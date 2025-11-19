@@ -16,27 +16,27 @@
           {
             "group": "Core Concept",
             "pages": [
-              "Get_Started/Workflows",
-              "Get_Started/Sessions",
-              "Get_Started/Nodes",
-              "Get_Started/Datablocks"
+              "Getting_Started/Workflows",
+              "Getting_Started/Sessions",
+              "Getting_Started/Nodes",
+              "Getting_Started/Datablocks"
             ]
           },
           {
             "group": "Setup",
             "pages": [
-              "Get_Started/Getting_Started",
-              "Get_Started/Accounts_and_Roles",
-              "Get_Started/Environments"
+              "Getting_Started/Test_Account",
+              "Getting_Started/Roles_and_Access_Management"
             ]
           },
           {
             "group": "Compliance & Security",
             "pages": [
-              "Get_Started/PII",
-              "Get_Started/eIDAS_eIDZT",
-              "Get_Started/AMLR",
-              "Get_Started/Audit"
+              "Getting_Started/GDPR_and_PII",
+              "Getting_Started/eID",
+              "Getting_Started/PEP_and_Sanctions",
+              "Getting_Started/AML",
+              "Getting_Started/Audit"
             ]
           }
         ]
@@ -47,47 +47,23 @@
           {
             "group": "Identity Verification",
             "pages": [
-              "Platform_Guides/ID_Document_Verification",
-              "Platform_Guides/eID",
-              "Platform_Guides/Data_Verification"
+              "Getting_Started/Document_Verification",
+              "Getting_Started/Data_Verification",
+              "Getting_Started/EUDI_Wallet"
             ]
           },
           {
             "group": "Trust",
             "pages": [
-              "Platform_Guides/Device_Intelligence"
+              "Getting_Started/Device_Intelligence"
             ]
           },
           {
             "group": "Authentication",
             "pages": [
-              "Platform_Guides/Biometric_Authentication"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Integration",
-        "groups": [
-          {
-            "group": "Authenticate",
-            "pages": [
-              "Integration/Authenticate"
-            ]
-          },
-          {
-            "group": "Integrate Workflows",
-            "pages": [
-              "Integration/Get_Flows",
-              "Integration/Execute_Flows",
-              "Integration/Get_Flow_Status"
-            ]
-          },
-          {
-            "group": "Receive Results",
-            "pages": [
-              "Integration/Get_Datablocks",
-              "Integration/Get_Audit_Trial"
+              "Getting_Started/Biometric_Authentication",
+              "Getting_Started/Email_and_Phone_Verification",
+              "Getting_Started/Advanced_Electro"
             ]
           }
         ]
@@ -121,17 +97,6 @@
             "pages": [
               "Development_Resources/Web",
               "Development_Resources/Mobile"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Standalone",
-        "groups": [
-          {
-            "group": "",
-            "pages": [
-              "Standalone"
             ]
           }
         ]

@@ -32,6 +32,42 @@
         },
         {
           "group": "Compliance & Secruity",
+          "pages": [
+            "GDPR & PII"
+          ]
+        }
+      ]
+    },
+    {
+      "tab": "Platform Guides",
+      "groups": [
+        {
+          "group": "Identity Verification",
+          "pages": [
+            "api-reference/introduction"
+          ]
+        },
+        {
+          "group": "Fraud Intelligence",
+          "pages": []
+        },
+        {
+          "group": "Electronic Signing",
+          "pages": []
+        },
+        {
+          "group": "AML Screening",
+          "pages": []
+        },
+        {
+          "group": "Authentication",
+          "pages": []
+        }
+      ]
+    }
+  ]
+}
+   
     "global": {
       "anchors": [
         {

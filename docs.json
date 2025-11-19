@@ -11,28 +11,32 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Getting Started",
+        "tab": "Get Started",
         "groups": [
           {
             "group": "Core Concept",
             "pages": [
-              "Getting_Started/Workflows",
-              "Getting_Started/Sessions",
-              "Getting_Started/Nodes",
-              "Getting_Started/Datablocks"
+              "Get_Started/Workflows",
+              "Get_Started/Sessions",
+              "Get_Started/Nodes",
+              "Get_Started/Datablocks"
             ]
           },
           {
             "group": "Setup",
             "pages": [
-              "Getting_Started/Test_Account",
-              "Getting_Started/Roles_and_Access_Management"
+              "Get_Started/Getting_Started",
+              "Get_Started/Accounts_and_Roles",
+              "Get_Started/Environments"
             ]
           },
           {
-            "group": "Compliance & Secruity",
+            "group": "Compliance & Security",
             "pages": [
-              "Getting_Started/GDPR_and_PII"
+              "Get_Started/PII",
+              "Get_Started/eIDAS_eIDZT",
+              "Get_Started/AMLR",
+              "Get_Started/Audit"
             ]
           }
         ]
@@ -43,35 +47,91 @@
           {
             "group": "Identity Verification",
             "pages": [
-              "Platform_Guides/Document_Verification",
-              "Platform_Guides/Data_Verification",
-              "Platform_Guides/EUDI_Wallet",
-              "Platform_Guides/eID"
+              "Platform_Guides/ID_Document_Verification",
+              "Platform_Guides/eID",
+              "Platform_Guides/Data_Verification"
             ]
           },
           {
-            "group": "Fraud Intelligence",
+            "group": "Trust",
             "pages": [
-              "Platform_Guides/Device_Intelligence",
-              "Platform_Guides/Email_and_Phone_Verification"
-            ]
-          },
-          {
-            "group": "Electronic Signing",
-            "pages": [
-              "Platform_Guides/Advanced_Electro"
-            ]
-          },
-          {
-            "group": "Screening",
-            "pages": [
-              "Platform_Guides/PEP_and_Sanctions"
+              "Platform_Guides/Device_Intelligence"
             ]
           },
           {
             "group": "Authentication",
             "pages": [
               "Platform_Guides/Biometric_Authentication"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integration",
+        "groups": [
+          {
+            "group": "Authenticate",
+            "pages": [
+              "Integration/Authenticate"
+            ]
+          },
+          {
+            "group": "Integrate Workflows",
+            "pages": [
+              "Integration/Get_Flows",
+              "Integration/Execute_Flows",
+              "Integration/Get_Flow_Status"
+            ]
+          },
+          {
+            "group": "Receive Results",
+            "pages": [
+              "Integration/Get_Datablocks",
+              "Integration/Get_Audit_Trial"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Development Resources",
+        "groups": [
+          {
+            "group": "API Credentials",
+            "pages": [
+              "Development_Resources/Create_Credentials",
+              "Development_Resources/Expiry_Dates"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "Development_Resources/Configure",
+              "Development_Resources/Secure_Webhooks",
+              "Development_Resources/Handle_Webhooks"
+            ]
+          },
+          {
+            "group": "Error Handling",
+            "pages": [
+              "Development_Resources/Error_Handling"
+            ]
+          },
+          {
+            "group": "SDKs & Libraries",
+            "pages": [
+              "Development_Resources/Web",
+              "Development_Resources/Mobile"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Standalone",
+        "groups": [
+          {
+            "group": "",
+            "pages": [
+              "Standalone"
             ]
           }
         ]

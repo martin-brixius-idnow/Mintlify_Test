@@ -16,7 +16,7 @@
           {
             "group": "Core Concept",
             "pages": [
-              "Workflows",
+              "essentials/workflows",
               "Sessions",
               "Nodes",
               "Datablocks"

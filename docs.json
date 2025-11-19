@@ -16,23 +16,23 @@
           {
             "group": "Core Concept",
             "pages": [
-              "Getting_Started/Workflows.mdx",
-              "Getting_Started/Sessions.mdx",
-              "Getting_Started/Nodes.mdx",
-              "Getting_Started/Datablocks.mdx"
+              "Getting_Started/Workflows",
+              "Getting_Started/Sessions",
+              "Getting_Started/Nodes",
+              "Getting_Started/Datablocks"
             ]
           },
           {
             "group": "Setup",
             "pages": [
-              "Getting_Started/Test_Account.mdx",
-              "Getting_Started/Roles_and_Access_Management.mdx"
+              "Getting_Started/Test Account",
+              "Getting_Started/Roles & Access Management"
             ]
           },
           {
             "group": "Compliance & Secruity",
             "pages": [
-              "Getting_Started/GDPR_and_PII.mdx"
+              "Getting_Started/GDPR & PII"
             ]
           }
         ]
@@ -43,35 +43,35 @@
           {
             "group": "Identity Verification",
             "pages": [
-              "Getting_Started/Document_Verification.mdx",
-              "Getting_Started/Data_Verification.mdx",
-              "Getting_Started/EUDI_Wallet.mdx",
-              "Getting_Started/eID.mdx"
+              "Platform_Guides/Identity Verification/Document Verification",
+              "Platform_Guides/Identity Verification/Data Verification",
+              "Platform_Guides/Identity Verification/EUDI Wallet",
+              "Platform_Guides/Identity Verification/eID"
             ]
           },
           {
             "group": "Fraud Intelligence",
             "pages": [
-              "Getting_Started/Device_Intelligence.mdx",
-              "Getting_Started/Email_and_Phone_Verification.mdx"
+              "Platform_Guides/Fraud Intelligence/Device Intelligence",
+              "Platform_Guides/Fraud Intelligence/Email & Phone Verification"
             ]
           },
           {
             "group": "Electronic Signing",
             "pages": [
-              "Getting_Started/Advanced_Electro.mdx"
+              "Platform_Guides/Electronic Signing/Advanced Electro"
             ]
           },
           {
             "group": "Screening",
             "pages": [
-              "Getting_Started/PEP_and_Sanctions.mdx"
+              "Platform_Guides/Screening/PEP & Sanctions"
             ]
           },
           {
             "group": "Authentication",
             "pages": [
-              "Getting_Started/Biometric_Authentication.mdx"
+              "Platform_Guides/Authentication/Biometric Authentication"
             ]
           }
         ]

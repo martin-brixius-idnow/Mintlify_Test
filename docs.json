@@ -16,23 +16,23 @@
           {
             "group": "Core Concept",
             "pages": [
-              "essentials/workflows",
-              "Sessions",
-              "Nodes",
-              "Datablocks"
+              "Getting_Started/Workflows.mdx",
+              "Getting_Started/Sessions.mdx",
+              "Getting_Started/Nodes.mdx",
+              "Getting_Started/Datablocks.mdx"
             ]
           },
           {
             "group": "Setup",
             "pages": [
-              "Test Account",
-              "Roles & Access Management"
+              "Getting_Started/Test_Account.mdx",
+              "Getting_Started/Roles_and_Access_Management.mdx"
             ]
           },
           {
             "group": "Compliance & Secruity",
             "pages": [
-              "GDPR & PII"
+              "Getting_Started/GDPR_and_PII.mdx"
             ]
           }
         ]
@@ -43,35 +43,35 @@
           {
             "group": "Identity Verification",
             "pages": [
-              "Document Verification",
-              "Data Verification",
-              "EUDI Wallet",
-              "eID"
+              "Getting_Started/Document_Verification.mdx",
+              "Getting_Started/Data_Verification.mdx",
+              "Getting_Started/EUDI_Wallet.mdx",
+              "Getting_Started/eID.mdx"
             ]
           },
           {
             "group": "Fraud Intelligence",
             "pages": [
-              "Device Intelligence",
-              "Email & Phone Verification"    
+              "Getting_Started/Device_Intelligence.mdx",
+              "Getting_Started/Email_and_Phone_Verification.mdx"
             ]
           },
           {
             "group": "Electronic Signing",
             "pages": [
-              "Advanced Electro"
+              "Getting_Started/Advanced_Electro.mdx"
             ]
           },
           {
             "group": "Screening",
             "pages": [
-              "PEP & Sanctions"
+              "Getting_Started/PEP_and_Sanctions.mdx"
             ]
           },
           {
             "group": "Authentication",
             "pages": [
-              "Biometric Authentication" 
+              "Getting_Started/Biometric_Authentication.mdx"
             ]
           }
         ]

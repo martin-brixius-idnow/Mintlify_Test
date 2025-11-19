@@ -9,67 +9,29 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
-      {
-        "tab": "Getting Started",
-        "groups": [
-          {
-            "group": "Core Concept",
-            "pages": [
-              "Workflows",
-              "Sessions",
-              "Nodes",
-              "Datablocks"
-            ]
-          },
-          {
-            "group": "Setup",
-            "pages": [
-              "Create Test Account",
-              "Manage Roles & Accessy"
-
-            ]
-          },
-          {
-            "group": "Compliance & Secruity",
-            "pages": [
-              "GDPR & PII",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
-    ],
+{
+  "tabs": [
+    {
+      "tab": "Getting Started",
+      "groups": [
+        {
+          "group": "Core Concept",
+          "pages": [
+            "Workflows",
+            "Sessions",
+            "Nodes",
+            "Datablocks"
+          ]
+        },
+        {
+          "group": "Setup",
+          "pages": [
+            "Test Account",
+            "Roles & Access Management"
+          ]
+        },
+        {
+          "group": "Compliance & Secruity",
     "global": {
       "anchors": [
         {

@@ -11,27 +11,29 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Getting Started",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Core Concept",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "Workflows",
+              "Sessions",
+              "Nodes",
+              "Datablocks"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Setup",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "Create Test Account",
+              "Manage Roles & Accessy"
+
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Compliance & Secruity",
             "pages": [
-              "essentials/markdown",
+              "GDPR & PII",
               "essentials/code",
               "essentials/images",
               "essentials/reusable-snippets"

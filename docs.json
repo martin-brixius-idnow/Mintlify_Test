@@ -79,8 +79,8 @@
             "group": "Webhooks",
             "pages": [
               "Development_Resources/Configure",
-              "Development_Resources/Secure_Webhooks",
-              "Development_Resources/Handle_Webhooks"
+              "Development_Resources/Secure",
+              "Development_Resources/Handle"
             ]
           },
           {

@@ -1,39 +1,72 @@
 ---
-title: Platform Guides
+title: Introduction
 description: Comprehensive guides for using the IDnow Trustplatform's identity verification, authentication, and compliance features.
 ---
 
+import { Cards, Card, Callout } from "mintlify/components";
+
 # Platform Guides
 
-Welcome to the Platform Guides for the IDnow Trustplatform.
+Build and orchestrate verification, trust, and authentication — with clear, focused guides.
 
-> _This is a placeholder page. Please update with your product details._
+<Callout type="info">
+This is a concise landing page. Use the cards below to jump straight into the most relevant areas.
+</Callout>
 
-## Overview
+## Start here
 
-- What are Platform Guides?
-- How to navigate the IDnow Trustplatform documentation
-- Understanding workflows, nodes, and DataBlocks
+<Cards columns={3}>
+  <Card title="Document Verification" icon="id-card" href="/Platform_Guides/Document_Verification">
+    Capture, liveness, authenticity, and AML options.
+  </Card>
+  <Card title="Data Verification" icon="document-check" href="/Platform_Guides/Data_Verification">
+    Headless verification using authoritative datasets.
+  </Card>
+  <Card title="Workflow Basics" icon="flowchart" href="/Platform_Guides/Workflow_Basics">
+    How workflows, nodes, and DataBlocks work together.
+  </Card>
+</Cards>
 
-## Guide Categories
+## More capabilities
 
-### Identity Verification
-Complete identity verification solutions including document verification, EUDI Wallet integration, and eIDs.
+<Cards columns={3}>
+  <Card title="EUDI Wallet & eIDs" icon="shield" href="/Platform_Guides/EUDI_Wallet">
+    European identity wallets and electronic IDs.
+  </Card>
+  <Card title="Electronic Signatures" icon="signature" href="/Platform_Guides/Qualified_Electronic_Signature">
+    Qualified and Advanced electronic signatures.
+  </Card>
+  <Card title="Device Intelligence" icon="mobile" href="/Platform_Guides/Device_Intelligence">
+    Risk signals and device trust scoring.
+  </Card>
+</Cards>
 
-### Electronic Signatures
-Qualified and Advanced Electronic Signature implementations.
+<Cards columns={3}>
+  <Card title="PEP & Sanctions" icon="flag" href="/Platform_Guides/PEP_Sanctions_Screening">
+    Screening and watchlist checks.
+  </Card>
+  <Card title="Biometric Authentication" icon="face-id" href="/Platform_Guides/Biometric_Authentication">
+    Enroll and verify with strong biometrics.
+  </Card>
+  <Card title="Templates" icon="layout-grid" href="/Platform_Guides/Workflow_Templates">
+    Prebuilt flows to accelerate implementation.
+  </Card>
+</Cards>
 
-### Trust & Risk Assessment
-Device intelligence and digital signal verification for risk assessment.
+## References
 
-### Screening
-PEP and sanctions screening capabilities.
+<Cards columns={3}>
+  <Card title="Nodes Reference" icon="node" href="/Platform_Guides/Nodes_Reference">
+    Building blocks for orchestration.
+  </Card>
+  <Card title="DataBlocks Reference" icon="table" href="/Platform_Guides/DataBlocks_Reference">
+    Output schemas and attributes.
+  </Card>
+  <Card title="Platform Overview" icon="compass" href="/Platform_Guides/index">
+    One-page overview of this section.
+  </Card>
+</Cards>
 
-### Authentication
-Biometric authentication including enrollment and verification.
-
-### Workflow Building
-Learn how to build custom workflows using the DSL.
-
-## Next Steps
-
+<Callout type="tip">
+Looking to integrate right away? Open the <a href="https://idnow.mintlify.app/api-reference">API Explorer</a> or visit <a href="/Integration/index">Integrate</a>.
+</Callout>

@@ -8,7 +8,6 @@
     "dark": "#ff6336"
   },
   "favicon": "/favicon.png",
-
   "versions": {
     "current": "v1",
     "list": [
@@ -16,7 +15,6 @@
       { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
     ]
   },
-
   "navigation": {
     "versions": { "default": "v1" },
     "tabs": [
@@ -24,10 +22,7 @@
         "tab": "Get Started",
         "icon": "book",
         "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Getting_Started/index"]
-          },
+          { "group": "Overview", "pages": ["Getting_Started/index"] },
           {
             "group": "Core Concept",
             "pages": [
@@ -43,20 +38,14 @@
               "Getting_Started/Access_Management"
             ]
           },
-          {
-            "group": "Compliance & Security",
-            "pages": ["Getting_Started/PII"]
-          }
+          { "group": "Compliance & Security", "pages": ["Getting_Started/PII"] }
         ]
       },
       {
         "tab": "Platform Guides",
         "icon": "compass",
         "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Platform_Guides/index"]
-          },
+          { "group": "Overview", "pages": ["Platform_Guides/index"] },
           {
             "group": "Identity Verification",
             "pages": [
@@ -81,18 +70,8 @@
               "Platform_Guides/Email_Phone_Verification"
             ]
           },
-          {
-            "group": "Screening",
-            "pages": [
-              "Platform_Guides/PEP_Sanctions_Screening"
-            ]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "Platform_Guides/Biometric_Authentication"
-            ]
-          },
+          { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
+          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] },
           {
             "group": "Workflow Studio",
             "pages": [
@@ -108,14 +87,8 @@
         "tab": "Integrate",
         "icon": "server",
         "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Integration/index"]
-          },
-          {
-            "group": "Authenticate",
-            "pages": ["Integration/Authenticate"]
-          },
+          { "group": "Overview", "pages": ["Integration/index"] },
+          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
           {
             "group": "Integrate Workflows",
             "pages": [
@@ -137,14 +110,8 @@
         "tab": "Development Resources",
         "icon": "tools",
         "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Development_Resources/index"]
-          },
-          {
-            "group": "API Credentials",
-            "pages": ["Development_Resources/Manage"]
-          },
+          { "group": "Overview", "pages": ["Development_Resources/index"] },
+          { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
           {
             "group": "Webhooks",
             "pages": [
@@ -160,29 +127,19 @@
               "Development_Resources/Mobile"
             ]
           },
-          {
-            "group": "Error Handling",
-            "pages": ["Development_Resources/Error_Handling"]
-          }
+          { "group": "Error Handling", "pages": ["Development_Resources/Error_Handling"] }
         ]
       }
     ]
   },
-
   "logo": {
     "light": "/logo/images.png",
     "dark": "/logo/images.png"
   },
-
   "navbar": {
     "links": [
       { "label": "Support", "href": "mailto:hi@mintlify.com" },
-
-      /* Option A: If your API section folder is 'api-reference' like the Mintlify Starter Kit */
       { "label": "API Explorer", "href": "/api-reference" }
-
-      /* Option B: If you want to land on Integrate's overview (remove Option A) */
-      /* { "label": "API Explorer", "href": "/Integration" } */
     ],
     "primary": {
       "type": "button",
@@ -190,7 +147,6 @@
       "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
   },
-
   "contextual": {
     "options": [
       "copy",
@@ -203,7 +159,6 @@
       "vscode"
     ]
   },
-
   "footer": {
     "socials": {
       "x": "https://x.com/mintlify",

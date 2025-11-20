@@ -75,4 +75,92 @@
               "Integration/Authenticate",
               "Integration/Execute_Flows",
               "Integration/Get_Audit_Trial",
-         
+              "Integration/Get_Datablocks",
+              "Integration/Get_Flow_Status",
+              "Integration/Get_Flows"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Development Resources",
+        "pages": ["Development_Resources"],
+        "groups": [
+          {
+            "group": "API Credentials",
+            "pages": ["Development_Resources/Manage"]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "Development_Resources/Configure",
+              "Development_Resources/Secure",
+              "Development_Resources/Handle"
+            ]
+          },
+          {
+            "group": "SDKs & Libraries",
+            "pages": [
+              "Development_Resources/Web",
+              "Development_Resources/Mobile"
+            ]
+          },
+          {
+            "group": "Error Handling",
+            "pages": ["Development_Resources/Error_Handling"]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Documentation",
+          "href": "https://mintlify.com/docs",
+          "icon": "book-open-cover"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://mintlify.com/blog",
+          "icon": "newspaper"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hi@mintlify.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://dashboard.mintlify.com"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/mintlify",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  }
+}

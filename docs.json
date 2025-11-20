@@ -19,7 +19,6 @@
 
   "navigation": {
     "versions": { "default": "v1" },
-
     "tabs": [
       {
         "tab": "Get Started",
@@ -47,7 +46,6 @@
           }
         ]
       },
-
       {
         "tab": "Platform Guides",
         "icon": "compass",
@@ -100,7 +98,6 @@
           }
         ]
       },
-
       {
         "tab": "API Reference",
         "icon": "server",
@@ -127,7 +124,6 @@
           }
         ]
       },
-
       {
         "tab": "Development Resources",
         "icon": "tools",

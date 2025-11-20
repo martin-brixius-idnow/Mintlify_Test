@@ -48,23 +48,23 @@
           {
             "group": "Identity Verification",
             "pages": [
-              "Getting_Started/Document_Verification",
-              "Getting_Started/Data_Verification",
-              "Getting_Started/EUDI_Wallet"
+              "Platform_Guides/Document_Verification",
+              "Platform_Guides/Data_Verification",
+              "Platform_Guides/EUDI_Wallet"
             ]
           },
           {
             "group": "Trust",
             "pages": [
-              "Getting_Started/Device_Intelligence"
+              "Platform_Guides/Device_Intelligence"
             ]
           },
           {
             "group": "Authentication",
             "pages": [
-              "Getting_Started/Biometric_Authentication",
-              "Getting_Started/Email_and_Phone_Verification",
-              "Getting_Started/Advanced_Electro"
+              "Platform_Guides/Biometric_Authentication",
+              "Platform_Guides/Email___Phone_Verification",
+              "Platform_Guides/Advanced_Electro"
             ]
           }
         ]

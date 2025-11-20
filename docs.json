@@ -24,7 +24,7 @@
       {
         "tab": "Get Started",
         "icon": "book",
-        "pages": ["Getting_Started"],
+        "pages": ["Getting_Started/index"],
         "groups": [
           {
             "group": "Core Concept",
@@ -45,14 +45,13 @@
             "group": "Compliance & Security",
             "pages": ["Getting_Started/PII"]
           }
-        ],
-        "dropdowns": ["Get Started"]
+        ]
       },
 
       {
         "tab": "Platform Guides",
         "icon": "compass",
-        "pages": ["Platform_Guides"],
+        "pages": ["Platform_Guides/index"],
         "groups": [
           {
             "group": "Identity Verification",
@@ -99,14 +98,13 @@
               "Platform_Guides/Workflow_Templates"
             ]
           }
-        ],
-        "dropdowns": ["Platform Guides"]
+        ]
       },
 
       {
         "tab": "API Reference",
         "icon": "server",
-        "pages": ["Integration"],
+        "pages": ["Integration/index"],
         "groups": [
           {
             "group": "Authenticate",
@@ -127,14 +125,13 @@
               "Integration/Get_Audit_Trial"
             ]
           }
-        ],
-        "dropdowns": ["API Reference"]
+        ]
       },
 
       {
         "tab": "Development Resources",
         "icon": "tools",
-        "pages": ["Development_Resources"],
+        "pages": ["Development_Resources/index"],
         "groups": [
           {
             "group": "API Credentials",
@@ -159,8 +156,7 @@
             "group": "Error Handling",
             "pages": ["Development_Resources/Error_Handling"]
           }
-        ],
-        "dropdowns": ["Development Resources"]
+        ]
       }
     ]
   },

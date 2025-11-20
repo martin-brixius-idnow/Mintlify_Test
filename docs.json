@@ -45,57 +45,66 @@
           }
         ]
       },
-{
-  "tab": "Platform Guides",
-  "pages": ["Platform_Guides"],
-  "groups": [
-    {
-      "group": "Identity Verification",
-      "pages": [
-        "Platform_Guides/Document_Verification",
-        "Platform_Guides/Identity_Comparison",
-        "Platform_Guides/Data_Verification",
-        "Platform_Guides/EUDI_Wallet",
-        "Platform_Guides/eIDs"
-      ]
-    },
-    {
-      "group": "Electronic Signatures",
-      "pages": [
-        "Platform_Guides/Qualified_Electronic_Signature",
-        "Platform_Guides/Advanced_Electronic_Signature"
-      ]
-    },
-    {
-      "group": "Trust & Risk Assessment",
-      "pages": [
-        "Platform_Guides/Device_Intelligence",
-        "Platform_Guides/Email_Phone_Verification"
-      ]
-    },
-    {
-      "group": "Screening",
-      "pages": [
-        "Platform_Guides/PEP_Sanctions_Screening"
-      ]
-    },
-    {
-      "group": "Authentication",
-      "pages": [
-        "Platform_Guides/Biometric_Authentication"
-      ]
-    },
-    {
-      "group": "Workflow Building",
-      "pages": [
-        "Platform_Guides/Workflow_Basics",
-        "Platform_Guides/DataBlocks_Reference",
-        "Platform_Guides/Nodes_Reference",
-        "Platform_Guides/Workflow_Templates"
-      ]
-    }
-  ]
-},
+
+      {
+        "menu": "Solutions",
+        "items": [
+          { "label": "Banks", "page": "Solutions/Banks" },
+          { "label": "Fintechs", "page": "Solutions/Fintechs" },
+          { "label": "Telecom", "page": "Solutions/Telecom" },
+          { "label": "Car Rental", "page": "Solutions/Car_Rental" },
+          { "label": "Insurance", "page": "Solutions/Insurance" }
+        ]
+      },
+
+      {
+        "tab": "Platform Guides",
+        "pages": ["Platform_Guides"],
+        "groups": [
+          {
+            "group": "Identity Verification",
+            "pages": [
+              "Platform_Guides/Document_Verification",
+              "Platform_Guides/Identity_Comparison",
+              "Platform_Guides/Data_Verification",
+              "Platform_Guides/EUDI_Wallet",
+              "Platform_Guides/eIDs"
+            ]
+          },
+          {
+            "group": "Electronic Signatures",
+            "pages": [
+              "Platform_Guides/Qualified_Electronic_Signature",
+              "Platform_Guides/Advanced_Electronic_Signature"
+            ]
+          },
+          {
+            "group": "Trust & Risk Assessment",
+            "pages": [
+              "Platform_Guides/Device_Intelligence",
+              "Platform_Guides/Email_Phone_Verification"
+            ]
+          },
+          {
+            "group": "Screening",
+            "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
+          },
+          {
+            "group": "Authentication",
+            "pages": ["Platform_Guides/Biometric_Authentication"]
+          },
+          {
+            "group": "Workflow Building",
+            "pages": [
+              "Platform_Guides/Workflow_Basics",
+              "Platform_Guides/DataBlocks_Reference",
+              "Platform_Guides/Nodes_Reference",
+              "Platform_Guides/Workflow_Templates"
+            ]
+          }
+        ]
+      },
+
       {
         "tab": "API Reference",
         "pages": ["Integration"],
@@ -121,6 +130,7 @@
           }
         ]
       },
+
       {
         "tab": "Development Resources",
         "pages": ["Development_Resources"],

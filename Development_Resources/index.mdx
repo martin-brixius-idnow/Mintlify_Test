@@ -1,65 +1,120 @@
 ---
-title: Overview
-description: Explore all developer tools, guides, and SDKs to build on the IDnow Trustplatform.
+title: "Development Resources"
+description: "Explore all developer tools, guides, and SDKs to build on the IDnow Trustplatform."
 ---
 
-import Callout from '@components/Callout'
-import Card from '@components/Card'
+<img
+  className="block"
+  src="/images/dev-resources-hero.png"
+  alt="Development Resources"
+/>
 
-# 🚀 Development Resources
+# Development Resources
 
-<Callout type="info" title="Welcome!">
-  The IDnow Trustplatform empowers you to build secure, seamless identity verification experiences.  
-  This section gathers all technical resources, guides, and tools to help you integrate, test, and maintain your solutions.
-</Callout>
+The IDnow Trustplatform empowers you to build secure, seamless identity verification experiences.
 
-<br/>
+This section gathers all technical resources, guides, and tools to help you integrate, test, and maintain your solutions.
 
-## 🧭 Quick Navigation
+<Note>
+Everything you need to ship production-ready identity flows.
+</Note>
 
-<div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-  <Card title="API Credentials" href="./Manage" icon="🔑">
+---
+
+## Quick Navigation
+
+<CardGroup cols={2}>
+  <Card
+    title="API Credentials"
+    icon="key"
+    href="/Development_Resources/Manage"
+    color="#10b981"
+  >
     Securely manage your API credentials and access keys for authentication.
   </Card>
-  <Card title="Webhooks" href="./Configure" icon="🔔">
+  
+  <Card
+    title="Webhooks"
+    icon="webhook"
+    href="/Development_Resources/Configure"
+    color="#3b82f6"
+  >
     Configure, secure, and process webhooks for real-time event notifications.
   </Card>
-  <Card title="SDKs & Libraries" href="./Web" icon="📦">
+  
+  <Card
+    title="SDKs & Libraries"
+    icon="code"
+    href="/Development_Resources/Web"
+    color="#8b5cf6"
+  >
     Download official SDKs for web and mobile to speed up your integration.
   </Card>
-  <Card title="Error Handling" href="./Error_Handling" icon="🛠️">
+  
+  <Card
+    title="Error Handling"
+    icon="triangle-exclamation"
+    href="/Development_Resources/Error_Handling"
+    color="#f59e0b"
+  >
     Learn about error codes and best practices for resilient integrations.
   </Card>
-</div>
-
-<br/>
+</CardGroup>
 
 ---
 
-## 🛠️ What You’ll Find Here
+## What You'll Find Here
 
-- **API Credentials:**  
-  How to create, manage, and secure your API keys.
-
-- **Webhooks:**  
-  Step-by-step setup, securing endpoints, and handling event payloads.
-
-- **SDKs & Libraries:**  
-  Links to our supported SDKs and usage examples for different platforms.
-
-- **Error Handling:**  
-  Troubleshooting, error codes, and guidance for robust error management.
-
----
-
-## 💡 Additional Resources
-
-- [Platform Guides](/docs/Platform_Guides) — Deep dives into identity verification, trust, and authentication flows.
-- [Get Started](/docs/Get_Started) — Core concepts and onboarding for new users.
-- [Support](mailto:support@idnow.io) — Our team is here to help!
+<AccordionGroup>
+  <Accordion title="API Credentials" icon="key">
+    How to create, manage, and secure your API keys.
+  </Accordion>
+  
+  <Accordion title="Webhooks" icon="webhook">
+    Step-by-step setup, securing endpoints, and handling event payloads.
+  </Accordion>
+  
+  <Accordion title="SDKs & Libraries" icon="code">
+    Links to our supported SDKs and usage examples for different platforms.
+  </Accordion>
+  
+  <Accordion title="Error Handling" icon="triangle-exclamation">
+    Troubleshooting, error codes, and guidance for robust error management.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
-<Callout type="success" title="Pro Tip">
-  Access the <a href="https://dashboard.idnow.io" target="_blank">IDnow Dashboard</a> for live monitoring, API key management, and more!
-</Callout>
+## Additional Resources
+
+<CardGroup cols={3}>
+  <Card
+    title="Platform Guides"
+    icon="book"
+    href="/Platform_Guides"
+  >
+    Deep dives into identity verification, trust, and authentication flows.
+  </Card>
+  
+  <Card
+    title="Get Started"
+    icon="rocket"
+    href="/Get_Started"
+  >
+    Core concepts and onboarding for new users.
+  </Card>
+  
+  <Card
+    title="Support"
+    icon="headset"
+    href="mailto:support@idnow.io"
+  >
+    Our team is here to help!
+  </Card>
+</CardGroup>
+
+---
+
+<Tip>
+Access the [IDnow Dashboard](https://dashboard.idnow.io) for live monitoring, API key management, and more!
+</Tip>

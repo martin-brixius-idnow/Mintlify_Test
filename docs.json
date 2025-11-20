@@ -8,7 +8,17 @@
     "dark": "#ff6336"
   },
   "favicon": "/favicon.svg",
+
+  "versions": {
+    "current": "v1",
+    "list": [
+      { "id": "v1", "label": "v1 (Current)", "path": "/" },
+      { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
+    ]
+  },
+
   "navigation": {
+    "versions": { "default": "v1" },
     "tabs": [
       {
         "tab": "Get Started",
@@ -31,9 +41,7 @@
           },
           {
             "group": "Compliance & Security",
-            "pages": [
-              "Getting_Started/PII"
-            ]
+            "pages": ["Getting_Started/PII"]
           }
         ]
       },
@@ -71,9 +79,7 @@
         "groups": [
           {
             "group": "Authenticate",
-            "pages": [
-              "Integration/Authenticate"
-            ]
+            "pages": ["Integration/Authenticate"]
           },
           {
             "group": "Integrate Workflows",
@@ -123,23 +129,23 @@
       }
     ]
   },
+
   "logo": {
     "light": "/logo/images.png",
     "dark": "/logo/images.png"
   },
+
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
+      { "label": "Support", "href": "mailto:hi@mintlify.com" }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Studio",
+      "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
   },
+
   "contextual": {
     "options": [
       "copy",
@@ -152,6 +158,7 @@
       "vscode"
     ]
   },
+
   "footer": {
     "socials": {
       "x": "https://x.com/mintlify",

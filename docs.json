@@ -14,10 +14,6 @@
         "tab": "Get Started",
         "groups": [
           {
-            "group": "Introduction",
-            "pages": ["Home/Welcome"]
-          },
-          {
             "group": "Core Concept",
             "pages": [
               "Getting_Started/Create Flows",

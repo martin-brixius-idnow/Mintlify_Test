@@ -50,7 +50,7 @@
         ]
       },
       {
-        "tab": "Platform Guides",
+        "tab": "Guides",
         "icon": "compass",
         "groups": [
           { "group": "Overview", "pages": ["Platform_Guides/index"] },
@@ -115,7 +115,7 @@
         ]
       },
       {
-        "tab": "Development Resources",
+        "tab": "Resources",
         "icon": "tools",
         "groups": [
           { "group": "Overview", "pages": ["Development_Resources/index"] },

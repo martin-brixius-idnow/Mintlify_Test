@@ -1,8 +1,75 @@
 ---
-title: Overview
-slug: /Integration
+title: Introduction
+description: Integrate the IDnow Trustplatform via REST APIs. Execute workflows, track status, and retrieve results with secure webhooks.
 ---
 
-# Welcome
+import { Cards, Card, Callout, Steps } from "mintlify/components";
 
-Pick a topic from the sidebar to continue.
+# Integrate
+
+Everything you need to call our APIs, run workflows, and consume results — fast and secure.
+
+<Callout type="info">
+Start with credentials, then execute a flow and fetch the results. Use the API Explorer to try requests in your browser.
+</Callout>
+
+## Quickstart
+
+<Steps>
+  <li>
+    Get API credentials<br />
+    Create keys in <a href="/Development_Resources/Manage">Development Resources → API Credentials</a>.
+  </li>
+  <li>
+    Execute your first flow<br />
+    Send a request to <a href="/Integration/Execute_Flows">Execute Flows</a> and capture the flow ID.
+  </li>
+  <li>
+    Track and retrieve results<br />
+    Check <a href="/Integration/Get_Flow_Status">Get Flow Status</a> and fetch normalized outputs via <a href="/Integration/Get_Datablocks">Get DataBlocks</a>.
+  </li>
+</Steps>
+
+## Core endpoints
+
+<Cards columns={3}>
+  <Card title="Authenticate" icon="key" href="/Integration/Authenticate">
+    Obtain and manage access tokens.
+  </Card>
+  <Card title="Execute Flows" icon="flowchart" href="/Integration/Execute_Flows">
+    Start a verification workflow.
+  </Card>
+  <Card title="Get Flow Status" icon="check-double" href="/Integration/Get_Flow_Status">
+    Poll or query current state and decisions.
+  </Card>
+</Cards>
+
+<Cards columns={3}>
+  <Card title="Get DataBlocks" icon="table" href="/Integration/Get_Datablocks">
+    Retrieve structured outputs and attributes.
+  </Card>
+  <Card title="Audit Trail" icon="timeline" href="/Integration/Get_Audit_Trial">
+    Evidence and event history for compliance.
+  </Card>
+  <Card title="Webhooks" icon="bolt" href="/Development_Resources/Configure">
+    Receive updates and results in real time.
+  </Card>
+</Cards>
+
+## Tools
+
+<Cards columns={3}>
+  <Card title="API Explorer" icon="square-terminal" href="https://idnow.mintlify.app/api-reference">
+    Interactive reference powered by OpenAPI — test endpoints in-browser.
+  </Card>
+  <Card title="Studio" icon="cube" href="https://hub.hub.dev.eu.idnow.io/auth/login">
+    Design and simulate workflows visually.
+  </Card>
+  <Card title="SDKs" icon="code" href="/Development_Resources/Web">
+    Web and mobile libraries to accelerate integration.
+  </Card>
+</Cards>
+
+<Callout type="success">
+Ready to build? Jump to <a href="/Integration/Execute_Flows">Execute Flows</a> or open the <a href="https://idnow.mintlify.app/api-reference">API Explorer</a>.
+</Callout>

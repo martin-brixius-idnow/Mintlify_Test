@@ -139,7 +139,7 @@
   "navbar": {
     "links": [
       { "label": "Support", "href": "mailto:hi@mintlify.com" },
-      { "label": "API Explorer", "href": "/api-reference" }
+      { "label": "API Explorer", "href": "https://idnow.mintlify.app/api-reference" }
     ],
     "primary": {
       "type": "button",

@@ -1,0 +1,65 @@
+---
+title: Overview
+description: Explore all developer tools, guides, and SDKs to build on the IDnow Trustplatform.
+---
+
+import Callout from '@components/Callout'
+import Card from '@components/Card'
+
+# 🚀 Development Resources
+
+<Callout type="info" title="Welcome!">
+  The IDnow Trustplatform empowers you to build secure, seamless identity verification experiences.  
+  This section gathers all technical resources, guides, and tools to help you integrate, test, and maintain your solutions.
+</Callout>
+
+<br/>
+
+## 🧭 Quick Navigation
+
+<div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+  <Card title="API Credentials" href="./Manage" icon="🔑">
+    Securely manage your API credentials and access keys for authentication.
+  </Card>
+  <Card title="Webhooks" href="./Configure" icon="🔔">
+    Configure, secure, and process webhooks for real-time event notifications.
+  </Card>
+  <Card title="SDKs & Libraries" href="./Web" icon="📦">
+    Download official SDKs for web and mobile to speed up your integration.
+  </Card>
+  <Card title="Error Handling" href="./Error_Handling" icon="🛠️">
+    Learn about error codes and best practices for resilient integrations.
+  </Card>
+</div>
+
+<br/>
+
+---
+
+## 🛠️ What You’ll Find Here
+
+- **API Credentials:**  
+  How to create, manage, and secure your API keys.
+
+- **Webhooks:**  
+  Step-by-step setup, securing endpoints, and handling event payloads.
+
+- **SDKs & Libraries:**  
+  Links to our supported SDKs and usage examples for different platforms.
+
+- **Error Handling:**  
+  Troubleshooting, error codes, and guidance for robust error management.
+
+---
+
+## 💡 Additional Resources
+
+- [Platform Guides](/docs/Platform_Guides) — Deep dives into identity verification, trust, and authentication flows.
+- [Get Started](/docs/Get_Started) — Core concepts and onboarding for new users.
+- [Support](mailto:support@idnow.io) — Our team is here to help!
+
+---
+
+<Callout type="success" title="Pro Tip">
+  Access the <a href="https://dashboard.idnow.io" target="_blank">IDnow Dashboard</a> for live monitoring, API key management, and more!
+</Callout>

@@ -1,143 +1,177 @@
----
-title: IDnow Trustplatform
-description: Build trusted identity, verification, and signature experiences. Fast to start, robust for scale, compliant in Europe.
-layout: wide
----
-
-import { Callout, Cards, Card, Steps, SectionHeader } from "mintlify/components";
-
-<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', flexWrap: 'wrap' }}>
-  <div style={{ flex: '1 1 520px', minWidth: 320 }}>
-    <h1 style={{ marginBottom: 12 }}>Verify, sign, and trust — all in one platform</h1>
-    <p style={{ fontSize: 18, lineHeight: 1.6, marginBottom: 20 }}>
-      Orchestrate KYC, document checks, eIDs, qualified electronic signatures, device trust, and risk signals.
-      Start in minutes, scale to millions, stay compliant across Europe.
-    </p>
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-      <a className="button" href="/Getting_Started/index">Get started</a>
-      <a className="button button--secondary" href="https://idnow.mintlify.app/api-reference">Open API Explorer</a>
-      <a className="button button--ghost" href="/Platform_Guides/index">Platform guides</a>
-    </div>
-    <div style={{ marginTop: 12, color: 'var(--muted-foreground)' }}>
-      Sandbox by default · EU data residency options · Built-in webhook security
-    </div>
-  </div>
-  <div style={{ flex: '1 1 420px', minWidth: 320 }}>
-    <Cards columns={2}>
-      <Card title="Create a flow" icon="flowchart" href="/Integration/Execute_Flows">
-        Orchestrate and execute verification workflows.
-      </Card>
-      <Card title="Check status" icon="check-double" href="/Integration/Get_Flow_Status">
-        Track progress and outcomes in real time.
-      </Card>
-      <Card title="Fetch results" icon="table" href="/Integration/Get_Datablocks">
-        Retrieve normalized DataBlocks and decisions.
-      </Card>
-      <Card title="Secure webhooks" icon="lock" href="/Development_Resources/Secure">
-        Verify signatures and protect callbacks.
-      </Card>
-    </Cards>
-  </div>
-</div>
-
-<Callout type="tip" style={{ marginTop: 16 }}>
-Try requests live in the <a href="https://idnow.mintlify.app/api-reference">API Explorer</a>. No local setup required.
-</Callout>
-
-## Build your way
-
-<Cards columns={3}>
-  <Card title="Get Started" icon="book" href="/Getting_Started/index">
-    Concepts, test accounts, access management, and data handling (PII).
-  </Card>
-  <Card title="Platform Guides" icon="compass" href="/Platform_Guides/index">
-    Document checks, data verification, eIDs/EUDI, signatures, device trust, and more.
-  </Card>
-  <Card title="Integrate (API)" icon="server" href="/Integration/index">
-    Endpoints for executing flows, retrieving results, and auditing.
-  </Card>
-</Cards>
-
-<Cards columns={3}>
-  <Card title="SDKs & Libraries" icon="code" href="/Development_Resources/Web">
-    Web and mobile SDKs to accelerate integration and reduce boilerplate.
-  </Card>
-  <Card title="Webhooks" icon="bolt" href="/Development_Resources/Configure">
-    Configure, secure, and consume event notifications.
-  </Card>
-  <Card title="Error Handling" icon="circle-exclamation" href="/Development_Resources/Error_Handling">
-    Clear errors, remediation guidance, and troubleshooting flows.
-  </Card>
-</Cards>
-
-## Popular capabilities
-
-<Cards columns={4}>
-  <Card title="ID Document Verification" icon="id-card" href="/Platform_Guides/Document_Verification">
-    Liveness and authenticity checks with AML screening options.
-  </Card>
-  <Card title="Data Verification" icon="document-check" href="/Platform_Guides/Data_Verification">
-    Headless verification using authoritative datasets.
-  </Card>
-  <Card title="Qualified eSignatures (QES)" icon="signature" href="/Platform_Guides/Qualified_Electronic_Signature">
-    Fully compliant signatures with strong identity proofing.
-  </Card>
-  <Card title="Device Intelligence" icon="mobile" href="/Platform_Guides/Device_Intelligence">
-    Risk signals and anomaly detection from device telemetry.
-  </Card>
-</Cards>
-
-## Quickstart in 3 steps
-
-<Steps>
-  <li>
-    Create credentials and a sandbox project.
-    <br />
-    Go to <a href="/Development_Resources/Manage">Development Resources → API Credentials</a> and <a href="/Getting_Started/Test_Account">Get Started → Test Account</a>.
-  </li>
-  <li>
-    Configure access and webhooks.
-    <br />
-    Set roles in <a href="/Getting_Started/Access_Management">Access Management</a> and secure callbacks in <a href="/Development_Resources/Secure">Webhooks → Secure</a>.
-  </li>
-  <li>
-    Execute your first flow and fetch results.
-    <br />
-    <a href="/Integration/Execute_Flows">Execute Flows</a> → <a href="/Integration/Get_Flow_Status">Get Flow Status</a> → <a href="/Integration/Get_Datablocks">Get DataBlocks</a>.
-  </li>
-</Steps>
-
-## Compliance, privacy, and EU readiness
-
-<Cards columns={3}>
-  <Card title="PII Handling" icon="shield-check" href="/Getting_Started/PII">
-    Minimize data, encrypt at rest and in transit, and control retention.
-  </Card>
-  <Card title="EUDI Wallet & eIDs" icon="shield" href="/Platform_Guides/EUDI_Wallet">
-    Prepare for next‑gen European identities and attestations.
-  </Card>
-  <Card title="Audit Trail" icon="timeline" href="/Integration/Get_Audit_Trial">
-    Preserve evidence with verifiable events and timestamps.
-  </Card>
-</Cards>
-
-## Tools you’ll use
-
-<Cards columns={4}>
-  <Card title="API Explorer" icon="square-terminal" href="https://idnow.mintlify.app/api-reference">
-    Interactive reference powered by OpenAPI. Test requests in-browser.
-  </Card>
-  <Card title="Studio" icon="cube" href="https://hub.hub.dev.eu.idnow.io/auth/login">
-    Visual workflow builder to orchestrate and simulate flows.
-  </Card>
-  <Card title="SDKs" icon="brackets-curly" href="/Development_Resources/Web">
-    Frontend and mobile packages for faster UI integration.
-  </Card>
-  <Card title="Templates" icon="layout-grid" href="/Platform_Guides/Workflow_Templates">
-    Best‑practice workflows to get into production quickly.
-  </Card>
-</Cards>
-
-<Callout type="success">
-Ready to build? Start with <a href="/Getting_Started/index">Get Started</a> or open the <a href="https://idnow.mintlify.app/api-reference">API Explorer</a>.
-</Callout>
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "IDnow Trustplatform",
+  "colors": {
+    "primary": "#ff6336",
+    "light": "#ff6336",
+    "dark": "#ff6336"
+  },
+  "favicon": "/favicon.png",
+  "versions": {
+    "current": "v1",
+    "list": [
+      { "id": "v1", "label": "v1 (Current)", "path": "/" },
+      { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
+    ]
+  },
+  "navigation": {
+    "versions": { "default": "v1" },
+    "anchors": [
+      {
+        "name": "API Reference",
+        "icon": "square-terminal",
+        "url": "api-reference",
+        "openapi": "/path/to/your/openapi.json"
+      }
+    ],
+    "tabs": [
+      {
+        "tab": "Get Started",
+        "icon": "book",
+        "groups": [
+          { "group": "Overview", "pages": ["Getting_Started/index"] },
+          {
+            "group": "Core Concept",
+            "pages": [
+              "Getting_Started/Flows",
+              "Getting_Started/Nodes",
+              "Getting_Started/Datablocks"
+            ]
+          },
+          {
+            "group": "Setup",
+            "pages": [
+              "Getting_Started/Test_Account",
+              "Getting_Started/Access_Management"
+            ]
+          },
+          { "group": "Compliance & Security", "pages": ["Getting_Started/PII"] }
+        ]
+      },
+      {
+        "tab": "Platform Guides",
+        "icon": "compass",
+        "groups": [
+          { "group": "Overview", "pages": ["Platform_Guides/index"] },
+          {
+            "group": "Identity Verification",
+            "pages": [
+              "Platform_Guides/Document_Verification",
+              "Platform_Guides/Identity_Comparison",
+              "Platform_Guides/Data_Verification",
+              "Platform_Guides/EUDI_Wallet",
+              "Platform_Guides/eIDs"
+            ]
+          },
+          {
+            "group": "Electronic Signatures",
+            "pages": [
+              "Platform_Guides/Qualified_Electronic_Signature",
+              "Platform_Guides/Advanced_Electronic_Signature"
+            ]
+          },
+          {
+            "group": "Trust & Risk Assessment",
+            "pages": [
+              "Platform_Guides/Device_Intelligence",
+              "Platform_Guides/Email_Phone_Verification"
+            ]
+          },
+          { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
+          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] },
+          {
+            "group": "Workflow Studio",
+            "pages": [
+              "Platform_Guides/Workflow_Basics",
+              "Platform_Guides/DataBlocks_Reference",
+              "Platform_Guides/Nodes_Reference",
+              "Platform_Guides/Workflow_Templates"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrate",
+        "icon": "server",
+        "groups": [
+          { "group": "Overview", "pages": ["Integration/index"] },
+          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
+          {
+            "group": "Integrate Workflows",
+            "pages": [
+              "Integration/Get_Flows",
+              "Integration/Execute_Flows",
+              "Integration/Get_Flow_Status"
+            ]
+          },
+          {
+            "group": "Receive Results",
+            "pages": [
+              "Integration/Get_Datablocks",
+              "Integration/Get_Audit_Trial"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Development Resources",
+        "icon": "tools",
+        "groups": [
+          { "group": "Overview", "pages": ["Development_Resources/index"] },
+          { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "Development_Resources/Configure",
+              "Development_Resources/Secure",
+              "Development_Resources/Integrate"
+            ]
+          },
+          {
+            "group": "SDKs & Libraries",
+            "pages": [
+              "Development_Resources/Web",
+              "Development_Resources/Mobile"
+            ]
+          },
+          { "group": "Error Handling", "pages": ["Development_Resources/Error_Handling"] }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/images.png",
+    "dark": "/logo/images.png"
+  },
+  "navbar": {
+    "links": [
+      { "label": "Support", "href": "mailto:hi@mintlify.com" },
+      { "label": "API Explorer", "href": "https://idnow.mintlify.app/api-reference" }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Studio",
+      "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/mintlify",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  }
+}

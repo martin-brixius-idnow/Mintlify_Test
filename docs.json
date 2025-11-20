@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Mint Starter Kit",
   "colors": {
-    "primary": "#852413",
-    "light": "#852413",
-    "dark": "#852413"
+    "primary": "#ff6336",
+    "light": "#ff6336",
+    "dark": "#ff6336"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -70,14 +70,24 @@
         "pages": ["Integration"],
         "groups": [
           {
-            "group": "Core APIs",
+            "group": "Authenticate",
             "pages": [
-              "Integration/Authenticate",
+              "Integration/Authenticate"
+            ]
+          },
+          {
+            "group": "Integrate Workflows",
+            "pages": [
+              "Integration/Get_Flows",
               "Integration/Execute_Flows",
-              "Integration/Get_Audit_Trial",
+              "Integration/Get_Flow_Status"
+            ]
+          },
+          {
+            "group": "Receive Results",
+            "pages": [
               "Integration/Get_Datablocks",
-              "Integration/Get_Flow_Status",
-              "Integration/Get_Flows"
+              "Integration/Get_Audit_Trial"
             ]
           }
         ]

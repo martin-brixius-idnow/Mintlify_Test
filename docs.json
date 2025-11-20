@@ -26,6 +26,10 @@
         "pages": ["Getting_Started/index"],
         "groups": [
           {
+            "group": "Overview",
+            "pages": ["Getting_Started/Introduction"]
+          },
+          {
             "group": "Core Concept",
             "pages": [
               "Getting_Started/Flows",
@@ -51,6 +55,10 @@
         "icon": "compass",
         "pages": ["Platform_Guides/index"],
         "groups": [
+          {
+            "group": "Overview",
+            "pages": ["Platform_Guides/Introduction"]
+          },
           {
             "group": "Identity Verification",
             "pages": [
@@ -104,6 +112,10 @@
         "pages": ["Integration/index"],
         "groups": [
           {
+            "group": "Overview",
+            "pages": ["Integration/Introduction"]
+          },
+          {
             "group": "Authenticate",
             "pages": ["Integration/Authenticate"]
           },
@@ -129,6 +141,10 @@
         "icon": "tools",
         "pages": ["Development_Resources/index"],
         "groups": [
+          {
+            "group": "Overview",
+            "pages": ["Development_Resources/Introduction"]
+          },
           {
             "group": "API Credentials",
             "pages": ["Development_Resources/Manage"]

@@ -18,9 +18,7 @@
   },
 
   "navigation": {
-    "versions": [
-      { "default": "v1" }
-    ],
+    "versions": { "default": "v1" },
 
     "tabs": [
       {

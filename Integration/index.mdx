@@ -1,75 +1,158 @@
 ---
-title: Overview
-description: Integrate the IDnow Trustplatform via REST APIs. Execute workflows, track status, and retrieve results with secure webhooks.
+title: "Integration"
+description: "Three endpoints. Zero friction. Ship identity flows in minutes."
 ---
 
-import { Cards, Card, Callout, Steps } from "mintlify/components";
+<img
+  className="block"
+  src="/images/integration-hero.png"
+  alt="Integration Overview"
+/>
 
-# Integrate
+# Integration
 
-Everything you need to call our APIs, run workflows, and consume results — fast and secure.
+Ship identity flows in minutes, not weeks.
 
-<Callout type="info">
-Start with credentials, then execute a flow and fetch the results. Use the API Explorer to try requests in your browser.
-</Callout>
+One authentication. Three endpoints. Unlimited workflows.
 
-## Quickstart
+The API returns only what you need. No bloat. No unnecessary PII exposure. Request full data when you want it. Ignore it when you don't.
+
+<Note>
+Built for privacy-first teams who move fast.
+</Note>
+
+---
+
+## How it works
 
 <Steps>
-  <li>
-    Get API credentials<br />
-    Create keys in <a href="/Development_Resources/Manage">Development Resources → API Credentials</a>.
-  </li>
-  <li>
-    Execute your first flow<br />
-    Send a request to <a href="/Integration/Execute_Flows">Execute Flows</a> and capture the flow ID.
-  </li>
-  <li>
-    Track and retrieve results<br />
-    Check <a href="/Integration/Get_Flow_Status">Get Flow Status</a> and fetch normalized outputs via <a href="/Integration/Get_Datablocks">Get DataBlocks</a>.
-  </li>
+  <Step title="Authenticate once" icon="key">
+    OAuth 2.0. Standard flow. Works everywhere.
+  </Step>
+  
+  <Step title="Execute any workflow" icon="play">
+    `POST /v1/workflows/{id}/executions` — Start verification, login, signature, fraud check. Whatever you built.
+  </Step>
+  
+  <Step title="Get status instantly" icon="bolt">
+    `GET /v1/executions/{id}` — Poll for completion. Datablock references only. Fast responses.
+  </Step>
+  
+  <Step title="Fetch data on demand" icon="download">
+    `GET /v1/executions/{id}/datablocks` — Request identity data when you actually need it.
+  </Step>
 </Steps>
 
-## Core endpoints
+---
 
-<Cards columns={3}>
-  <Card title="Authenticate" icon="key" href="/Integration/Authenticate">
-    Obtain and manage access tokens.
-  </Card>
-  <Card title="Execute Flows" icon="flowchart" href="/Integration/Execute_Flows">
-    Start a verification workflow.
-  </Card>
-  <Card title="Get Flow Status" icon="check-double" href="/Integration/Get_Flow_Status">
-    Poll or query current state and decisions.
-  </Card>
-</Cards>
+## Why developers choose this API
 
-<Cards columns={3}>
-  <Card title="Get DataBlocks" icon="table" href="/Integration/Get_Datablocks">
-    Retrieve structured outputs and attributes.
+<CardGroup cols={2}>
+  <Card 
+    title="Privacy by default" 
+    icon="lock"
+    color="#10b981"
+  >
+    Datablock references, not raw PII. Minimize exposure. Maximize control.
   </Card>
-  <Card title="Audit Trail" icon="timeline" href="/Integration/Get_Audit_Trial">
-    Evidence and event history for compliance.
+  
+  <Card 
+    title="Expand what you need" 
+    icon="arrows-maximize"
+    color="#3b82f6"
+  >
+    `expand[]=workflow_path` for audit trails. `expand[]=datablocks` for data. Your call.
   </Card>
-  <Card title="Webhooks" icon="bolt" href="/Development_Resources/Configure">
-    Receive updates and results in real time.
+  
+  <Card 
+    title="Complete audit trails" 
+    icon="route"
+    color="#8b5cf6"
+  >
+    Every node. Every transition. Every timestamp. Full lineage when you expand.
   </Card>
-</Cards>
+  
+  <Card 
+    title="Zero vendor lock-in" 
+    icon="code-branch"
+    color="#f59e0b"
+  >
+    Versioned endpoints. Swap workflows. Change providers. No rewrites.
+  </Card>
+</CardGroup>
 
-## Tools
+---
 
-<Cards columns={3}>
-  <Card title="API Explorer" icon="square-terminal" href="https://idnow.mintlify.app/api-reference">
-    Interactive reference powered by OpenAPI — test endpoints in-browser.
-  </Card>
-  <Card title="Studio" icon="cube" href="https://hub.hub.dev.eu.idnow.io/auth/login">
-    Design and simulate workflows visually.
-  </Card>
-  <Card title="SDKs" icon="code" href="/Development_Resources/Web">
-    Web and mobile libraries to accelerate integration.
-  </Card>
-</Cards>
+## Integration paths
 
-<Callout type="success">
-Ready to build? Jump to <a href="/Integration/Execute_Flows">Execute Flows</a> or open the <a href="https://idnow.mintlify.app/api-reference">API Explorer</a>.
-</Callout>
+<CardGroup cols={2}>
+  <Card
+    title="Authenticate"
+    icon="fingerprint"
+    href="/Integration/Authenticate"
+  >
+    OAuth 2.0 credentials. Token refresh. Production-ready security.
+  </Card>
+  
+  <Card
+    title="Execute workflows"
+    icon="rocket"
+    href="/Integration/Execute_Workflows"
+  >
+    Launch any flow. Pass context. Track execution state.
+  </Card>
+  
+  <Card
+    title="Retrieve results"
+    icon="chart-network"
+    href="/Integration/Retrieve_Results"
+  >
+    Poll for completion. Handle status transitions. Get references.
+  </Card>
+  
+  <Card
+    title="Fetch datablocks"
+    icon="database"
+    href="/Integration/Fetch_Datablocks"
+  >
+    Pull identity data, documents, signatures. Full control over what you access.
+  </Card>
+</CardGroup>
+
+---
+
+## You control everything
+
+<AccordionGroup>
+  <Accordion title="Data exposure" icon="shield-halved">
+    Request only the datablocks you need. Leave the rest untouched.
+  </Accordion>
+  
+  <Accordion title="Audit granularity" icon="list-timeline">
+    Expand workflow paths to see execution history down to the millisecond.
+  </Accordion>
+  
+  <Accordion title="Session behavior" icon="clock">
+    Set expiry. Manage state. Control lifecycle.
+  </Accordion>
+  
+  <Accordion title="Custom context" icon="tags">
+    Attach metadata for your downstream systems. It flows through unchanged.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Start building
+
+<Card
+  title="API Reference — Full specs"
+  icon="code"
+  href="/API_Reference/overview"
+>
+  Every endpoint. Every parameter. Every schema. Copy-paste examples included.
+</Card>
+
+<Tip>
+**Pro tip:** Use `expand[]=workflow_path` in staging to debug flows. Use minimal responses in production to stay fast.
+</Tip>

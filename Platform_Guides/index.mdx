@@ -73,26 +73,6 @@ Every workflow uses typed datablocks and explicit transitions. You control data 
 
 ---
 
-## How recipes work
-
-Each recipe follows the same structure:
-
-**Purpose**: One-line summary of what it solves.
-
-**When to use**: Clear trigger conditions.
-
-**Required nodes**: Workflow steps and their versions.
-
-**Datablocks**: Input and output types.
-
-**Workflow skeleton**: Minimal JSON you can copy and adapt.
-
-**Checklist**: Integration steps from setup to production.
-
-All workflows validate at design time. All transitions require explicit port mapping. All datablocks are typed and traceable.
-
----
-
 ## Start with a recipe
 
 <CardGroup cols={2}>
@@ -145,36 +125,3 @@ All workflows validate at design time. All transitions require explicit port map
   </Card>
 </CardGroup>
 
----
-
-## Next steps
-
-<Steps>
-  <Step title="Pick a recipe">
-    Choose the workflow pattern closest to your use case.
-  </Step>
-  
-  <Step title="Copy the skeleton">
-    Paste the JSON workflow into your flow definition.
-  </Step>
-  
-  <Step title="Configure providers">
-    Replace placeholder IDs with your provider and template references.
-  </Step>
-  
-  <Step title="Test in staging">
-    Execute the workflow and inspect the audit trail with expansion parameters.
-  </Step>
-  
-  <Step title="Deploy to production">
-    Tune data minimization and permissions, then promote.
-  </Step>
-</Steps>
-
-<Card
-  title="API Reference"
-  icon="code"
-  href="/API_Reference/overview"
->
-  Full endpoint documentation, expansion parameters, and datablock schemas.
-</Card>

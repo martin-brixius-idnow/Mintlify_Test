@@ -69,22 +69,15 @@
           {
             "group": "API Credentials",
             "pages": [
-              "Development_Resources/Create_Credentials",
-              "Development_Resources/Expiry_Dates"
+              "Development_Resources/Create_Credentials"
             ]
           },
           {
             "group": "Webhooks",
             "pages": [
               "Development_Resources/Configure",
-              "Development_Resources/Secure_Webhooks",
-              "Development_Resources/Handle_Webhooks"
-            ]
-          },
-          {
-            "group": "Error Handling",
-            "pages": [
-              "Development_Resources/Error_Handling"
+              "Development_Resources/Secure",
+              "Development_Resources/Handle"
             ]
           },
           {
@@ -92,6 +85,12 @@
             "pages": [
               "Development_Resources/Web",
               "Development_Resources/Mobile"
+            ]
+          },
+          {
+            "group": "Error Handling",
+            "pages": [
+              "Development_Resources/Error_Handling"
             ]
           }
         ]
@@ -119,4 +118,7 @@
   "contextual": {
     "options": [
       "copy",
-      "view",
+      "view"
+    ]
+  }
+}

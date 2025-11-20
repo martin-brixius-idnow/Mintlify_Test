@@ -1,17 +1,15 @@
 ---
-title: IDnow Trustplatform
+title: Introduction
 description: Build trusted identity, verification, and signature experiences. Fast to start, robust for scale, compliant in Europe.
-layout: wide
 ---
 
 import { Callout, Cards, Card, Steps, SectionHeader } from "mintlify/components";
 
-<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', flexWrap: 'wrap' }}>
+<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', marginBottom: 16 }}>
   <div style={{ flex: '1 1 520px', minWidth: 320 }}>
     <h1 style={{ marginBottom: 12 }}>Verify, sign, and trust — all in one platform</h1>
     <p style={{ fontSize: 18, lineHeight: 1.6, marginBottom: 20 }}>
-      Orchestrate KYC, document checks, eIDs, qualified electronic signatures, device trust, and risk signals.
-      Start in minutes, scale to millions, stay compliant across Europe.
+      Orchestrate document checks, data verification, eIDs, qualified e-signatures, device trust, and risk. Start in minutes, scale to millions, stay compliant across Europe.
     </p>
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
       <a className="button" href="/Getting_Started/index">Get started</a>
@@ -19,9 +17,10 @@ import { Callout, Cards, Card, Steps, SectionHeader } from "mintlify/components"
       <a className="button button--ghost" href="/Platform_Guides/index">Platform guides</a>
     </div>
     <div style={{ marginTop: 12, color: 'var(--muted-foreground)' }}>
-      Sandbox by default · EU data residency options · Built-in webhook security
+      Sandbox by default · EU data residency options · Built‑in webhook security
     </div>
   </div>
+
   <div style={{ flex: '1 1 420px', minWidth: 320 }}>
     <Cards columns={2}>
       <Card title="Create a flow" icon="flowchart" href="/Integration/Execute_Flows">
@@ -40,39 +39,33 @@ import { Callout, Cards, Card, Steps, SectionHeader } from "mintlify/components"
   </div>
 </div>
 
-<Callout type="tip" style={{ marginTop: 16 }}>
+<Callout type="tip">
 Try requests live in the <a href="https://idnow.mintlify.app/api-reference">API Explorer</a>. No local setup required.
 </Callout>
 
-## Build your way
+## What to expect
 
 <Cards columns={3}>
   <Card title="Get Started" icon="book" href="/Getting_Started/index">
-    Concepts, test accounts, access management, and data handling (PII).
+    Grasp and set up the platform in minutes.
   </Card>
   <Card title="Platform Guides" icon="compass" href="/Platform_Guides/index">
-    Document checks, data verification, eIDs/EUDI, signatures, device trust, and more.
+    Orchestrate identity, risk, and authentication from one place.
   </Card>
-  <Card title="Integrate (API)" icon="server" href="/Integration/index">
-    Endpoints for executing flows, retrieving results, and auditing.
+  <Card title="Integrate Flows" icon="server" href="/Integration/index">
+    Integrate once to access every capability.
   </Card>
 </Cards>
 
-<Cards columns={3}>
-  <Card title="SDKs & Libraries" icon="code" href="/Development_Resources/Web">
-    Web and mobile SDKs to accelerate integration and reduce boilerplate.
-  </Card>
+<Cards columns={1}>
   <Card title="Webhooks" icon="bolt" href="/Development_Resources/Configure">
-    Configure, secure, and consume event notifications.
-  </Card>
-  <Card title="Error Handling" icon="circle-exclamation" href="/Development_Resources/Error_Handling">
-    Clear errors, remediation guidance, and troubleshooting flows.
+    Receive important updates related to flows and verification results.
   </Card>
 </Cards>
 
 ## Popular capabilities
 
-<Cards columns={4}>
+<Cards columns={3}>
   <Card title="ID Document Verification" icon="id-card" href="/Platform_Guides/Document_Verification">
     Liveness and authenticity checks with AML screening options.
   </Card>
@@ -82,8 +75,17 @@ Try requests live in the <a href="https://idnow.mintlify.app/api-reference">API 
   <Card title="Qualified eSignatures (QES)" icon="signature" href="/Platform_Guides/Qualified_Electronic_Signature">
     Fully compliant signatures with strong identity proofing.
   </Card>
-  <Card title="Device Intelligence" icon="mobile" href="/Platform_Guides/Device_Intelligence">
-    Risk signals and anomaly detection from device telemetry.
+</Cards>
+
+<Cards columns={3}>
+  <Card title="Workflow Templates" icon="layout-grid" href="/Platform_Guides/Workflow_Templates">
+    Best‑practice flows to get into production quickly.
+  </Card>
+  <Card title="Nodes Reference" icon="node" href="/Platform_Guides/Nodes_Reference">
+    All building blocks used in workflows.
+  </Card>
+  <Card title="DataBlocks Reference" icon="table" href="/Platform_Guides/DataBlocks_Reference">
+    Schemas and attributes for returned results.
   </Card>
 </Cards>
 
@@ -91,18 +93,15 @@ Try requests live in the <a href="https://idnow.mintlify.app/api-reference">API 
 
 <Steps>
   <li>
-    Create credentials and a sandbox project.
-    <br />
+    Create credentials and a sandbox project.<br />
     Go to <a href="/Development_Resources/Manage">Development Resources → API Credentials</a> and <a href="/Getting_Started/Test_Account">Get Started → Test Account</a>.
   </li>
   <li>
-    Configure access and webhooks.
-    <br />
+    Configure access and webhooks.<br />
     Set roles in <a href="/Getting_Started/Access_Management">Access Management</a> and secure callbacks in <a href="/Development_Resources/Secure">Webhooks → Secure</a>.
   </li>
   <li>
-    Execute your first flow and fetch results.
-    <br />
+    Execute your first flow and fetch results.<br />
     <a href="/Integration/Execute_Flows">Execute Flows</a> → <a href="/Integration/Get_Flow_Status">Get Flow Status</a> → <a href="/Integration/Get_Datablocks">Get DataBlocks</a>.
   </li>
 </Steps>
@@ -131,10 +130,10 @@ Try requests live in the <a href="https://idnow.mintlify.app/api-reference">API 
     Visual workflow builder to orchestrate and simulate flows.
   </Card>
   <Card title="SDKs" icon="brackets-curly" href="/Development_Resources/Web">
-    Frontend and mobile packages for faster UI integration.
+    Frontend and mobile packages for faster integration.
   </Card>
-  <Card title="Templates" icon="layout-grid" href="/Platform_Guides/Workflow_Templates">
-    Best‑practice workflows to get into production quickly.
+  <Card title="Postman & Samples" icon="folder" href="/Development_Resources/Integrate">
+    Collections and sample projects for rapid testing.
   </Card>
 </Cards>
 

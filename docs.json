@@ -12,6 +12,9 @@
     "tabs": [
       {
         "tab": "Get Started",
+        "pages": [
+          "Getting_Started/Overview"
+        ],
         "groups": [
           {
             "group": "Core Concept",
@@ -38,6 +41,9 @@
       },
       {
         "tab": "Platform Guides",
+        "pages": [
+          "Platform_Guides/Overview"
+        ],
         "groups": [
           {
             "group": "Identity Verification",

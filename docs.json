@@ -23,6 +23,7 @@
       {
         "tab": "Get Started",
         "icon": "book",
+        "href": "/Getting_Started/index",
         "pages": ["Getting_Started/index"],
         "groups": [
           {
@@ -49,6 +50,7 @@
       {
         "tab": "Platform Guides",
         "icon": "compass",
+        "href": "/Platform_Guides/index",
         "pages": ["Platform_Guides/index"],
         "groups": [
           {
@@ -101,6 +103,7 @@
       {
         "tab": "API Reference",
         "icon": "server",
+        "href": "/Integration/index",
         "pages": ["Integration/index"],
         "groups": [
           {
@@ -127,6 +130,7 @@
       {
         "tab": "Development Resources",
         "icon": "tools",
+        "href": "/Development_Resources/index",
         "pages": ["Development_Resources/index"],
         "groups": [
           {

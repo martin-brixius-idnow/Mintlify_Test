@@ -53,7 +53,7 @@
         "tab": "Guides",
         "icon": "compass",
         "groups": [
-          { "group": "Overview", "pages": ["Platform_Guides/index"] },
+          { "group": "Guides", "pages": ["Platform_Guides/index"] },
           {
             "group": "Identity Verification",
             "pages": [
@@ -95,7 +95,7 @@
         "tab": "Integrate",
         "icon": "server",
         "groups": [
-          { "group": "Overview", "pages": ["Integration/index"] },
+          { "group": "Integrate", "pages": ["Integration/index"] },
           { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
           {
             "group": "Integrate Workflows",
@@ -118,7 +118,7 @@
         "tab": "Resources",
         "icon": "tools",
         "groups": [
-          { "group": "Overview", "pages": ["Development_Resources/index"] },
+          { "group": "Resources", "pages": ["Development_Resources/index"] },
           { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
           {
             "group": "Webhooks",

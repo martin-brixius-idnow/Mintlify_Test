@@ -1,137 +1,140 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "IDnow Trustplatform",
-  "colors": {
-    "primary": "#ff683c",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Get Started",
-        "groups": [
-          {
-            "group": "Core Concept",
-            "pages": [
-              "Getting_Started/Create Flows",
-              "Getting_Started/Select Nodes",
-              "Getting_Started/Get Datablocks"
-            ]
-          },
-          {
-            "group": "Setup",
-            "pages": [
-              "Getting_Started/Test_Account",
-              "Getting_Started/Access_Management"
-            ]
-          },
-          {
-            "group": "Compliance & Security",
-            "pages": [
-              "Getting_Started/PII"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Platform Guides",
-        "groups": [
-          {
-            "group": "Identity Verification",
-            "pages": [
-              "Getting_Started/Document_Verification",
-              "Getting_Started/Data_Verification",
-              "Getting_Started/EUDI_Wallet"
-            ]
-          },
-          {
-            "group": "Trust",
-            "pages": [
-              "Getting_Started/Device_Intelligence"
-            ]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "Getting_Started/Biometric_Authentication",
-              "Getting_Started/Email_and_Phone_Verification",
-              "Getting_Started/Advanced_Electro"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Development Resources",
-        "groups": [
-          {
-            "group": "API Credentials",
-            "pages": [
-              "Development_Resources/Manage"
-            ]
-          },
-          {
-            "group": "Webhooks",
-            "pages": [
-              "Development_Resources/Configure",
-              "Development_Resources/Secure_Webhooks",
-              "Development_Resources/Handle_Webhooks"
-            ]
-          },
-          {
-            "group": "SDKs & Libraries",
-            "pages": [
-              "Development_Resources/Web",
-              "Development_Resources/Mobile"
-            ]
-          },
-          {
-            "group": "Error Handling",
-            "pages": [
-              "Development_Resources/Error_Handling"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {}
-  },
-  "logo": {
-    "light": "/logo/images.png",
-    "dark": "/logo/images.png"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "IDnow Trustplatform",
+  "colors": {
+    "primary": "#ff683c",
+    "light": "#07C983",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Get Started",
+        "groups": [
+          {
+            "group": "Core Concept",
+            "pages": [
+              "Getting_Started/Create Flows",
+              "Getting_Started/Select Nodes",
+              "Getting_Started/Get Datablocks"
+            ]
+          },
+          {
+            "group": "Setup",
+            "pages": [
+              "Getting_Started/Test_Account",
+              "Getting_Started/Access_Management"
+            ]
+          },
+          {
+            "group": "Compliance & Security",
+            "pages": [
+              "Getting_Started/PII"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Platform Guides",
+        "groups": [
+          {
+            "group": "Identity Verification",
+            "pages": [
+              "Getting_Started/Document_Verification",
+              "Getting_Started/Data_Verification",
+              "Getting_Started/EUDI_Wallet"
+            ]
+          },
+          {
+            "group": "Trust",
+            "pages": [
+              "Getting_Started/Device_Intelligence"
+            ]
+          },
+          {
+            "group": "Authentication",
+            "pages": [
+              "Getting_Started/Biometric_Authentication",
+              "Getting_Started/Email_and_Phone_Verification",
+              "Getting_Started/Advanced_Electro"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Development Resources",
+        "pages": [
+          "Development_Resources/Overview"
+        ],
+        "groups": [
+          {
+            "group": "API Credentials",
+            "pages": [
+              "Development_Resources/Manage"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "Development_Resources/Configure",
+              "Development_Resources/Secure_Webhooks",
+              "Development_Resources/Handle_Webhooks"
+            ]
+          },
+          {
+            "group": "SDKs & Libraries",
+            "pages": [
+              "Development_Resources/Web",
+              "Development_Resources/Mobile"
+            ]
+          },
+          {
+            "group": "Error Handling",
+            "pages": [
+              "Development_Resources/Error_Handling"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {}
+  },
+  "logo": {
+    "light": "/logo/images.png",
+    "dark": "/logo/images.png"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hi@mintlify.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://dashboard.mintlify.com"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/mintlify",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  }
 }

@@ -1,107 +1,26 @@
-"navigation": {
-  "versions": { "default": "v1" },
-  "anchors": [
+{
+  "tab": "Get Started",
+  "icon": "book",
+  "pages": ["index"],
+  "groups": [
     {
-      "name": "API Reference",
-      "icon": "square-terminal",
-      "url": "api-reference",
-      "openapi": "/path/to/your/openapi.json"
-    }
-  ],
-  "tabs": [
-    {
-      "tab": "Get Started",
-      "icon": "book",
-      "pages": ["index"]
-    },
-    {
-      "tab": "Guides",
-      "icon": "compass",
-      "groups": [
-        { "group": "Overview", "pages": ["Platform_Guides/index"] },
-        {
-          "group": "Identity Verification",
-          "pages": [
-            "Platform_Guides/Document_Verification",
-            "Platform_Guides/Identity_Comparison",
-            "Platform_Guides/Data_Verification",
-            "Platform_Guides/EUDI_Wallet",
-            "Platform_Guides/eIDs"
-          ]
-        },
-        {
-          "group": "Electronic Signatures",
-          "pages": [
-            "Platform_Guides/Qualified_Electronic_Signature",
-            "Platform_Guides/Advanced_Electronic_Signature"
-          ]
-        },
-        {
-          "group": "Trust & Risk Assessment",
-          "pages": [
-            "Platform_Guides/Device_Intelligence",
-            "Platform_Guides/Email_Phone_Verification"
-          ]
-        },
-        { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
-        { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] },
-        {
-          "group": "Workflow Studio",
-          "pages": [
-            "Platform_Guides/Workflow_Basics",
-            "Platform_Guides/DataBlocks_Reference",
-            "Platform_Guides/Nodes_Reference",
-            "Platform_Guides/Workflow_Templates"
-          ]
-        }
+      "group": "Core Concept",
+      "pages": [
+        "Getting_Started/Flows",
+        "Getting_Started/Nodes",
+        "Getting_Started/Datablocks"
       ]
     },
     {
-      "tab": "Integrate",
-      "icon": "server",
-      "groups": [
-        { "group": "Overview", "pages": ["Integration/index"] },
-        { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
-        {
-          "group": "Integrate Workflows",
-          "pages": [
-            "Integration/Get_Flows",
-            "Integration/Execute_Flows",
-            "Integration/Get_Flow_Status"
-          ]
-        },
-        {
-          "group": "Receive Results",
-          "pages": [
-            "Integration/Get_Datablocks",
-            "Integration/Get_Audit_Trial"
-          ]
-        }
+      "group": "Setup",
+      "pages": [
+        "Getting_Started/Test_Account",
+        "Getting_Started/Access_Management"
       ]
     },
     {
-      "tab": "Resources",
-      "icon": "tools",
-      "groups": [
-        { "group": "Overview", "pages": ["Development_Resources/index"] },
-        { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
-        {
-          "group": "Webhooks",
-          "pages": [
-            "Development_Resources/Configure",
-            "Development_Resources/Secure",
-            "Development_Resources/Integrate"
-          ]
-        },
-        {
-          "group": "SDKs & Libraries",
-          "pages": [
-            "Development_Resources/Web",
-            "Development_Resources/Mobile"
-          ]
-        },
-        { "group": "Error Handling", "pages": ["Development_Resources/Error_Handling"] }
-      ]
+      "group": "Compliance & Security",
+      "pages": ["Getting_Started/PII"]
     }
   ]
 }

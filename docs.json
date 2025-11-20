@@ -30,7 +30,7 @@
         "tab": "Get Started",
         "icon": "book",
         "groups": [
-          { "group": "Overview", "pages": ["Getting_Started/index"] },
+          { "group": "Overview", "pages": ["index"] },
           {
             "group": "Core Concept",
             "pages": [

@@ -29,7 +29,7 @@
       {
         "tab": "Get Started",
         "icon": "book",
-        "pages": ["index"],
+        "pages": ["Getting_Started/index"],
         "groups": [
           {
             "group": "Core Concept",
@@ -127,14 +127,8 @@
         "tab": "Resources",
         "icon": "tools",
         "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Development_Resources/index"]
-          },
-          {
-            "group": "API Credentials",
-            "pages": ["Development_Resources/Manage"]
-          },
+          { "group": "Overview", "pages": ["Development_Resources/index"] },
+          { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
           {
             "group": "Webhooks",
             "pages": [

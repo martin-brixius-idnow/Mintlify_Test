@@ -24,7 +24,7 @@
         "tab": "Get Started",
         "icon": "book",
         "pages": [
-          "Getting_Started/introduction"
+          "Getting_Started/index"
         ],
         "groups": [
           {
@@ -52,7 +52,7 @@
         "tab": "Platform Guides",
         "icon": "compass",
         "pages": [
-          "Platform_Guides/introduction"
+          "Platform_Guides/index"
         ],
         "groups": [
           {
@@ -106,7 +106,7 @@
         "tab": "API Reference",
         "icon": "server",
         "pages": [
-          "Integration/introduction"
+          "Integration/index"
         ],
         "groups": [
           {
@@ -134,7 +134,7 @@
         "tab": "Development Resources",
         "icon": "tools",
         "pages": [
-          "Development_Resources/introduction"
+          "Development_Resources/index"
         ],
         "groups": [
           {

@@ -3,7 +3,7 @@
     "tabs": [
       {
         "tab": "Get Started",
-        "pages": ["Getting_Started/Overview"],
+        "pages": ["Getting_Started"],
         "groups": [
           {
             "group": "Core Concept",
@@ -30,7 +30,7 @@
       },
       {
         "tab": "Platform Guides",
-        "pages": ["Platform_Guides/Overview"],
+        "pages": ["Platform_Guides"],
         "groups": [
           {
             "group": "Identity Verification",
@@ -58,7 +58,7 @@
       },
       {
         "tab": "Development Resources",
-        "pages": ["Development_Resources/Overview"],
+        "pages": ["Development_Resources"],
         "groups": [
           {
             "group": "API Credentials",

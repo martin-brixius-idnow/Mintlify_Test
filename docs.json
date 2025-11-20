@@ -23,9 +23,7 @@
       {
         "tab": "Get Started",
         "icon": "book",
-        "pages": [
-          "Getting_Started/index"
-        ],
+        "pages": ["Getting_Started/introduction"],
         "groups": [
           {
             "group": "Core Concept",
@@ -51,9 +49,7 @@
       {
         "tab": "Platform Guides",
         "icon": "compass",
-        "pages": [
-          "Platform_Guides/index"
-        ],
+        "pages": ["Platform_Guides/introduction"],
         "groups": [
           {
             "group": "Identity Verification",
@@ -105,9 +101,7 @@
       {
         "tab": "API Reference",
         "icon": "server",
-        "pages": [
-          "Integration/index"
-        ],
+        "pages": ["Integration/introduction"],
         "groups": [
           {
             "group": "Authenticate",
@@ -133,9 +127,7 @@
       {
         "tab": "Development Resources",
         "icon": "tools",
-        "pages": [
-          "Development_Resources/index"
-        ],
+        "pages": ["Development_Resources/introduction"],
         "groups": [
           {
             "group": "API Credentials",

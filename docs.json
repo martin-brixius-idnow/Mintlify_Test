@@ -12,22 +12,14 @@
     "tabs": [
       {
         "tab": "Get Started",
-        "groups": [
-          {
-            "group": "Home",
-            "pages": [
-              "Home",
-            ]
-          },
-      {
-        "tab": "Get Started",
+        "pages": ["Home/Welcome"]
         "groups": [
           {
             "group": "Core Concept",
             "pages": [
-              "Getting_Started/Flows",
-              "Getting_Started/Nodes",
-              "Getting_Started/Datablocks"
+              "Getting_Started/Create Flows",
+              "Getting_Started/Select Nodes",
+              "Getting_Started/Get Datablocks"
             ]
           },
           {

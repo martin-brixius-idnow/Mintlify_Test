@@ -55,7 +55,7 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": ["Platform_Guides//index"]
+            "pages": ["Platform_Guides/index"]
           },
           {
             "group": "Identity Verification",
@@ -176,7 +176,13 @@
 
   "navbar": {
     "links": [
-      { "label": "Support", "href": "mailto:hi@mintlify.com" }
+      { "label": "Support", "href": "mailto:hi@mintlify.com" },
+
+      /* Option A: If your API section folder is 'api-reference' like the Mintlify Starter Kit */
+      { "label": "API Explorer", "href": "/api-reference" }
+
+      /* Option B: If you want to land on Integrate's overview (remove Option A) */
+      /* { "label": "API Explorer", "href": "/Integration" } */
     ],
     "primary": {
       "type": "button",

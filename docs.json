@@ -18,7 +18,54 @@
   },
 
   "navigation": {
-    "versions": { "default": "v1" },
+    "products": [],
+    "languages": [],
+    "versions": [
+      { "default": "v1" }
+    ],
+    "anchors": [],
+    "groups": [],
+    "pages": [],
+
+    "dropdowns": [
+      {
+        "menu": "Get Started Groups",
+        "items": [
+          { "label": "Core Concept", "page": "Getting_Started/Flows" },
+          { "label": "Setup", "page": "Getting_Started/Test_Account" },
+          { "label": "Compliance & Security", "page": "Getting_Started/PII" }
+        ]
+      },
+      {
+        "menu": "Platform Guides Groups",
+        "items": [
+          { "label": "Identity Verification", "page": "Platform_Guides/Document_Verification" },
+          { "label": "Electronic Signatures", "page": "Platform_Guides/Qualified_Electronic_Signature" },
+          { "label": "Trust & Risk Assessment", "page": "Platform_Guides/Device_Intelligence" },
+          { "label": "Screening", "page": "Platform_Guides/PEP_Sanctions_Screening" },
+          { "label": "Authentication", "page": "Platform_Guides/Biometric_Authentication" },
+          { "label": "Workflow Building", "page": "Platform_Guides/Workflow_Basics" }
+        ]
+      },
+      {
+        "menu": "API Reference Groups",
+        "items": [
+          { "label": "Authenticate", "page": "Integration/Authenticate" },
+          { "label": "Integrate Workflows", "page": "Integration/Get_Flows" },
+          { "label": "Receive Results", "page": "Integration/Get_Datablocks" }
+        ]
+      },
+      {
+        "menu": "Development Resources Groups",
+        "items": [
+          { "label": "API Credentials", "page": "Development_Resources/Manage" },
+          { "label": "Webhooks", "page": "Development_Resources/Configure" },
+          { "label": "SDKs & Libraries", "page": "Development_Resources/Web" },
+          { "label": "Error Handling", "page": "Development_Resources/Error_Handling" }
+        ]
+      }
+    ],
+
     "tabs": [
       {
         "tab": "Get Started",
@@ -43,18 +90,8 @@
             "group": "Compliance & Security",
             "pages": ["Getting_Started/PII"]
           }
-        ]
-      },
-
-      {
-        "menu": "Solutions",
-        "items": [
-          { "label": "Banks", "page": "Solutions/Banks" },
-          { "label": "Fintechs", "page": "Solutions/Fintechs" },
-          { "label": "Telecom", "page": "Solutions/Telecom" },
-          { "label": "Car Rental", "page": "Solutions/Car_Rental" },
-          { "label": "Insurance", "page": "Solutions/Insurance" }
-        ]
+        ],
+        "dropdowns": ["Get Started Groups"]
       },
 
       {
@@ -87,11 +124,15 @@
           },
           {
             "group": "Screening",
-            "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
+            "pages": [
+              "Platform_Guides/PEP_Sanctions_Screening"
+            ]
           },
           {
             "group": "Authentication",
-            "pages": ["Platform_Guides/Biometric_Authentication"]
+            "pages": [
+              "Platform_Guides/Biometric_Authentication"
+            ]
           },
           {
             "group": "Workflow Building",
@@ -102,7 +143,8 @@
               "Platform_Guides/Workflow_Templates"
             ]
           }
-        ]
+        ],
+        "dropdowns": ["Platform Guides Groups"]
       },
 
       {
@@ -128,7 +170,8 @@
               "Integration/Get_Audit_Trial"
             ]
           }
-        ]
+        ],
+        "dropdowns": ["API Reference Groups"]
       },
 
       {
@@ -158,7 +201,8 @@
             "group": "Error Handling",
             "pages": ["Development_Resources/Error_Handling"]
           }
-        ]
+        ],
+        "dropdowns": ["Development Resources Groups"]
       }
     ]
   },

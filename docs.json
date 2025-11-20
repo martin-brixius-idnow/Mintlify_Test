@@ -61,7 +61,7 @@
         "groups": [
           {
             "group": "Identity Verification",
-            "icon": "id-card",
+            "icon": "id",
             "pages": [
               "Platform_Guides/Document_Verification",
               "Platform_Guides/Identity_Comparison",
@@ -102,7 +102,7 @@
           },
           {
             "group": "Workflow Studio",
-            "icon": "flowchart",
+            "icon": "share-3",
             "pages": [
               "Platform_Guides/Workflow_Basics",
               "Platform_Guides/DataBlocks_Reference",

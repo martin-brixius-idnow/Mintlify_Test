@@ -35,7 +35,7 @@
             "group": "Core Concept",
             "pages": [
               "Getting_Started/Flows",
-              "Getting_Started/Nodes",
+              "Getting_Started/Steps",
               "Getting_Started/Datablocks"
             ]
           },
@@ -49,6 +49,25 @@
           { "group": "Compliance & Security", "pages": ["Getting_Started/PII"] }
         ]
       },
+
+      {
+        "tab": "Solution Templates",
+        "icon": "blocks",
+        "groups": [
+          { "group": "Overview", "pages": ["Solution_Templates/index"] },
+          {
+            "group": "Templates",
+            "pages": [
+              "Solution_Templates/Digital_Onboarding",
+              "Solution_Templates/Qualified_Electronic_Signature",
+              "Solution_Templates/AML_Compliance",
+              "Solution_Templates/Fraud_Prevention",
+              "Solution_Templates/Age_Verification"
+            ]
+          }
+        ]
+      },
+
       {
         "tab": "Step Library",
         "icon": "compass",
@@ -91,6 +110,7 @@
           }
         ]
       },
+
       {
         "tab": "Integrate",
         "icon": "server",
@@ -114,6 +134,7 @@
           }
         ]
       },
+
       {
         "tab": "Resources",
         "icon": "tools",

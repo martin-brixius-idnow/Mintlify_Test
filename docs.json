@@ -54,7 +54,7 @@
         "tab": "Solution Templates",
         "icon": "sparkles",
         "groups": [
-          { "group": "Overview", "pages": ["Solution_Templates/index"] },
+          { "group": "Solution Templates", "pages": ["Solution_Templates/index"] },
           {
             "group": "Templates",
             "pages": [
@@ -70,7 +70,7 @@
 
       {
         "tab": "Node Library",
-        "icon": "layers",
+        "icon": "stack",
         "groups": [
           { "group": "Node Library", "pages": ["Platform_Guides/index"] },
           {

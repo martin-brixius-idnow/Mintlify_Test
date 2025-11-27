@@ -72,7 +72,15 @@
         "tab": "Node Library",
         "icon": "cube",
         "groups": [
-          { "group": "Node Library", "pages": ["Platform_Guides/index"] },
+          {
+            "group": "Workflow Studio",
+            "pages": [
+              "Platform_Guides/Workflow_Basics",
+              "Platform_Guides/DataBlocks_Reference",
+              "Platform_Guides/Nodes_Reference",
+              "Platform_Guides/Workflow_Templates"
+            ]
+          },
           {
             "group": "Identity Verification",
             "pages": [
@@ -98,16 +106,7 @@
             ]
           },
           { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
-          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] },
-          {
-            "group": "Workflow Studio",
-            "pages": [
-              "Platform_Guides/Workflow_Basics",
-              "Platform_Guides/DataBlocks_Reference",
-              "Platform_Guides/Nodes_Reference",
-              "Platform_Guides/Workflow_Templates"
-            ]
-          }
+          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] }
         ]
       },
 

@@ -69,30 +69,6 @@
       },
 
       {
-        "tab": "Integrate",
-        "icon": "server",
-        "groups": [
-          { "group": "Integrate", "pages": ["Integration/index"] },
-          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
-          {
-            "group": "Integrate Workflows",
-            "pages": [
-              "Integration/Get_Flows",
-              "Integration/Execute_Flows",
-              "Integration/Get_Flow_Status"
-            ]
-          },
-          {
-            "group": "Receive Results",
-            "pages": [
-              "Integration/Get_Datablocks",
-              "Integration/Get_Audit_Trial"
-            ]
-          }
-        ]
-      },
-
-      {
         "tab": "Node Library",
         "icon": "cube",
         "groups": [
@@ -136,6 +112,30 @@
       },
 
       {
+        "tab": "Integrate",
+        "icon": "server",
+        "groups": [
+          { "group": "Integrate", "pages": ["Integration/index"] },
+          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
+          {
+            "group": "Integrate Workflows",
+            "pages": [
+              "Integration/Get_Flows",
+              "Integration/Execute_Flows",
+              "Integration/Get_Flow_Status"
+            ]
+          },
+          {
+            "group": "Receive Results",
+            "pages": [
+              "Integration/Get_Datablocks",
+              "Integration/Get_Audit_Trial"
+            ]
+          }
+        ]
+      },
+
+      {
         "tab": "Resources",
         "icon": "tools",
         "groups": [
@@ -161,10 +161,12 @@
       }
     ]
   },
+
   "logo": {
     "light": "/logo/images.png",
     "dark": "/logo/images.png"
   },
+
   "navbar": {
     "links": [
       { "label": "Support", "href": "mailto:hi@mintlify.com" },
@@ -176,6 +178,7 @@
       "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
   },
+
   "contextual": {
     "options": [
       "copy",
@@ -188,6 +191,7 @@
       "vscode"
     ]
   },
+
   "footer": {
     "socials": {
       "x": "https://x.com/mintlify",

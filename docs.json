@@ -50,7 +50,7 @@
         ]
       },
       {
-        "tab": "Guides",
+        "tab": "Step Library",
         "icon": "compass",
         "groups": [
           { "group": "Guides", "pages": ["Platform_Guides/index"] },

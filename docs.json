@@ -52,7 +52,7 @@
 
       {
         "tab": "Solution Templates",
-        "icon": "blocks",
+        "icon": "sparkles",
         "groups": [
           { "group": "Overview", "pages": ["Solution_Templates/index"] },
           {

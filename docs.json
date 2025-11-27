@@ -35,7 +35,7 @@
             "group": "Core Concept",
             "pages": [
               "Getting_Started/Flows",
-              "Getting_Started/Steps",
+              "Getting_Started/Nodes",
               "Getting_Started/Datablocks"
             ]
           },

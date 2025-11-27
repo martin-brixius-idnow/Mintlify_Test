@@ -70,7 +70,7 @@
 
       {
         "tab": "Node Library",
-        "icon": "stacks",
+        "icon": "cube",
         "groups": [
           { "group": "Node Library", "pages": ["Platform_Guides/index"] },
           {

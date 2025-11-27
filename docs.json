@@ -69,10 +69,10 @@
       },
 
       {
-        "tab": "Step Library",
-        "icon": "compass",
+        "tab": "Node Library",
+        "icon": "layers",
         "groups": [
-          { "group": "Guides", "pages": ["Platform_Guides/index"] },
+          { "group": "Node Library", "pages": ["Platform_Guides/index"] },
           {
             "group": "Identity Verification",
             "pages": [

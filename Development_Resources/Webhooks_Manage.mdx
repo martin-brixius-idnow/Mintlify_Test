@@ -20,61 +20,6 @@ HTTP endpoints are **not supported**. HTTPS with a valid SSL certificate is requ
 | **Capacity** | Handle expected event volume |
 | **Idempotency** | Process duplicates safely using `event_id` |
 
-### Example Payload
-
-```json
-{
-  "event_id": "evt_c3d4e5f6g7h8i9j0",
-  "event_name": "flow_execution.completed",
-  "delivery_id": "1",
-  "createdAt": "2025-11-24T10:18:45.789Z",
-  "flowId": "identity_verification_v2",
-  "execution_id": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
-  "execution_status": "COMPLETED",
-  "decision_outcome": "accepted",
-  "last_step_id": "My Node",
-  "last_step_type": "END",
-  "last_step_status": "COMPLETED"
-}
-```
-
-### Sample Implementation
-
-<CodeGroup>
-
-```javascript Node.js
-app.post('/webhooks/idnow', express.json(), (req, res) => {
-  // Respond immediately
-  res.status(200).json({ received: true });
-  
-  // Process asynchronously
-  setImmediate(() => processEvent(req.body));
-});
-```
-
-```python Python
-@app.route('/webhooks/idnow', methods=['POST'])
-def webhook():
-    # Process asynchronously
-    threading.Thread(target=process_event, args=(request.json,)).start()
-    return {'received': True}, 200
-```
-
-```php PHP
-<?php
-$event = json_decode(file_get_contents('php://input'), true);
-
-// Respond immediately
-http_response_code(200);
-echo json_encode(['received' => true]);
-
-// Process asynchronously
-fastcgi_finish_request();
-processEvent($event);
-```
-
-</CodeGroup>
-
 <Tip>
 Return 2xx **immediately**, then process events asynchronously to avoid timeouts.
 </Tip>
@@ -89,15 +34,12 @@ Set up your webhook endpoint in the IDnow Studio UI.
   <Step title="Navigate to Settings">
     Go to **Settings â†’ Webhooks** in Studio.
   </Step>
-  
   <Step title="Add endpoint URL">
     Enter your HTTPS endpoint URL and description.
   </Step>
-  
   <Step title="Set secret key">
     Provide a secret key for JWT signature verification.
   </Step>
-  
   <Step title="Subscribe to events">
     Select specific events or receive all events by default.
   </Step>
@@ -117,11 +59,8 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   <Accordion title="Validate IP address" icon="network-wired">
     Accept requests only from IDnow's documented IP ranges.
   </Accordion>
-  
   <Accordion title="Verify JWT signature" icon="key">
-    Use your secret key to validate the JWT in the request header.
-    
-    See [Security](/webhooks/security) for details.
+    Use your secret key to validate the JWT in the request header. See the Security page for details.
   </Accordion>
 </AccordionGroup>
 
@@ -131,38 +70,20 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   <Step title="Check for duplicates">
     Use `event_id` to detect already-processed events.
   </Step>
-  
   <Step title="Return 2xx immediately">
     Respond within 10 seconds to acknowledge receipt.
   </Step>
-  
   <Step title="Queue for processing">
     Add the event to a background queue.
   </Step>
 </Steps>
-
-```javascript
-const processed = new Set();
-
-app.post('/webhooks/idnow', (req, res) => {
-  const { event_id } = req.body;
-  
-  if (processed.has(event_id)) {
-    return res.status(200).send('Already processed');
-  }
-  
-  processed.add(event_id);
-  res.status(200).json({ received: true });
-  
-  eventQueue.add(req.body);
-});
-```
 
 ### 3. Handle Retries
 
 IDnow retries failed deliveries automatically.
 
 **Retry schedule:**
+
 - Maximum attempts: **5 times**
 - Intervals: 1min â†’ 5min â†’ 15min â†’ 1hour â†’ 6hours
 
@@ -178,15 +99,12 @@ Implement idempotency using `event_id` to handle duplicate deliveries from retri
   <Card title="Quick Response" icon="bolt">
     Return 2xx immediately, don't wait for processing.
   </Card>
-  
   <Card title="Use Queues" icon="gears">
     Handle high volumes with background workers.
   </Card>
-  
   <Card title="Track event_id" icon="key">
     Prevent duplicate processing from retries.
   </Card>
-  
   <Card title="Monitor Logs" icon="chart-simple">
     Track error rates, latency, and delivery success.
   </Card>
@@ -200,15 +118,12 @@ Implement idempotency using `event_id` to handle duplicate deliveries from retri
   <Accordion title="Not receiving webhooks" icon="inbox">
     Check HTTPS accessibility, firewall rules, TLS certificate, and Studio configuration.
   </Accordion>
-  
   <Accordion title="Timeout errors" icon="clock">
     Return 2xx within 10 seconds. Move processing to background queue.
   </Accordion>
-  
   <Accordion title="High retry rates" icon="rotate">
     Check response time (<1s), error logs, and server capacity.
   </Accordion>
-  
   <Accordion title="Duplicate events" icon="copy">
     Expected behavior. Use `event_id` for idempotency and return 200 OK.
   </Accordion>

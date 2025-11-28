@@ -111,7 +111,7 @@
       },
 
       {
-        "tab": "Integrate",
+        "tab": "Integration",
         "icon": "server",
         "groups": [
           { "group": "Integrate", "pages": ["Integration/index"] },

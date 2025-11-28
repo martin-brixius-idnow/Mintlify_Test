@@ -1,4 +1,189 @@
 ---
-title: Introduction
-description: Receive real-time event notifications when flows execute.
+title: 'Event Types'
+description: 'Learn which webhook events are sent for each flow execution state'
 ---
+
+## Overview
+
+Idnow sends webhook events for different stages of a flow execution. Each event provides information about the current state of the verification journey.
+
+<Info>
+All events use thin payloads. No personally identifiable information (PII) is included by default.
+</Info>
+
+### Event Payload Structure
+
+All webhook events share a common structure:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `event_id` | String | Same ID across retries for the same event |
+| `event_name` | String | Format: `resource.action` (e.g., `flow_execution.completed`) |
+| `delivery_id` | String | Unique per retry attempt (sequence: 1, 2, 3, 4, 5) |
+| `createdAt` | ISO 8601 | When webhook was sent |
+| `flowId` | String | The type of workflow that was chosen |
+| `execution_id` | UUID | Matches the API response and Hub Studio |
+| `execution_status` | Enum | `CREATED`, `RUNNING`, `COMPLETED`, `ERROR`, `ABORTED`, `EXPIRED` |
+| `decision_outcome` | String | Final outcome as defined in DSL (for completed flows) |
+| `last_step_id` | String | Defined by you in the workflow configuration |
+| `last_step_type` | String | Named by Idnow (step type identifier) |
+| `last_step_status` | String | Status of the last executed step (e.g., `ABORTED`) |
+
+<Info>
+The `event_id` remains the same across all retry attempts, while `delivery_id` increments.
+</Info>
+
+## Flow Execution Events
+
+Idnow sends the following event types when a flow execution changes state:
+
+<CardGroup cols={2}>
+  <Card title="flow_execution.created" icon="play">
+    Flow is initialized and ready to start
+  </Card>
+  <Card title="flow_execution.started" icon="circle-play">
+    User has begun the verification journey
+  </Card>
+  <Card title="flow_execution.step_completed" icon="circle-check">
+    A workflow step has finished processing
+  </Card>
+  <Card title="flow_execution.completed" icon="circle-check">
+    Flow ends with final outcome (accepted/rejected)
+  </Card>
+  <Card title="flow_execution.expired" icon="clock">
+    Session timeout reached, no longer usable
+  </Card>
+  <Card title="flow_execution.aborted" icon="circle-xmark">
+    Flow ends prematurely with no final outcome
+  </Card>
+  <Card title="flow_execution.error" icon="triangle-exclamation">
+    Flow enters ERROR state and stops processing
+  </Card>
+</CardGroup>
+
+## Event Details
+
+### flow_execution.created
+
+Sent when a new flow execution is initialized through the API.
+
+**When it occurs:**
+- API request to create a new verification session
+- Flow is ready but user has not started yet
+
+**Next steps:**
+- Share the verification link with your user
+- User can now begin the journey
+
+---
+
+### flow_execution.started
+
+Sent when the user opens the verification link and begins the process.
+
+**When it occurs:**
+- User clicks the verification link
+- Session becomes active
+
+**Next steps:**
+- User proceeds through workflow steps
+- Additional events sent as steps complete
+
+---
+
+### flow_execution.step_completed
+
+Sent each time a workflow step finishes processing.
+
+**When it occurs:**
+- Document verification completes
+- Biometric check finishes
+- Any configured step reaches completion
+
+**Next steps:**
+- Flow continues to next step
+- Or proceeds to final outcome
+
+<Note>
+This event fires multiple times per flow, once for each completed step.
+</Note>
+
+---
+
+### flow_execution.completed
+
+Sent when the flow reaches a final outcome.
+
+**When it occurs:**
+- All required steps finish successfully
+- Flow determines acceptance or rejection
+- Workflow reaches an end node
+
+**Next steps:**
+- Review the outcome in `decision_outcome`
+- Process the result in your system
+
+<Tip>
+Check the `last_step_id` to understand which end node was reached.
+</Tip>
+
+---
+
+### flow_execution.expired
+
+Sent when the session reaches its time-to-live (TTL) limit.
+
+**When it occurs:**
+- Configured timeout period elapses
+- User does not complete verification in time
+- Session becomes unusable
+
+**Next steps:**
+- Create a new flow execution if needed
+- Contact user to restart the process
+
+---
+
+### flow_execution.aborted
+
+Sent when a flow ends prematurely without reaching a final decision.
+
+**When it occurs:**
+- User closes the browser mid-session
+- User explicitly cancels the process
+- Flow stops before reaching an end node
+
+**Next steps:**
+- Determine if user should restart
+- Analyze dropout reasons
+
+---
+
+### flow_execution.error
+
+Sent when a flow encounters a critical error and cannot continue.
+
+**When it occurs:**
+- System error during processing
+- Configuration issue detected
+- Unrecoverable state reached
+
+**Next steps:**
+- Review error logs in Studio
+- Contact support if issue persists
+
+<Warning>
+This event indicates a technical problem that prevented normal flow completion.
+</Warning>
+
+
+### Event Ordering
+
+<Warning>
+Webhook delivery is asynchronous. Events are **not guaranteed** to arrive in order.
+</Warning>
+
+**Best practices:**
+- Use `createdAt` timestamps to order events
+- Check `execution_status` to determine current state
+- Implement idempotency using `event_id`

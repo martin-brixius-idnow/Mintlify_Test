@@ -11,22 +11,12 @@
   "versions": {
     "current": "v1",
     "list": [
-      {
-        "id": "v1",
-        "label": "v1 (Current)",
-        "path": "/"
-      },
-      {
-        "id": "v0.9",
-        "label": "v0.9",
-        "path": "/v0.9"
-      }
+      { "id": "v1", "label": "v1 (Current)", "path": "/" },
+      { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
     ]
   },
   "navigation": {
-    "versions": {
-      "default": "v1"
-    },
+    "versions": { "default": "v1" },
     "anchors": [
       {
         "name": "API Reference",
@@ -42,6 +32,7 @@
         "groups": [
           {
             "group": "Trust Platform",
+            "hidden": true,
             "pages": ["index"]
           },
           {
@@ -59,18 +50,17 @@
               "Getting_Started/Access_Management"
             ]
           },
-          {
-            "group": "Compliance & Security",
-            "pages": ["Getting_Started/PII"]
-          }
+          { "group": "Compliance & Security", "pages": ["Getting_Started/PII"] }
         ]
       },
+
       {
         "tab": "Solution Templates",
         "icon": "sparkles",
         "groups": [
           {
             "group": "Solution Templates",
+            "hidden": true,
             "pages": ["Solution_Templates/index"]
           },
           {
@@ -85,12 +75,14 @@
           }
         ]
       },
+
       {
         "tab": "Node Library",
         "icon": "cube",
         "groups": [
           {
             "group": "Workflow Studio",
+            "hidden": true,
             "pages": [
               "Platform_Guides/Workflow_Basics",
               "Platform_Guides/DataBlocks_Reference",
@@ -122,28 +114,21 @@
               "Platform_Guides/Email_Phone_Verification"
             ]
           },
-          {
-            "group": "Screening",
-            "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
-          },
-          {
-            "group": "Authentication",
-            "pages": ["Platform_Guides/Biometric_Authentication"]
-          }
+          { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
+          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] }
         ]
       },
+
       {
         "tab": "Integration",
         "icon": "server",
         "groups": [
           {
             "group": "Integrate",
+            "hidden": true,
             "pages": ["Integration/index"]
           },
-          {
-            "group": "Authenticate",
-            "pages": ["Integration/Authenticate"]
-          },
+          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
           {
             "group": "Integrate Workflows",
             "pages": [
@@ -161,18 +146,17 @@
           }
         ]
       },
+
       {
         "tab": "Resources",
         "icon": "tools",
         "groups": [
           {
             "group": "Resources",
+            "hidden": true,
             "pages": ["Development_Resources/index"]
           },
-          {
-            "group": "API Credentials",
-            "pages": ["Development_Resources/Manage"]
-          },
+          { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
           {
             "group": "Webhooks",
             "pages": [
@@ -188,28 +172,21 @@
               "Development_Resources/Mobile"
             ]
           },
-          {
-            "group": "Error Handling",
-            "pages": ["Development_Resources/Error_Handling"]
-          }
+          { "group": "Error Handling", "pages": ["Development_Resources/Error_Handling"] }
         ]
       }
     ]
   },
+
   "logo": {
     "light": "/logo/images.png",
     "dark": "/logo/images.png"
   },
+
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      },
-      {
-        "label": "API Explorer",
-        "href": "https://idnow.mintlify.app/api-reference"
-      }
+      { "label": "Support", "href": "mailto:hi@mintlify.com" },
+      { "label": "API Explorer", "href": "https://idnow.mintlify.app/api-reference" }
     ],
     "primary": {
       "type": "button",
@@ -217,6 +194,7 @@
       "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
   },
+
   "contextual": {
     "options": [
       "copy",
@@ -229,6 +207,7 @@
       "vscode"
     ]
   },
+
   "footer": {
     "socials": {
       "x": "https://x.com/mintlify",

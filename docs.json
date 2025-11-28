@@ -176,7 +176,6 @@
           {
             "group": "Webhooks",
             "pages": [
-              "Development_Resources/Webhooks_Introduction",
               "Development_Resources/Webhooks_Manage",
               "Development_Resources/Webhooks_Secure",
               "Development_Resources/Webhooks_Events"

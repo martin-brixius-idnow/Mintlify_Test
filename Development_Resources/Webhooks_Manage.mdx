@@ -11,7 +11,6 @@ Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 sec
 HTTP endpoints are **not supported**. HTTPS with a valid SSL certificate is required.
 </Warning>
 
-
 **Requirements:**
 
 | Requirement | Details |
@@ -64,7 +63,6 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
 ### Process the Event
 
 <Steps>
-  </Step>
   <Step title="Return 2xx immediately">
     Respond within 10 seconds to acknowledge receipt.
   </Step>
@@ -73,6 +71,7 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Step>
   <Step title="Queue for processing">
     Add the event to a background queue.
+  </Step>
 </Steps>
 
 ### Handle Retries

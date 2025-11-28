@@ -1,223 +1,201 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "IDnow Trustplatform",
-  "colors": {
-    "primary": "#ff6336",
-    "light": "#ff6336",
-    "dark": "#ff6336"
-  },
-  "favicon": "/favicon.png",
-  "versions": {
-    "current": "v1",
-    "list": [
-      { "id": "v1", "label": "v1 (Current)", "path": "/" },
-      { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
-    ]
-  },
-  "navigation": {
-    "versions": { "default": "v1" },
-    "anchors": [
-      {
-        "name": "API Reference",
-        "icon": "square-terminal",
-        "url": "api-reference",
-        "openapi": "/path/to/your/openapi.json"
-      }
-    ],
-    "tabs": [
-      {
-        "tab": "Get Started",
-        "page": "index",
-        "icon": "book",
-        "groups": [
-          {
-            "group": "Trust Platform",
-            "hidden": true,
-            "pages": ["index"]
-          },
-          {
-            "group": "Core Concept",
-            "pages": [
-              "Getting_Started/Flows",
-              "Getting_Started/Nodes",
-              "Getting_Started/Datablocks"
-            ]
-          },
-          {
-            "group": "Setup",
-            "pages": [
-              "Getting_Started/Test_Account",
-              "Getting_Started/Access_Management"
-            ]
-          },
-          { "group": "Compliance & Security", "pages": ["Getting_Started/PII"] }
-        ]
-      },
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "IDnow Trustplatform",
+  "colors": {
+    "primary": "#ff6336",
+    "light": "#ff6336",
+    "dark": "#ff6336"
+  },
+  "favicon": "/favicon.png",
+  "versions": {
+    "current": "v1",
+    "list": [
+      { "id": "v1", "label": "v1 (Current)", "path": "/" },
+      { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
+    ]
+  },
+  "navigation": {
+    "versions": { "default": "v1" },
+    "anchors": [
+      {
+        "name": "API Reference",
+        "icon": "square-terminal",
+        "url": "api-reference",
+        "openapi": "/path/to/your/openapi.json"
+      }
+    ],
+    "tabs": [
+      {
+        "tab": "Get Started",
+        "icon": "book",
+        "groups": [
+          { "group": "Trust Platform", "pages": ["index"] },
+          {
+            "group": "Core Concept",
+            "pages": [
+              "Getting_Started/Flows",
+              "Getting_Started/Nodes",
+              "Getting_Started/Datablocks"
+            ]
+          },
+          {
+            "group": "Setup",
+            "pages": [
+              "Getting_Started/Test_Account",
+              "Getting_Started/Access_Management"
+            ]
+          },
+          { "group": "Compliance & Security", "pages": ["Getting_Started/PII"] }
+        ]
+      },
 
-      {
-        "tab": "Solution Templates",
-        "page": "Solution_Templates/index",
-        "icon": "sparkles",
-        "groups": [
-          {
-            "group": "Solution Templates",
-            "hidden": true,
-            "pages": ["Solution_Templates/index"]
-          },
-          {
-            "group": "Templates",
-            "pages": [
-              "Solution_Templates/Digital_Onboarding",
-              "Solution_Templates/Qualified_Electronic_Signature",
-              "Solution_Templates/AML_Compliance",
-              "Solution_Templates/Fraud_Prevention",
-              "Solution_Templates/Age_Verification"
-            ]
-          }
-        ]
-      },
+      {
+        "tab": "Solution Templates",
+        "icon": "sparkles",
+        "groups": [
+          { "group": "Solution Templates", "pages": ["Solution_Templates/index"] },
+          {
+            "group": "Templates",
+            "pages": [
+              "Solution_Templates/Digital_Onboarding",
+              "Solution_Templates/Qualified_Electronic_Signature",
+              "Solution_Templates/AML_Compliance",
+              "Solution_Templates/Fraud_Prevention",
+              "Solution_Templates/Age_Verification"
+            ]
+          }
+        ]
+      },
 
-      {
-        "tab": "Node Library",
-        "page": "Platform_Guides/Workflow_Basics",
-        "icon": "cube",
-        "groups": [
-          {
-            "group": "Workflow Studio",
-            "hidden": true,
-            "pages": [
-              "Platform_Guides/Workflow_Basics",
-              "Platform_Guides/DataBlocks_Reference",
-              "Platform_Guides/Nodes_Reference",
-              "Platform_Guides/Workflow_Templates"
-            ]
-          },
-          {
-            "group": "Identity Verification",
-            "pages": [
-              "Platform_Guides/Document_Verification",
-              "Platform_Guides/Identity_Comparison",
-              "Platform_Guides/Data_Verification",
-              "Platform_Guides/EUDI_Wallet",
-              "Platform_Guides/eIDs"
-            ]
-          },
-          {
-            "group": "Electronic Signatures",
-            "pages": [
-              "Platform_Guides/Qualified_Electronic_Signature",
-              "Platform_Guides/Advanced_Electronic_Signature"
-            ]
-          },
-          {
-            "group": "Trust & Risk Assessment",
-            "pages": [
-              "Platform_Guides/Device_Intelligence",
-              "Platform_Guides/Email_Phone_Verification"
-            ]
-          },
-          { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
-          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] }
-        ]
-      },
+      {
+        "tab": "Node Library",
+        "icon": "cube",
+        "groups": [
+          {
+            "group": "Workflow Studio",
+            "pages": [
+              "Platform_Guides/Workflow_Basics",
+              "Platform_Guides/DataBlocks_Reference",
+              "Platform_Guides/Nodes_Reference",
+              "Platform_Guides/Workflow_Templates"
+            ]
+          },
+          {
+            "group": "Identity Verification",
+            "pages": [
+              "Platform_Guides/Document_Verification",
+              "Platform_Guides/Identity_Comparison",
+              "Platform_Guides/Data_Verification",
+              "Platform_Guides/EUDI_Wallet",
+              "Platform_Guides/eIDs"
+            ]
+          },
+          {
+            "group": "Electronic Signatures",
+            "pages": [
+              "Platform_Guides/Qualified_Electronic_Signature",
+              "Platform_Guides/Advanced_Electronic_Signature"
+            ]
+          },
+          {
+            "group": "Trust & Risk Assessment",
+            "pages": [
+              "Platform_Guides/Device_Intelligence",
+              "Platform_Guides/Email_Phone_Verification"
+            ]
+          },
+          { "group": "Screening", "pages": ["Platform_Guides/PEP_Sanctions_Screening"] },
+          { "group": "Authentication", "pages": ["Platform_Guides/Biometric_Authentication"] }
+        ]
+      },
 
-      {
-        "tab": "Integration",
-        "page": "Integration/index",
-        "icon": "server",
-        "groups": [
-          {
-            "group": "Integrate",
-            "hidden": true,
-            "pages": ["Integration/index"]
-          },
-          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
-          {
-            "group": "Integrate Workflows",
-            "pages": [
-              "Integration/Get_Flows",
-              "Integration/Execute_Flows",
-              "Integration/Get_Flow_Status"
-            ]
-          },
-          {
-            "group": "Receive Results",
-            "pages": [
-              "Integration/Get_Datablocks",
-              "Integration/Get_Audit_Trial"
-            ]
-          }
-        ]
-      },
+      {
+        "tab": "Integration",
+        "icon": "server",
+        "groups": [
+          { "group": "Integrate", "pages": ["Integration/index"] },
+          { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
+          {
+            "group": "Integrate Workflows",
+            "pages": [
+              "Integration/Get_Flows",
+              "Integration/Execute_Flows",
+              "Integration/Get_Flow_Status"
+            ]
+          },
+          {
+            "group": "Receive Results",
+            "pages": [
+              "Integration/Get_Datablocks",
+              "Integration/Get_Audit_Trial"
+            ]
+          }
+        ]
+      },
 
-      {
-        "tab": "Resources",
-        "page": "Development_Resources/index",
-        "icon": "tools",
-        "groups": [
-          {
-            "group": "Resources",
-            "hidden": true,
-            "pages": ["Development_Resources/index"]
-          },
-          { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
-          {
-            "group": "Webhooks",
-            "pages": [
-              "Development_Resources/Configure",
-              "Development_Resources/Secure",
-              "Development_Resources/Integrate"
-            ]
-          },
-          {
-            "group": "SDKs & Libraries",
-            "pages": [
-              "Development_Resources/Web",
-              "Development_Resources/Mobile"
-            ]
-          },
-          { "group": "Error Handling", "pages": ["Development_Resources/Error_Handling"] }
-        ]
-      }
-    ]
-  },
+      {
+        "tab": "Resources",
+        "icon": "tools",
+        "groups": [
+          { "group": "Resources", "pages": ["Development_Resources/index"] },
+          { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "Development_Resources/Configure",
+              "Development_Resources/Secure",
+              "Development_Resources/Integrate"
+            ]
+          },
+          {
+            "group": "SDKs & Libraries",
+            "pages": [
+              "Development_Resources/Web",
+              "Development_Resources/Mobile"
+            ]
+          },
+          { "group": "Error Handling", "pages": ["Development_Resources/Error_Handling"] }
+        ]
+      }
+    ]
+  },
 
-  "logo": {
-    "light": "/logo/images.png",
-    "dark": "/logo/images.png"
-  },
+  "logo": {
+    "light": "/logo/images.png",
+    "dark": "/logo/images.png"
+  },
 
-  "navbar": {
-    "links": [
-      { "label": "Support", "href": "mailto:hi@mintlify.com" },
-      { "label": "API Explorer", "href": "https://idnow.mintlify.app/api-reference" }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Studio",
-      "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
-    }
-  },
+  "navbar": {
+    "links": [
+      { "label": "Support", "href": "mailto:hi@mintlify.com" },
+      { "label": "API Explorer", "href": "https://idnow.mintlify.app/api-reference" }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Studio",
+      "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
+    }
+  },
 
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
 
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
+  "footer": {
+    "socials": {
+      "x": "https://x.com/mintlify",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
+    }
+  }
 }

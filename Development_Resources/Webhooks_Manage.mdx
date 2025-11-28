@@ -54,7 +54,7 @@ app.post('/webhooks/idnow', express.json(), (req, res) => {
 ```python Python
 @app.route('/webhooks/idnow', methods=['POST'])
 def webhook():
-    # Respond immediately
+    # Process asynchronously
     threading.Thread(target=process_event, args=(request.json,)).start()
     return {'received': True}, 200
 ```

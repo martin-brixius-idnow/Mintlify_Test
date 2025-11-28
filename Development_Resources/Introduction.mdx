@@ -1,11 +1,8 @@
 ---
 title: Introduction
-description: Receive real-time event notifications when flows execute.
+description: Webhooks deliver **real-time notifications** to your application when events occur during a flow execution.
 ---
-
-Webhooks deliver **real-time notifications** to your application when events occur during a flow execution. Instead of polling the API, your server automatically receives an HTTP POST request the moment something changes.
-
-In the TrustPlatform, every action runs as a **flow** and a series of **nodes** like a identity verification or digital signatures. Because nodes execute **asynchronously** (based on user behavior, device performance, and third-party services), webhooks keep your system synchronized with the flow's current state.
+In TrustPlatform, every flow runs as a session consisting of one or more nodes, such as identity verification or digital signature steps. Instead of polling the API, your server automatically receives an HTTP POST request the moment something changes. Since nodes execute asynchronously, depending on user actions, device performance, and third-party services, webhooks ensure your system stays synchronized with the flow’s current state and can notify you when new results or data blocks are available for retrieval.
 
 <Info>
 **Key characteristics:**

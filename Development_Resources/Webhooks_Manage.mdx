@@ -11,6 +11,7 @@ Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 sec
 HTTP endpoints are **not supported**. HTTPS with a valid SSL certificate is required.
 </Warning>
 
+
 **Requirements:**
 
 | Requirement | Details |
@@ -36,7 +37,7 @@ Set up your webhook endpoint in the IDnow Studio UI.
     Enter your HTTPS endpoint URL and description.
   </Step>
   <Step title="Set secret key">
-    Provide a secret key for JWT signature verification.
+    Provide a secret key for authentication and JWT signature verification.
   </Step>
   <Step title="Subscribe to events">
     Select specific events or receive all events by default.
@@ -56,7 +57,7 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
     Accept requests only from IDnow's documented IP ranges.
   </Accordion>
   <Accordion title="Verify JWT signature" icon="key">
-    Use your secret key to validate the JWT in the request header. See the Security page for details.
+    Optionally, use your secret key to validate the JWT in the request header. See the Security page for details.
   </Accordion>
 </AccordionGroup>
 
@@ -80,8 +81,8 @@ IDnow retries failed deliveries automatically.
 
 **Retry schedule:**
 
-- Maximum attempts: 5 times
-- Intervals: 1min, 5min, 15min, 1hour, 6hours
+- Maximum attempts: 3 times
+- Intervals: 2sec, 4sec, 8sec
 
 <Warning>
 Implement idempotency using event_id to handle duplicate deliveries from retries.
@@ -94,7 +95,7 @@ Implement idempotency using event_id to handle duplicate deliveries from retries
     Return 2xx immediately, don't wait for processing.
   </Card>
   <Card title="Use Queues" icon="gears">
-    Handle high volumes with background workers.
+    Handle high volumes with asynchronously processing
   </Card>
   <Card title="Track event_id" icon="key">
     Prevent duplicate processing from retries.
@@ -103,23 +104,6 @@ Implement idempotency using event_id to handle duplicate deliveries from retries
     Track error rates, latency, and delivery success.
   </Card>
 </CardGroup>
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="Not receiving webhooks" icon="inbox">
-    Check HTTPS accessibility, firewall rules, TLS certificate, and Studio configuration.
-  </Accordion>
-  <Accordion title="Timeout errors" icon="clock">
-    Return 2xx within 10 seconds. Move processing to background queue.
-  </Accordion>
-  <Accordion title="High retry rates" icon="rotate">
-    Check response time, error logs, and server capacity.
-  </Accordion>
-  <Accordion title="Duplicate events" icon="copy">
-    Expected behavior. Use event_id for idempotency and return 200 OK.
-  </Accordion>
-</AccordionGroup>
 
 ## Next Steps
 

@@ -18,13 +18,11 @@ HTTP endpoints are **not supported**. HTTPS with a valid SSL certificate is requ
 | **Protocol** | HTTPS with TLS 1.2+ |
 | **Response time** | Return 2xx within 10 seconds |
 | **Capacity** | Handle expected event volume |
-| **Idempotency** | Process duplicates safely using `event_id` |
+| **Idempotency** | Process duplicates safely using event_id |
 
 <Tip>
 Return 2xx **immediately**, then process events asynchronously to avoid timeouts.
 </Tip>
-
----
 
 ## Configure in Studio
 
@@ -32,7 +30,7 @@ Set up your webhook endpoint in the IDnow Studio UI.
 
 <Steps>
   <Step title="Navigate to Settings">
-    Go to **Settings â†’ Webhooks** in Studio.
+    Go to **Settings** then **Webhooks** in Studio.
   </Step>
   <Step title="Add endpoint URL">
     Enter your HTTPS endpoint URL and description.
@@ -49,11 +47,9 @@ Set up your webhook endpoint in the IDnow Studio UI.
 Configure separate endpoints for **test**, **preprod**, and **live** environments.
 </Info>
 
----
-
 ## Handle Webhooks
 
-### 1. Verify the Source
+### Verify the Source
 
 <AccordionGroup>
   <Accordion title="Validate IP address" icon="network-wired">
@@ -64,11 +60,11 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Accordion>
 </AccordionGroup>
 
-### 2. Process the Event
+### Process the Event
 
 <Steps>
   <Step title="Check for duplicates">
-    Use `event_id` to detect already-processed events.
+    Use event_id to detect already-processed events.
   </Step>
   <Step title="Return 2xx immediately">
     Respond within 10 seconds to acknowledge receipt.
@@ -78,20 +74,18 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Step>
 </Steps>
 
-### 3. Handle Retries
+### Handle Retries
 
 IDnow retries failed deliveries automatically.
 
 **Retry schedule:**
 
-- Maximum attempts: **5 times**
-- Intervals: 1min â†’ 5min â†’ 15min â†’ 1hour â†’ 6hours
+- Maximum attempts: 5 times
+- Intervals: 1min, 5min, 15min, 1hour, 6hours
 
 <Warning>
-Implement idempotency using `event_id` to handle duplicate deliveries from retries.
+Implement idempotency using event_id to handle duplicate deliveries from retries.
 </Warning>
-
----
 
 ## Best Practices
 
@@ -110,8 +104,6 @@ Implement idempotency using `event_id` to handle duplicate deliveries from retri
   </Card>
 </CardGroup>
 
----
-
 ## Troubleshooting
 
 <AccordionGroup>
@@ -122,14 +114,12 @@ Implement idempotency using `event_id` to handle duplicate deliveries from retri
     Return 2xx within 10 seconds. Move processing to background queue.
   </Accordion>
   <Accordion title="High retry rates" icon="rotate">
-    Check response time (<1s), error logs, and server capacity.
+    Check response time, error logs, and server capacity.
   </Accordion>
   <Accordion title="Duplicate events" icon="copy">
-    Expected behavior. Use `event_id` for idempotency and return 200 OK.
+    Expected behavior. Use event_id for idempotency and return 200 OK.
   </Accordion>
 </AccordionGroup>
-
----
 
 ## Next Steps
 

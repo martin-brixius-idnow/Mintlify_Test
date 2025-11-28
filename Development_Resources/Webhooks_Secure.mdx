@@ -66,30 +66,6 @@ Your webhook endpoint must support TLS 1.2 or higher. Idnow validates your endpo
   </Card>
 </CardGroup>
 
-## Best Practices
-
-<AccordionGroup>
-  <Accordion title="Process events asynchronously">
-    Queue webhook events for background processing. Return a `2xx` response immediately to confirm receipt.
-  </Accordion>
-
-  <Accordion title="Implement idempotency">
-    Use the `event_id` to deduplicate events. Idnow retries failed deliveries with the same `event_id`.
-  </Accordion>
-
-  <Accordion title="Validate the source">
-    Always verify the IP address is from Idnow and the API token matches your configuration. Optionally verify the JWT signature.
-  </Accordion>
-
-  <Accordion title="Use HTTPS only">
-    Never configure HTTP endpoints. Idnow only delivers to HTTPS URLs.
-  </Accordion>
-
-  <Accordion title="Monitor webhook health">
-    Track delivery success rates and response times. Set up alerts for failures.
-  </Accordion>
-</AccordionGroup>
-
 ## Security Headers
 
 Idnow includes these headers with every webhook request:
@@ -101,59 +77,3 @@ Idnow includes these headers with every webhook request:
 | `Content-Type` | Always `application/json` |
 | `User-Agent` | Idnow webhook service identifier |
 
-## Response Requirements
-
-Your endpoint must respond within 10 seconds with an HTTP status code.
-
-| Status Code | Meaning | Retry Behavior |
-|-------------|---------|----------------|
-| `2xx` | Success | No retry |
-| `4xx` | Client error | No retry |
-| `5xx` | Server error | Automatic retry |
-| Timeout | No response | Automatic retry |
-
-<Warning>
-Idnow retries only for transient errors (5xx) and network issues. Misconfigurations (4xx) are not retried.
-</Warning>
-
-## Retry Logic
-
-When a webhook delivery fails due to a transient error, Idnow automatically retries using exponential backoff.
-
-### Retry Schedule
-
-- **Attempt 1**: Immediate
-- **Attempt 2**: 2 seconds
-- **Attempt 3**: 4 seconds  
-- **Attempt 4**: 8 seconds
-- **Attempt 5**: 16 seconds
-
-<Note>
-All retry attempts use the same `event_id` but have unique `delivery_id` values.
-</Note>
-
-## Troubleshooting
-
-Common security-related issues and solutions:
-
-<AccordionGroup>
-  <Accordion title="401 Unauthorized">
-    Check that your API token matches the value configured in Studio. The token is case-sensitive.
-  </Accordion>
-
-  <Accordion title="403 Forbidden">
-    Verify your IP whitelist includes all Idnow IP ranges. Check your firewall rules.
-  </Accordion>
-
-  <Accordion title="Invalid JWT signature">
-    Ensure you are using the correct public key and RS256 algorithm for verification.
-  </Accordion>
-
-  <Accordion title="Timeout errors">
-    Your endpoint must respond within 10 seconds. Move processing to background jobs.
-  </Accordion>
-</AccordionGroup>
-
-<Tip>
-Contact support if you need help configuring webhook security for your environment.
-</Tip>

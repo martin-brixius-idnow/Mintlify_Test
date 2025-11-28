@@ -176,7 +176,7 @@
           {
             "group": "Webhooks",
             "pages": [
-              "Development_Resources/Configure",
+              "Development_Resources/Manage & Configure",
               "Development_Resources/Secure",
               "Development_Resources/Integrate"
             ]

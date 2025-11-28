@@ -28,6 +28,7 @@
     "tabs": [
       {
         "tab": "Get Started",
+        "page": "index",
         "icon": "book",
         "groups": [
           {
@@ -56,6 +57,7 @@
 
       {
         "tab": "Solution Templates",
+        "page": "Solution_Templates/index",
         "icon": "sparkles",
         "groups": [
           {
@@ -78,6 +80,7 @@
 
       {
         "tab": "Node Library",
+        "page": "Platform_Guides/Workflow_Basics",
         "icon": "cube",
         "groups": [
           {
@@ -121,6 +124,7 @@
 
       {
         "tab": "Integration",
+        "page": "Integration/index",
         "icon": "server",
         "groups": [
           {
@@ -149,6 +153,7 @@
 
       {
         "tab": "Resources",
+        "page": "Development_Resources/index",
         "icon": "tools",
         "groups": [
           {

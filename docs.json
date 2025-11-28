@@ -176,8 +176,8 @@
           {
             "group": "Webhooks",
             "pages": [
-              "Development_Resources/Introduction",
-              "Development_Resources/Manage & Configure",
+              "Development_Resources/Webhooks_Introduction",
+              "Development_Resources/Webhooks_Manage",
               "Development_Resources/Secure",
               "Development_Resources/Integrate"
             ]

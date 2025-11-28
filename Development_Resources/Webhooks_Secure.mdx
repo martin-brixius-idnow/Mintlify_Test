@@ -1,4 +1,138 @@
 ---
-title: Secure
-description: Learn about Secure Webhooks in IDnow Trustplatform.
+title: 'Security'
+description: 'Learn how to secure your webhook endpoints'
 ---
+
+## Authentication
+
+Idnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from Idnow.
+
+### API Token
+
+You provide an API token when configuring your webhook endpoint in Studio. Idnow includes this token in the request header.
+
+<Steps>
+  <Step title="Add your API token">
+    Configure your API token in Studio when setting up the webhook endpoint.
+  </Step>
+  
+  <Step title="Verify the token">
+    Check the token in the request header matches your expected value.
+  </Step>
+</Steps>
+
+### JWT Signature
+
+All webhook payloads are signed using JSON Web Tokens (JWT). You can optionally verify the signature to confirm authenticity.
+
+<CodeGroup>
+
+```javascript Node.js
+const jwt = require('jsonwebtoken');
+
+function verifyWebhook(token, publicKey) {
+  try {
+    const decoded = jwt.verify(token, publicKey);
+    return decoded;
+  } catch(err) {
+    console.error('Invalid signature');
+    return null;
+  }
+}
+```
+
+```python Python
+import jwt
+
+def verify_webhook(token, public_key):
+    try:
+        decoded = jwt.decode(token, public_key, algorithms=["RS256"])
+        return decoded
+    except jwt.InvalidSignatureError:
+        print("Invalid signature")
+        return None
+```
+
+```java Java
+import io.jsonwebtoken.Jwts;
+
+public boolean verifyWebhook(String token, PublicKey publicKey) {
+    try {
+        Jwts.parserBuilder()
+            .setSigningKey(publicKey)
+            .build()
+            .parseClaimsJws(token);
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
+```
+
+</CodeGroup>
+
+## IP Whitelisting
+
+Restrict your webhook endpoint to only accept requests from Idnow IP addresses.
+
+<Info>
+  Idnow maintains a limited and stable list of IP addresses for webhook delivery.
+</Info>
+
+### IP Ranges
+
+Add these IP ranges to your firewall or application allow list:
+
+```text
+203.0.113.0/24
+198.51.100.0/24
+192.0.2.0/24
+```
+
+<Note>
+  Contact your account manager for the current production IP ranges.
+</Note>
+
+## TLS Requirements
+
+Your webhook endpoint must support TLS 1.2 or higher. Idnow validates your endpoint's TLS configuration during setup.
+
+<CardGroup cols={2}>
+  <Card title="TLS 1.2" icon="check">
+    Supported and recommended
+  </Card>
+  <Card title="TLS 1.3" icon="check">
+    Supported and recommended
+  </Card>
+</CardGroup>
+
+## Best Practices
+
+  </Accordion>
+
+  <Accordion title="Validate the source">
+    Always verify:
+    - IP address is from Idnow
+    - API token matches your configuration
+    - JWT signature is valid (optional)
+  </Accordion>
+
+  <Accordion title="Use HTTPS only">
+    Never configure HTTP endpoints. Idnow only delivers to HTTPS URLs.
+  </Accordion>
+</AccordionGroup>
+
+## Security Headers
+
+Idnow includes these headers with every webhook request:
+
+| Header | Description |
+|--------|-------------|
+| `Authorization` | Your API token |
+| `X-Idnow-Signature` | JWT signature of the payload |
+| `Content-Type` | Always `application/json` |
+| `User-Agent` | Idnow webhook service identifier |
+
+## Example Verification
+
+Here's a complete example that implements all security checks:

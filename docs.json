@@ -30,7 +30,12 @@
         "tab": "Get Started",
         "icon": "book",
         "groups": [
-          { "group": "Trust Platform", "pages": ["index"] },
+          {
+            "group": "Trust Platform",
+            "pages": [
+              { "page": "index", "hidden": true }
+            ]
+          },
           {
             "group": "Core Concept",
             "pages": [
@@ -54,7 +59,12 @@
         "tab": "Solution Templates",
         "icon": "sparkles",
         "groups": [
-          { "group": "Solution Templates", "pages": ["Solution_Templates/index"] },
+          {
+            "group": "Solution Templates",
+            "pages": [
+              { "page": "Solution_Templates/index", "hidden": true }
+            ]
+          },
           {
             "group": "Templates",
             "pages": [
@@ -75,7 +85,7 @@
           {
             "group": "Workflow Studio",
             "pages": [
-              "Platform_Guides/Workflow_Basics",
+              { "page": "Platform_Guides/Workflow_Basics", "hidden": true },
               "Platform_Guides/DataBlocks_Reference",
               "Platform_Guides/Nodes_Reference",
               "Platform_Guides/Workflow_Templates"
@@ -114,7 +124,12 @@
         "tab": "Integration",
         "icon": "server",
         "groups": [
-          { "group": "Integrate", "pages": ["Integration/index"] },
+          {
+            "group": "Integrate",
+            "pages": [
+              { "page": "Integration/index", "hidden": true }
+            ]
+          },
           { "group": "Authenticate", "pages": ["Integration/Authenticate"] },
           {
             "group": "Integrate Workflows",
@@ -138,7 +153,12 @@
         "tab": "Resources",
         "icon": "tools",
         "groups": [
-          { "group": "Resources", "pages": ["Development_Resources/index"] },
+          {
+            "group": "Resources",
+            "pages": [
+              { "page": "Development_Resources/index", "hidden": true }
+            ]
+          },
           { "group": "API Credentials", "pages": ["Development_Resources/Manage"] },
           {
             "group": "Webhooks",

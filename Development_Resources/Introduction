@@ -7,7 +7,7 @@ description: Receive real-time event notifications when flows execute.
 
 Webhooks deliver **real-time notifications** to your application when events occur during a user's flow execution. Instead of polling the API, your server automatically receives an HTTP POST request the moment something changes.
 
-In the TrustPlatform, every verification runs as a **flow** — a series of **nodes** like identity checks, document verification, or digital signatures. Because nodes execute **asynchronously** (based on user behavior, device performance, and third-party services), webhooks keep your system synchronized with the flow's current state.
+In the TrustPlatform, every verification runs as a **flow** â€” a series of **nodes** like identity checks, document verification, or digital signatures. Because nodes execute **asynchronously** (based on user behavior, device performance, and third-party services), webhooks keep your system synchronized with the flow's current state.
 
 <Info>
 **Key characteristics:**
@@ -44,15 +44,27 @@ The webhook system operates in four phases:
 
 Before receiving webhooks, complete these steps:
 
-<Check>**Expose a secure HTTPS endpoint** supporting TLS 1.2+ for receiving POST requests</Check>
-
-<Check>**Allowlist official IDnow IP ranges** to block unauthorized sources</Check>
-
-<Check>**Enable JWT signature verification** using your configured secret (recommended)</Check>
-
-<Check>**Respond with HTTP 2xx within 10 seconds** and process events asynchronously</Check>
-
-<Check>**Use `event_id` for idempotency** to avoid duplicate event handling</Check>
+<AccordionGroup>
+  <Accordion title="1. Expose a secure HTTPS endpoint" icon="lock" defaultOpen="true">
+    Your endpoint must support **TLS 1.2 or higher** for receiving POST requests.
+  </Accordion>
+  
+  <Accordion title="2. Allowlist official IDnow IP ranges" icon="shield-check">
+    Block unauthorized sources by accepting requests only from documented IDnow IPs.
+  </Accordion>
+  
+  <Accordion title="3. Enable JWT signature verification (recommended)" icon="key">
+    Use your configured secret to verify webhook authenticity and prevent spoofing.
+  </Accordion>
+  
+  <Accordion title="4. Respond with HTTP 2xx within 10 seconds" icon="bolt">
+    Return a success status quickly and process events asynchronously in the background.
+  </Accordion>
+  
+  <Accordion title="5. Use event_id for idempotency" icon="fingerprint">
+    Track `event_id` to detect and skip duplicate deliveries caused by retries.
+  </Accordion>
+</AccordionGroup>
 
 <Note>
 These steps ensure reliable delivery, secure processing, and smooth integration.
@@ -103,7 +115,7 @@ Webhooks fire whenever a flow transitions to a new state, allowing your backend 
 </CardGroup>
 
 <Tip>
-These events keep your system **synchronized, predictable, and responsive** — enabling you to automate reactions, trigger internal workflows, or update UI states without ever polling again.
+These events keep your system **synchronized, predictable, and responsive** â€” enabling you to automate reactions, trigger internal workflows, or update UI states without ever polling again.
 </Tip>
 
 ---

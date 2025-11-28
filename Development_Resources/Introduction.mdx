@@ -5,9 +5,9 @@ description: Receive real-time event notifications when flows execute.
 
 ## What Are Webhooks?
 
-Webhooks deliver **real-time notifications** to your application when events occur during a user's flow execution. Instead of polling the API, your server automatically receives an HTTP POST request the moment something changes.
+Webhooks deliver **real-time notifications** to your application when events occur during a flow execution. Instead of polling the API, your server automatically receives an HTTP POST request the moment something changes.
 
-In the TrustPlatform, every verification runs as a **flow** â€” a series of **nodes** like identity checks, document verification, or digital signatures. Because nodes execute **asynchronously** (based on user behavior, device performance, and third-party services), webhooks keep your system synchronized with the flow's current state.
+In the TrustPlatform, every action runs as a **flow** and a series of **nodes** like a identity verification or digital signatures. Because nodes execute **asynchronously** (based on user behavior, device performance, and third-party services), webhooks keep your system synchronized with the flow's current state.
 
 <Info>
 **Key characteristics:**
@@ -54,7 +54,7 @@ Before receiving webhooks, complete these steps:
   </Accordion>
   
   <Accordion title="3. Enable JWT signature verification (recommended)" icon="key">
-    Use your configured secret to verify webhook authenticity and prevent spoofing.
+    Use our signed JTW to verify webhook authenticity and prevent spoofing.
   </Accordion>
   
   <Accordion title="4. Respond with HTTP 2xx within 10 seconds" icon="bolt">
@@ -69,54 +69,6 @@ Before receiving webhooks, complete these steps:
 <Note>
 These steps ensure reliable delivery, secure processing, and smooth integration.
 </Note>
-
----
-
-## Common Use Cases
-
-Webhooks fire whenever a flow transitions to a new state, allowing your backend to react instantly:
-
-<CardGroup cols={2}>
-  <Card title="Flow Created" icon="plus">
-    A new flow execution record is initialized
-    
-    `flow_execution.created`
-  </Card>
-  
-  <Card title="Flow Started" icon="play">
-    The user has entered and begun the flow
-    
-    `flow_execution.started`
-  </Card>
-  
-  <Card title="Flow Completed" icon="circle-check">
-    All required nodes have successfully finished
-    
-    `flow_execution.completed`
-  </Card>
-  
-  <Card title="Flow Expired" icon="clock">
-    The flow reached its TTL without completion
-    
-    `flow_execution.expired`
-  </Card>
-  
-  <Card title="Flow Error" icon="triangle-exclamation">
-    A node failure halted the flow
-    
-    `flow_execution.error`
-  </Card>
-  
-  <Card title="Flow Aborted" icon="circle-xmark">
-    The flow was terminated before completion
-    
-    `flow_execution.aborted`
-  </Card>
-</CardGroup>
-
-<Tip>
-These events keep your system **synchronized, predictable, and responsive** â€” enabling you to automate reactions, trigger internal workflows, or update UI states without ever polling again.
-</Tip>
 
 ---
 

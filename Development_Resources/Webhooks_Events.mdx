@@ -1,5 +1,5 @@
 ---
-title: 'Event Types'
+title: 'Handle Events'
 description: 'Learn which webhook events are sent for each flow execution state'
 ---
 
@@ -187,3 +187,15 @@ Webhook delivery is asynchronous. Events are **not guaranteed** to arrive in ord
 - Use `createdAt` timestamps to order events
 - Check `execution_status` to determine current state
 - Implement idempotency using `event_id`
+
+
+### Retry Behavior
+
+When an event fails to deliver, Idnow retries using the same `event_id` but a new `delivery_id`.
+
+**Example:**
+- First attempt: `event_id: abc123`, `delivery_id: 1`
+- First retry: `event_id: abc123`, `delivery_id: 2`
+- Second retry: `event_id: abc123`, `delivery_id: 3`
+
+See the [Security](/webhooks/security) page for retry schedules and policies.

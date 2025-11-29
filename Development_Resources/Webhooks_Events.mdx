@@ -1,6 +1,6 @@
 ---
-title: 'Webhook Structure & Types'
-description: 'Learn which webhook events are sent for each flow execution state'
+title: 'Events'
+description: 'Understand webhook event types, payload structure, and when each event is triggered'
 ---
 
 ## Overview
@@ -11,7 +11,8 @@ Idnow sends webhook events for different stages of a flow execution. Each event 
 All events use thin payloads. No personally identifiable information (PII) is included by default.
 </Info>
 
-### Event Payload Structure
+---
+## Event Payload Structure
 
 All webhook events share a common structure:
 
@@ -19,183 +20,109 @@ All webhook events share a common structure:
 |-------|------|-------------|
 | `event_id` | String | Same ID across retries for the same event |
 | `event_name` | String | Format: `resource.action` (e.g., `flow_execution.completed`) |
-| `delivery_id` | String | Unique per retry attempt (sequence: 1, 2, 3, 4, 5) |
-| `createdAt` | ISO 8601 | When webhook was sent |
-| `flowId` | String | The type of workflow that was chosen |
-| `execution_id` | UUID | Matches the API response and Hub Studio |
-| `execution_status` | Enum | `CREATED`, `RUNNING`, `COMPLETED`, `ERROR`, `ABORTED`, `EXPIRED` |
-| `decision_outcome` | String | Final outcome as defined in DSL (for completed flows) |
-| `last_step_id` | String | Defined by you in the workflow configuration |
-| `last_step_type` | String | Named by Idnow (step type identifier) |
-| `last_step_status` | String | Status of the last executed step (e.g., `ABORTED`) |
+| `delivery_id` | String | Unique per retry attempt (sequence: 1, 2, 3) |
+| `createdAt` | ISO 8601 | When the webhook was sent |
+| `flowId` | String | The identifier of the flow that was triggered |
+| `execution_id` | UUID | The identifier of the specific execution (session) |
+| `execution_status` | Enum | Current status of the flow |
+| `decision_outcome` | String | Final decision result, provided only when the flow has completed |
+| `last_node_id` | String | Identifier of the last executed node, ID is defined by you in the node configuration |
+| `last_node_type` | String | Name of the last executed node |
+| `last_node_status` | String | Status of the last executed node (e.g., Aborted) |
 
 <Info>
 The `event_id` remains the same across all retry attempts, while `delivery_id` increments.
 </Info>
 
+---
 ## Flow Execution Events
 
 Idnow sends the following event types when a flow execution changes state:
 
-<CardGroup cols={2}>
-  <Card title="flow_execution.created" icon="play">
-    Flow is initialized and ready to start
-  </Card>
-  <Card title="flow_execution.started" icon="circle-play">
-    User has begun the verification journey
-  </Card>
-  <Card title="flow_execution.step_completed" icon="circle-check">
-    A workflow step has finished processing
-  </Card>
-  <Card title="flow_execution.completed" icon="circle-check">
-    Flow ends with final outcome (accepted/rejected)
-  </Card>
-  <Card title="flow_execution.expired" icon="clock">
-    Session timeout reached, no longer usable
-  </Card>
-  <Card title="flow_execution.aborted" icon="circle-xmark">
-    Flow ends prematurely with no final outcome
-  </Card>
-  <Card title="flow_execution.error" icon="triangle-exclamation">
-    Flow enters ERROR state and stops processing
-  </Card>
-</CardGroup>
+| Event Type | Description |
+|------------|-------------|
+| flow_execution.created | Flow is initialized and ready to start |
+| flow_execution.started | User has begun the verification journey |
+| flow_execution.completed | Flow ends with final outcome |
+| flow_execution.expired | Flow expiry TTL reached, no longer usable |
+| flow_execution.aborted | Flow ends by user interaction with no final outcome |
+| flow_execution.error | Flow enters ERROR state and stops processing |
 
-## Event Details
+---
+## Event Payloads Examples
+
+All webhook payloads are a minimal, machine-readable JSON message that delivers metadata about an event and will never include PII. You can fetch full details from the API when needed by using the respective `flow execution_id`. 
 
 ### flow_execution.created
 
-Sent when a new flow execution is initialized through the API.
-
-**When it occurs:**
-- API request to create a new verification session
-- Flow is ready but user has not started yet
-
-**Next steps:**
-- Share the verification link with your user
-- User can now begin the journey
+```json
+{
+  "event_id": "evt_a1b2c3d4e5f6g7h8",
+  "event_name": "flow_execution.created",
+  "delivery_id": "1",
+  "createdAt": "2025-11-24T10:15:30.123Z",
+  "flowId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d32",
+  "execution_id": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6e",
+  "execution_status": "CREATED"
+}
+```
 
 ---
 
 ### flow_execution.started
 
-Sent when the user opens the verification link and begins the process.
-
-**When it occurs:**
-- User clicks the verification link
-- Session becomes active
-
-**Next steps:**
-- User proceeds through workflow steps
-- Additional events sent as steps complete
-
----
-
-### flow_execution.step_completed
-
-Sent each time a workflow step finishes processing.
-
-**When it occurs:**
-- Document verification completes
-- Biometric check finishes
-- Any configured step reaches completion
-
-**Next steps:**
-- Flow continues to next step
-- Or proceeds to final outcome
-
-<Note>
-This event fires multiple times per flow, once for each completed step.
-</Note>
+```json
+{
+  "event_id": "evt_b2c3d4e5f6g7h8i9",
+  "event_name": "flow_execution.started",
+  "delivery_id": "1",
+  "createdAt": "2025-11-24T10:15:32.456Z",
+  "flowId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
+  "execution_id": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
+  "execution_status": "RUNNING",
+  "decision_outcome": NO_OUTCOME,
+  "last_step_id": "My Node",
+  "last_step_type": "Start",
+  "last_step_status": "COMPLETED"
+}
+```
 
 ---
 
 ### flow_execution.completed
 
-Sent when the flow reaches a final outcome.
-
-**When it occurs:**
-- All required steps finish successfully
-- Flow determines acceptance or rejection
-- Workflow reaches an end node
-
-**Next steps:**
-- Review the outcome in `decision_outcome`
-- Process the result in your system
-
-<Tip>
-Check the `last_step_id` to understand which end node was reached.
-</Tip>
-
----
-
-### flow_execution.expired
-
-Sent when the session reaches its time-to-live (TTL) limit.
-
-**When it occurs:**
-- Configured timeout period elapses
-- User does not complete verification in time
-- Session becomes unusable
-
-**Next steps:**
-- Create a new flow execution if needed
-- Contact user to restart the process
+```json
+{
+  "event_id": "evt_c3d4e5f6g7h8i9j0",
+  "event_name": "flow_execution.completed",
+  "delivery_id": "1",
+  "createdAt": "2025-11-24T10:18:45.789Z",
+  "flowId": "identity_verification_v2",
+  "execution_id": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
+  "execution_status": "COMPLETED",
+  "decision_outcome": "accepted",
+  "last_step_id": "My Node",
+  "last_step_type": "END",
+  "last_step_status": "COMPLETED"
+}
+```
 
 ---
 
-### flow_execution.aborted
+### flow_execution.expired (aborted)
 
-Sent when a flow ends prematurely without reaching a final decision.
-
-**When it occurs:**
-- User closes the browser mid-session
-- User explicitly cancels the process
-- Flow stops before reaching an end node
-
-**Next steps:**
-- Determine if user should restart
-- Analyze dropout reasons
-
----
-
-### flow_execution.error
-
-Sent when a flow encounters a critical error and cannot continue.
-
-**When it occurs:**
-- System error during processing
-- Configuration issue detected
-- Unrecoverable state reached
-
-**Next steps:**
-- Review error logs in Studio
-- Contact support if issue persists
-
-<Warning>
-This event indicates a technical problem that prevented normal flow completion.
-</Warning>
-
-
-### Event Ordering
-
-<Warning>
-Webhook delivery is asynchronous. Events are **not guaranteed** to arrive in order.
-</Warning>
-
-**Best practices:**
-- Use `createdAt` timestamps to order events
-- Check `execution_status` to determine current state
-- Implement idempotency using `event_id`
-
-
-### Retry Behavior
-
-When an event fails to deliver, Idnow retries using the same `event_id` but a new `delivery_id`.
-
-**Example:**
-- First attempt: `event_id: abc123`, `delivery_id: 1`
-- First retry: `event_id: abc123`, `delivery_id: 2`
-- Second retry: `event_id: abc123`, `delivery_id: 3`
-
-See the [Security](/webhooks/security) page for retry schedules and policies.
+```json
+{
+  "event_id": "evt_e5f6g7h8i9j0k1l2",
+  "event_name": "flow_execution.expired",
+  "delivery_id": "1",
+  "createdAt": "2025-11-24T11:15:30.654Z",
+  "flowId": "identity_verification_v2",
+  "execution_id": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
+  "execution_status": "EXPIRED",
+  "decision_outcome": NO_OUTCOME,
+  "last_step_id": "My node",
+  "last_step_type": "DOC_ID:v2",
+  "last_step_status": "EXPIRED"
+}
+```

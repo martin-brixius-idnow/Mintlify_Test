@@ -1,11 +1,15 @@
 ---
-title: Manage Webhooks
-description: Configure your webhook endpoint to receive real-time events.
+title: 'Manage'
+description: 'Set up webhook endpoints, manage subscriptions, and monitor delivery'
 ---
-## Webhooks
 
-In TrustPlatform, every flow runs as a session consisting of one or more nodes, such as identity verification or digital signature steps. Instead of polling the API, your server automatically receives an HTTP POST request the moment something changes. Since nodes execute asynchronously, depending on user actions, device performance, and third-party services, webhooks ensure your system stays synchronized with the flow’s current state and can notify you when new results or data blocks are available for retrieval.
+## Overview
 
+In TrustPlatform, each flow runs as a session made up of one or more nodes, like identity checks or digital signatures. 
+
+Instead of polling the API, your server gets an HTTP POST as soon as something changes. Because nodes run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
+
+---
 <Info>
 **Key characteristics:**
 - Thin payloads only (never contains PII)
@@ -15,28 +19,6 @@ In TrustPlatform, every flow runs as a session consisting of one or more nodes, 
 </Info>
 
 ---
-
-## Webhook Lifecycle
-
-The webhook system operates in four phases:
-
-<Steps>
-  <Step title="Setup Phase">
-    Configure your webhook endpoint in Studio
-  </Step>
-  <Step title="Runtime Phase">
-    Events are generated and delivered as flows execute
-  </Step>
-  <Step title="Customer Handling">
-    Your endpoint validates, processes, and acknowledges events
-  </Step>
-  <Step title="Retry & Monitoring">
-    Failed deliveries are retried; all attempts are logged
-  </Step>
-</Steps>
-
----
-
 ## Integration Checklist
 
 Before receiving webhooks, complete these steps:
@@ -63,18 +45,11 @@ Before receiving webhooks, complete these steps:
   </Accordion>
 </AccordionGroup>
 
-<Note>
-These steps ensure reliable delivery, secure processing, and smooth integration.
-</Note>
-
-
-## 1. Expose an Endpoint
+---
+## Setup
+### 1. Expose an Endpoint
 
 Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 seconds.
-
-<Warning>
-HTTP endpoints are **not supported**. HTTPS with a valid SSL certificate is required.
-</Warning>
 
 **Requirements:**
 
@@ -89,7 +64,8 @@ HTTP endpoints are **not supported**. HTTPS with a valid SSL certificate is requ
 Return 2xx **immediately**, then process events asynchronously to avoid timeouts.
 </Tip>
 
-## 2. Configure in Studio
+
+### 2. Setup Webhooks in Studio
 
 Set up your webhook endpoint in the IDnow Studio UI.
 
@@ -101,7 +77,7 @@ Set up your webhook endpoint in the IDnow Studio UI.
     Enter your HTTPS endpoint URL and description.
   </Step>
   <Step title="Set secret key">
-    Provide a secret key for authentication and JWT signature verification.
+    Provide a secret key for authentication.
   </Step>
   <Step title="Subscribe to events">
     Select specific events or receive all events by default.
@@ -112,9 +88,11 @@ Set up your webhook endpoint in the IDnow Studio UI.
 Configure separate endpoints for **test**, **preprod**, and **live** environments.
 </Info>
 
-## 3. Handle Webhooks
+Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it’s no longer required. 
 
-### Verify the Source
+### 3. Handle Webhooks
+
+#### Verify the Source
 
 <AccordionGroup>
   <Accordion title="Validate IP address" icon="network-wired">
@@ -125,7 +103,7 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Accordion>
 </AccordionGroup>
 
-### Process the Event
+#### Process the Event
 
 <Steps>
   <Step title="Return 2xx immediately">
@@ -139,46 +117,44 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Step>
 </Steps>
 
-### Handle Retries
 
-IDnow retries failed deliveries automatically.
+#### Timeout
 
-**Retry schedule:**
+Your endpoint must respond within **10 seconds**. Responses taking longer are treated as failures and trigger retries.
 
-- Maximum attempts: 3 times
-- Intervals: 2sec, 4sec, 8sec
+<Tip>
+Process webhook events asynchronously. Acknowledge receipt immediately (return HTTP 2xx) and queue the event for background processing.
+</Tip>
 
-<Warning>
-Implement idempotency using event_id to handle duplicate deliveries from retries.
-</Warning>
+#### Retry Logic
 
-## Best Practices
+IDnow automatically retries failed deliveries:
 
-<CardGroup cols={2}>
-  <Card title="Quick Response" icon="bolt">
-    Return 2xx immediately, don't wait for processing.
-  </Card>
-  <Card title="Use Queues" icon="gears">
-    Handle high volumes with asynchronously processing
-  </Card>
-  <Card title="Track event_id" icon="key">
-    Prevent duplicate processing from retries.
-  </Card>
-  <Card title="Monitor Logs" icon="chart-simple">
-    Track error rates, latency, and delivery success.
-  </Card>
-</CardGroup>
+| Attempt | Delay | Total Elapsed Time |
+|---------|-------|-------------------|
+| 1st retry | 2 seconds | 2s |
+| 2nd retry | 4 seconds | 6s |
+| 3rd retry | 8 seconds | 14s |
+
+**Retry conditions:**
+- âœ… Transient errors (5xx status codes)
+- âœ… Network errors (timeout, connection refused)
+- âœ… Endpoint unavailable
+
+**No retry for:**
+- âŒ Client errors (4xx status codes)
+- âŒ Authentication failures
+- âŒ Invalid endpoint URL
+
+After maximum retries, the event is moved to the **dead letter queue**.
 
 ## Next Steps
 
-<CardGroup cols={3}>
-  <Card title="Security" icon="shield" href="/webhooks/security">
-    Implement JWT signature verification
+<CardGroup cols={2}>
+  <Card title="Secure Webhooks" icon="lock" href="/webhooks/secure">
+    Implement HMAC signature verification
   </Card>
-  <Card title="Events Reference" icon="list" href="/webhooks/events">
-    View all available event types
-  </Card>
-  <Card title="Best Practices" icon="star" href="/webhooks/best-practices">
-    Production deployment guide
+  <Card title="Event Types" icon="list" href="/webhooks/events">
+    Learn about available webhook events
   </Card>
 </CardGroup>

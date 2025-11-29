@@ -1,15 +1,21 @@
 ---
 title: 'Secure Webhooks'
-description: 'Learn how to secure your webhook endpoints'
+description: 'Implement security best practices to verify webhook authenticity'
 ---
 
+## Overview
+
+Secure your webhook endpoints to ensure that incoming requests genuinely originate from IDnow and have not been tampered with.
+
+---
 ## Authentication
 
 Idnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from Idnow.
 
+---
 ### API Token
 
-You provide an API token when configuring your webhook endpoint in Studio. Idnow includes this token in the request header.
+You must provide an API token when configuring your webhook endpoint in Studio. Idnow includes this token in the request header.
 
 <Steps>
   <Step title="Add your API token">
@@ -31,6 +37,7 @@ The JWT signature is included in the `X-Idnow-Signature` header with every webho
 JWT signature verification is optional but recommended for production environments.
 </Info>
 
+---
 ## IP Whitelisting
 
 Restrict your webhook endpoint to only accept requests from Idnow IP addresses.
@@ -53,6 +60,7 @@ Add these IP ranges to your firewall or application allow list:
 Contact your account manager for the current production IP ranges.
 </Note>
 
+---
 ## TLS Requirements
 
 Your webhook endpoint must support TLS 1.2 or higher. Idnow validates your endpoint's TLS configuration during setup.
@@ -66,6 +74,7 @@ Your webhook endpoint must support TLS 1.2 or higher. Idnow validates your endpo
   </Card>
 </CardGroup>
 
+---
 ## Security Headers
 
 Idnow includes these headers with every webhook request:

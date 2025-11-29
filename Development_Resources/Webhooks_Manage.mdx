@@ -67,7 +67,7 @@ Return 2xx **immediately**, then process events asynchronously to avoid timeouts
 
 ### 2. Setup Webhooks in Studio
 
-Set up your webhook endpoint in the IDnow Studio UI.
+Set up your webhook endpoint in IDnow Studio.
 
 <Steps>
   <Step title="Navigate to Settings">
@@ -118,7 +118,7 @@ Webhook endpoints are fully manageable after creation. You can update an existin
 </Steps>
 
 
-#### Timeout
+#### Prevent Failures
 
 Your endpoint must respond within **10 seconds**. Responses taking longer are treated as failures and trigger retries.
 
@@ -147,14 +147,3 @@ IDnow automatically retries failed deliveries:
 - âŒ Invalid endpoint URL
 
 After maximum retries, the event is moved to the **dead letter queue**.
-
-## Next Steps
-
-<CardGroup cols={2}>
-  <Card title="Secure Webhooks" icon="lock" href="/webhooks/secure">
-    Implement HMAC signature verification
-  </Card>
-  <Card title="Event Types" icon="list" href="/webhooks/events">
-    Learn about available webhook events
-  </Card>
-</CardGroup>

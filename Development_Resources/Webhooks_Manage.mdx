@@ -5,9 +5,9 @@ description: 'Set up webhook endpoints, manage subscriptions, and monitor delive
 
 ## Overview
 
-In TrustPlatform, each flow runs as a session made up of one or more nodes, like identity checks or digital signatures. 
+In TrustPlatform, each flow runs as a session made up of one or more nodes, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes. 
 
-Instead of polling the API, your server gets an HTTP POST as soon as something changes. Because nodes run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
+Because nodes run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
 
 ---
 <Info>
@@ -46,12 +46,18 @@ Before receiving webhooks, complete these steps:
 </AccordionGroup>
 
 ---
+
 ## Setup
+Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it’s no longer required. 
+
 ### 1. Expose an Endpoint
 
 Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 seconds.
 
-**Requirements:**
+<Tip>
+Return 2xx **immediately**, then process events asynchronously to avoid timeouts.
+</Tip>
+
 
 | Requirement | Details |
 |------------|---------|
@@ -60,10 +66,7 @@ Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 sec
 | **Capacity** | Handle expected event volume |
 | **Idempotency** | Process duplicates safely using event_id |
 
-<Tip>
-Return 2xx **immediately**, then process events asynchronously to avoid timeouts.
-</Tip>
-
+---
 
 ### 2. Setup Webhooks in Studio
 
@@ -88,7 +91,7 @@ Set up your webhook endpoint in IDnow Studio.
 Configure separate endpoints for **test**, **preprod**, and **live** environments.
 </Info>
 
-Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it’s no longer required. 
+---
 
 ### 3. Handle Webhooks
 
@@ -137,13 +140,13 @@ IDnow automatically retries failed deliveries:
 | 3rd retry | 8 seconds | 14s |
 
 **Retry conditions:**
-- âœ… Transient errors (5xx status codes)
-- âœ… Network errors (timeout, connection refused)
-- âœ… Endpoint unavailable
+- Transient errors (5xx status codes)
+- Network errors (timeout, connection refused)
+- Endpoint unavailable
 
 **No retry for:**
-- âŒ Client errors (4xx status codes)
-- âŒ Authentication failures
-- âŒ Invalid endpoint URL
+- Client errors (4xx status codes)
+- Authentication failures
+- Invalid endpoint URL
 
 After maximum retries, the event is moved to the **dead letter queue**.

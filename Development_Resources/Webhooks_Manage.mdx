@@ -2,13 +2,11 @@
 title: 'Manage'
 description: 'Set up webhook endpoints, manage subscriptions, and monitor delivery'
 ---
-
 ## Overview
 
 In TrustPlatform, each flow runs as a session made up of one or more nodes, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes. 
 
 Because nodes run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
-
 ---
 <Info>
 **Key characteristics:**
@@ -17,7 +15,6 @@ Because nodes run asynchronously, depending on the user, the device, or third-pa
 - Asynchronous delivery (order not guaranteed)
 - Automatic retries for transient failures
 </Info>
-
 ---
 ## Integration Checklist
 
@@ -44,9 +41,7 @@ Before receiving webhooks, complete these steps:
     Track `event_id` to detect and skip duplicate deliveries caused by retries.
   </Accordion>
 </AccordionGroup>
-
 ---
-
 ## Setup
 Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it’s no longer required. 
 
@@ -65,9 +60,7 @@ Return 2xx **immediately**, then process events asynchronously to avoid timeouts
 | **Response time** | Return 2xx within 10 seconds |
 | **Capacity** | Handle expected event volume |
 | **Idempotency** | Process duplicates safely using event_id |
-
 ---
-
 ### 2. Setup Webhooks in Studio
 
 Set up your webhook endpoint in IDnow Studio.
@@ -90,9 +83,7 @@ Set up your webhook endpoint in IDnow Studio.
 <Info>
 Configure separate endpoints for **test**, **preprod**, and **live** environments.
 </Info>
-
 ---
-
 ### 3. Handle Webhooks
 
 #### Verify the Source
@@ -105,7 +96,7 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
     Optionally, use your secret key to validate the JWT in the request header. See the Security page for details.
   </Accordion>
 </AccordionGroup>
-
+---
 #### Process the Event
 
 <Steps>
@@ -119,8 +110,7 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
     Add the event to a background queue.
   </Step>
 </Steps>
-
-
+---
 #### Prevent Failures
 
 Your endpoint must respond within **10 seconds**. Responses taking longer are treated as failures and trigger retries.
@@ -128,7 +118,7 @@ Your endpoint must respond within **10 seconds**. Responses taking longer are tr
 <Tip>
 Process webhook events asynchronously. Acknowledge receipt immediately (return HTTP 2xx) and queue the event for background processing.
 </Tip>
-
+---
 #### Retry Logic
 
 IDnow automatically retries failed deliveries:

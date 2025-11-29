@@ -7,12 +7,10 @@ description: 'Implement security best practices to verify webhook authenticity'
 
 Secure your webhook endpoints to ensure that incoming requests genuinely originate from IDnow and have not been tampered with.
 
----
 ## Authentication
 
 Idnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from Idnow.
 
----
 ### API Token
 
 You must provide an API token when configuring your webhook endpoint in Studio. Idnow includes this token in the request header.

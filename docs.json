@@ -45,12 +45,6 @@
             "pages": ["index"]
           },
           {
-            "group": "Core Concept",
-            "pages": [
-              "Getting_Started/index"
-            ]
-          },
-          {
             "group": "Setup",
             "pages": [
               "Getting_Started/Test_Account",
@@ -90,7 +84,7 @@
           {
             "group": "Workflow Studio",
             "pages": [
-              "Platform_Guides/Workflow_Basics",
+              "Platform_Guides/Basics",
               "Platform_Guides/DataBlocks_Reference",
               "Platform_Guides/Nodes_Reference",
               "Platform_Guides/Workflow_Templates"

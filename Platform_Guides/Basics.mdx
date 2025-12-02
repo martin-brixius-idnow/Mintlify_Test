@@ -49,7 +49,7 @@ Each node consumes and produces typed **DataBlocks**. Examples of such DataBlock
 
 The DataBlock structure is preserved in the API response after a flow runs, making it easy to trace data from the initial input to the final outcome.
 
-## Verdicts and Datablock creation
+### Verdicts and Datablock creation
 
 A node’s verdict determines which DataBlocks it produces. For example, in an IDV workflow, a capture failure produces no DocumentData or ExtendedIdentity, while a capture failure or a fraud verdict always includes DocumentVerification results. Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
 
@@ -57,7 +57,7 @@ A node’s verdict determines which DataBlocks it produces. For example, in an I
 
 *An IDV node generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
 
-## DataBlocks as Input
+### DataBlocks as Input
 
 Some nodes require specific DataBlocks as input and always produce a particular DataBlock as output. For example, an AML Screening node:
 
@@ -74,7 +74,7 @@ In many cases, the required input DataBlock is provided in the initial API reque
 
 *AML Screening with BasicIdentity coming from the API request and two possible verdicts: match and no_match, both yielding PepAndSanctionsResults.*
 
-## Missing DataBlocks and Multiple of the Same Type
+### Missing DataBlocks and Multiple of the Same Type
 
 If a required DataBlock is missing, the node cannot execute. For example, if AML Screening requires `BasicIdentity` but none is present in the workflow context, that node will not run.
 

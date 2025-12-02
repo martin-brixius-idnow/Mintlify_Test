@@ -12,13 +12,13 @@ This page explains the core building blocks of the IDnow TrustPlatform and how t
 - **Verdicts**: Results of a node (e.g. “verified”, “fraud”).
 - **DataBlocks**: Typed data passed between nodes.
 - **Ports**: Named paths that decide the next node.
-
+---
 ## Flows: From Start to End
 
 At IDnow, a **flow** defines how input data moves through a series of steps until a final output is produced. 
 
 Every flow must contain exactly one **Start node** as its entry point and at least one **End node** representing a final outcome. Between Start and End, you can add any combination of processing steps to build your desired automation.
-
+---
 ## Nodes
 
 **Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature.
@@ -28,7 +28,7 @@ IDnow provides a comprehensive node library that you can use to construct the au
 ![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-basic-flow.png)
 
 *Every flow starts at Start, passes through one or more nodes, and ends in an End node.*
-
+---
 ## Verdicts
 
 Each node can produce one or more **verdicts**, which describe what happened during a flow execution. For an IDV node, defined verdicts are
@@ -42,7 +42,7 @@ In the API response, those verdicts are often accompanied by structured data tha
 ![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-datablocks-verdicts.png)
 
 *Example of an IDV node with multiple verdicts, each mapped to a dedicated End node.*
-
+---
 ## DataBlocks
 
 Each node consumes and produces typed **DataBlocks**. Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. This keeps data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
@@ -85,7 +85,7 @@ If a required DataBlock is missing, the node cannot execute. For example, if AML
 In more complex flows, a node may require multiple instances of the same DataBlock type (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the nodeâ€™s input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
 
 When multiple upstream nodes generate DataBlocks of the same type, the platform currently uses the last produced instance.
-
+---
 ## Ports and Flow Control
 
 **Ports** define how flows choose their next step. Ports are named exits on a node and determine which path the flow follows. Ports effectively turn node verdicts into transitions:
@@ -106,7 +106,7 @@ When a node is configured in Studio with multiple output scenarios, the scenario
 
 ![More complex flow where verdicts define flow path and output Datablocks created](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-aml-basicidentity.png)
 
-
+---
 ## Putting It All Together
 
 A Trust Platform flow is composed of nodes, verdicts, DataBlocks, and ports. When designing a flow:

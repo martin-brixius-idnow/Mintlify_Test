@@ -53,44 +53,47 @@ In the API response, those verdicts are often accompanied by structured data tha
 
 ## DataBlocks
 
-Each node consumes and produces typed **DataBlocks**. Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. This keeps data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
+Each node consumes and produces typed **DataBlocks**. Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
 
-The DataBlock structure is preserved in the API response after a flow runs, making it easy to trace data from the initial input to the final outcome.
+DataBlocks keep data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
 
-### Verdicts and Datablock creation
+The DataBlock structure is preserved in the API response after a flow execution, making it easy to trace data from the initial input to the final outcome.
 
-A node’s verdict determines which DataBlocks it produces. For example, in an IDV workflow, a capture failure produces no DocumentData or ExtendedIdentity, while a capture failure or a fraud verdict always includes DocumentVerification results. Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
+### Created per Verdict
+
+A node’s **verdict** determines which DataBlocks it produces. For example, in an IDV workflow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
 
 ![IDV node producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-verdicts.png)
 
 *An IDV node generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
 
-### DataBlocks as Input
+### As Input
 
-Some nodes require specific DataBlocks as input and always produce a particular DataBlock as output. For example, an AML Screening node:
+Some nodes, such as AML Screening
 
-- Requires a `BasicIdentity` DataBlock as input.
 - Produces a `PepAndSanctionsResults` DataBlock as output.
+- Requires a `BasicIdentity` DataBlock as **input**.
 
-![Flow where an IDV node creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match.png)
+Each node defines which DataBlocks it requires and which it produces for each verdict. DataBlocks flow from each node’s outputs to the inputs of the next nodes. These definitions allow the system to validate the flow, ensuring all required inputs are available before a node executes.
 
-*IDV followed by AML Screening: BasicIdentity flows from IDV into AML, which produces PepAndSanctionsResults.*
+The DataBlock can be included in the initial API request when a workflow is executed as shown in the example below.
 
-In many cases, the required input DataBlock is provided in the initial API request when the flow starts, instead of being produced by a previous node.
+![Flow where an IDV node creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
 
-![AML Screening flow where BasicIdentity comes directly from the API request, and AML produces PepAndSanctionsResults for match and no_match verdicts.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match.png)
+### Missing DataBlocks
 
-*AML Screening with BasicIdentity coming from the API request and two possible verdicts: match and no_match, both yielding PepAndSanctionsResults.*
+If a required DataBlock is missing, the node cannot execute. For example, the AML Screening node requires a BasicIdentity DataBlock, which can be provided either 
 
-### Missing DataBlocks and Multiple of the Same Type
+- in the initial API request or 
+- produced by an upstream node
 
-If a required DataBlock is missing, the node cannot execute. For example, if AML Screening requires `BasicIdentity` but none is present in the workflow context, that node will not run.
-
+All outputs from a node are added to the workflow context, making them accessible to all of its descendant nodes. As a result, any node that generates a BasicIdentity, such as an IDV node, can satisfy the AML Screening node’s input requirement.
 
 ![IDV node produces BasicIdentity as an outcome which is used as an inpot for AML Screening](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-overview.png)
 
+### Duplications
 
-In more complex flows, a node may require multiple instances of the same DataBlock type (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the nodeâ€™s input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
+In more complex flows, a node may require multiple instances of the same DataBlock type (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the nodes input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
 
 When multiple upstream nodes generate DataBlocks of the same type, the platform currently uses the last produced instance.
 

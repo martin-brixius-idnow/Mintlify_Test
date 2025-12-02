@@ -85,9 +85,8 @@
             "group": "Workflow Studio",
             "pages": [
               "Platform_Guides/Basics",
-              "Platform_Guides/DataBlocks_Reference",
-              "Platform_Guides/Nodes_Reference",
-              "Platform_Guides/Workflow_Templates"
+              "Platform_Guides/Datablocks",
+              "Platform_Guides/Nodes",
             ]
           },
           {

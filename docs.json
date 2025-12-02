@@ -82,7 +82,7 @@
         "icon": "cube",
         "groups": [
           {
-            "group": "Workflow Studio",
+            "group": "Core Concept",
             "pages": [
               "Platform_Guides/Basics",
               "Platform_Guides/Datablocks",

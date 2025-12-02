@@ -21,7 +21,7 @@ Every flow must contain exactly one **Start node** as its entry point and at lea
 
 ## Nodes
 
-**Nodes** are modular building blocks within a TrustPlatform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature
+**Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature
 
 IDnow provides a comprehensive node library that you can use to construct the automation logic of your flow.
 
@@ -105,7 +105,7 @@ When a node is configured in Studio with multiple output scenarios, the scenario
 
 ## Putting It All Together
 
-A TrustPlatform flow is composed of nodes, verdicts, DataBlocks, and ports. When designing a flow:
+A Trust Platform flow is composed of nodes, verdicts, DataBlocks, and ports. When designing a flow:
 
 1. **Define the initial process steps**  
    For example, start with an ID verification node that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding ports, each connected to the appropriate next node or End node.
@@ -116,6 +116,6 @@ A TrustPlatform flow is composed of nodes, verdicts, DataBlocks, and ports. When
 3. **Extend the workflow as needed**  
    Add additional nodes for risk checks, digital signals, signatures, or evidence collection. Each node follows the same pattern of verdicts, DataBlocks, and ports.
 
-*By combining nodes, verdicts, DataBlocks, and ports, you can build complex trust workflows in the TrustPlatform.*
+*By combining nodes, verdicts, DataBlocks, and ports, you can build complex trust workflows in the Trust Platform.*
 
 By understanding these building blocks, you can compose complex trust workflows simply by wiring nodes together. The platform handles execution, data propagation, and audit trails automatically.

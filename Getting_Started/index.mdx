@@ -1,5 +1,5 @@
 ---
-title: TrustPlatform Flows, Nodes, Verdicts, and DataBlocks
+title: Basics
 description: Overview of flows, nodes, verdicts, DataBlocks, and how to compose workflows in the IDnow TrustPlatform.
 ---
 
@@ -7,13 +7,11 @@ description: Overview of flows, nodes, verdicts, DataBlocks, and how to compose 
 
 This page explains the core building blocks of the IDnow TrustPlatform and how they work together to form end-to-end flows:
 
-- Flows
-- Nodes
-- Verdicts
-- DataBlocks
-- Ports
-
-> Images in this page are loaded directly from your GitHub repository via raw URLs. All files live under `images/` in the `Mintlify_Test` repo.
+- **Flow**: End‑to‑end workflows that define how data moves from a Start node to one or more End nodes.
+- **Nodes**: Individual processing steps in a flow that take inputs and produce outputs.
+- **Verdicts**: Outcomes of a node (like “verified”, “fraud”, “failure”) that describe what happened.
+- **DataBlocks**: Typed data objects (e.g., BasicIdentity, DocumentVerification) that nodes read and write as they run.
+- **Ports**: Named exits on a node that route the flow to the next step based on the node’s verdict.
 
 ## Overview: From Start to End
 

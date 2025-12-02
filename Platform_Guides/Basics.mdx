@@ -53,7 +53,9 @@ In the API response, those verdicts are often accompanied by structured data tha
 
 ## DataBlocks
 
-Each node consumes and produces typed **DataBlocks**. Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
+Each node consumes and produces typed **DataBlocks**. 
+
+Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
 
 DataBlocks keep data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
 
@@ -61,7 +63,11 @@ The DataBlock structure is preserved in the API response after a flow execution,
 
 ### Created per Verdict
 
-A node’s **verdict** determines which DataBlocks it produces. For example, in an IDV workflow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
+A node’s **verdict** determines which DataBlocks it produces. 
+
+As an example, in an IDV workflow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. 
+
+Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
 
 ![IDV node producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-verdicts.png)
 
@@ -71,18 +77,18 @@ A node’s **verdict** determines which DataBlocks it produces. For example, in 
 
 Some nodes, such as AML Screening
 
-- Produces a `PepAndSanctionsResults` DataBlock as output.
-- Requires a `BasicIdentity` DataBlock as **input**.
+- produces a `PepAndSanctionsResults` DataBlock as output.
+- but **require** a `BasicIdentity` DataBlock as **input**.
 
-Each node defines which DataBlocks it requires and which it produces for each verdict. DataBlocks flow from each node’s outputs to the inputs of the next nodes. These definitions allow the system to validate the flow, ensuring all required inputs are available before a node executes.
+Each node defines which DataBlocks it requires and which it produces for each verdict. 
 
-The DataBlock can be included in the initial API request when a workflow is executed as shown in the example below.
+DataBlocks flow from each node’s outputs to the inputs of the next nodes. These definitions allow the system to validate the flow, ensuring all required inputs are available before a node executes.The DataBlock can be included in the initial API request when a workflow is executed as shown in the example below.
 
 ![Flow where an IDV node creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
 
 ### Missing DataBlocks
 
-If a required DataBlock is missing, the node cannot execute. For example, the AML Screening node requires a BasicIdentity DataBlock, which can be provided either 
+If a required DataBlock is missing, the node cannot execute. As an example, the AML Screening node requires a BasicIdentity DataBlock, which can be provided either 
 
 - in the initial API request or 
 - produced by an upstream node
@@ -93,9 +99,9 @@ All outputs from a node are added to the workflow context, making them accessibl
 
 ### Duplications
 
-In more complex flows, a node may require multiple instances of the same DataBlock type (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the nodes input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
+In more complex flows, a node may require multiple instances of the same DataBlock type as **input** (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the nodes input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
 
-When multiple upstream nodes generate DataBlocks of the same type, the platform currently uses the last produced instance.
+When multiple upstream nodes generate DataBlocks of the same type as **output**, the platform currently uses the last produced instance.
 
 ---
 

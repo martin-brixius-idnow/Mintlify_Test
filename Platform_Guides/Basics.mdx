@@ -21,23 +21,23 @@ Every flow must contain exactly one **Start node** as its entry point and at lea
 
 ## Nodes
 
-**Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature
+**Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature.
 
 IDnow provides a comprehensive node library that you can use to construct the automation logic of your flow.
 
 ![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-basic-flow.png)
 
-*Minimal example: every flow starts at Start, passes through one or more nodes, and ends in an End node.*
+*Every flow starts at Start, passes through one or more nodes, and ends in an End node.*
 
 ## Verdicts
 
-Each node can produce one or more **verdicts**, which describe what happened during execution. For an IDV node, common verdicts might be:
+Each node can produce one or more **verdicts**, which describe what happened during a flow execution. For an IDV node, defined verdicts are
 
 - `verified`
 - `fraud`
 - `failure`
 
-These verdicts are often accompanied by structured data that explains the result. At the flow level, the verdict of the final End node feeds into the high-level outcome you see in the API response (for example, accepted or rejected).
+In the API response, those verdicts are often accompanied by structured data that explains the result. At the flow level, the verdict of the final End node feeds into the high-level `outcome` you see in the API response (for example, accepted or rejected).
 
 ![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-datablocks-verdicts.png)
 
@@ -45,13 +45,17 @@ These verdicts are often accompanied by structured data that explains the result
 
 ## DataBlocks
 
-Each node consumes and produces typed **DataBlocks** (for example, `ExtendedIdentity`, `DocumentVerification`, `DocumentData`). This keeps data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
+Each node consumes and produces typed **DataBlocks**. Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. This keeps data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
 
 The DataBlock structure is preserved in the API response after a flow runs, making it easy to trace data from the initial input to the final outcome.
 
+## Verdicts and Datablock creation
+
+A node’s verdict determines which DataBlocks it produces. For example, in an IDV workflow, a capture failure produces no DocumentData or ExtendedIdentity, while a capture failure or a fraud verdict always includes DocumentVerification results. Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
+
 ![IDV node producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-datablocks-verdicts.png)
 
-*Example: an IDV node generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
+*An IDV node generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
 
 ## DataBlocks as Input
 

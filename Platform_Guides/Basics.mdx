@@ -7,11 +7,11 @@ description: Overview of Flows, Nodes, Verdicts and DataBlocks.
 
 This page explains the core building blocks of the IDnow TrustPlatform and how they work together to form end-to-end flows:
 
-- **Flow**: Overall path from Start node to End node.
-- **Nodes**: Steps that process data
-- **Verdicts**: Outcome of a node (e.g. “verified”, “fraud”)
-- **DataBlocks**: Typed data passed between nodes.
-- **Ports**: Named paths that decide the next node.
+- **Flow**: Directed path from Start to End that defines the steps and final outcome.
+- **Nodes**: Individual steps that read inputs, perform work, and write DataBlocks.
+- **Verdicts**: The result of a node that determines outputs and routing (e.g., “verified”, “fraud”).
+- **DataBlocks**: Typed payloads that carry data between nodes and into the API response.
+- **Ports**: Named exits that map a verdict to the next node or an End node.
 
 ---
 

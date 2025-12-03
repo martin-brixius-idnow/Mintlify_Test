@@ -1,1 +1,164 @@
+---
+title: "DOC_ID:v2"
+category: "Identity Verification"
+type: "Step Node"
+---
 
+# DOC_ID:v2
+
+## Overview
+
+Complete identity verification process with interactive document capture and biometric verification. Manages end-user session via SDK-Web and processes data through IDCheck.io backend service.
+
+---
+
+## Key Features
+
+- **Interactive Capture**: Guides users through document and biometric capture
+- **Backend Processing**: Automated analysis via IDCheck.io service
+- **Optional Manual Review**: Human operator verification support
+- **Multi-Document Support**: ID cards, passports, permits, visas, licenses, health cards
+- **Biometric Verification**: Selfie and video capture options
+- **Flexible Consent**: SDK or customer-managed consent handling
+
+---
+
+## Configuration
+
+### Required Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `capture` | Object | Container for capture session parameters |
+
+### Capture Configuration
+
+| Parameter | Type | Required | Values | Description |
+|-----------|------|----------|--------|-------------|
+| `documentTypes` | Array | Yes | `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` | Document types user can scan |
+| `biometricSampleTypes` | Array | No | `SELFIE`, `VIDEO` | Biometric samples to capture. Empty = disabled |
+| `biometricConsentHandling` | String | No | `SDK`, `CUSTOMER` | Who handles consent collection. Default: `SDK` |
+
+---
+
+## Input Data
+
+**No input DataBlocks required** - This node initiates data collection.
+
+---
+
+## Output Scenarios
+
+### Verified
+**Condition**: Successful document and biometric processing
+
+| DataBlock | Conditional | Description |
+|-----------|-------------|-------------|
+| `BasicIdentity` | No | Core identity data |
+| `ExtendedIdentity` | No | Additional identity attributes |
+| `DocumentData` | No | Document metadata |
+| `DocumentImages` | No | Document image references |
+| `DocumentVerification` | No | Verification results |
+| `BiometricSamples` | Yes* | Biometric data (only if `biometricSampleTypes` configured) |
+
+### Fraud Detected
+**Condition**: Document or biometric fraud identified
+
+- `DocumentVerification` - Fraud details, no identity extracted
+
+### Capture Failed
+**Condition**: Image quality insufficient for processing
+
+- `DocumentVerification` - Quality failure details
+
+### Default
+**Condition**: Technical or unexpected error
+
+- `DocumentVerification` - Error information
+
+---
+
+## Example Usage
+
+```json
+{
+  "id": "doc_verification",
+  "type": "DOC_ID:v2",
+  "options": {
+    "capture": {
+      "documentTypes": ["ID", "PASSPORT", "RESIDENT_PERMIT"],
+      "biometricSampleTypes": ["SELFIE", "VIDEO"],
+      "biometricConsentHandling": "SDK"
+    }
+  },
+  "next": [
+    { "id": "success_step", "port": "verified" },
+    { "id": "fraud_step", "port": "fraud_detected" },
+    { "id": "retry_step", "port": "capture_failed" },
+    { "id": "error_step", "port": "default" }
+  ]
+}
+```
+
+---
+
+## Workflow Integration
+
+### Typical Flow
+
+1. **User Session Start** â†’ DOC_ID:v2 launches SDK
+2. **Document Capture** â†’ User scans identity document
+3. **Biometric Capture** â†’ User provides selfie/video (if configured)
+4. **Backend Processing** â†’ IDCheck.io analyzes and verifies
+5. **Result Routing** â†’ Workflow continues based on output port
+
+### Common Use Cases
+
+- **Full Identity Verification**: Enable all document types + biometric capture
+- **Document-Only Verification**: Empty `biometricSampleTypes` array
+- **High-Assurance Onboarding**: VIDEO + manual review enabled
+- **Quick Verification**: SELFIE with automated processing
+
+---
+
+## Technical Notes
+
+- **SDK-Web Integration**: Requires proper SDK initialization
+- **Realm Configuration**: Backend IDCheck.io realm must align with node options
+- **Consent Management**: If `biometricConsentHandling` = `SDK`, consent handled during capture
+- **Image Storage**: All captures stored in S3 buckets (URLs in output DataBlocks)
+
+---
+
+## Output Port Routing
+
+| Port | Usage | Typical Next Step |
+|------|-------|-------------------|
+| `verified` | Success path | PEP checks, enrollment, approval |
+| `fraud_detected` | Fraud handling | Rejection, manual review |
+| `capture_failed` | Quality issues | Retry logic, user assistance |
+| `default` | Error handling | System error page, support |
+
+---
+
+## Dependencies
+
+- **Backend Service**: IDCheck.io
+- **Storage**: AWS S3
+- **Frontend**: SDK-Web compatible interface
+
+---
+
+## Version History
+
+- **v2**: Current version - Added enhanced capture options and biometric consent handling
+- **v1**: Deprecated - Replaced by DOC_ID_HEADLESS:v1 for headless scenarios
+
+---
+
+## Related Nodes
+
+- **DOC_ID_HEADLESS:v1** - Headless document verification (API-based)
+- **BIOMETRIC_ENROLLMENT:v1** - Biometric credential enrollment
+- **BIOMETRIC_VERIFICATION:v1** - Biometric authentication
+- **SPHINX:v1** - IDnow document verification service

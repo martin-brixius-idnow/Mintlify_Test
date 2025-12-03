@@ -83,18 +83,16 @@
         "groups": [
           {
             "group": "Core Concept",
-            "pages": [
-              "Platform_Guides/Core_Concept"
-            ]
+            "pages": ["Platform_Guides/Core_Concept"]
           },
           {
             "group": "Document Verification",
             "pages": [
               {
-                "group": "Subchapters",
+                "group": "Document Verification",
                 "pages": [
-                  "Platform_Guides/Document_Verification/Sphinx",
-                  "Platform_Guides/Document_Verification/IDcheck"
+                  "Platform_Guides/Document_Verification/Document_Verification_Sphinx",
+                  "Platform_Guides/Document_Verification/Document_Verification_IDcheck"
                 ]
               },
               "Platform_Guides/Identity_Comparison",

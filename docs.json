@@ -86,10 +86,10 @@
             "pages": ["Platform_Guides/Overview"]
           },
           {
-            "group": "Document Verification",
+            "group": "Identity Verification",
             "pages": [
               {
-                "group": "Identity Verification",
+                "group": "Document Verification",
                 "pages": [
                   "Platform_Guides/Document_Verification_Sphinx",
                   "Platform_Guides/Document_Verification_IDcheck"

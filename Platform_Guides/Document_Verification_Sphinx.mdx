@@ -1,4 +1,79 @@
 ---
 title: Sphinx
-description: 
+description: Cryptographic identity verification using national electronic identity cards with attestation
 ---
+
+## Overview
+
+Secure identity verification leveraging national electronic identity card infrastructure. Validates identity data through cryptographic attestation using pre-configured certificate chains, ensuring authenticity directly from eID cards without relying solely on visual document inspection.
+
+---
+
+## Key Features
+
+- **Cryptographic Attestation** - Certificate chain validation for tamper-proof verification
+- **National eID Support** - Compatible with electronic identity card standards
+- **Cross-Validation** - Compare attestation data against other workflow steps
+- **Flexible Input Mapping** - Configure which steps provide identity data for comparison
+- **Multi-Output Support** - Produces verified identity and document data
+- **Fraud Prevention** - Detects invalid attestation attempts
+
+---
+
+## Configuration
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `inputSources` | Object | No | - | Maps identity data sources to workflow step IDs for pre-filling the session |
+| `shortname` | String | No | - | Managed at the credential configuration level on the platform |
+
+---
+
+## Input
+
+| DataBlock | Description |
+|-----------|-------------|
+| `BasicIdentity` | Optional BasicIdentity data to compare against attestation |
+| `ExtendedIdentit` | Optional ExtendedIdentity data to compare against attestation |
+
+*If the DataBlock is not available, the node will execute normally without this information, and the workflow will proceed without error.
+
+---
+
+## Verdicts
+
+Verdicts for this DataBlock
+
+| Verdict | Description |
+|---------|-------------|
+| `verified` | Successful document processing with identity extraction. User's documents were successfully verified, either automatically or by an agent. |
+| `fraud_detected` | Document identified as fraudulent. This occurs when fraud is confirmed after manual review. No identity data is extracted. |
+| `aborted` | The user aborted the journey or the session expired. No data is extracted. |
+| `cancelled` | The verification process was cancelled by the agent, for instance due to blurry images or unusable documents. |
+| `default` | Unexpected or technical error occurred during processing. This includes service unavailability or processing failures. |
+
+---
+
+## Output
+
+DataBlocks produced per verdict.
+
+| Verdict | DataBlocks Produced | Notes |
+|---------|---------------------|-------|
+| **verified** | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
+| **fraud_detected** | `DocumentVerification` | Contains fraud detection details |
+| **aborted** | - | No DataBlocks produced |
+| **cancelled** | `DocumentVerification` | Contains cancellation reason |
+| **default** | - | No DataBlocks produced |
+---
+
+## Technical Requirements
+
+### Backend
+### Frontend
+
+---
+
+## Best Practices
+
+- **Data Privacy** - Handle extracted identity data according to GDPR and local regulations

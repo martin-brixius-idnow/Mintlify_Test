@@ -32,26 +32,48 @@ Automated instant identity verification using AI and Machine Learning. Guides us
 
 ## Input
 
-- This node does not require any input DataBlocks — it initiates data collection automatically.
+- This node does not require any input DataBlocks â€” it initiates data collection automatically.
 
 ---
 
 ## Verdicts
 
-Below is a full overview of all possible outcomes of the Document Verification process.
+The Document Verification process can produce four possible outcomes based on processing results.
 
-| **Scenario** | **DataBlocks Produced** | **Description** |
-|--------------|--------------------------|------------------|
-| **verified** | `DocumentVerification`, `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `BiometricSamples`* | The document and biometric samples (if configured) were successfully processed and data was extracted. <br/><br/>*`BiometricSamples` is only produced if `biometricSampleTypes` was configured with one or more values and capture was successful.* |
-| **fraud_detected** | `DocumentVerification` | Fraud was detected on the document or biometric samples (if configured), or they were no longer valid. No identity data is extracted. |
-| **capture_failed** | `DocumentVerification` | The quality of the provided images did not allow for processing. |
-| **default** | `DocumentVerification` | A technical or unexpected error occurred during processing. |
+| Verdict | Description |
+|---------|-------------|
+| **verified** | The document and biometric samples (if configured) were successfully processed and data was extracted. Identity verification completed successfully. |
+| **fraud_detected** | Fraud was detected on the document or biometric samples (if configured), or they were no longer valid. No identity data is extracted for security reasons. |
+| **capture_failed** | The quality of the provided images did not allow for processing. Common causes include blur, glare, poor lighting, or incomplete document visibility. |
+| **default** | A technical or unexpected error occurred during processing. This includes service unavailability, timeouts, or processing failures. |
 
+---
+
+## Output
+
+DataBlocks produced per verdict.
+
+| Verdict | DataBlocks Produced | Notes |
+|---------|---------------------|-------|
+| **verified** | `DocumentVerification`, `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `BiometricSamples`* | *`BiometricSamples` only if `biometricSampleTypes` configured |
+| **fraud_detected** | `DocumentVerification` | No identity data extracted |
+| **capture_failed** | `DocumentVerification` | Contains quality failure reasons |
+| **default** | `DocumentVerification` | Contains error details |
+
+---
 
 ## Technical Requirements
 
 ### Backend
+- **Service**: IDCheck.io
+- **Realm Configuration**: Must align with workflow settings
+- **API Credentials**: Managed at platform level
 
 ### Frontend
+- **SDK**: SDK-Web compatible interface required
+- **Browser Support**: Modern browsers with camera access
 
-
+### Storage
+- **Provider**: AWS S3
+- **Content**: Document images, biometric samples
+- **Access**: Secure URLs in output DataBlocks

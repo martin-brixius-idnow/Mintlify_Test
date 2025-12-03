@@ -8,8 +8,8 @@ description: Overview of Flows, Nodes, Verdicts and DataBlocks.
 This page explains the core building blocks of the IDnow TrustPlatform and how they work together to form end-to-end flows:
 
 - **Flow**: Overall path from Start node to End node.
-- **Nodes**: Steps that process data.
-- **Verdicts**: Results of a node (e.g. “verified”, “fraud”).
+- **Nodes**: Steps that process data
+- **Verdicts**: Outcome of a node (e.g. “verified”, “fraud”)
 - **DataBlocks**: Typed data passed between nodes.
 - **Ports**: Named paths that decide the next node.
 
@@ -27,10 +27,14 @@ Every flow must contain exactly one **Start node** as its entry point and at lea
 
 **Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature.
 
-IDnow provides a comprehensive node library that you can use to construct the automation logic of your flow.
+Flows conclude at explicit End nodes that represent a final `outcome`. End outcomes are:
 
-![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-basic-flow.png)
+- **accepted:** The flow meets your success criteria
+- **rejected:** The flow failed this criteria
 
+Other nodes perform operations and transform data or control workflow branching through **verdicts**. 
+
+![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
 *Every flow starts at Start, passes through one or more nodes, and ends in an End node.*
 
 ---
@@ -43,10 +47,11 @@ Each node can produce one or more **verdicts**, which describe what happened dur
 - `fraud`
 - `failure`
 
-In the API response, those verdicts are often accompanied by structured data that explains the result. At the flow level, the verdict of the final End node feeds into the high-level `outcome` you will see also in the API response of a flow execution (for example, accepted or rejected).
+In the flow, the verdict is used to select the next port: it either routes to a follow-up node or to an End node, which sets the final outcome shown in the API (for example, accepted or rejected). See also the chapter **ports** for more explanation.
 
-![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-datablocks-verdicts.png)
+In the API response, each verdict includes structured data that explains the result.
 
+![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/2-trustplatform-idv-verdicts.png)
 *Example of an IDV node with multiple verdicts, each mapped to a dedicated End node.*
 
 ---

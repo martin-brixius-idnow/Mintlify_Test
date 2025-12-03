@@ -1,5 +1,73 @@
 ---
 title: Identity Comparison
-description: Documentation for Identity Comparison in the IDnow Trustplatform.
 ---
 
+## Overview
+
+The node is a specialized processing step designed to compare two BasicIdentity DataBlocks. This step is essential for workflows that need to verify the consistency of identity information from different sources (e.g., an identity provided by the user and an identity extracted from a document).
+
+## Key Features
+
+- **Dual Source Comparison**: Compares identity data from two different sources
+- **Requires Two Distinct DataBlocks**: Requires two distinct BasicIdentity DataBlocks
+- **Configurable Attributes**: Allows selection of specific attributes to compare
+- **Dual Comparison Modes**: Supports both strict and tolerant comparison modes
+- **ComparisonResults Output**: Produces ComparisonResults DataBlock with detailed verdict and traceability
+- **Transition Requirement**: Workflow must define transitions for both `match` and `failure` ports to handle all possible outcomes
+
+## Configuration
+
+The node is configured via the `options` object, which specifies the source nodes and comparison parameters.
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| leftOperand | string | Yes | Node ID that produced the first BasicIdentity DataBlock |
+| rightOperand | string | Yes | Node ID that produced the second BasicIdentity DataBlock |
+| attributes | array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
+| mode | enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
+
+**Comparison Mode Details:**
+
+- **strict**: Name comparison requires all words from both names to have "close enough" matches. Date comparison requires the two dates to be exactly the same.
+- **tolerant**: Name comparison requires at least one word from the first name to have a "close enough" match in the second name. Date comparison requires year and month to match (day is ignored).
+
+**Input DataBlock Referencing:**
+
+The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) of the preceding nodes that produced the BasicIdentity DataBlocks to be compared. The values must correspond to existing node IDs in the workflow. The values of `leftOperand` and `rightOperand` must be different to ensure comparison between two distinct data sources.
+
+## Input Data
+
+| DataBlock Type | Required | Description |
+|----------------|----------|-------------|
+| BasicIdentity | Yes | First BasicIdentity DataBlock (from leftOperand node) |
+| BasicIdentity | Yes | Second BasicIdentity DataBlock (from rightOperand node) |
+
+**Important:** This node requires exactly two BasicIdentity DataBlocks as input. The workflow validation system ensures that the nodes referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a BasicIdentity DataBlock.
+
+## Comparison Logic
+
+| Outcome       | Description |
+|---------------|-------------|
+| `match`       | All specified attributes in the attributes list were successfully compared according to the configured comparison mode (strict or tolerant), and all values matched. |
+| `noMatch`     | At least one pair of compared attribute values did not match based on the configured comparison mode. This verdict takes priority over `inconclusive` if there are also missing attribute values. |
+| `inconclusive`| One or more required attribute values are missing, making comparison impossible. No mismatches were detected among the available attributes. |
+
+## Output Data
+
+DataBlocks produced per verdict.
+
+| Scenario | DataBlocks Produced | Description |
+|----------|---------------------|-------------|
+| match | `ComparisonResults` | All specified attributes match between the two BasicIdentity sources |
+| failure | `ComparisonResults` | One or more specified attributes do not match or are missing, preventing the expected comparison between the two BasicIdentity sources |
+
+---
+
+## Technical Requirements
+
+### Backend
+### Frontend
+
+---
+
+## Best Practices

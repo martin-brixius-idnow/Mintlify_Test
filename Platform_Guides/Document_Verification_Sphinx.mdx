@@ -31,10 +31,12 @@ Secure identity verification leveraging national electronic identity card infras
 
 ## Input
 
-| DataBlock | Description |
-|-----------|-------------|
-| `BasicIdentity` | Optional BasicIdentity data to compare against attestation |
-| `ExtendedIdentit` | Optional ExtendedIdentity data to compare against attestation |
+Input requirements for this node.
+
+| DataBlock          | Mandatory | Description                                          |
+|--------------------|----------|------------------------------------------------------|
+| `BasicIdentity`    | No      | BasicIdentity data to compare against attestation    |
+| `ExtendedIdentity` | No      | ExtendedIdentity data to compare against attestation |
 
 *If the DataBlock is not available, the node will execute normally without this information, and the workflow will proceed without error.
 
@@ -42,7 +44,7 @@ Secure identity verification leveraging national electronic identity card infras
 
 ## Verdicts
 
-Verdicts for this DataBlock
+Verdicts for this DataBlock.
 
 | Verdict | Description |
 |---------|-------------|

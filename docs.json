@@ -84,15 +84,19 @@
           {
             "group": "Core Concept",
             "pages": [
-              "Platform_Guides/Basics",
-              "Platform_Guides/Datablocks",
-              "Platform_Guides/Nodes"
+              "Platform_Guides/Core_Concept"
             ]
           },
           {
-            "group": "Identity Verification",
+            "group": "Document Verification",
             "pages": [
-              "Platform_Guides/Document_Verification",
+              {
+                "group": "Subchapters",
+                "pages": [
+                  "Platform_Guides/Document_Verification/Sphinx",
+                  "Platform_Guides/Document_Verification/IDcheck"
+                ]
+              },
               "Platform_Guides/Identity_Comparison",
               "Platform_Guides/Data_Verification",
               "Platform_Guides/EUDI_Wallet",

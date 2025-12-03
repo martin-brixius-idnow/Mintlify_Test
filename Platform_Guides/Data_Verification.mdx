@@ -17,7 +17,6 @@ The node performs headless document verification that processes pre-captured doc
 
 ---
 
-
 ## Configuration Options
 
 | Attribute | Type | Description |
@@ -29,18 +28,26 @@ The node performs headless document verification that processes pre-captured doc
 
 ## Types of Input Data
 
+Input requirements for this node.
+
 | DataBlock Type | Required | Description |
 |----------------|----------|-------------|
 | `DocumentImages` | Yes | Pre-captured document images (front and/or back side) |
 | `BiometricSamples` | Yes | Pre-captured biometric data with `consent = true` |
 
-**Important:** The BiometricSamples DataBlock must have the `consent` field set to `true`. This serves as explicit confirmation that the client has lawfully obtained the user's consent before submitting the data for processing.
+If the consent field in the BiometricSamples DataBlock is set to true, Idnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
+
+---
+
+## Verdicts
+
+This node does not produce any verdicts.
 
 ---
 
 ## Types of Output Data
 
-The DOC_ID_HEADLESS:v1 node produces different outputs depending on the outcome of the verification process.
+DataBlocks produced per verdict.
 
 | Scenario | DataBlocks Produced | Description |
 |----------|---------------------|-------------|

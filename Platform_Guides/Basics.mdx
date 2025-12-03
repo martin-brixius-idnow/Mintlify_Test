@@ -34,7 +34,7 @@ Flows conclude at explicit End nodes that represent a final `outcome`. End outco
 
 Other nodes perform operations and transform data or control workflow branching through **verdicts**. 
 
-![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-basic-flow.png)
+![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
 *Every flow starts at Start, passes through one or more nodes, and ends in an End node.*
 
 ---
@@ -51,7 +51,7 @@ In the flow, the verdict is used to select the next port: it either routes to a 
 
 In the API response, each verdict includes structured data that explains the result.
 
-![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-verdicts.png)
+![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/2-trustplatform-idv-verdicts.png)
 *Example of an IDV node with multiple verdicts, each mapped to a dedicated End node.*
 
 ---
@@ -74,7 +74,7 @@ As an example, in an IDV workflow, a capture failure produces no `DocumentData` 
 
 Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
 
-![IDV node producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-verdicts.png)
+![IDV node producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/3-trustplatform-idv-verdicts.png)
 
 *An IDV node generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
 

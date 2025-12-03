@@ -89,7 +89,7 @@
             "group": "Document Verification",
             "pages": [
               {
-                "group": "Document Verification",
+                "group": "Identity Verification",
                 "pages": [
                   "Platform_Guides/Document_Verification_Sphinx",
                   "Platform_Guides/Document_Verification_IDcheck"

@@ -83,7 +83,7 @@
         "groups": [
           {
             "group": "Core Concept",
-            "pages": ["Platform_Guides/Core_Concept"]
+            "pages": ["Platform_Guides/Overview"]
           },
           {
             "group": "Document Verification",

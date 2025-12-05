@@ -18,8 +18,6 @@ The node is a specialized processing step designed to compare two BasicIdentity 
 
 ## Configuration
 
-The node is configured via the `options` object, which specifies the source nodes and comparison parameters.
-
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | leftOperand | string | Yes | Node ID that produced the first BasicIdentity DataBlock |
@@ -46,6 +44,8 @@ The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) 
 
 ## Input Data
 
+Input requirements for this node.
+
 | DataBlock Type | Required | Description |
 |----------------|----------|-------------|
 | BasicIdentity | Yes | First BasicIdentity DataBlock (from leftOperand node) |
@@ -61,14 +61,3 @@ DataBlocks produced per verdict.
 |----------|---------------------|-------------|
 | match | `ComparisonResults` | All specified attributes match between the two BasicIdentity sources |
 | failure | `ComparisonResults` | One or more specified attributes do not match or are missing, preventing the expected comparison between the two BasicIdentity sources |
-
----
-
-## Technical Requirements
-
-### Backend
-### Frontend
-
----
-
-## Best Practices

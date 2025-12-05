@@ -1,0 +1,57 @@
+---
+title: Biometric Authentication
+description: Interactive face verification that initiates a biometric session, waits for the result, and returns an AuthenticationResult.
+---
+
+## Overview
+
+This Step node executes a biometric face verification process. It orchestrates an interactive authentication flow with the end-user and processes the authentication result.
+
+---
+
+## Key Features
+
+- ***Verification Initialization***: Creates an authentication request and sends a UI directive to the client to start the biometric verification process.
+- ***Signal Waiting***: Waits for a signal containing the authentication result.
+- ***Result Processing***: Once the signal is received, it computes the final authentication result by verifying the transaction or processing failure information.
+
+This node is ideal for scenarios where strong biometric authentication is required as part of an identity workflow.
+
+---
+
+## Configuration
+
+This node requires no configuration options. It uses the Third Party configuration parameters defined at the infrastructure level.
+
+---
+
+## Input Data
+
+Input requirements for this node.
+
+| DataBlock       | Mandatory | Description |
+|-----------------|-----------|-------------|
+| `UserReference` | Yes       | Contains the unique subject identifier (subjectId) necessary to identify the user in the Keyless system. |
+
+---
+
+## Verdicts
+
+Verdicts for this DataBlock.
+
+| Scenario        | Description |
+|-----------------|-------------|
+| `authenticated` | Biometric authentication succeeded. The user has been successfully authenticated. |
+| `failed`        | Biometric authentication failed. This can be due to biometric mismatch, capture error, or technical issue. |
+
+---
+
+## Output Data
+
+DataBlocks produced per verdict.
+
+| Scenario        | DataBlocks produced     | Description |
+|-----------------|-------------------------|-------------|
+| **authenticated** | `AuthenticationResult` | Biometric authentication succeeded. The user has been successfully authenticated. |
+| **failed**        | `AuthenticationResult` | Biometric authentication failed. This can be due to biometric mismatch, capture error, or technical issue. |
+| **default**       | `âˆ…`                    | A technical or unexpected error occurred during processing. |

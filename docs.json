@@ -84,29 +84,25 @@
           {
             "group": "Core Concept",
             "pages": [
-                  "Platform_Guides/Core_Concept_Introduction",
-                  "Platform_Guides/Core_Concept_Studio",
-                  "Platform_Guides/Core_Concept_DataBlocks"
-                ]
-              },
+              "Platform_Guides/Core_Concept_Introduction",
+              "Platform_Guides/Core_Concept_Studio",
+              "Platform_Guides/Core_Concept_DataBlocks"
+            ]
+          },
           {
-            "group": "Identity Verification",
+            "group": "Document Verification",
             "pages": [
-              {
-                "group": "Document Verification",
-                "pages": [
-                  "Platform_Guides/Document_Verification_Sphinx",
-                  "Platform_Guides/Document_Verification_IDcheck",
-                  "Platform_Guides/Document_Verification_Headless"
-                ]
-              },
-
-           {
-                "group": "eID",
-                "pages": [
-                  "Platform_Guides/eID_France_Identité"
-                ]
-              },
+              "Platform_Guides/Document_Verification_Sphinx",
+              "Platform_Guides/Document_Verification_IDcheck",
+              "Platform_Guides/Document_Verification_Headless"
+            ]
+          },
+          {
+            "group": "eID",
+            "pages": [
+              "Platform_Guides/eID_France_Identité"
+            ]
+          },
           {
             "group": "Electronic Signatures",
             "pages": [

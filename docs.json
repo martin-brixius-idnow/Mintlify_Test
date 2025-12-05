@@ -49,9 +49,16 @@
             "pages": [
               "Getting_Started/Test_Account",
               "Getting_Started/Access_Management"
+
+            ]
+          },
+         {
+            "group": "Customization",
+            "pages": [
               "Platform_Guides/Branding"
             ]
           },
+          
           {
             "group": "Compliance & Security",
             "pages": ["Getting_Started/PII"]

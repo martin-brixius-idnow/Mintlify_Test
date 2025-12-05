@@ -11,6 +11,11 @@ This node assesses user trust level based on various signals determined based on
 
 ## Key Features
 
+- Computes a ***trust score*** from email, phone, IP and name signals.
+- Routes flow using ***configurable thresholds***: suspiciousUserThreshold and trustedUserThreshold.
+- ***Optional inputSources*** to specify step IDs (basicIdentity, extendedIdentity, deviceSignals); otherwise uses latest DataBlocks.
+- ***Produces DigitalSignals*** for trusted, suspicious, and not_trusted; inconclusive when no definitive assessment.
+
 ---
 
 ## Configuration

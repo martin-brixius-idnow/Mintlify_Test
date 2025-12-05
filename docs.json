@@ -84,7 +84,8 @@
           {
             "group": "Core Concept",
             "pages": ["Platform_Guides/Introduction"]
-            "pages": ["Platform_Guides/Flow Builder"]
+            "pages": ["Platform_Guides/Core_Concept_Studio"]
+            "pages": ["Platform_Guides/DataBlocks"]
           },
           {
             "group": "Identity Verification",

@@ -99,15 +99,11 @@
           },
           {
             "group": "eID",
-            "pages": [
-              "Platform_Guides/eID_France_Identité"
-            ]
+            "pages": ["Platform_Guides/eID_France_Identité"]
           },
           {
             "group": "Electronic Signatures",
-            "pages": [
-              "Platform_Guides/Electronic_Signature"
-            ]
+            "pages": ["Platform_Guides/Electronic_Signature"]
           },
           {
             "group": "Trust & Risk Assessment",
@@ -126,6 +122,8 @@
               "Platform_Guides/Biometric_Enrollment",
               "Platform_Guides/Biometric_Verification"
             ]
+          }
+        ]
       },
       {
         "tab": "Integration",

@@ -83,7 +83,8 @@
         "groups": [
           {
             "group": "Core Concept",
-            "pages": ["Platform_Guides/Overview"]
+            "pages": ["Platform_Guides/Introduction"]
+            "pages": ["Platform_Guides/Flow Builder"]
           },
           {
             "group": "Identity Verification",

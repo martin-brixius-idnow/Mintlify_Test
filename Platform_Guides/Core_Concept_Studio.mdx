@@ -54,16 +54,18 @@ These nodes cannot be deleted and serve as the boundaries of your verification f
 
 Click **Add node** to browse available verification methods:
 
-| Node Type | Technical Name | Description |
-|-----------|----------------|-------------|
-| Biometric authentication | `biometric_verification` | Face matching and liveness detection |
-| Verify identity with document | - | ID document scanning and verification |
-| Check political exposure and sanctions | `pep_and_sanctions` | AML/PEP screening |
-| Choose verification method | `method_selector` | Let users select their preferred method |
-| Decision | `choice` | Create conditional logic based on custom rules |
-| Contract Signing | `electronic_signature` | Collect digital signatures |
-| Device information | `device_signals` | Capture device fingerprinting data |
-| Email, Phone & IP Signals | `digital_signals` | Additional identity signals |
+| Node Name | Description |
+|-----------|-------------|
+| **Sphinx** | Cryptographic identity verification using national electronic identity cards with attestation |
+| **IDcheck** | AI-powered automated identity verification with document scanning and biometric capture |
+| **Headless** | Headless document and biometric verification with automatic identity extraction |
+| **France IdentitÃ©** | Authentication with France IdentitÃ© via OIDC |
+| **QES & AES** | Supports both AES (Advanced Electronic Signature) and QES (Qualified Electronic Signature) |
+| **Device Intelligence** | Leverage device intelligence to detect fraud and assess risk |
+| **Email & Phone Verification** | Assesses user trust level based on email, phone, IP, and name signals |
+| **PEP & Sanctions Screening** | PEP and Sanctions screening functionality |
+| **Biometric Enrollment** | Manages facial biometric enrollment of a user |
+| **Biometric Authentication** | Interactive face verification with biometric session and result processing |
 
 ![Node Selection](images/Core_Concept_Studio/5-Core_Concept_Studio-Node-Selection.png)
 

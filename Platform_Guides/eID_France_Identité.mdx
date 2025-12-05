@@ -1,5 +1,60 @@
 ---
 title: France Identité
-description: 
+description: Authentication with France Identité via OIDC
 ---
 
+## Overview
+
+This node orchestrates a user's authentication via the France Identité identity provider using the OIDC protocol. It initiates the user's redirection to France Identité for authentication and consent collection, then processes the response to retrieve the identity data.
+
+---
+
+## Key Features
+
+---
+
+## Configuration
+
+This node does not require any specific configuration options.
+
+---
+
+## Input Data
+
+This node does not require any input DataBlock.
+
+---
+
+## Verdicts
+
+Verdicts for this DataBlock.
+
+| Verdict | Description |
+|---------|-------------|
+| `verified` | The user's identity has been successfully authenticated by the France Identité wallet. The user has consented to sharing their data, and the OIDC flow has completed with the reception of an ID Token containing the verified attributes. |
+| `canceled` | The user actively interrupted the process. This can occur either by explicitly cancelling the authentication or by refusing to grant consent at the data sharing step. |
+| `not_verified` | The authentication attempt failed. The identity could not be verified because the user failed to authenticate with their wallet (e.g., by entering an incorrect PIN). |
+| `default` | A technical or unexpected error occurred during the OIDC flow. This can include service unavailability, a generic error, or a protocol error. |
+
+---
+
+## Output Data
+
+DataBlocks produced per verdict.
+
+| Verdict | DataBlocks Produced | Notes |
+|---------|---------------------|-------|
+| **verified** | `BasicIdentity`, `ExtendedIdentity`, `AuthenticationResult` | |
+| **canceled** | `AuthenticationResult` | |
+| **not_verified** | `AuthenticationResult` | |
+
+---
+
+## Technical Requirements
+
+### Backend
+### Frontend
+
+---
+
+## Best Practices

@@ -140,7 +140,7 @@
             "pages": ["Integration/Authenticate"]
           },
           {
-            "group": "Integrate Workflows",
+            "group": "Integrate Flows",
             "pages": [
               "Integration/Get_Flows",
               "Integration/Execute_Flows",
@@ -157,8 +157,8 @@
           {
             "group": "Frontend",
             "pages": [
-              "Integration/iframe",
-              "Integration/redirect"
+              "Integration/frontend_embedded",
+              "Integration/frontend_redirect"
             ]
           }
         ]

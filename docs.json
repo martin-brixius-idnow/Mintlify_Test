@@ -83,10 +83,12 @@
         "groups": [
           {
             "group": "Core Concept",
-            "pages": ["Platform_Guides/Core_Concept_Introduction"],
-            "pages": ["Platform_Guides/Core_Concept_Studio"],
-            "pages": ["Platform_Guides/Core_Concept_DataBlocks"]
-          },
+            "pages": [
+                  "Platform_Guides/Core_Concept_Introduction",
+                  "Platform_Guides/Core_Concept_Studio",
+                  "Platform_Guides/Core_Concept_DataBlocks"
+                ]
+              },
           {
             "group": "Identity Verification",
             "pages": [

@@ -33,7 +33,7 @@ The node orchestrates the verification of user data through EUDI Wallet verifiab
 
 ## Input Data
 
-This node does not require any input DataBlock from the workflow context.
+This node does not require any input DataBlock.
 
 ---
 
@@ -49,15 +49,6 @@ The EUDI_WALLET_VERIFIER:v1 node produces different outputs depending on the pre
 | `default` | PresentationResult | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
 
 **Dynamic Output:** The `verified` scenario uses a dynamic function based on configuration options. All unique DataBlocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.
-
----
-
-## Technical Requirements
-
-### Backend
-### Frontend
-
----
 
 ## Best Practices
 

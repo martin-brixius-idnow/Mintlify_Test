@@ -1,5 +1,57 @@
 ---
-title: Email & Phone Verification
-description: Documentation for Email Phone Verification in the IDnow Trustplatform.
+title: Email & Phone Verification 
+description: 
 ---
 
+## Overview
+
+This node assesses user trust level based on various signals determined based on email address, telephone number, IP address, and names. It computes a trust score and routes the workflow based on configurable thresholds.
+
+---
+
+## Key Features
+
+---
+
+## Configuration
+
+| Parameter                     | Type    | Required | Default | Description |
+|------------------------------|---------|----------|---------|-------------|
+| `suspiciousUserThreshold`    | Integer | Yes      |         | The score threshold (in percent) below which a user is considered "suspicious". |
+| `trustedUserThreshold`       | Integer | Yes      |         | The score threshold (in percent) above which a user is considered "trusted". |
+| `inputSources`               | Object  | No       |         | Specifies the workflow step IDs to use for sourcing data. If omitted, the node will use the latest available datablocks from the workflow. |
+| `inputSources.basicIdentity` | String  | No       |         | The step ID providing basic identity data (e.g., first name, last name). |
+| `inputSources.extendedIdentity` | String | No     |         | The step ID providing extended identity data (e.g., phone, email). |
+| `inputSources.deviceSignals` | String  | No       |         | The step ID providing device signal data (e.g., IP address). |
+
+---
+
+## Input Data
+
+If the input sources are not specified, the node attempts to retrieve the information directly from the execution context. In other words, it will fetch the latest available datablocks (`BasicIdentity`, `ExtendedIdentity`, and `DeviceSignals` if they exist).
+
+---
+
+## Verdicts
+
+Verdicts for this DataBlock.
+
+| Verdict       | Description |
+|---------------|-------------|
+| `trusted`     | The score computed is greater than or equal to trustedUserThreshold. |
+| `suspicious`  | The score computed is less than or equal to suspiciousUserThreshold. |
+| `not_trusted` | The score computed is between suspiciousUserThreshold and trustedUserThreshold. |
+| `inconclusive`| The provider cannot compute a definitive score or assessment. |
+
+---
+
+## Output Data
+
+DataBlocks produced per verdict.
+
+| Verdict        | DataBlocks Produced | Notes |
+|----------------|---------------------|-------|
+| **trusted**    | `DigitalSignals`    |       |
+| **suspicious** | `DigitalSignals`    |       |
+| **not_trusted**| `DigitalSignals`    |       |
+| **inconclusive**|                     |       |

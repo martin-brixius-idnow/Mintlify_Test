@@ -122,9 +122,10 @@
           },
           {
             "group": "Authentication",
-            "pages": ["Platform_Guides/Biometric_Authentication"]
-          }
-        ]
+            "pages": [
+              "Platform_Guides/Biometric_Enrollment",
+              "Platform_Guides/Biometric_Verification"
+            ]
       },
       {
         "tab": "Integration",

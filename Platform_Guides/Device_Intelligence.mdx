@@ -3,3 +3,79 @@ title: Device Intelligence
 description: Documentation for Device Intelligence in the IDnow Trustplatform.
 ---
 
+## Overview
+
+Leverage device intelligence to detect fraud and assess risk. Spot anomalies, automation, and suspicious environments in real time.
+
+---
+
+## Key Features
+
+- Integrates device signals services (e.g., Fingerprint) to assess device risk and detect fraud attempts.
+- Analyses automation, environment manipulation, VMs/emulators, and behavioral anomalies.
+- Configurable risk thresholds via `suspiciousUserThreshold`, `notTrustedUserThreshold`, and `confidenceScoreThreshold`.
+- Deterministic output mapping based on `suspectScore` and `confidence.score` thresholds.
+
+---
+
+## Configuration
+
+| Parameter                   | Type   | Required | Default | Description |
+|----------------------------|--------|----------|---------|-------------|
+| `suspiciousUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered â€œsuspiciousâ€ based on suspectScore. |
+| `notTrustedUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered â€œnot_trustedâ€ based on suspectScore. |
+| `confidenceScoreThreshold` | Float  | -        | -       | Sets the minimum fingerprint confidence.score below which the result is deemed â€œinconclusiveâ€ and routed to 
+
+---
+
+## Input Data
+
+This node does not require any input DataBlock.
+
+---
+
+## Verdicts
+
+Verdicts for this DataBlock.
+
+
+| Verdict        | Description |
+|----------------|-------------|
+| `trusted`      | The device is considered trustworthy as the suspect score is below the defined suspicious threshold. |
+| `suspicious`   | The device is flagged as suspicious because the suspect score has exceeded the suspicious threshold. |
+| `not_trusted`  | The device is deemed not trusted as the suspect score has surpassed the high-risk (not trusted) threshold. |
+| `inconclusive` | A verdict could not be reached because the confidence score was below the required threshold. |
+---
+
+## Output Data
+
+DataBlocks produced per verdict.
+
+| Verdict         | DataBlocks Produced | Notes |
+|-----------------|---------------------|-------|
+| **trusted**     | `DeviceSignals`     |       |
+| **suspicious**  | `DeviceSignals`     |       |
+| **not_trusted** | `DeviceSignals`     |       |
+| **inconclusive**| `DeviceSignals`     |       |
+
+---
+
+## Output Mapping
+
+| Result                                         | Mapped Output |
+|------------------------------------------------|---------------|
+| `confidence.score < confidenceScoreThreshold`  | `inconclusive`|
+| `suspectScore < suspiciousUserThreshold`       | `trusted`     |
+| `suspectScore > suspiciousUserThreshold`       | `suspicious`  |
+| `suspectScore > notTrustedUserThreshold`       | `not_trusted` |
+
+---
+
+## Technical Requirements
+
+### Backend
+### Frontend
+
+---
+
+## Best Practices

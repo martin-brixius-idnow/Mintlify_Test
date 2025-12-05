@@ -1,29 +1,43 @@
 ---
-title: Use DataBlocks
+title: DataBlocks
 description: The DataBlock is the unit of information produced and consumed by the workflow nodes. It is typed, and each type references a specific set of attributes.
 ---
 
 ## Overview
 
-The DataBlock is the unit of information produced and consumed by the workflow nodes. It is typed, and each type references a specific set of attributes.
+A DataBlock is a piece of information that flow nodes create or use. Each DataBlock has a type, and that type defines what information it contains.
 
-The DSL ensures data flow consistency by:
+The system ensures data flow consistency by:
 
-1. Determining which data blocks are available at each step  
-2. Verifying that the required input data blocks are present  
-3. Ensuring that data dependencies are satisfied before execution  
+- Tracking which DataBlocks exist at each step
+- Checking that each step has the DataBlocks it needs
+- Making sure all required data is ready before a step runs
 
 ---
 
 ## AuthenticationResult
 
-The AuthenticationResult DataBlock contains the result of a biometric authentication process. It uses a discriminated union based on the `result` field to represent either a successful or failed authentication.
+Short description:  
+The AuthenticationResult DataBlock contains the result of a biometric authentication process and uses a discriminated union based on the `result` field to represent either a successful or failed authentication.
 
-### Structure
+### Attributes
 
-The DataBlock uses a discriminated union with two possible variants.
+| Attribute              | Description                                                                                          | Mandatory |
+|------------------------|------------------------------------------------------------------------------------------------------|-----------|
+| `result`               | Discriminator that determines the result type (`"success"` or `"failure"`).                         | Yes       |
+| `provider`             | Authentication service provider.                                                                     | Yes       |
+| `credentialId`         | Unique identifier of the credential used (or attempted).                                            | Yes       |
+| `credentialType`       | Type of credential (e.g., `"FACE"`, `"FINGERPRINT"`, `"FIDO_KEY"`).                                 | Yes       |
+| `subjectId`            | Identifier of the authenticated (or attempted) subject.                                             | Yes       |
+| `requestId`            | Unique identifier of the authentication request.                                                    | Yes       |
+| `authenticatedAt`      | ISO 8601 timestamp of successful authentication (success variant).                                  | Yes (success) |
+| `attemptedAt`          | ISO 8601 timestamp of the authentication attempt (failure variant).                                 | Yes (failure) |
+| `reason.code`          | Standardized error code identifying the type of failure (failure variant).                          | Yes (failure) |
+| `reason.details`       | Detailed error message (failure variant).                                                           | Optional (failure) |
 
-#### Successful Authentication
+### Example payloads
+
+Successful authentication:
 
 ```json
 {
@@ -37,69 +51,26 @@ The DataBlock uses a discriminated union with two possible variants.
 }
 ```
 
-- mandatory â€“ authentication service provider (e.g., "KEYLESS")  
-- mandatory â€“ unique identifier of the credential used  
-- mandatory â€“ type of credential (e.g., "FACE")  
-- mandatory â€“ identifier of the authenticated subject  
-- mandatory â€“ unique identifier of the authentication request  
-- mandatory â€“ ISO 8601 timestamp of successful authentication  
-
-#### Failed Authentication
-
-```json
-{
-  "result": "failure",
-  "provider": "string",
-  "credentialId": "string",
-  "credentialType": "string",
-  "subjectId": "string",
-  "requestId": "string",
-  "attemptedAt": "string",
-  "reason": {
-    "code": "string",
-    "details": "string"
-  }
-}
-```
-
-- mandatory â€“ authentication service provider  
-- mandatory â€“ identifier of the attempted credential  
-- mandatory â€“ type of credential  
-- mandatory â€“ subject identifier  
-- mandatory â€“ unique identifier of the authentication request  
-- mandatory â€“ ISO 8601 timestamp of the authentication attempt  
-- mandatory â€“ failure details  
-- mandatory â€“ standardized error code  
-- optional â€“ detailed error message  
-
-### Common Fields
-
-- `result`: Discriminator that determines the result type (`"success"` or `"failure"`)  
-- `provider`: The name of the authentication service provider (e.g., "KEYLESS", "INTERNAL", etc.)  
-- `credentialId`: The unique identifier of the credential used for authentication  
-- `credentialType`: The type of credential (e.g., "FACE", "FINGERPRINT", "FIDO_KEY")  
-- `subjectId`: The subject identifier in the system  
-- `requestId`: A unique identifier to trace this specific authentication request  
-
-### Success-Specific Fields
-
-- `authenticatedAt`: ISO 8601 timestamp indicating when the authentication succeeded  
-
-### Failure-Specific Fields
-
-- `attemptedAt`: ISO 8601 timestamp indicating when the authentication attempt occurred  
-- `reason`: Object containing failure details  
-  - `code`: Standardized error code to identify the type of failure  
-  - `details`: Optional message with additional details about the failure  
-
 ---
 
 ## AuthenticatorCredential
 
-The AuthenticatorCredential DataBlock represents a concrete authentication credential that has been issued, enrolled or created and is associated with a subject. This DataBlock is typically produced by an enrollment step (like `BIOMETRIC_ENROLLMENT:v1`). It contains every element required to:
+Short description:  
+The AuthenticatorCredential DataBlock represents a concrete authentication credential that has been issued, enrolled or created and is associated with a subject.
 
-- perform future authentications with the credential  
-- manage its life-cycle (suspension, revocation, rotation)
+### Attributes
+
+| Attribute        | Description                                                                                                           | Mandatory |
+|------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
+| `credentialId`   | Unique identifier returned by the provider.                                                                          | Yes       |
+| `credentialType` | Technology / modality (e.g. `FACE`, `FINGERPRINT`, `FIDO_KEY`, `PASSWORD`).                                          | Yes       |
+| `subjectId`      | Internal immutable identifier of the entity (links the credential to a subject).                                    | Yes       |
+| `provider`       | System that manages the credential (e.g. `KEYLESS`, `PLATFORM`, `CUSTOM`, `INTERNAL_CA`).                            | Yes       |
+| `status`         | Lifecycle status of the credential (e.g. `ACTIVE`, `REVOKED`, `SUSPENDED`, `EXPIRED`).                               | Yes       |
+| `createdAt`      | ISO 8601 timestamp of initial creation.                                                                              | Yes       |
+| `updatedAt`      | ISO 8601 timestamp of last modification (equals `createdAt` if never updated).                                      | Yes       |
+
+### Example payload
 
 ```json
 {
@@ -113,48 +84,30 @@ The AuthenticatorCredential DataBlock represents a concrete authentication crede
 }
 ```
 
-- mandatory â€“ unique identifier returned by the provider  
-- mandatory â€“ technology / modality e.g. FACE, FINGERPRINT, FIDO_KEY, PASSWORD  
-- mandatory â€“ internal immutable identifier of the entity  
-- optional â€“ system that manages the credential, e.g. KEYLESS, INTERNAL_CA  
-- required â€“ ACTIVE | SUSPENDED | REVOKED | EXPIRED  
-- required â€“ ISO 8601 timestamp of initial creation  
-- required â€“ ISO 8601 timestamp of last modification (equals `createdAt` if never updated)  
-
-`credentialId` (required, string)  
-The primary key for the credential, as provided by the backend service (e.g., the Keyless enrollment ID).
-
-`credentialType` (required, string)  
-The category of the factor. This allows for filtering and specific logic within the workflow.  
-Examples: `FACE`, `FINGERPRINT`, `FIDO_KEY`, `TOTP`.
-
-`subjectId` (required, string)  
-The identifier that explicitly links this credential to a `SubjectIdentifier`. This prevents any ambiguity when a single subject has multiple credentials.
-
-`provider` (required, string)  
-The name of the service provider that manages this credential (e.g., KEYLESS, PLATFORM, CUSTOM). This is essential for multi-provider models.
-
-`status` (required, string)  
-Manages the credential's lifecycle. Examples: `ACTIVE`, `REVOKED`, `SUSPENDED`.
-
-`createdAt` (required, string)  
-An ISO 8601 timestamp indicating when the credential was created.
-
-`updatedAt` (required, string)  
-An ISO 8601 timestamp indicating the last time the credential was modified (equal to `createdAt` if never modified).
-
 ---
 
 ## BasicIdentity
 
+Short description:  
 The `basicIdentity` data block contains fundamental identity information extracted from documents.
+
+### Attributes
+
+| Attribute     | Description         | Mandatory |
+|---------------|---------------------|-----------|
+| `familyName`  | Family name.        | No        |
+| `name`        | Name.               | Yes       |
+| `givenName`   | Given name.         | No        |
+| `birthDate`   | Birth date.         | No        |
+
+### Example payload
 
 ```json
 {
-  "familyName": "string", // optional
-  "name": "string",       // mandatory
-  "givenName": "string",  // optional
-  "birthDate": "string"   // optional
+  "familyName": "string",
+  "name": "string",
+  "givenName": "string",
+  "birthDate": "string"
 }
 ```
 
@@ -162,30 +115,45 @@ The `basicIdentity` data block contains fundamental identity information extract
 
 ## BiometricSamples
 
-The BiometricSamples data block contains references to biometric data captured from the end-user. It is used both as an input for headless processes and as an output from capture sessions.
+Short description:  
+The BiometricSamples data block contains references to biometric data captured from the end-user and is used as input or output of biometric processes.
+
+### Attributes
+
+| Attribute  | Description                                                                                                             | Mandatory |
+|-----------|-------------------------------------------------------------------------------------------------------------------------|-----------|
+| `faceUrl` | S3 bucket URL pointing to the captured face image (selfie).                                                             | Yes       |
+| `consent` | Indicates user consent for biometric processing; usage depends on context (headless vs SDK-driven nodes).              | Optional  |
+
+### Example payload
 
 ```json
 {
-  "faceUrl": "string",  // mandatory - S3 bucket URL pointing to the captured face image (selfie).
-  "consent": "boolean"  // optional - Indicates user consent for biometric processing.
+  "faceUrl": "string",
+  "consent": true
 }
 ```
-
-- `faceUrl`: This attribute provides a secure link to the face image file stored in an S3 bucket.  
-- `consent`: The usage of this attribute is context-dependent:  
-  - When this DataBlock is provided as an input to a headless node (e.g., `DOC_ID_HEADLESS:v1`), this field is mandatory and its value must be `true`. This serves as explicit confirmation that the client has lawfully obtained the user's consent before submitting the data for processing.  
-  - When this DataBlock is produced by an SDK-driven node (e.g., `DOC_ID:v2`), this field will not be present. In this case, consent is managed by the node's `biometricConsentHandling` option, and the successful production of the DataBlock itself implies that the consent requirement was fulfilled during the capture session.
 
 ---
 
 ## Check
 
+Short description:  
 The Check JSON Object represents an individual verification check performed on a document or identity.
+
+### Attributes
+
+| Attribute | Description                        | Mandatory |
+|-----------|------------------------------------|-----------|
+| `id`      | Identifier of the check.           | Yes       |
+| `status`  | Status of the check (`valid` / `invalid`). | Yes |
+
+### Example payload
 
 ```json
 {
-  "id": "string",     // mandatory - identifier of the check
-  "status": "string"  // mandatory - valid or invalid
+  "id": "string",
+  "status": "string"
 }
 ```
 
@@ -193,83 +161,110 @@ The Check JSON Object represents an individual verification check performed on a
 
 ## ComparisonResults
 
-To support reusability of the data block, the output is a generic ComparisonResults DataBlock with the following structure:
+Short description:  
+The ComparisonResults DataBlock contains the output of a comparison between two sets of data, including verdict and attribute-level details.
+
+### Attributes
+
+| Attribute              | Description                                                                                       | Mandatory |
+|------------------------|---------------------------------------------------------------------------------------------------|-----------|
+| `verdict`              | Overall result of the comparison (`match` / `noMatch` / `inconclusive`).                         | Yes       |
+| `leftOperand`          | Id of the node whose data was used as left operand.                                              | Yes       |
+| `rightOperand`         | Id of the node whose data was used as right operand.                                             | Yes       |
+| `attributesCompared`   | List of attributes that were checked.                                                            | Yes       |
+| `mismatchedAttributes` | List of attributes that failed to match (empty if verdict is `match` or `inconclusive`).         | Yes       |
+| `missingAttributes`    | List of attributes that could not be compared because data was missing.                          | Yes       |
+
+### Example payload
 
 ```json
 {
-  "verdict": "'match' | 'noMatch' | 'inconclusive'",  // mandatory
-  "leftOperand": "string",                            // mandatory
-  "rightOperand": "string",                           // mandatory
-  "attributesCompared": ["string"],                   // mandatory
-  "mismatchedAttributes": ["string"],                 // mandatory - array can be empty
-  "missingAttributes": ["string"]                     // mandatory - array can be empty
+  "verdict": "match",
+  "leftOperand": "nodeA",
+  "rightOperand": "nodeB",
+  "attributesCompared": ["string"],
+  "mismatchedAttributes": ["string"],
+  "missingAttributes": ["string"]
 }
 ```
-
-- `verdict`: The overall result of the comparison.  
-- `leftOperand` / `rightOperand`: The ids of the nodes whose data was compared, ensuring full traceability.  
-- `attributesCompared`: The list of attributes that were checked.  
-- `mismatchedAttributes`: The list of attributes that failed to match. This list is empty if the verdict is `match` or `inconclusive`.  
-- `missingAttributes`: The list of attributes that could not be compared because their data was missing. This list is empty if the verdict is `match` and can be empty if the verdict is `noMatch`.
 
 ---
 
 ## DeviceSignals
 
-The DeviceSignals DataBlock encapsulates a comprehensive set of information about the end-user's device, browser, and network environment. This data is crucial for risk assessment and fraud detection, typically generated by a third-party provider like Fingerprint.
+Short description:  
+The DeviceSignals DataBlock encapsulates information about the end-user's device, browser, and network environment for risk assessment and fraud detection.
+
+### Attributes
+
+| Attribute                     | Description                                                                                                             | Mandatory |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------------|-----------|
+| `userReference`              | Identifier to link the assessment to a specific user or session.                                                       | Optional  |
+| `provider`                   | Service that performed the assessment.                                                                                 | Yes       |
+| `timestamp`                  | ISO 8601 timestamp of when the assessment was completed.                                                               | Yes       |
+| `services`                   | Array listing specific services/signals analyzed (e.g., `["ip", "emails", "phone"]`).                                  | Yes       |
+| `inputSources.basicIdentity` | Step ID that provided basic identity data.                                                                             | Optional  |
+| `inputSources.extendedIdentity` | Step ID that provided extended identity data.                                                                      | Optional  |
+| `inputSources.deviceSignals` | Step ID that provided device signal data.                                                                              | Optional  |
+| `result`                     | Final qualitative outcome: `trusted`, `suspicious`, `not_trusted`, or `inconclusive`.                                  | Yes       |
+| `score`                      | Numerical trust score as a percentage.                                                                                 | Yes       |
+| `reasons[].code`            | Machine-readable code for the reason (e.g., `"RE029"`).                                                                 | Mandatory (per reason) |
+| `reasons[].details`         | Human-readable explanation of the reason.                                                                               | Mandatory (per reason) |
+| `signals`                    | Complete, raw JSON response received from the provider.                                                                | Yes       |
+
+### Example payload
 
 ```json
 {
   "userReference": "string",
   "provider": "string",
   "timestamp": "string",
-  "services": ["string"],
+  "services": ["ip", "emails", "phone"],
   "inputSources": {
     "basicIdentity": "string",
     "extendedIdentity": "string",
     "deviceSignals": "string"
   },
-  "result": "enum",
-  "score": "number",
+  "result": "trusted",
+  "score": 71.6,
   "reasons": [
     {
       "code": "string",
       "details": "string"
     }
   ],
-  "signals": "object"
+  "signals": {}
 }
 ```
-
-- `userReference`: An optional identifier to link the device signals to a specific user within the client's system.  
-- `provider`: The name of the service that generated the signals (e.g., "Fingerprint").  
-- `timestamp`: An ISO 8601 timestamp indicating when the device signals were captured.  
-- `services`: An array listing the specific services/signals that were analyzed (e.g., `["ip", "emails", "phone"]`).  
-- `inputSources`: An object detailing the workflow steps that provided the source data for this assessment.  
-  - `basicIdentity`: The step ID that provided basic identity data.  
-  - `extendedIdentity`: The step ID that provided extended identity data.  
-  - `deviceSignals`: The step ID that provided device signal data.  
-- `result`: The overall trust assessment from the provider. The value must be one of `trusted`, `inconclusive`, `suspicious`, or `not_trusted`.  
-- `score`: The precise numerical trust score as a percentage (e.g., 71.6).  
-- `reasons`: A list of factors that significantly influenced the final score.  
-  - `code`: A machine-readable code for the reason (e.g., "RE029").  
-  - `details`: A human-readable explanation of the reason.  
-- `signals`: The complete, raw JSON response received from the provider, for auditing and debugging purposes.
 
 ---
 
 ## DocumentData
 
+Short description:  
 The DocumentData data block contains information about processed documents.
+
+### Attributes
+
+| Attribute          | Description                     | Mandatory |
+|--------------------|---------------------------------|-----------|
+| `documentType`     | Document type.                  | Yes       |
+| `documentNumber`   | Document number.                | Optional  |
+| `expiryDate`       | Expiry date of the document.    | Optional  |
+| `issuanceDate`     | Issuance date of the document.  | Optional  |
+| `issuingAuthority` | Issuing authority.              | Optional  |
+| `issuingCountry`   | Issuing country.                | Optional  |
+
+### Example payload
 
 ```json
 {
-  "documentType": "string",      // mandatory
-  "documentNumber": "string",    // optional
-  "expiryDate": "string",        // optional
-  "issuanceDate": "string",      // optional
-  "issuingAuthority": "string",  // optional
-  "issuingCountry": "string"     // optional
+  "documentType": "string",
+  "documentNumber": "string",
+  "expiryDate": "string",
+  "issuanceDate": "string",
+  "issuingAuthority": "string",
+  "issuingCountry": "string"
 }
 ```
 
@@ -277,12 +272,22 @@ The DocumentData data block contains information about processed documents.
 
 ## DocumentImages
 
+Short description:  
 The DocumentImages data block contains references to image files stored in S3 buckets.
+
+### Attributes
+
+| Attribute      | Description                                                  | Mandatory |
+|----------------|--------------------------------------------------------------|-----------|
+| `frontSideUrl` | S3 bucket URL pointing to the front side image file.         | Optional  |
+| `backSideUrl`  | S3 bucket URL pointing to the back side image file.          | Optional  |
+
+### Example payload
 
 ```json
 {
-  "frontSideUrl": "string",  // optional - S3 bucket URL pointing to the front side image file
-  "backSideUrl": "string"    // optional - S3 bucket URL pointing to the back side image file
+  "frontSideUrl": "string",
+  "backSideUrl": "string"
 }
 ```
 
@@ -290,7 +295,18 @@ The DocumentImages data block contains references to image files stored in S3 bu
 
 ## DocumentsToSign
 
-This DataBlock is used to reference the documents uploaded by the customer that the end-user needs to sign, as well as the id of the corresponding template.
+Short description:  
+The DocumentsToSign DataBlock references the documents uploaded by the customer that the end-user needs to sign, and the corresponding template id.
+
+### Attributes
+
+| Attribute                 | Description                                                                                      | Mandatory |
+|---------------------------|--------------------------------------------------------------------------------------------------|-----------|
+| `documents`               | Array of document objects to be included in the signing process (must contain at least one).    | Yes       |
+| `documents[].templateId`  | Identifier linking the runtime document to a document template / definition.                    | Yes       |
+| `documents[].sourceUrl`   | URL (e.g. S3) pointing to the actual source file to be signed.                                  | Yes       |
+
+### Example payload
 
 ```json
 {
@@ -303,21 +319,26 @@ This DataBlock is used to reference the documents uploaded by the customer that 
 }
 ```
 
-- `documents` (mandatory, array): An array of objects where each object represents a single document to be included in the signing process. The array must contain at least one document.  
-- `templateId` (mandatory, string): The identifier that explicitly links the runtime document to a `DocumentTemplate` defined in the `documentTemplates` array (within the step's static options). This link ensures that the correct set of signature fields and properties is applied to the source document.  
-  NOTE: for this development cycle 4, as the templates of the document are not going to be availabe in the node definition, the template will directly refence the identifier of the document definition added on InstantSign.  
-- `sourceUrl` (mandatory, string): The URL (e.g., a S3 URL) pointing to the actual source file to be signed. This is the dynamic content that will be presented to the user and processed by the signature provider.
-
 ---
 
 ## DocumentVerification
 
-The DocumentVerification data block contains the results of document verification processes. Only error checks are returned in the `failedChecks` attribute.
+Short description:  
+The DocumentVerification data block contains the results of document verification processes; only error checks are returned in `failedChecks`.
+
+### Attributes
+
+| Attribute      | Description                                      | Mandatory |
+|----------------|--------------------------------------------------|-----------|
+| `verdict`      | Overall verdict (`success` or `failure`).        | Yes       |
+| `failedChecks` | Array of Check JSON Object (can be empty).       | Yes       |
+
+### Example payload
 
 ```json
 {
-  "verdict": "string",                 // mandatory - success or failure
-  "failedChecks": [ /* Check JSON Object */ ] // mandatory - array can be empty
+  "verdict": "success",
+  "failedChecks": []
 }
 ```
 
@@ -325,21 +346,38 @@ The DocumentVerification data block contains the results of document verificatio
 
 ## ExtendedIdentity
 
+Short description:  
 The ExtendedIdentity data block contains additional identity information beyond basic fields.
+
+### Attributes
+
+| Attribute                     | Description                                                                                                           | Mandatory |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
+| `portraitUrl`                 | S3 bucket URL pointing to the portrait image file (selfie image renamed to portrait).                               | Optional  |
+| `nationality`                 | Nationality.                                                                                                         | Optional  |
+| `personalAdministrativeNumber`| Personal administrative number (renamed from personalNumber).                                                       | Optional  |
+| `birthPlace`                  | Birth place.                                                                                                         | Optional  |
+| `address`                     | Address.                                                                                                             | Optional  |
+| `familyNameBirth`            | Family name at birth.                                                                                                | Optional  |
+| `givenNameBirth`             | Given name at birth.                                                                                                 | Optional  |
+| `email`                       | Email address.                                                                                                       | Optional  |
+| `phoneNumber`                 | Phone number.                                                                                                        | Optional  |
+| `sex`                         | Sex (renamed from gender).                                                                                          | Optional  |
+
+### Example payload
 
 ```json
 {
-  "portraitUrl": "string",                  // optional S3 bucket URL pointing to the portrait image file.
-                                              // (note : selfieImage has been renamed in portrait see PID Rulebook of the EUDI Wallet ARF)
-  "nationality": "string",                  // optional
-  "personalAdministrativeNumber": "string", // optional (note : personalNumber has been renamed in personalAdministrativeNumber see PID Rulebook of the EUDI Wallet ARF)
-  "birthPlace": "string",                   // optional
-  "address": "string",                      // optional
-  "familyNameBirth": "string",             // optional
-  "givenNameBirth": "string",              // optional
-  "email": "string",                        // optional
-  "phoneNumber": "string",                  // optional
-  "sex": "string"                           // optional (note : gender has been renamed in sex see PID Rulebook of the EUDI Wallet ARF)
+  "portraitUrl": "string",
+  "nationality": "string",
+  "personalAdministrativeNumber": "string",
+  "birthPlace": "string",
+  "address": "string",
+  "familyNameBirth": "string",
+  "givenNameBirth": "string",
+  "email": "string",
+  "phoneNumber": "string",
+  "sex": "string"
 }
 ```
 
@@ -347,58 +385,69 @@ The ExtendedIdentity data block contains additional identity information beyond 
 
 ## DigitalSignals
 
-The DigitalSignals datablock is the structured output generated by the `DIGITAL_SIGNALS:v1` node. It acts as a detailed receipt of the trust assessment, based on email, phone number and IP, encapsulating not only the final result but also all the underlying data that led to it. This datablock is important for auditing and providing transparency into the decision-making process.
+Short description:  
+The DigitalSignals datablock is the structured output generated by the `DIGITAL_SIGNALS:v1` node and acts as a detailed receipt of the trust assessment based on email, phone and IP.
+
+### Attributes
+
+| Attribute                     | Description                                                                                                           | Mandatory |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
+| `provider`                    | Service that performed the assessment.                                                                               | Yes       |
+| `timestamp`                   | ISO 8601 timestamp of when the assessment was completed.                                                             | Yes       |
+| `services`                    | List of services/signals analyzed (e.g. `["ip", "emails", "phone", "name"]`).                                        | Yes       |
+| `inputSources.basicIdentity`  | Step ID that provided core identity data (e.g. name).                                                                | Optional  |
+| `inputSources.extendedIdentity` | Step ID that provided additional identity data (e.g. phone, email).                                              | Optional  |
+| `inputSources.deviceSignals`  | Step ID that provided device signal data (e.g. IP address).                                                          | Optional  |
+| `result`                      | Final qualitative outcome: `trusted`, `suspicious`, `not_trusted`, or `inconclusive`.                                | Yes       |
+| `score`                       | Numerical trust score as a percentage.                                                                               | Yes       |
+| `reasons[].code`              | Machine-readable code for the scoring factor.                                                                        | Mandatory (per reason) |
+| `reasons[].details`           | Human-readable description explaining the reason code and its impact.                                               | Mandatory (per reason) |
+| `signals`                     | Complete, raw JSON response received from the provider.                                                              | Yes       |
+
+### Example payload
 
 ```json
 {
-  "provider": "string",     // mandatory - The service that performed the assessment (e.g., "Trustfull").
-  "timestamp": "string",    // mandatory - ISO 8601 timestamp of when the assessment was completed.
-  "services": ["string"],   // mandatory - An array listing the specific services/signals that were analyzed (e.g., ["ip", "emails", "phone"]).
-  "inputSources": {          // optional - An object detailing the workflow steps that provided the source data for this assessment.
-    "basicIdentity": "string",    // optional - The step ID that provided basic identity data.
-    "extendedIdentity": "string", // optional - The step ID that provided extended identity data.
-    "deviceSignals": "string"     // optional - The step ID that provided device signal data.
+  "provider": "string",
+  "timestamp": "string",
+  "services": ["ip", "emails", "phone", "name"],
+  "inputSources": {
+    "basicIdentity": "string",
+    "extendedIdentity": "string",
+    "deviceSignals": "string"
   },
-  "result": "enum",         // mandatory - The final, qualitative outcome. Can be 'trusted', 'suspicious', 'not_trusted', or 'inconclusive'.
-  "score": "number",        // mandatory - The precise numerical trust score as a percentage (e.g., 71.6).
-  "reasons": [               // optional - A list of factors that significantly influenced the final score.
+  "result": "trusted",
+  "score": 71.6,
+  "reasons": [
     {
-      "code": "string",     // mandatory - A machine-readable code for the reason (e.g., "RE029").
-      "details": "string"   // mandatory - A human-readable explanation of the reason.
+      "code": "string",
+      "details": "string"
     }
   ],
-  "signals": "object"       // mandatory - The complete, raw JSON response received from the provider, for auditing and debugging purposes.
+  "signals": {}
 }
 ```
-
-- `provider` (string): The name of the third-party service provider that performed the cross digital data assessment (e.g., "Trustfull"). This attribute is mandatory.  
-- `timestamp` (string): The ISO 8601 timestamp indicating the exact date and time when the assessment was completed and the datablock was generated. This attribute is mandatory.  
-- `services` (array): A mandatory list of strings that specifies which types of data signals were requested and analyzed during this assessment (e.g., `["ip", "emails", "phone", "name"]`).  
-- `inputSources` (object): An optional object that details the specific workflow step IDs from which the data was sourced for this transaction.  
-  - `basicIdentity` (string): The step ID that provided the core identity data, such as the user's name.  
-  - `extendedIdentity` (string): The step ID that provided additional identity data, like the user's phone number or email.  
-  - `deviceSignals` (string): The step ID that provided technical data, such as the user's IP address.  
-- `result` (enum): A mandatory string that represents the final, qualitative outcome of the trust assessment. It accepts one of four values:  
-  - `trusted`: The user's score met or exceeded the trusted threshold.  
-  - `suspicious`: The user's score met or fell below the suspicious threshold.  
-  - `not_trusted`: The user's score was between the suspicious and trusted thresholds.  
-  - `inconclusive`: The provider could not return a definitive assessment due to insufficient data or other issues.  
-- `score` (number): A mandatory numerical value representing the precise trust score as a percentage (e.g., 71.6). This provides a granular measure of the assessed risk.  
-- `reasons` (array): An optional list of objects, where each object provides a specific reason that influenced the final score. This field is absent if no specific reasons were flagged.  
-  - `code` (string): A machine-readable code for the specific scoring factor (e.g., "RE029").  
-  - `details` (string): A human-readable description explaining the reason code and its impact on the score.  
-- `signals` (object): A mandatory JSON object containing the complete, raw, and unaltered response from the external provider. This is essential for in-depth debugging, analysis, and maintaining a complete audit trail.
 
 ---
 
 ## PepAndSanctionsResults
 
-The PepAndSanctionsResults data block contains results from PEP (Politically Exposed Person) and sanctions screening services.
+Short description:  
+The PepAndSanctionsResults data block contains results from PEP and sanctions screening services.
+
+### Attributes
+
+| Attribute      | Description                    | Mandatory |
+|----------------|--------------------------------|-----------|
+| `isPEP`        | Indicates if subject is a PEP. | Yes       |
+| `isSanctioned` | Indicates if subject is sanctioned. | Yes   |
+
+### Example payload
 
 ```json
 {
-  "isPEP": "boolean",       // mandatory
-  "isSanctioned": "boolean" // mandatory
+  "isPEP": true,
+  "isSanctioned": false
 }
 ```
 
@@ -406,15 +455,41 @@ The PepAndSanctionsResults data block contains results from PEP (Politically Exp
 
 ## PresentationResult
 
-The PresentationResult DataBlock encapsulates the complete outcome of an EUDI Wallet credential presentation session. It contains:
+Short description:  
+The PresentationResult DataBlock encapsulates the complete outcome of an EUDI Wallet credential presentation session, including metadata, presented credentials and error information in case of failure.
 
-- Session metadata (ID, timestamps, state)  
-- Presented verifiable credentials with their claims  
-- Error information in case of failure  
+### Attributes (common)
 
-The DataBlock uses a discriminated union with two possible variants.
+| Attribute    | Description                                                        | Mandatory |
+|--------------|--------------------------------------------------------------------|-----------|
+| `sessionId`  | Unique identifier for the presentation session.                    | Yes       |
+| `result`     | Discriminator (`"success"` or `"failure"`).                        | Yes       |
+| `createdAt`  | ISO 8601 timestamp of the presentation request creation.           | Yes       |
 
-### Successful Presentation
+### Attributes (success variant)
+
+| Attribute                       | Description                                                         | Mandatory |
+|---------------------------------|---------------------------------------------------------------------|-----------|
+| `presentedAt`                   | ISO 8601 timestamp of the presentation by the user.                | Yes       |
+| `presentedCredentials`         | List of credentials presented by the user.                          | Optional  |
+| `presentedCredentials[].type`  | Type of the presented credential.                                   | Yes       |
+| `presentedCredentials[].issuer`| Identifier of the credential issuer.                                | Yes       |
+| `presentedCredentials[].presentedClaims[].claimName` | Name of the claim shared by the user.              | Yes       |
+| `presentedCredentials[].presentedClaims[].claimValue`| Value of the claim shared by the user.             | Yes       |
+| `presentedCredentials[].issuerNames` | Names associated with the issuer.                             | Optional  |
+| `presentedCredentials[].queryId`    | Identifier of the query associated with this credential.       | Optional  |
+
+### Attributes (failure variant)
+
+| Attribute          | Description                                              | Mandatory |
+|--------------------|----------------------------------------------------------|-----------|
+| `attemptedAt`      | ISO 8601 timestamp of the presentation attempt.         | Yes       |
+| `reason.code`      | Standardized error code.                                | Yes       |
+| `reason.details`   | Detailed error message.                                 | Optional  |
+
+### Example payloads
+
+Successful presentation:
 
 ```json
 {
@@ -439,18 +514,7 @@ The DataBlock uses a discriminated union with two possible variants.
 }
 ```
 
-- `sessionId`: mandatory - Unique identifier for the presentation session.  
-- `result`: mandatory - The final result of the presentation.  
-- `createdAt`: mandatory - ISO 8601 timestamp of the presentation request creation.  
-- `presentedAt`: mandatory - ISO 8601 timestamp of the presentation by the user.  
-- `presentedCredentials`: optional - List of credentials presented by the user.  
-  - `type`: mandatory - The type of the presented credential.  
-  - `issuer`: mandatory - The issuer of the credential.  
-  - `presentedClaims`: mandatory - List of claims shared by the user.  
-  - `issuerNames`: names associated with the issuer.  
-  - `queryId`: identifier of the query associated with this credential.
-
-### Failed Presentation
+Failed presentation:
 
 ```json
 {
@@ -465,49 +529,48 @@ The DataBlock uses a discriminated union with two possible variants.
 }
 ```
 
-- `sessionId`: mandatory - Unique identifier for the presentation session.  
-- `result`: mandatory - The final state of the presentation.  
-- `createdAt`: mandatory - ISO 8601 timestamp of the presentation request creation.  
-- `attemptedAt`: mandatory - ISO 8601 timestamp of the presentation attempt  
-- `reason`: optional - Details of the failure.  
-  - `code`: mandatory - Standardized error code.  
-  - `details`: optional - Detailed error message.
-
-### Common Fields
-
-- `sessionId`: Unique identifier for the presentation session.  
-- `result`: Discriminator that determines the result type (`"success"` or `"failure"`)  
-- `createdAt`: ISO 8601 timestamp indicating the presentation request creation date.
-
-### Success-Specific Fields
-
-- `presentedAt`: ISO 8601 timestamp indicating the date of the presentation done by the user.  
-- `presentedCredentials`: Optional array containing the credentials that were presented by the user. This field is only present if `result` is `success`.  
-  - `type`: The type of the presented credential.  
-  - `issuer`: The identifier of the credential issuer.  
-  - `presentedClaims`: Array of claims (identity attributes) that the user consented to share.  
-  - `issuerNames`: Names associated with the issuer.  
-  - `queryId`: Identifier of the query associated with this credential.
-
-### Failure-Specific Fields
-
-- `attemptedAt`: ISO 8601 timestamp indicating the date of the presentation attempt done by the user.  
-- `reason`: Optional object describing the reason for failure. This field is only present if `result` is `failure`.  
-  - `code`: A standardized error code.  
-  - `details`: A more detailed error message.
-
 ---
 
 ## SessionContext
 
-The SessionContext DataBlock consolidates a comprehensive set of information about the end-user's technical environment. It is populated at the very beginning of a workflow execution, as soon as the end-user opens the link associated to the flow execution in their browser. It is designed to be a single source of truth, aggregating data collected from the client-side (browser or web view) and data observed or derived on the server-side.
+Short description:  
+The SessionContext DataBlock consolidates information about the end-user's technical environment, combining client-side and server-side data.
 
-### Data Collection Flow
+### Attributes (client)
 
-1. Client-Side Collection: When the user's browser loads the URL provided, the front-end application immediately collects all client attributes and sends them to the server as part of its initialization call.  
-2. Server-Side Enrichment: Upon receiving this initial call, the server inspects the incoming request to gather server attributes (IP address, TLS fingerprint, etc.). It then merges the client-provided data with its own server-side data to form the complete SessionContext DataBlock, which is then used for the rest of the workflow execution.
+| Attribute                               | Description                                                                                          | Mandatory          |
+|-----------------------------------------|------------------------------------------------------------------------------------------------------|--------------------|
+| `client.browser.userAgent`             | Full user-agent string reported by the browser.                                                      | Always Present     |
+| `client.browser.language`              | Preferred language of the user (e.g. `"en-US"`).                                                     | Always Present     |
+| `client.browser.cookiesEnabled`        | Indicates whether cookies are enabled.                                                               | Always Present     |
+| `client.browser.vendor`                | Vendor of the browser (e.g. `"Google Inc."`).                                                        | Always Present     |
+| `client.device.type`                   | Device type (`mobile`, `tablet`, `desktop`).                                                         | Always Present     |
+| `client.device.screen.width`           | Screen width in pixels.                                                                              | Always Present     |
+| `client.device.screen.height`          | Screen height in pixels.                                                                             | Always Present     |
+| `client.device.screen.colorDepth`      | Screen color depth.                                                                                  | Always Present     |
+| `client.device.hardwareConcurrency`    | Number of logical processor cores (depends on browser API support).                                  | Optional           |
+| `client.os.platform`                   | OS/platform identifier (e.g. `"Win32"`, `"MacIntel"`).                                               | Always Present (attribute exists, may be empty) |
+| `client.timezone.name`                 | IANA timezone name (e.g. `"Europe/Paris"`).                                                          | Always Present     |
+| `client.timezone.offset`               | Timezone offset from UTC in minutes.                                                                 | Always Present     |
+| `client.network.online`                | Online status of the browser.                                                                        | Always Present     |
+| `client.network.effectiveType`         | Effective connection quality (e.g. `slow-2g`, `2g`, `3g`, `4g`).                                     | Optional           |
+| `client.network.type`                  | Underlying connection technology (e.g. `wifi`, `cellular`, `ethernet`).                              | Optional           |
+| `client.network.downlink`              | Estimated download bandwidth in Mbps.                                                                | Optional           |
+| `client.network.rtt`                   | Estimated round-trip time in ms.                                                                     | Optional           |
 
-### Structure
+### Attributes (server)
+
+| Attribute                                  | Description                                                                                      | Mandatory          |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------|
+| `server.network.ipAddress`                | Client's public IP address.                                                                      | Always Present     |
+| `server.network.geolocation.countryCode`  | ISO country code (e.g. `"FR"`, `"US"`).                                                          | Optional (object optional) |
+| `server.network.geolocation.region`       | Region / state / province.                                                                       | Optional           |
+| `server.network.geolocation.city`         | City.                                                                                            | Optional           |
+| `server.network.asn.number`               | Autonomous System Number.                                                                        | Optional           |
+| `server.network.asn.organization`         | Name of the organization owning the ASN.                                                         | Optional           |
+| `server.network.tlsFingerprint`           | TLS fingerprint (e.g. JA3) of the client's TLS handshake.                                        | Optional           |
+
+### Example payload
 
 ```json
 {
@@ -515,44 +578,44 @@ The SessionContext DataBlock consolidates a comprehensive set of information abo
     "browser": {
       "userAgent": "string",
       "language": "string",
-      "cookiesEnabled": "boolean",
+      "cookiesEnabled": true,
       "vendor": "string"
     },
     "device": {
-      "type": "enum",
+      "type": "desktop",
       "screen": {
-        "width": "number",
-        "height": "number",
-        "colorDepth": "number"
+        "width": 1920,
+        "height": 1080,
+        "colorDepth": 24
       },
-      "hardwareConcurrency": "number"
+      "hardwareConcurrency": 8
     },
     "os": {
-      "platform": "string"
+      "platform": "Win32"
     },
     "timezone": {
-      "name": "string",
-      "offset": "number"
+      "name": "Europe/Paris",
+      "offset": 120
     },
     "network": {
-      "online": "boolean",
-      "effectiveType": "enum",
-      "type": "enum",
-      "downlink": "number",
-      "rtt": "number"
+      "online": true,
+      "effectiveType": "4g",
+      "type": "wifi",
+      "downlink": 10,
+      "rtt": 50
     }
   },
   "server": {
     "network": {
       "ipAddress": "string",
       "geolocation": {
-        "countryCode": "string",
+        "countryCode": "FR",
         "region": "string",
         "city": "string"
       },
       "asn": {
-        "number": "number",
-        "organization": "string"
+        "number": 15169,
+        "organization": "GOOGLE"
       },
       "tlsFingerprint": "string"
     }
@@ -560,55 +623,26 @@ The SessionContext DataBlock consolidates a comprehensive set of information abo
 }
 ```
 
-#### Fields
-
-`client`: An object containing all data collected directly from the end-user's browser or web view.
-
-- `browser`: Information related to the user's browser.  
-  - `userAgent` (string): The full user-agent string reported by the browser.  
-  - `language` (string): The preferred language of the user, as configured in the browser (e.g., "en-US").  
-  - `cookiesEnabled` (boolean): Indicates whether cookies are enabled in the browser.  
-  - `vendor` (string): The vendor of the browser (e.g., "Google Inc.").  
-
-- `device`: Characteristics of the user's device.  
-  - `type` (enum): The type of device, detected via front-end logic. Can be `mobile`, `tablet`, or `desktop`.  
-  - `screen` (object): Details about the device's screen.  
-    - `width` / `height` (number): The screen resolution in pixels.  
-    - `colorDepth` (number): The color depth of the screen.  
-  - `hardwareConcurrency` (number): The number of logical processor cores available to the browser.
-
-- `os`: Information about the underlying operating system.  
-  - `platform` (string): The platform identifier (e.g., "Win32", "MacIntel", "Linux armv8l").
-
-- `timezone`: The user's timezone configuration.  
-  - `name` (string): The IANA timezone name (e.g., "Europe/Paris").  
-  - `offset` (number): The timezone offset from UTC in minutes.
-
-- `network`: Network information as seen by the client, based on the Network Information API.  
-  - `online` (boolean): The online status of the browser.  
-  - `effectiveType` (enum): The effective quality of the connection (e.g., "slow-2g", "2g", "3g", "4g").  
-  - `type` (enum): The underlying connection technology (e.g., "wifi", "cellular", "ethernet").  
-  - `downlink` (number): The estimated download bandwidth in Megabits per second (Mbps).  
-  - `rtt` (number): The estimated round-trip time in milliseconds (ms).
-
-`server`: An object containing data collected or derived by the server during the request.
-
-- `network`: Network information as observed by the server.  
-  - `ipAddress` (string): The client's public IP address that connected to the server.  
-  - `geolocation` (object): Geographic information derived from the IP address.  
-    - `countryCode` (string): The ISO country code (e.g., "FR", "US").  
-    - `region` (string): The state, region, or province.  
-    - `city` (string): The city.  
-  - `asn` (object): Information about the Autonomous System (network) the IP belongs to.  
-    - `number` (number): The Autonomous System Number (e.g., 15169 for Google).  
-    - `organization` (string): The name of the organization that owns the ASN (e.g., "GOOGLE").  
-  - `tlsFingerprint` (string, optional): A fingerprint (e.g., JA3) of the client's TLS handshake, used to identify the underlying client application and detect non-standard or malicious clients.
-
 ---
 
 ## SignedDocumentsPackage
 
-This DataBlock is the successful output of the `ELECTRONIC_SIGNATURE:v1` step.
+Short description:  
+The SignedDocumentsPackage DataBlock is the successful output of the `ELECTRONIC_SIGNATURE:v1` step and contains information about the signature process and signed documents.
+
+### Attributes
+
+| Attribute                          | Description                                                                                         | Mandatory |
+|------------------------------------|-----------------------------------------------------------------------------------------------------|-----------|
+| `signatureProcessId`              | Identifier of the signature process (transaction number).                                           | Yes       |
+| `signedDocuments.mode`           | Delivery mode: `"archive"`, `"items"`, or `"both"`.                                                 | Yes       |
+| `signedDocuments.archiveUrl`     | Direct download URL for the ZIP archive containing signed documents (depending on `mode`).         | Optional  |
+| `signedDocuments.documents`      | Array of signed document objects (depending on `mode`).                                             | Optional  |
+| `signedDocuments.documents[].templateId` | Identifier for the template used for the electronic signature.                                  | Yes (per document, when present) |
+| `signedDocuments.documents[].signedUrl`  | S3 URL to the final signed PDF file.                                                              | Yes (per document, when present) |
+| `createdAt`                       | ISO 8601 timestamp of initial creation.                                                             | Yes       |
+
+### Example payload
 
 ```json
 {
@@ -627,29 +661,23 @@ This DataBlock is the successful output of the `ELECTRONIC_SIGNATURE:v1` step.
 }
 ```
 
-- `signatureProcessId` (string): A unique identifier of the entire signature process. This value is transaction number generated instantSign.  
-- `signedDocuments` (object): A list of objects, each representing a successfully signed document.  
-  - `mode` (string): Defines how the signed documents are delivered. It accepts one of three values:  
-    - `archive`: All documents are bundled in a single archive file. Only `archiveUrl` will be present.  
-    - `items`: Documents are provided as a list of individual files. Only `documents` will be present.  
-    - `both`: Both the archive and the individual files are available. Both `archiveUrl` and `documents` will be present.  
-    - For the development cycle 4, only the `archive` mode will be supported.  
-  - `archiveUrl`: The direct download URL for a single ZIP file containing all the signed documents. This field's presence depends on the `mode`.  
-  - `documents`: An array of objects, where each object represents an individual signed document. This field's presence depends on the `mode`.  
-    - `templateId` (string): The identifier for the template that was used to generate the electronic signature for the provided document.  
-    - `signedUrl` (string): The S3 bucket URL to the final, signed PDF file.  
-- `createdAt`: mandatory â€“ ISO 8601 timestamp of initial creation.
-
 ---
 
 ## UserReference
 
-The UserReference data block carries a reference to a user, that contains the subject identifier provided by the customer.
+Short description:  
+The UserReference data block carries a reference to a user and contains the subject identifier provided by the customer.
+
+### Attributes
+
+| Attribute   | Description                                                                                                 | Mandatory |
+|-------------|-------------------------------------------------------------------------------------------------------------|-----------|
+| `subjectId` | Identifier of the subject provided by the customer (identifier generated by the Trust Platform is provided with the `AuthenticatorCredential`). | Optional  |
+
+### Example payload
 
 ```json
 {
-  "subjectId": "string" // optional
+  "subjectId": "string"
 }
 ```
-
-- `subjectId`: The value is the identifier of the subject provided by the customer. (i.e identifier generated by the Trust Platform is provided with the `AuthenticatorCredential`).

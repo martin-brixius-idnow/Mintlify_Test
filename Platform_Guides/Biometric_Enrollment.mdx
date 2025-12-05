@@ -9,7 +9,7 @@ This Step node manages facial biometric enrollment and supports silent enrollmen
 
 ---
 
-## Configuration Options
+## Configuration
 
 | Parameter   | Type    | Required | Description |
 |------------|---------|----------|-------------|
@@ -25,6 +25,18 @@ Input requirements for this node.
 |----------:|:---------:|-------------|
 | `UserReference` | Optional | Contains the unique subject identifier or the user alias (mail/tel etc). |
 | `BiometricSamples` or `DocumentImages` | Conditional | An image source is required: `BiometricSamples` (priority) or `DocumentImages`. |
+
+---
+
+## Verdicts
+
+Verdicts for this DataBlock.
+
+| Verdict | Description |
+|---------|-------------|
+| `accepted ` | The enrollment was successful.  |
+| `rejected` | The enrollment has failed after all retry attempts. |
+| `already_enrolled` | The user is already enrolled. |
 
 ---
 

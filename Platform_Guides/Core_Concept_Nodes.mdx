@@ -1,13 +1,18 @@
 ---
 title: Nodes
-description: Overview on node types
+description: Overview of node types
 ---
 
 ## Overview
 
-Workflows are modeled as directed graphs of **nodes** connected by transitions. Nodes are classified into four types: **Start nodes** that initiate workflow execution, **Step nodes** that perform processing, **Decision nodes** that implement conditional branching, and **End nodes** that terminate execution with an outcome status.【82-3】【82-4】
+Workflows are modeled as directed graphs of **nodes** connected by transitions. Nodes fall into four types:
 
-Each node has an `id`, a `type` (matching a grammar word), an `options` object for configuration, and an optional `next` array that defines outgoing transitions.【82-4】【102-19】
+- **Start nodes** initiate workflow execution.
+- **Step nodes** perform processing.
+- **Decision nodes** implement conditional branching.
+- **End nodes** terminate execution with an outcome status.
+
+Each node has an `id`, a `type` (matching a grammar word), an `options` object for configuration, and an optional `next` array that defines outgoing transitions.
 
 ---
 
@@ -17,162 +22,22 @@ Use this table as a clickable index. Each link jumps to the detailed section for
 
 | Node | Type | Short description | Link |
 |------|------|-------------------|------|
-| `START` | Start | Entry point of every workflow; unique `START` node that can publish initial DataBlocks.【102-3】 | [Open](#start) |
-| `DOC_ID:v1` (deprecated) | Step | Legacy headless document verification on customer-provided document images using IDCheck.io.【100-0】【102-21】 | [Open](#doc_idv1-deprecated) |
-| `DOC_ID_HEADLESS:v1` | Step | Headless document and identity verification from API-submitted images and optional biometric sample.【100-2】【102-18】 | [Open](#doc_id_headlessv1) |
-| `DOC_ID:v2` | Step | Interactive SDK-based document (and optional biometric) capture plus backend IDCheck.io verification.【100-6】【100-7】 | [Open](#doc_idv2) |
-| `SPHINX:v1.0` | Step | Integration of IDnow’s Sphinx document verification service (AutoIdent / VideoIdent).【100-10】【102-46】 | [Open](#sphinxv10) |
-| `FRANCE_IDENTITE:v1.0` | Step | OIDC-based authentication against the France Identité identity provider, returning verified identity data.【100-13】【100-14】 | [Open](#france_identitev10) |
-| `EUDI_WALLET_VERIFIER:v1.0` | Step | Verification of user data via EUDI Wallet verifiable credential presentations (OID4VP / mdoc).【100-16】【102-40】 | [Open](#eudi_wallet_verifierv10) |
-| `BIOMETRIC_ENROLLMENT:v1` | Step | Facial biometric enrollment via Keyless IDV bridge using images from existing sources.【102-31】【102-28】 | [Open](#biometric_enrollmentv1) |
-| `BIOMETRIC_VERIFICATION:v1` | Step | Biometric face verification with Keyless using an existing user reference.【102-17】 | [Open](#biometric_verificationv1) |
-| `VERIFICATION_METHOD_SELECTOR:v1` | Step | Presents multiple verification methods and routes based on the user’s selection (dynamic ports).【102-35】【102-10】 | [Open](#verification_method_selectorv1) |
-| `DEVICE_SIGNALS:v1` | Step | Integrates device-signals provider (e.g. Fingerprint) to assess device risk and fraud signals.【102-35】 | [Open](#device_signalsv1) |
-| `DIGITAL_SIGNALS:v1` | Step | Uses digital signals (email, phone, IP, etc.) to compute a trust score and qualitative result.【82-19】【102-23】【102-32】 | [Open](#digital_signalsv1) |
-| `ELECTRONIC_SIGNATURE:v1` | Step | Orchestrates an electronic signature process and returns a package of signed documents.【102-12】 | [Open](#electronic_signaturev1) |
-| `BASIC_IDENTITY_COMPARISON:v1` | Step | Compares two `BasicIdentity` DataBlocks and outputs structured comparison results.【102-38】【102-49】 | [Open](#basic_identity_comparisonv1) |
-| `PEP_AND_SANCTIONS:v1` | Step | Runs AML screening against PEP and sanctions lists using `BasicIdentity` data.【102-22】 | [Open](#pep_and_sanctionsv1) |
-| `CHOICE` | Decision | Conditional branching node that evaluates conditions and routes via named ports.【102-26】【102-41】 | [Open](#choice-decision) |
-| `END` | End | Terminates a workflow path and emits an `OutcomeStatus`.【102-30】 | [Open](#end) |
+| `START` | Start | Entry point of every workflow; unique `START` node that can publish initial DataBlocks. | [Open](#start) |
+| `DOC_ID:v1` (deprecated) | Step | Legacy headless document verification on customer-provided images. | [Open](#doc_idv1-deprecated) |
+| `DOC_ID_HEADLESS:v1` | Step | Headless document and identity verification from API-submitted images and optional biometric sample. | [Open](#doc_id_headlessv1) |
+| `DOC_ID:v2` | Step | Interactive SDK-based document capture and backend verification. | [Open](#doc_idv2) |
+| `SPHINX:v1.0` | Step | IDnow Sphinx automated and agent-assisted document verification. | [Open](#sphinxv10) |
+| `FRANCE_IDENTITE:v1.0` | Step | OIDC-based authentication with France Identité. | [Open](#france_identitev10) |
+| `EUDI_WALLET_VERIFIER:v1.0` | Step | Verification using EUDI Wallet credential presentations. | [Open](#eudi_wallet_verifierv10) |
+| `BIOMETRIC_ENROLLMENT:v1` | Step | Facial biometric enrollment via Keyless IDV bridge. | [Open](#biometric_enrollmentv1) |
+| `BIOMETRIC_VERIFICATION:v1` | Step | Biometric face verification via Keyless. | [Open](#biometric_verificationv1) |
+| `VERIFICATION_METHOD_SELECTOR:v1` | Step | Displays multiple verification methods and routes by user selection. | [Open](#verification_method_selectorv1) |
+| `DEVICE_SIGNALS:v1` | Step | Device-signal risk assessment (e.g. automation, emulator detection). | [Open](#device_signalsv1) |
+| `DIGITAL_SIGNALS:v1` | Step | Trust scoring based on digital signals (email, phone, IP). | [Open](#digital_signalsv1) |
+| `ELECTRONIC_SIGNATURE:v1` | Step | Complete electronic signature orchestration. | [Open](#electronic_signaturev1) |
+| `BASIC_IDENTITY_COMPARISON:v1` | Step | Compares two `BasicIdentity` DataBlocks. | [Open](#basic_identity_comparisonv1) |
+| `PEP_AND_SANCTIONS:v1` | Step | AML screening against PEP and sanctions lists. | [Open](#pep_and_sanctionsv1) |
+| `CHOICE` | Decision | Conditional branching node. | [Open](#choice-decision) |
+| `END` | End | Terminates workflow and emits an outcome status. | [Open](#end) |
 
 ---
-
-## Start
-
-### `START`
-
-The **Start** step represents the entry point of every workflow. There must be exactly one `START` node with id `"START"`, it cannot have incoming transitions, and it must have exactly one outgoing transition.【102-3】
-
-It has no required inputs and can optionally declare initial DataBlocks via the `inputs` option so that subsequent steps can consume pre-existing data without needing a producer step.【102-3】
-
----
-
-## Step nodes
-
-### `DOC_ID:v1` (deprecated) {#doc_idv1-deprecated}
-
-This step executes a **headless document verification** process using IDCheck.io, based on document images submitted by the customer via the Trust Platform API, without interacting with the end-user. It has been deprecated and replaced by `DOC_ID_HEADLESS:v1`.【100-0】【102-21】
-
----
-
-### `DOC_ID_HEADLESS:v1` {#doc_id_headlessv1}
-
-`DOC_ID_HEADLESS:v1` performs **document and identity verification in headless mode**, consuming document images (and optionally a biometric sample) provided via the Trust Platform API and delegating analysis, extraction and verification to IDCheck.io according to the configured realm.【100-2】【102-18】【102-39】
-
-It always requires `DocumentImages` as input and may additionally require `BiometricSamples` when biometric processing is enabled in `options`.【100-3】【102-39】
-
----
-
-### `DOC_ID:v2` {#doc_idv2}
-
-`DOC_ID:v2` orchestrates a **full identity verification flow** that starts with an interactive SDK-Web capture session and ends with backend analysis, potentially including manual review by an agent.【100-6】
-
-Its configuration defines the capture phase, including allowed `documentTypes`, optional `biometricSampleTypes`, and who collects biometric consent via `biometricConsentHandling`.【100-6】【100-7】
-
----
-
-### `SPHINX:v1.0` {#sphinxv10}
-
-The `SPHINX:v1.0` node integrates the **Sphinx document verification service**, providing automated (AutoIdent) and agent-assisted (VideoIdent) verification methods to help detect fraud and meet compliance requirements.【100-10】
-
-It can optionally use `inputSources` to pre-fill identity data from `BasicIdentity` and `ExtendedIdentity` DataBlocks produced by previous nodes or the `START` node.【100-10】【100-11】
-
----
-
-### `FRANCE_IDENTITE:v1.0` {#france_identitev10}
-
-`FRANCE_IDENTITE:v1.0` orchestrates a user’s **authentication via the France Identité identity provider** using the OIDC protocol: it redirects the user for authentication and consent, then processes the response to retrieve verified identity attributes.【100-13】【100-14】
-
-The node requires no input DataBlocks or specific configuration options and returns `BasicIdentity`, `ExtendedIdentity` and `AuthenticationResult` on successful authentication.【100-13】【102-45】
-
----
-
-### `EUDI_WALLET_VERIFIER:v1.0` {#eudi_wallet_verifierv10}
-
-This step orchestrates **verification of user data via EUDI Wallet credential presentations**, implementing OID4VP and mdoc flows to request, receive and verify credentials from the user’s European Digital Identity Wallet.【100-16】
-
-It is configured with `requestedCredentials`, each specifying a credential `type`, `format`, and optional `datablocks` mapping to DSL DataBlocks; on success, it produces `PresentationResult` and any DataBlocks referenced in `datablocks`.【100-16】【100-18】【102-40】
-
----
-
-### `BIOMETRIC_ENROLLMENT:v1` {#biometric_enrollmentv1}
-
-`BIOMETRIC_ENROLLMENT:v1` manages **facial biometric enrollment** of a user via the Keyless IDV bridge, enabling silent enrollment from images collected by other sources (not necessarily a Keyless SDK).【102-31】
-
-It creates an `AuthenticatorCredential` on successful enrollment and supports retry behavior through the `maxRetries` option.【102-28】
-
----
-
-### `BIOMETRIC_VERIFICATION:v1` {#biometric_verificationv1}
-
-This step executes a **biometric face verification** process using the Keyless service: it initializes an authentication request, waits for the biometric result signal, and processes the outcome.【102-17】
-
-It consumes a `UserReference` DataBlock (subject identifier) and produces `AuthenticationResult` in both `authenticated` and `failed` scenarios, with a `default` scenario for technical errors.【102-17】
-
----
-
-### `VERIFICATION_METHOD_SELECTOR:v1` {#verification_method_selectorv1}
-
-`VERIFICATION_METHOD_SELECTOR:v1` displays a **selection page of verification methods** configured by the client, then routes the workflow to the node associated with the chosen method using **dynamic ports** whose names match the configured method identifiers.【102-35】【102-10】
-
-It is a pure routing step: it has no static inputs, produces no DataBlocks, and defines a static `default` port as a fallback for errors, abandonment or timeouts.【102-10】【102-35】
-
----
-
-### `DEVICE_SIGNALS:v1` {#device_signalsv1}
-
-This node integrates a **device signals service** (such as Fingerprint) to assess device risk and detect fraud indicators like automation, environment manipulation or emulator usage.【102-35】
-
-Configuration options define thresholds (e.g. `suspiciousUserThreshold`, `notTrustedUserThreshold`) used to classify results into scenarios such as `trusted`, `suspicious`, `not_trusted` and `inconclusive`.【102-35】【102-32】
-
----
-
-### `DIGITAL_SIGNALS:v1` {#digital_signalsv1}
-
-`DIGITAL_SIGNALS:v1` calls a **digital signals provider** to compute a trust assessment based on signals such as IP, email and phone, producing a `DigitalSignals` DataBlock with score, reasons and raw provider response.【82-19】【102-23】【102-32】
-
-It has no mandatory static inputs and uses configuration options (including thresholds and optional `inputSources`) to interpret the provider’s result into scenarios `trusted`, `suspicious`, `not_trusted`, `inconclusive` and a `default` fallback.【102-23】【102-32】【102-36】
-
----
-
-### `ELECTRONIC_SIGNATURE:v1` {#electronic_signaturev1}
-
-This step orchestrates a **complete electronic signature process** by wrapping a signature provider API (e.g. InstantSign): it validates inputs (including document expiry for QES), builds provider API calls, manages the end-user session and outputs a `SignedDocumentsPackage`.【102-12】
-
-Its configuration centers on `signingConfiguration`, including `signatureLevel` (such as QES or AES), which must match what is enabled and configured at the provider.【102-12】
-
----
-
-### `BASIC_IDENTITY_COMPARISON:v1` {#basic_identity_comparisonv1}
-
-`BASIC_IDENTITY_COMPARISON:v1` compares **two `BasicIdentity` DataBlocks** and produces a `ComparisonResults` DataBlock describing attribute-level matches, mismatches and missing data.【102-38】
-
-Options specify which attributes to compare and the comparison `mode` (`strict` or `tolerant`), while outputs use two ports: `match` when all specified attributes match and `failure` otherwise.【102-38】【102-49】
-
----
-
-### `PEP_AND_SANCTIONS:v1` {#pep_and_sanctionsv1}
-
-This step executes an **AML screening** of an identity against PEP and sanctions lists using `BasicIdentity` data (last name, first name, date of birth).【102-22】
-
-It has a single `default` scenario that always produces `PepAndSanctionsResults`, making its output deterministic.【102-22】
-
----
-
-## Decision node
-
-### `CHOICE` {#choice-decision}
-
-The **Decision** node (`CHOICE`) represents a conditional branching point: it evaluates configured conditions over DataBlock fields and routes execution to different ports such as `success` or `failure`.【102-26】【102-41】
-
-Its `options.choices` array defines condition sets and their `then` ports, and a mandatory `default` port is used when no choice matches, ensuring that every evaluation has a valid outcome.【102-26】【102-20】
-
----
-
-## End node
-
-### `END` {#end}
-
-The **End** step terminates a workflow execution path and emits an `OutcomeStatus` via its `default` output scenario, but it has no outgoing transitions.【102-30】
-
-Its `options.outcome` (or `outcomeStatus` in examples) classifies the termination (for example `accepted` or `rejected`), and validation enforces that `END` nodes have no `next` transitions.【102-30】

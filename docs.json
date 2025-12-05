@@ -93,10 +93,10 @@
                 "pages": [
                   "Platform_Guides/Document_Verification_Sphinx",
                   "Platform_Guides/Document_Verification_IDcheck"
+                  "Platform_Guides/Document_Verification_Headless"
                 ]
               },
               "Platform_Guides/Identity_Comparison",
-              "Platform_Guides/Data_Verification",
               "Platform_Guides/EUDI_Wallet",
               "Platform_Guides/eIDs"
             ]

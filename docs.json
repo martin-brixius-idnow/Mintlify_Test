@@ -100,11 +100,13 @@
                   "Platform_Guides/Document_Verification_Headless"
                 ]
               },
-              "Platform_Guides/Identity_Comparison",
-              "Platform_Guides/EUDI_Wallet",
-              "Platform_Guides/eIDs"
-            ]
-          },
+
+           {
+                "group": "eID",
+                "pages": [
+                  "Platform_Guides/eID_France_Identité"
+                ]
+              },
           {
             "group": "Electronic Signatures",
             "pages": [

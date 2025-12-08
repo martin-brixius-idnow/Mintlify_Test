@@ -85,53 +85,53 @@
           }
         ]
       },
-      {
-        "tab": "Platform",
-        "icon": "cube",
-        "groups": [
-          {
-            "group": "Core Concept",
-            "pages": [
-              "Platform_Guides/Core_Concept_Overview",
-              "Platform_Guides/Core_Concept_Use-DataBlocks"
-            ]
-          },
-          {
-            "group": "Document Verification",
-            "pages": [
-              "Platform_Guides/Document_Verification_Sphinx",
-              "Platform_Guides/Document_Verification_IDcheck",
-              "Platform_Guides/Document_Verification_Headless"
-            ]
-          },
-          {
-            "group": "eID",
-            "pages": ["Platform_Guides/eID_France_Identité"]
-          },
-          {
-            "group": "Electronic Signatures",
-            "pages": ["Platform_Guides/Electronic_Signature"]
-          },
-          {
-            "group": "Trust & Risk Assessment",
-            "pages": [
-              "Platform_Guides/Device_Intelligence",
-              "Platform_Guides/Email_Phone_Verification"
-            ]
-          },
-          {
-            "group": "Screening",
-            "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "Platform_Guides/Biometric_Enrollment",
-              "Platform_Guides/Biometric_Verification"
-            ]
-          }
-        ]
-      },
+{
+  "tab": "Platform",
+  "icon": "cube",
+  "groups": [
+    {
+      "group": "Core Concept",
+      "pages": [
+        "Platform_Guides/Core_Concept_Workflow_Basics",
+        "Platform_Guides/Core_Concept_DataBlocks"
+      ]
+    },
+    {
+      "group": "Document Verification",
+      "pages": [
+        "Platform_Guides/Document_Verification_Sphinx",
+        "Platform_Guides/Document_Verification_IDcheck",
+        "Platform_Guides/Document_Verification_Headless"
+      ]
+    },
+    {
+      "group": "Biometric Authentication",
+      "pages": [
+        "Platform_Guides/Biometric_Enrollment",
+        "Platform_Guides/Biometric_Verification"
+      ]
+    },
+    {
+      "group": "eID",
+      "pages": ["Platform_Guides/eID_France_Identité"]
+    },
+    {
+      "group": "Electronic Signatures",
+      "pages": ["Platform_Guides/Electronic_Signature"]
+    },
+    {
+      "group": "Trust & Risk Assessment",
+      "pages": [
+        "Platform_Guides/Device_Intelligence",
+        "Platform_Guides/Email_Phone_Verification"
+      ]
+    },
+    {
+      "group": "Screening",
+      "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
+    }
+  ]
+},
       {
         "tab": "Integration",
         "icon": "server",

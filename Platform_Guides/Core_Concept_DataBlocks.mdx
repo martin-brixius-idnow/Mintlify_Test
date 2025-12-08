@@ -17,10 +17,9 @@ The system ensures data flow consistency by:
 
 ## AuthenticationResult
 
-Short description:  
 The AuthenticationResult DataBlock contains the result of a biometric authentication process and uses a discriminated union based on the `result` field to represent either a successful or failed authentication.
 
-### Attributes
+***Attributes***
 
 | Attribute              | Description                                                                                          | Mandatory |
 |------------------------|------------------------------------------------------------------------------------------------------|-----------|
@@ -35,30 +34,14 @@ The AuthenticationResult DataBlock contains the result of a biometric authentica
 | `reason.code`          | Standardized error code identifying the type of failure (failure variant).                          | Yes (failure) |
 | `reason.details`       | Detailed error message (failure variant).                                                           | Optional (failure) |
 
-### Example payloads
-
-Successful authentication:
-
-```json
-{
-  "result": "success",
-  "provider": "string",
-  "credentialId": "string",
-  "credentialType": "string",
-  "subjectId": "string",
-  "requestId": "string",
-  "authenticatedAt": "string"
-}
-```
 
 ---
 
 ## AuthenticatorCredential
 
-Short description:  
 The AuthenticatorCredential DataBlock represents a concrete authentication credential that has been issued, enrolled or created and is associated with a subject.
 
-### Attributes
+***Attributes***
 
 | Attribute        | Description                                                                                                           | Mandatory |
 |------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
@@ -70,28 +53,13 @@ The AuthenticatorCredential DataBlock represents a concrete authentication crede
 | `createdAt`      | ISO 8601 timestamp of initial creation.                                                                              | Yes       |
 | `updatedAt`      | ISO 8601 timestamp of last modification (equals `createdAt` if never updated).                                      | Yes       |
 
-### Example payload
-
-```json
-{
-  "credentialId": "string",
-  "credentialType": "string",
-  "subjectId": "string",
-  "provider": "string",
-  "status": "string",
-  "createdAt": "string",
-  "updatedAt": "string"
-}
-```
-
 ---
 
 ## BasicIdentity
 
-Short description:  
 The `basicIdentity` data block contains fundamental identity information extracted from documents.
 
-### Attributes
+***Attributes***
 
 | Attribute     | Description         | Mandatory |
 |---------------|---------------------|-----------|
@@ -100,62 +68,31 @@ The `basicIdentity` data block contains fundamental identity information extract
 | `givenName`   | Given name.         | No        |
 | `birthDate`   | Birth date.         | No        |
 
-### Example payload
-
-```json
-{
-  "familyName": "string",
-  "name": "string",
-  "givenName": "string",
-  "birthDate": "string"
-}
-```
-
 ---
 
 ## BiometricSamples
 
-Short description:  
 The BiometricSamples data block contains references to biometric data captured from the end-user and is used as input or output of biometric processes.
 
-### Attributes
+***Attributes***
 
 | Attribute  | Description                                                                                                             | Mandatory |
 |-----------|-------------------------------------------------------------------------------------------------------------------------|-----------|
 | `faceUrl` | S3 bucket URL pointing to the captured face image (selfie).                                                             | Yes       |
 | `consent` | Indicates user consent for biometric processing; usage depends on context (headless vs SDK-driven nodes).              | Optional  |
 
-### Example payload
-
-```json
-{
-  "faceUrl": "string",
-  "consent": true
-}
-```
-
 ---
 
 ## Check
 
-Short description:  
 The Check JSON Object represents an individual verification check performed on a document or identity.
 
-### Attributes
+***Attributes***
 
 | Attribute | Description                        | Mandatory |
 |-----------|------------------------------------|-----------|
 | `id`      | Identifier of the check.           | Yes       |
 | `status`  | Status of the check (`valid` / `invalid`). | Yes |
-
-### Example payload
-
-```json
-{
-  "id": "string",
-  "status": "string"
-}
-```
 
 ---
 
@@ -164,7 +101,7 @@ The Check JSON Object represents an individual verification check performed on a
 Short description:  
 The ComparisonResults DataBlock contains the output of a comparison between two sets of data, including verdict and attribute-level details.
 
-### Attributes
+***Attributes***
 
 | Attribute              | Description                                                                                       | Mandatory |
 |------------------------|---------------------------------------------------------------------------------------------------|-----------|
@@ -175,27 +112,13 @@ The ComparisonResults DataBlock contains the output of a comparison between two 
 | `mismatchedAttributes` | List of attributes that failed to match (empty if verdict is `match` or `inconclusive`).         | Yes       |
 | `missingAttributes`    | List of attributes that could not be compared because data was missing.                          | Yes       |
 
-### Example payload
-
-```json
-{
-  "verdict": "match",
-  "leftOperand": "nodeA",
-  "rightOperand": "nodeB",
-  "attributesCompared": ["string"],
-  "mismatchedAttributes": ["string"],
-  "missingAttributes": ["string"]
-}
-```
-
 ---
 
 ## DeviceSignals
 
-Short description:  
 The DeviceSignals DataBlock encapsulates information about the end-user's device, browser, and network environment for risk assessment and fraud detection.
 
-### Attributes
+***Attributes***
 
 | Attribute                     | Description                                                                                                             | Mandatory |
 |------------------------------|-------------------------------------------------------------------------------------------------------------------------|-----------|
@@ -212,39 +135,13 @@ The DeviceSignals DataBlock encapsulates information about the end-user's device
 | `reasons[].details`         | Human-readable explanation of the reason.                                                                               | Mandatory (per reason) |
 | `signals`                    | Complete, raw JSON response received from the provider.                                                                | Yes       |
 
-### Example payload
-
-```json
-{
-  "userReference": "string",
-  "provider": "string",
-  "timestamp": "string",
-  "services": ["ip", "emails", "phone"],
-  "inputSources": {
-    "basicIdentity": "string",
-    "extendedIdentity": "string",
-    "deviceSignals": "string"
-  },
-  "result": "trusted",
-  "score": 71.6,
-  "reasons": [
-    {
-      "code": "string",
-      "details": "string"
-    }
-  ],
-  "signals": {}
-}
-```
-
 ---
 
 ## DocumentData
 
-Short description:  
 The DocumentData data block contains information about processed documents.
 
-### Attributes
+***Attributes***
 
 | Attribute          | Description                     | Mandatory |
 |--------------------|---------------------------------|-----------|
@@ -255,41 +152,18 @@ The DocumentData data block contains information about processed documents.
 | `issuingAuthority` | Issuing authority.              | Optional  |
 | `issuingCountry`   | Issuing country.                | Optional  |
 
-### Example payload
-
-```json
-{
-  "documentType": "string",
-  "documentNumber": "string",
-  "expiryDate": "string",
-  "issuanceDate": "string",
-  "issuingAuthority": "string",
-  "issuingCountry": "string"
-}
-```
-
 ---
 
 ## DocumentImages
-
-Short description:  
+ 
 The DocumentImages data block contains references to image files stored in S3 buckets.
 
-### Attributes
+***Attributes***
 
 | Attribute      | Description                                                  | Mandatory |
 |----------------|--------------------------------------------------------------|-----------|
 | `frontSideUrl` | S3 bucket URL pointing to the front side image file.         | Optional  |
 | `backSideUrl`  | S3 bucket URL pointing to the back side image file.          | Optional  |
-
-### Example payload
-
-```json
-{
-  "frontSideUrl": "string",
-  "backSideUrl": "string"
-}
-```
 
 ---
 
@@ -298,7 +172,7 @@ The DocumentImages data block contains references to image files stored in S3 bu
 Short description:  
 The DocumentsToSign DataBlock references the documents uploaded by the customer that the end-user needs to sign, and the corresponding template id.
 
-### Attributes
+***Attributes***
 
 | Attribute                 | Description                                                                                      | Mandatory |
 |---------------------------|--------------------------------------------------------------------------------------------------|-----------|
@@ -306,50 +180,26 @@ The DocumentsToSign DataBlock references the documents uploaded by the customer 
 | `documents[].templateId`  | Identifier linking the runtime document to a document template / definition.                    | Yes       |
 | `documents[].sourceUrl`   | URL (e.g. S3) pointing to the actual source file to be signed.                                  | Yes       |
 
-### Example payload
-
-```json
-{
-  "documents": [
-    {
-      "templateId": "string",
-      "sourceUrl": "string"
-    }
-  ]
-}
-```
-
 ---
 
 ## DocumentVerification
 
-Short description:  
 The DocumentVerification data block contains the results of document verification processes; only error checks are returned in `failedChecks`.
 
-### Attributes
+***Attributes***
 
 | Attribute      | Description                                      | Mandatory |
 |----------------|--------------------------------------------------|-----------|
 | `verdict`      | Overall verdict (`success` or `failure`).        | Yes       |
 | `failedChecks` | Array of Check JSON Object (can be empty).       | Yes       |
 
-### Example payload
-
-```json
-{
-  "verdict": "success",
-  "failedChecks": []
-}
-```
-
 ---
 
 ## ExtendedIdentity
 
-Short description:  
 The ExtendedIdentity data block contains additional identity information beyond basic fields.
 
-### Attributes
+***Attributes***
 
 | Attribute                     | Description                                                                                                           | Mandatory |
 |-------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
@@ -364,31 +214,13 @@ The ExtendedIdentity data block contains additional identity information beyond 
 | `phoneNumber`                 | Phone number.                                                                                                        | Optional  |
 | `sex`                         | Sex (renamed from gender).                                                                                          | Optional  |
 
-### Example payload
-
-```json
-{
-  "portraitUrl": "string",
-  "nationality": "string",
-  "personalAdministrativeNumber": "string",
-  "birthPlace": "string",
-  "address": "string",
-  "familyNameBirth": "string",
-  "givenNameBirth": "string",
-  "email": "string",
-  "phoneNumber": "string",
-  "sex": "string"
-}
-```
-
 ---
 
 ## DigitalSignals
 
-Short description:  
 The DigitalSignals datablock is the structured output generated by the `DIGITAL_SIGNALS:v1` node and acts as a detailed receipt of the trust assessment based on email, phone and IP.
 
-### Attributes
+***Attributes***
 
 | Attribute                     | Description                                                                                                           | Mandatory |
 |-------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
@@ -404,61 +236,26 @@ The DigitalSignals datablock is the structured output generated by the `DIGITAL_
 | `reasons[].details`           | Human-readable description explaining the reason code and its impact.                                               | Mandatory (per reason) |
 | `signals`                     | Complete, raw JSON response received from the provider.                                                              | Yes       |
 
-### Example payload
-
-```json
-{
-  "provider": "string",
-  "timestamp": "string",
-  "services": ["ip", "emails", "phone", "name"],
-  "inputSources": {
-    "basicIdentity": "string",
-    "extendedIdentity": "string",
-    "deviceSignals": "string"
-  },
-  "result": "trusted",
-  "score": 71.6,
-  "reasons": [
-    {
-      "code": "string",
-      "details": "string"
-    }
-  ],
-  "signals": {}
-}
-```
-
 ---
 
 ## PepAndSanctionsResults
 
-Short description:  
 The PepAndSanctionsResults data block contains results from PEP and sanctions screening services.
 
-### Attributes
+***Attributes***
 
 | Attribute      | Description                    | Mandatory |
 |----------------|--------------------------------|-----------|
 | `isPEP`        | Indicates if subject is a PEP. | Yes       |
 | `isSanctioned` | Indicates if subject is sanctioned. | Yes   |
 
-### Example payload
-
-```json
-{
-  "isPEP": true,
-  "isSanctioned": false
-}
-```
-
 ---
 
 ## PresentationResult
 
-Short description:  
 The PresentationResult DataBlock encapsulates the complete outcome of an EUDI Wallet credential presentation session, including metadata, presented credentials and error information in case of failure.
 
-### Attributes (common)
+***Attributes (common)***
 
 | Attribute    | Description                                                        | Mandatory |
 |--------------|--------------------------------------------------------------------|-----------|
@@ -466,7 +263,7 @@ The PresentationResult DataBlock encapsulates the complete outcome of an EUDI Wa
 | `result`     | Discriminator (`"success"` or `"failure"`).                        | Yes       |
 | `createdAt`  | ISO 8601 timestamp of the presentation request creation.           | Yes       |
 
-### Attributes (success variant)
+***Attributes (success variant)***
 
 | Attribute                       | Description                                                         | Mandatory |
 |---------------------------------|---------------------------------------------------------------------|-----------|
@@ -479,7 +276,7 @@ The PresentationResult DataBlock encapsulates the complete outcome of an EUDI Wa
 | `presentedCredentials[].issuerNames` | Names associated with the issuer.                             | Optional  |
 | `presentedCredentials[].queryId`    | Identifier of the query associated with this credential.       | Optional  |
 
-### Attributes (failure variant)
+***Attributes (failure variant)***
 
 | Attribute          | Description                                              | Mandatory |
 |--------------------|----------------------------------------------------------|-----------|
@@ -487,41 +284,13 @@ The PresentationResult DataBlock encapsulates the complete outcome of an EUDI Wa
 | `reason.code`      | Standardized error code.                                | Yes       |
 | `reason.details`   | Detailed error message.                                 | Optional  |
 
-### Example payloads
-
-Successful presentation:
-
-```json
-{
-  "sessionId": "string",
-  "result": "success",
-  "createdAt": "string",
-  "presentedAt": "string",
-  "presentedCredentials": [
-    {
-      "type": "string",
-      "issuer": "string",
-      "presentedClaims": [
-        {
-          "claimName": "string",
-          "claimValue": "any"
-        }
-      ],
-      "issuerNames": ["string"],
-      "queryId": "string"
-    }
-  ]
-}
-```
-
 ---
 
 ## SessionContext
 
-Short description:  
 The SessionContext DataBlock consolidates information about the end-user's technical environment, combining client-side and server-side data.
 
-### Attributes (client)
+***Attributes (client)***
 
 | Attribute                               | Description                                                                                          | Mandatory          |
 |-----------------------------------------|------------------------------------------------------------------------------------------------------|--------------------|
@@ -543,7 +312,7 @@ The SessionContext DataBlock consolidates information about the end-user's techn
 | `client.network.downlink`              | Estimated download bandwidth in Mbps.                                                                | Optional           |
 | `client.network.rtt`                   | Estimated round-trip time in ms.                                                                     | Optional           |
 
-### Attributes (server)
+***Attributes (server)***
 
 | Attribute                                  | Description                                                                                      | Mandatory          |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------|
@@ -555,67 +324,13 @@ The SessionContext DataBlock consolidates information about the end-user's techn
 | `server.network.asn.organization`         | Name of the organization owning the ASN.                                                         | Optional           |
 | `server.network.tlsFingerprint`           | TLS fingerprint (e.g. JA3) of the client's TLS handshake.                                        | Optional           |
 
-### Example payload
-
-```json
-{
-  "client": {
-    "browser": {
-      "userAgent": "string",
-      "language": "string",
-      "cookiesEnabled": true,
-      "vendor": "string"
-    },
-    "device": {
-      "type": "desktop",
-      "screen": {
-        "width": 1920,
-        "height": 1080,
-        "colorDepth": 24
-      },
-      "hardwareConcurrency": 8
-    },
-    "os": {
-      "platform": "Win32"
-    },
-    "timezone": {
-      "name": "Europe/Paris",
-      "offset": 120
-    },
-    "network": {
-      "online": true,
-      "effectiveType": "4g",
-      "type": "wifi",
-      "downlink": 10,
-      "rtt": 50
-    }
-  },
-  "server": {
-    "network": {
-      "ipAddress": "string",
-      "geolocation": {
-        "countryCode": "FR",
-        "region": "string",
-        "city": "string"
-      },
-      "asn": {
-        "number": 15169,
-        "organization": "GOOGLE"
-      },
-      "tlsFingerprint": "string"
-    }
-  }
-}
-```
-
 ---
 
 ## SignedDocumentsPackage
 
-Short description:  
 The SignedDocumentsPackage DataBlock is the successful output of the `ELECTRONIC_SIGNATURE:v1` step and contains information about the signature process and signed documents.
 
-### Attributes
+***Attributes***
 
 | Attribute                          | Description                                                                                         | Mandatory |
 |------------------------------------|-----------------------------------------------------------------------------------------------------|-----------|
@@ -627,42 +342,15 @@ The SignedDocumentsPackage DataBlock is the successful output of the `ELECTRONIC
 | `signedDocuments.documents[].signedUrl`  | S3 URL to the final signed PDF file.                                                              | Yes (per document, when present) |
 | `createdAt`                       | ISO 8601 timestamp of initial creation.                                                             | Yes       |
 
-### Example payload
-
-```json
-{
-  "signatureProcessId": "string",
-  "signedDocuments": {
-    "mode": "archive",
-    "archiveUrl": "string",
-    "documents": [
-      {
-        "templateId": "string",
-        "signedUrl": "string"
-      }
-    ]
-  },
-  "createdAt": "string"
-}
-```
 
 ---
 
 ## UserReference
 
-Short description:  
 The UserReference data block carries a reference to a user and contains the subject identifier provided by the customer.
 
-### Attributes
+***Attributes***
 
 | Attribute   | Description                                                                                                 | Mandatory |
 |-------------|-------------------------------------------------------------------------------------------------------------|-----------|
 | `subjectId` | Identifier of the subject provided by the customer (identifier generated by the Trust Platform is provided with the `AuthenticatorCredential`). | Optional  |
-
-### Example payload
-
-```json
-{
-  "subjectId": "string"
-}
-```

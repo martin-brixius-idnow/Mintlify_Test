@@ -145,7 +145,7 @@
             "pages": ["Integration/Authenticate"]
           },
           {
-            "group": "Integrate Flows",
+            "group": "Execute Flows",
             "pages": [
               "Integration/Get_Flows",
               "Integration/Execute_Flows",
@@ -155,15 +155,13 @@
           {
             "group": "Receive Results",
             "pages": [
-              "Integration/Get_Datablocks",
-              "Integration/Get_Audit_Trial"
+              "Integration/Get_Datablocks"
             ]
           },
           {
-            "group": "Frontend",
+            "group": "Navigate Player",
             "pages": [
-              "Integration/frontend_embedded",
-              "Integration/frontend_redirect"
+              "Integration/Player_Embedd-or-Redirect"
             ]
           }
         ]

@@ -157,7 +157,6 @@ https://player-trustplatform-staging.idnow.io/player/?sessionToken=abc123def456
 
 ## Step 4. Choose Integration Method
 
-
 ### Redirect Integration
 
 This is the simplest and most reliable integration method where the user is directed to the IDnow-hosted Player.
@@ -169,30 +168,32 @@ This is the simplest and most reliable integration method where the user is dire
 3. User completes verification
 4. Monitor completion via webhooks or polling
 
-```code-tabs
----
-labels: ["Web Browser", "iOS", "Android"]
----
 
-```javascript
+**Web Browser**:
+```code-tabs
 // Web Browser
 window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
 ```
 
-```swift
-// iOS
+**Mobile App (iOS)**
+
+```code-tabs
+// swift
 let playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=\(flowExecutionId)"
 if let url = URL(string: playerURL) {
     UIApplication.shared.open(url)
 }
 ```
 
-```java
-// Android
+**Mobile App (Android)**:
+
+```code-tabs
+// java
 String playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(playerURL));
 startActivity(intent);
 ```
+
 ```
 
 **Advantages**:

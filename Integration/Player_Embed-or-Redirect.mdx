@@ -66,7 +66,7 @@ The API returns a session token that you'll use to direct users to the Player.
 
 Once you receive the session token from the API response, construct the Player URL by appending it as a query parameter. Direct your user to this URL to begin the verification process.
 
-### Implementation Examples
+### Examples
 
 **Node.js Implementation**:
 
@@ -125,7 +125,7 @@ String sessionToken = extractSessionToken(response.body());
 String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
-### URL Structure and Parameters
+### URL Structure
 
 The Player is hosted by IDnow at:
 

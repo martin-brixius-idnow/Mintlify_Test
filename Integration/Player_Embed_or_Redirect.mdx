@@ -31,11 +31,10 @@ Before integrating with the Player, you need to set up your flow:
 
 ## Step 1. Create Flow Session
 
-Call the Session API to initiate a flow execution. 
+Call the Session API to initiate a flow execution.
 
-<Info>
-For complete API documentation, request examples, and implementation details, see [Create Session](/Integration/Create_Session).
-</Info>
+> [!info]
+> For complete API documentation, request examples, and implementation details, see [Create Session](/Integration/Create_Session).
 
 ---
 
@@ -70,9 +69,12 @@ Once you receive the session token from the API response, construct the Player U
 
 **Implementation Examples**:
 
-<CodeGroup>
+```code-tabs
+---
+labels: ["Node.js", "Python", "Java"]
+---
 
-```javascript Node.js
+```javascript
 const axios = require('axios');
 const FormData = require('form-data');
 
@@ -102,14 +104,14 @@ const sessionToken = response.data.sessionToken;
 const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=${sessionToken}`;
 ```
 
-```python Python
+```python
 import requests
 
 url = f"/flows/{flow_id}/{environment}/executions"
 headers = {"Authorization": f"Bearer {access_token}"}
 
 data = {
-    'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
+  'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
 }
 
 # Optional: Add binary files
@@ -122,10 +124,10 @@ session_token = result['sessionToken']
 player_url = f"https://player-trustplatform.idnow.io/player/?session_token={session_token}"
 ```
 
-```java Java
+```java
 HttpClient client = HttpClient.newHttpClient();
 
-String requestBody = "BasicIdentity={\"name\":\"John Doe\",\"familyName\":\"Doe\",\"givenName\":\"John\",\"birthDate\":\"1990-01-15\"}";
+String requestBody = "BasicIdentity={"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}";
 
 HttpRequest request = HttpRequest.newBuilder()
     .uri(URI.create("/flows/" + flowId + "/" + environment + "/executions"))
@@ -139,8 +141,7 @@ HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.o
 String sessionToken = extractSessionToken(response.body());
 String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
-
-</CodeGroup>
+```
 
 ### URL Structure and Parameters
 
@@ -189,16 +190,19 @@ This is the simplest and most reliable integration method where the user is dire
 
 **Platform Examples**:
 
-<CodeGroup>
+```code-tabs
+---
+labels: ["Web Browser", "iOS", "Android"]
+---
 
-```html Web Browser
+```html
 <!-- After API call to create flow execution -->
 <script>
   window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
 </script>
 ```
 
-```swift iOS
+```swift
 // After API call to create flow execution
 let playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=\(flowExecutionId)"
 if let url = URL(string: playerURL) {
@@ -206,14 +210,13 @@ if let url = URL(string: playerURL) {
 }
 ```
 
-```java Android
+```java
 // After API call to create flow execution
 String playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(playerURL));
 startActivity(intent);
 ```
-
-</CodeGroup>
+```
 
 **Advantages**:
 

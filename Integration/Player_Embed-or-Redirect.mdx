@@ -33,7 +33,9 @@ Before integrating with the Player, you need to set up your flow:
 
 Call the Session API to initiate a flow execution.
 
-> [!info] For complete API documentation, request examples, and implementation details, see Create Session.
+[!info]
+For complete API documentation, request examples, and implementation details, see **Create Session**.
+
 
 ---
 
@@ -53,10 +55,10 @@ The API returns a session token that you'll use to direct users to the Player.
 
 | Field | Description |
 |-------|-------------|
-| **customerId** | Your customer identifier |
-| **flowId** | The flow template used |
-| **flowExecutionId** | The specific session identifier |
-| **exp** | Token expiration timestamp |
+| `customerId` | Your customer identifier |
+| `flowId` | The flow template used |
+| `sessionId` | The specific session identifier |
+| `expiry` | Token expiration timestamp |
 
 ---
 
@@ -109,7 +111,6 @@ player_url = f"https://player-trustplatform.idnow.io/player/?session_token={sess
 
 **Java Implementation**:
 
-
 ```code-tabs
 HttpClient client = HttpClient.newHttpClient();
 String requestBody = "BasicIdentity={\"name\":\"John Doe\",\"familyName\":\"Doe\",\"givenName\":\"John\",\"birthDate\":\"1990-01-15\"}";
@@ -136,16 +137,17 @@ https://player-trustplatform.idnow.io/player/?sessionToken=[id]
 
 | Parameter | Required | Example | Purpose |
 |-----------|----------|---------|---------|
-| sessionToken | Yes | abc123def456 | Unique identifier for the user's verification session |
+| `sessionToken` | Yes | abc123def456 | Unique identifier for the user's verification session |
 
 
 **Example URLs**
 
+`Starting verification`
 ```
 https://player-trustplatform.idnow.io/player/?sessionToken=abc123def456
 ```
 
-Different environments may use different subdomains:
+`Different environments` may use different subdomains
 
 ```
 https://player-trustplatform-staging.idnow.io/player/?sessionToken=abc123def456

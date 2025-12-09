@@ -163,7 +163,7 @@
           {
             "group": "Navigate Player",
             "pages": [
-              "Integration/Player_Embedd-or-Redirect"
+              "Integration/Player_Embed-or-Redirect"
             ]
           }
         ]

@@ -31,7 +31,7 @@ Before integrating with the Player, you need to set up your flow:
 
 ## Step 1. Create Flow Session
 
-Call the Session API to initiate a flow execution.
+Call the Session API to initiate a flow session.
 
 [!info]
 For complete API documentation, request examples, and implementation details, see **Create Session**.
@@ -45,9 +45,9 @@ The API returns a session token that you'll use to direct users to the Player.
 
 ```json
 {
-  "flowExecutionId": "abc123def456ghi789",
-  "status": "CREATED",
+  "sessionId": "abc123def456ghi789",
   "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "status": "Created",
 }
 ```
 
@@ -55,10 +55,8 @@ The API returns a session token that you'll use to direct users to the Player.
 
 | Field | Description |
 |-------|-------------|
-| `customerId` | Your customer identifier |
-| `flowId` | The flow template used |
 | `sessionId` | The specific session identifier |
-| `expiry` | Token expiration timestamp |
+| `applicationId` | The specific application identifier |
 
 ---
 
@@ -82,7 +80,7 @@ form.append('BasicIdentity', JSON.stringify({
 }));
 // Optional: Add document images
 // form.append('DocumentImages', documentBuffer, 'document.jpg');
-const response = await axios.post(`/flows/${flowId}/${environment}/executions`, form, {
+const response = await axios.post(`/flows/${flowId}/${environment}/sessions`, form, {
   headers: {
     'Authorization': `Bearer ${accessToken}`,
     ...form.getHeaders()
@@ -96,7 +94,7 @@ const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=$
 
 ```code-tabs
 import requests
-url = f"/flows/{flow_id}/{environment}/executions"
+url = f"/flows/{flow_id}/{environment}/sessions"
 headers = {"Authorization": f"Bearer {access_token}"}
 data = {
     'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
@@ -115,7 +113,7 @@ player_url = f"https://player-trustplatform.idnow.io/player/?session_token={sess
 HttpClient client = HttpClient.newHttpClient();
 String requestBody = "BasicIdentity={\"name\":\"John Doe\",\"familyName\":\"Doe\",\"givenName\":\"John\",\"birthDate\":\"1990-01-15\"}";
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("/flows/" + flowId + "/" + environment + "/executions"))
+    .uri(URI.create("/flows/" + flowId + "/" + environment + "/sessions"))
     .header("Authorization", "Bearer " + accessToken)
     .header("Content-Type", "application/x-www-form-urlencoded")
     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
@@ -135,9 +133,10 @@ https://player-trustplatform.idnow.io/player/?sessionToken=[id]
 
 **Required Parameters**
 
-| Parameter | Required | Example | Purpose |
-|-----------|----------|---------|---------|
-| `sessionToken` | Yes | abc123def456 | Unique identifier for the user's verification session |
+| Field | Description |
+|-------|-------------|
+| `sessionId` | The specific session identifier |
+| `applicationId` | The specific application identifier |
 
 
 **Example URLs**
@@ -163,7 +162,7 @@ This is the simplest and most reliable integration method where the user is dire
 
 **Process**:
 
-1. Create flow execution via API call
+1. Create flow session via API call
 2. Redirect user to Player URL
 3. User completes verification
 4. Monitor completion via webhooks or polling
@@ -172,14 +171,14 @@ This is the simplest and most reliable integration method where the user is dire
 **Web Browser**:
 ```code-tabs
 // Web Browser
-window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
+window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + sessionId;
 ```
 
 **Mobile App (iOS)**
 
 ```code-tabs
 // swift
-let playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=\(flowExecutionId)"
+let playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=\(sessionId)"
 if let url = URL(string: playerURL) {
     UIApplication.shared.open(url)
 }
@@ -189,7 +188,7 @@ if let url = URL(string: playerURL) {
 
 ```code-tabs
 // java
-String playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
+String playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=" + sessionId;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(playerURL));
 startActivity(intent);
 ```
@@ -217,8 +216,8 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 
 **Implementation Steps**:
 
-1. Create flow execution via API call
-2. Embed Player in iframe using returned flow execution ID
+1. Create flow session via API call
+2. Embed Player in iframe using returned flow sessionId
 3. Handle completion via callback URL or postMessage events
 
 
@@ -226,10 +225,10 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 
 ```code-tabs
 ///html
-<!-- After creating flow execution via API -->
+<!-- After creating flow session via API -->
 <iframe
   id="idnow-player"
-  src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_EXECUTION_ID"
+  src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_SESSION_ID"
   style="width: 100%; height: 600px; border: none;"
   allow="camera; microphone; geolocation; fullscreen"
   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -244,7 +243,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 <div id="verification-container" style="width: 100%; height: 600px;">
   <iframe
     id="idnow-player"
-    src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_EXECUTION_ID"
+    src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_SESSION_ID"
     style="width: 100%; height: 100%; border: none;"
     allow="camera; microphone; geolocation; fullscreen"
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"

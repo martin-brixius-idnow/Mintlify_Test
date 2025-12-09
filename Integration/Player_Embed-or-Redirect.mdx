@@ -18,7 +18,7 @@ Before integrating with the Player, you need to set up your flow:
 | Integration Method | Description |
 |--------------------|-------------|
 | **Redirect Integration** (Recommended) | Redirect users to the IDnow-hosted Player URL for a full-screen verification experience with guaranteed camera/microphone access. |
-| **Iframe Integration** | Embed the Player within your web application using an iframe to keep users on your domain while maintaining your UI context. |
+| **Embedded Integration** | Embed the Player within your web application using an iframe to keep users on your domain while maintaining your UI context. |
 
 ### Integration Steps
 
@@ -64,7 +64,7 @@ The API returns a session token that you'll use to direct users to the Player.
 
 Once you receive the session token from the API response, construct the Player URL by appending it as a query parameter. Direct your user to this URL to begin the verification process.
 
-### Examples
+***Examples***
 
 **Node.js Implementation**:
 
@@ -123,7 +123,7 @@ String sessionToken = extractSessionToken(response.body());
 String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
-### URL Structure
+***URL Structure***
 
 The Player is hosted by IDnow at:
 
@@ -210,7 +210,7 @@ startActivity(intent);
 
 ---
 
-### Iframe Integration
+### Embedded Integration
 
 Embed the IDnow-hosted Player within your web application for a seamless in-app experience.
 

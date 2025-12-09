@@ -66,78 +66,74 @@ Once you receive the session token from the API response, construct the Player U
 
 ### Implementation Examples
 
+**Node.js Implementation**:
+
 ```code-tabs
 ---
-labels: ["Node.js", "Python", "Java"]
+labels: ["Node.js"]
 ---
-
 ```javascript
 const axios = require('axios');
 const FormData = require('form-data');
-
 const form = new FormData();
 form.append('BasicIdentity', JSON.stringify({
-  name: 'John Doe',
-  familyName: 'Doe',
-  givenName: 'John',
-  birthDate: '1990-01-15'
+  name: 'John Doe',
+  familyName: 'Doe',
+  givenName: 'John',
+  birthDate: '1990-01-15'
 }));
-
 // Optional: Add document images
 // form.append('DocumentImages', documentBuffer, 'document.jpg');
-
-const response = await axios.post(
-  `/flows/${flowId}/${environment}/executions`, 
-  form, 
-  {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      ...form.getHeaders()
-    }
-  }
-);
-
+const response = await axios.post(`/flows/${flowId}/${environment}/executions`, form, {
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    ...form.getHeaders()
+  }
+});
 const sessionToken = response.data.sessionToken;
-const playerUrl = `https://player-trustplatform.idnow.io/player/?sessionToken=${sessionToken}`;
+const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=${sessionToken}`;
 ```
 
+**Python Implementation**:
+
+```code-tabs
+---
+labels: ["Python"]
+---
 ```python
 import requests
-
 url = f"/flows/{flow_id}/{environment}/executions"
 headers = {"Authorization": f"Bearer {access_token}"}
-
 data = {
-  'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
+    'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
 }
-
 # Optional: Add binary files
 # files = {'DocumentImages': open('document.jpg', 'rb')}
-
 response = requests.post(url, headers=headers, data=data)
 result = response.json()
-
 session_token = result['sessionToken']
-player_url = f"https://player-trustplatform.idnow.io/player/?sessionToken={session_token}"
+player_url = f"https://player-trustplatform.idnow.io/player/?session_token={session_token}"
 ```
 
+**Java Implementation**:
+
+
+```code-tabs
+---
+labels: ["Java"]
+---
 ```java
 HttpClient client = HttpClient.newHttpClient();
-
-String requestBody = "BasicIdentity={"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}";
-
+String requestBody = "BasicIdentity={\"name\":\"John Doe\",\"familyName\":\"Doe\",\"givenName\":\"John\",\"birthDate\":\"1990-01-15\"}";
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("/flows/" + flowId + "/" + environment + "/executions"))
-    .header("Authorization", "Bearer " + accessToken)
-    .header("Content-Type", "application/x-www-form-urlencoded")
-    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-    .build();
-
+    .uri(URI.create("/flows/" + flowId + "/" + environment + "/executions"))
+    .header("Authorization", "Bearer " + accessToken)
+    .header("Content-Type", "application/x-www-form-urlencoded")
+    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+    .build();
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
 String sessionToken = extractSessionToken(response.body());
-String playerUrl = "https://player-trustplatform.idnow.io/player/?sessionToken=" + sessionToken;
-```
+String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
 ### URL Structure and Parameters
@@ -153,6 +149,7 @@ https://player-trustplatform.idnow.io/player/?sessionToken=[id]
 | Parameter | Required | Example | Purpose |
 |-----------|----------|---------|---------|
 | sessionToken | Yes | abc123def456 | Unique identifier for the user's verification session |
+
 
 **Example URLs**
 

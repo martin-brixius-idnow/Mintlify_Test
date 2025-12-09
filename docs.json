@@ -145,11 +145,13 @@
             "pages": ["Integration/Authenticate"]
           },
           {
-            "group": "Execute Flows",
+            "group": "Create Session",
             "pages": [
               "Integration/Get_Flows",
-              "Integration/Execute_Flows",
-              "Integration/Get_Flow_Status"
+              "Integration/Create_Session",
+              "Integration/Get_Results"
+              "Integration/Get_Datablocks"
+              "Integration/Get_Files"
             ]
           },
           {

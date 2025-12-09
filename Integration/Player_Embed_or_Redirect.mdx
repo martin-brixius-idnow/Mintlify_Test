@@ -40,19 +40,17 @@ Call the Session API to initiate a flow execution.
 
 ## Step 2. Obtain the Session Token
 
-**Response Structure**:
-
 The API returns a session token that you'll use to direct users to the Player.
 
 ```json
 {
   "flowExecutionId": "abc123def456ghi789",
   "status": "CREATED",
-  "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." 
+  "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
-**Session Token (JWT) Contains**:
+**Session Token (JWT) Contains:**
 
 | Field | Description |
 |-------|-------------|
@@ -67,7 +65,7 @@ The API returns a session token that you'll use to direct users to the Player.
 
 Once you receive the session token from the API response, construct the Player URL by appending it as a query parameter. Direct your user to this URL to begin the verification process.
 
-**Implementation Examples**:
+### Implementation Examples
 
 ```code-tabs
 ---
@@ -101,7 +99,7 @@ const response = await axios.post(
 );
 
 const sessionToken = response.data.sessionToken;
-const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=${sessionToken}`;
+const playerUrl = `https://player-trustplatform.idnow.io/player/?sessionToken=${sessionToken}`;
 ```
 
 ```python
@@ -121,7 +119,7 @@ response = requests.post(url, headers=headers, data=data)
 result = response.json()
 
 session_token = result['sessionToken']
-player_url = f"https://player-trustplatform.idnow.io/player/?session_token={session_token}"
+player_url = f"https://player-trustplatform.idnow.io/player/?sessionToken={session_token}"
 ```
 
 ```java
@@ -139,13 +137,11 @@ HttpRequest request = HttpRequest.newBuilder()
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 String sessionToken = extractSessionToken(response.body());
-String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
+String playerUrl = "https://player-trustplatform.idnow.io/player/?sessionToken=" + sessionToken;
 ```
 ```
 
 ### URL Structure and Parameters
-
-**Player Entry Point**
 
 The Player is hosted by IDnow at:
 
@@ -160,8 +156,6 @@ https://player-trustplatform.idnow.io/player/?sessionToken=[id]
 | sessionToken | Yes | abc123def456 | Unique identifier for the user's verification session |
 
 **Example URLs**
-
-Starting verification:
 
 ```
 https://player-trustplatform.idnow.io/player/?sessionToken=abc123def456
@@ -188,22 +182,18 @@ This is the simplest and most reliable integration method where the user is dire
 3. User completes verification
 4. Monitor completion via webhooks or polling
 
-**Platform Examples**:
-
 ```code-tabs
 ---
 labels: ["Web Browser", "iOS", "Android"]
 ---
 
-```html
-<!-- After API call to create flow execution -->
-<script>
-  window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
-</script>
+```javascript
+// Web Browser
+window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
 ```
 
 ```swift
-// After API call to create flow execution
+// iOS
 let playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=\(flowExecutionId)"
 if let url = URL(string: playerURL) {
     UIApplication.shared.open(url)
@@ -211,7 +201,7 @@ if let url = URL(string: playerURL) {
 ```
 
 ```java
-// After API call to create flow execution
+// Android
 String playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=" + flowExecutionId;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(playerURL));
 startActivity(intent);
@@ -256,20 +246,9 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 />
 ```
 
-**Advanced iframe with Event Handling**:
+**Advanced iframe with Event Handling** (display as code, not rendered):
 
-```html
-<div id="verification-container" style="width: 100%; height: 600px;">
-  <iframe
-    id="idnow-player"
-    src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_EXECUTION_ID"
-    style="width: 100%; height: 100%; border: none;"
-    allow="camera; microphone; geolocation; fullscreen"
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-  />
-</div>
-
-<script>
+```javascript
 // Listen for verification completion (if supported)
 window.addEventListener('message', function(event) {
   if (event.origin === 'https://player-trustplatform.idnow.io') {
@@ -282,7 +261,6 @@ window.addEventListener('message', function(event) {
     }
   }
 });
-</script>
 ```
 
 **Responsive iframe Setup**:

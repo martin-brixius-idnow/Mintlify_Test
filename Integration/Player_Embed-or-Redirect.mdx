@@ -69,10 +69,6 @@ Once you receive the session token from the API response, construct the Player U
 **Node.js Implementation**:
 
 ```code-tabs
----
-labels: ["Node.js"]
----
-```python
 const axios = require('axios');
 const FormData = require('form-data');
 const form = new FormData();
@@ -97,10 +93,6 @@ const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=$
 **Python Implementation**:
 
 ```code-tabs
----
-labels: ["Python"]
----
-```python
 import requests
 url = f"/flows/{flow_id}/{environment}/executions"
 headers = {"Authorization": f"Bearer {access_token}"}
@@ -119,10 +111,6 @@ player_url = f"https://player-trustplatform.idnow.io/player/?session_token={sess
 
 
 ```code-tabs
----
-labels: ["Java"]
----
-```java
 HttpClient client = HttpClient.newHttpClient();
 String requestBody = "BasicIdentity={\"name\":\"John Doe\",\"familyName\":\"Doe\",\"givenName\":\"John\",\"birthDate\":\"1990-01-15\"}";
 HttpRequest request = HttpRequest.newBuilder()

@@ -149,8 +149,8 @@
             "pages": [
               "Integration/Get_Flows",
               "Integration/Create_Session",
-              "Integration/Get_Results"
-              "Integration/Get_Datablocks"
+              "Integration/Get_Results",
+              "Integration/Get_Datablocks",
               "Integration/Get_Files"
             ]
           },

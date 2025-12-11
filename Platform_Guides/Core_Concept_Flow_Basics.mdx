@@ -25,8 +25,8 @@ Every flow must contain exactly one **Start node** as its entry point and at lea
 
 Between Start and End, you can add any combination of **operative nodes** (processing steps) to perform operations, transform data and control the routing of the flow.
 
-![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-introduction.png)
-*A minimal flow with Start, a single processing node, and an End node*
+![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
+*End nodes represent the final outcome of a flow*
 
 ---
 
@@ -41,14 +41,11 @@ Each node execution results in exactly one **verdict**, which in turn determines
 - which **DataBlocks** are produced or updated, and  
 - how the flow continues via **ports** to either another node or an End node.
 
-![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
-*End nodes represent the final outcome of a flow*
-
 ---
 
 ## Verdicts
 
-Each node can produce one or more **verdicts**, which describe what happened during a flow execution. For an IDV node, defined verdicts are
+Each node can produce one or more **verdicts**, which describe the ***result*** of a node operation. As an example, for an Identity Verification (IDV) node, defined verdicts are
 
 - `verified`
 - `fraud`

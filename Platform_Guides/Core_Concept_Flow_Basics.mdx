@@ -5,23 +5,28 @@ description: Flows, Nodes, Verdicts and DataBlocks.
 
 This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
 
-- **Flow**: Workflow from Start to End that defines the nodes and a final outcome (e.g., “accepted”, “rejected”).
-- **Nodes**: Individual steps that read inputs, write DataBlocks and produce verdicts.
-- **Verdicts**: The result of a node that determines outputs and routing through ports (e.g., “verified”, “fraud”).
-- **DataBlocks**: Typed payloads that carry data between nodes and into the final outcome.
-- **Ports**: Named exits that map a verdict to the next node or an End node.
+- **Flow**: A workflow that runs from start to end and defines the operational steps leading to a final outcome.
+- **Start & End Node**: The flow ends in an End Node that determines whether the outcome is accepted or rejected.
+- **Nodes**: A node performs an operational step that reads inputs, writes DataBlocks, and produces a verdict.
+- **Verdicts**: A verdict defines the node’s result and determines the output DataBlocks and the next routing step (e.g., "verified", "fraud").
+- **DataBlocks**: Typed payloads that act as inputs or outputs of a node depending on its verdict.
+- **Ports**: Named exits that route the flow to the next node or an End Node.
 
 ---
 
+
 ## Flows
 
-At IDnow, a **flow** defines how input data moves through a series of steps until a final output is produced. 
+At IDnow, a **flow** defines how input data moves through a series of steps until a final outcome is produced.
 
-Every flow must contain exactly one **Start node** as its entry point and at least one **End node** representing a final outcome. Between Start and End, you can add any combination of processing steps to build your desired automation.
+### Start and and End Node
+
+Every flow must contain exactly one **Start node** as its entry point and at least one **End node** representing a final outcome. Each execution of a flow always ends in an End node, and therefore always results in a final outcome of either `accepted` or `rejected`.
+
+Between Start and End, you can add any combination of **operative nodes** (processing steps) to perform operations, transform data and control the routing of the flow.
 
 ![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-introduction.png)
 *A minimal flow with Start, a single processing node, and an End node*
-
 
 ---
 
@@ -29,12 +34,12 @@ Every flow must contain exactly one **Start node** as its entry point and at lea
 
 **Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature.
 
-Flows conclude at explicit End nodes that represent a final `outcome`. End outcomes are:
+Between the Start and End nodes, other **operative nodes** perform operations and transform data or control workflow branching through **verdicts**.
 
-- **accepted:** The flow meets your success criteria
-- **rejected:** The flow failed this criteria
+Each node execution results in exactly one **verdict**, which in turn determines:
 
-Other nodes perform operations and transform data or control workflow branching through **verdicts**. 
+- which **DataBlocks** are produced or updated, and  
+- how the flow continues via **ports** to either another node or an End node.
 
 ![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
 *End nodes represent the final outcome of a flow*

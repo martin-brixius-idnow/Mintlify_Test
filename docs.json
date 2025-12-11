@@ -49,14 +49,15 @@
             "pages": [
               "Getting_Started/Test_Account",
               "Getting_Started/Access_Management"
-
             ]
           },
-         {
+          {
             "group": "Customization",
             "pages": [
               "Platform_Guides/Branding"
             ]
+          }
+        ]
       },
       {
         "tab": "Solution Templates",
@@ -78,54 +79,54 @@
           }
         ]
       },
-{
-  "tab": "Platform",
-  "icon": "cube",
-  "groups": [
-    {
-      "group": "Core Concept",
-      "pages": [
-        "Platform_Guides/Core_Concept_Flow_Basics",
-        "Platform_Guides/Core_Concept_DataBlocks"
-      ]
-    },
-    {
-      "group": "Document-based IDV",
-      "pages": [
-        "Platform_Guides/Document_Verification_Sphinx",
-        "Platform_Guides/Document_Verification_IDcheck",
-        "Platform_Guides/Document_Verification_Headless",
-        "Platform_Guides/Identity_Comparison"
-      ]
-    },
-    {
-      "group": "Biometric Authentication",
-      "pages": [
-        "Platform_Guides/Biometric_Enrollment",
-        "Platform_Guides/Biometric_Verification"
-      ]
-    },
-    {
-      "group": "eID",
-      "pages": ["Platform_Guides/eID_France_Identité"]
-    },
-    {
-      "group": "Electronic Signatures",
-      "pages": ["Platform_Guides/Electronic_Signature"]
-    },
-    {
-      "group": "Fraud Signals",
-      "pages": [
-        "Platform_Guides/Device_Intelligence",
-        "Platform_Guides/Email_Phone_Verification"
-      ]
-    },
-    {
-      "group": "Screening",
-      "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
-    }
-  ]
-},
+      {
+        "tab": "Platform",
+        "icon": "cube",
+        "groups": [
+          {
+            "group": "Core Concept",
+            "pages": [
+              "Platform_Guides/Core_Concept_Flow_Basics",
+              "Platform_Guides/Core_Concept_DataBlocks"
+            ]
+          },
+          {
+            "group": "Document-based IDV",
+            "pages": [
+              "Platform_Guides/Document_Verification_Sphinx",
+              "Platform_Guides/Document_Verification_IDcheck",
+              "Platform_Guides/Document_Verification_Headless",
+              "Platform_Guides/Identity_Comparison"
+            ]
+          },
+          {
+            "group": "Biometric Authentication",
+            "pages": [
+              "Platform_Guides/Biometric_Enrollment",
+              "Platform_Guides/Biometric_Verification"
+            ]
+          },
+          {
+            "group": "eID",
+            "pages": ["Platform_Guides/eID_France_Identité"]
+          },
+          {
+            "group": "Electronic Signatures",
+            "pages": ["Platform_Guides/Electronic_Signature"]
+          },
+          {
+            "group": "Fraud Signals",
+            "pages": [
+              "Platform_Guides/Device_Intelligence",
+              "Platform_Guides/Email_Phone_Verification"
+            ]
+          },
+          {
+            "group": "Screening",
+            "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
+          }
+        ]
+      },
       {
         "tab": "Integration",
         "icon": "server",
@@ -142,23 +143,27 @@
             "group": "Create Session",
             "pages": [
               "Integration/Get_Flows",
-              "Integration/Create_Session",
-              "Integration/Get_Results",
-              "Integration/Get_Datablocks",
-              "Integration/Get_Files"
+              "Integration/Create_Session"
             ]
           },
           {
             "group": "Receive Results",
             "pages": [
-              "Integration/Get_Datablocks"
-            ]
+              "Integration/Get_Results",
+              "Integration/Get_Datablocks",
+              "Integration/Get_Files"
+            ]              
           },
           {
-            "group": "Navigate Player",
+            "group": "Receive Notifications",
             "pages": [
-              "Integration/Player_Embed-or-Redirect"
-            ]
+              "Development_Resources/Webhooks_Events"
+            ]              
+          },
+          
+          {
+            "group": "Navigate Player",
+            "pages": ["Integration/Player_Embed-or-Redirect"]
           }
         ]
       },
@@ -178,8 +183,7 @@
             "group": "Webhooks",
             "pages": [
               "Development_Resources/Webhooks_Manage",
-              "Development_Resources/Webhooks_Secure",
-              "Development_Resources/Webhooks_Events"
+              "Development_Resources/Webhooks_Secure"
             ]
           },
           {

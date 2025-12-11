@@ -97,7 +97,7 @@
       ]
     },
     {
-      "group": "Document Verification",
+      "group": "Document-based IDV",
       "pages": [
         "Platform_Guides/Document_Verification_Sphinx",
         "Platform_Guides/Document_Verification_IDcheck",

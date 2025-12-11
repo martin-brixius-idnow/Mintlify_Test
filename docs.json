@@ -94,11 +94,12 @@
       "pages": [
         "Platform_Guides/Document_Verification_Sphinx",
         "Platform_Guides/Document_Verification_IDcheck",
-        "Platform_Guides/Document_Verification_Headless"
+        "Platform_Guides/Document_Verification_Headless",
+        "Platform_Guides/Identity_Comparison"
       ]
     },
     {
-      "group": "Biometric Verification",
+      "group": "Biometric Authentication",
       "pages": [
         "Platform_Guides/Biometric_Enrollment",
         "Platform_Guides/Biometric_Verification"

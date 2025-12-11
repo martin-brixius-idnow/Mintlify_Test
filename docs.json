@@ -140,7 +140,7 @@
             "pages": ["Integration/Authenticate"]
           },
           {
-            "group": "Create Session",
+            "group": "Create Sessions",
             "pages": [
               "Integration/Get_Flows",
               "Integration/Create_Session"
@@ -155,7 +155,7 @@
             ]              
           },
           {
-            "group": "Receive Notifications",
+            "group": "Handle Notifications",
             "pages": [
               "Development_Resources/Webhooks_Events"
             ]              

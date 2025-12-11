@@ -57,13 +57,6 @@
             "pages": [
               "Platform_Guides/Branding"
             ]
-          },
-          
-          {
-            "group": "Compliance & Security",
-            "pages": ["Getting_Started/PII"]
-          }
-        ]
       },
       {
         "tab": "Solution Templates",
@@ -105,7 +98,7 @@
       ]
     },
     {
-      "group": "Biometric Authentication",
+      "group": "Biometric Verification",
       "pages": [
         "Platform_Guides/Biometric_Enrollment",
         "Platform_Guides/Biometric_Verification"
@@ -120,7 +113,7 @@
       "pages": ["Platform_Guides/Electronic_Signature"]
     },
     {
-      "group": "Trust & Risk Assessment",
+      "group": "Fraud Signals",
       "pages": [
         "Platform_Guides/Device_Intelligence",
         "Platform_Guides/Email_Phone_Verification"

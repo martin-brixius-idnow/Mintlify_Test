@@ -1,0 +1,103 @@
+---
+title: "Get Session Results"
+description: "Retrieve the status and results of a verification session"
+---
+
+## Overview
+
+Retrieve detailed information about a specific session, including its current status, decision outcome, and execution history. The response follows data minimization principles by default, returning only essential metadata.
+
+## Endpoint
+
+```http
+GET /session/{sessionId}
+```
+
+### Path parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `sessionId` | string | Yes | The unique identifier of the session |
+
+## Request
+
+```json
+{
+  "flowId": "string",
+  "environment": "string",
+  "sessionId": "123"
+}
+```
+
+### Request parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `flowId` | string | Yes | Flow identifier |
+| `environment` | string | Yes | Environment where the session exists |
+| `sessionId` | string | Yes | Session identifier |
+
+## Response
+
+```json
+{
+  "flowId": "wf_1a2b3c4d5e6f",
+  "flowVersion": "string",
+  "environment": "string",
+  "subjectId": "REF-2024-001",
+  "sessionId": "123",
+  "sessionStatus": "in progress",
+  "createdAt": "2024-11-04T10:30:00Z",
+  "startedAt": null,
+  "updatedAt": "2024-11-04T10:35:00Z",
+  "completedAt": "2024-11-04T10:35:00Z",
+  "expiresAt": "2024-11-04T10:35:00Z",
+  "decisionOutcome": "accepted",
+  "lastStep": {
+    "stepName": "end_approved",
+    "stepType": "END",
+    "verdict": "completed"
+  }
+}
+```
+
+### Response parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `flowId` | string | Flow identifier |
+| `flowVersion` | string | Version of the flow executed |
+| `environment` | string | Environment identifier |
+| `subjectId` | string | Reference ID for the subject |
+| `sessionId` | string | Unique session identifier |
+| `sessionStatus` | string | Current status (e.g., `created`, `in progress`, `completed`) |
+| `createdAt` | string | ISO 8601 timestamp when session was created |
+| `startedAt` | string | ISO 8601 timestamp when processing started (null if not started) |
+| `updatedAt` | string | ISO 8601 timestamp of last update |
+| `completedAt` | string | ISO 8601 timestamp when session completed |
+| `expiresAt` | string | ISO 8601 timestamp when session expires |
+| `decisionOutcome` | string | Final decision (e.g., `accepted`, `rejected`) |
+| `lastStep` | object | Information about the last executed step |
+| `lastStep.stepName` | string | Name of the step |
+| `lastStep.stepType` | string | Type of step (e.g., `END`, `CHECK`) |
+| `lastStep.verdict` | string | Step verdict (e.g., `completed`, `failed`) |
+
+## Example
+
+```bash
+curl https://api.idnow.io/v1/session/123 \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "flowId": "wf_1a2b3c4d5e6f",
+    "environment": "production",
+    "sessionId": "123"
+  }'
+```
+
+## Notes
+
+- Response implements data minimization by default for GDPR compliance
+- If the session status is not `accepted`, the `lastStep` object provides debugging context
+- Datablock references are separated to allow granular access control
+- All timestamps follow ISO 8601 format

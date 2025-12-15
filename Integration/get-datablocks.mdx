@@ -1,0 +1,111 @@
+---
+title: "Get Datablocks"
+description: "Retrieve input and output data blocks for a session"
+---
+
+## Overview
+
+Retrieve all data blocks associated with a specific session. Data blocks contain the input data provided when creating the session and output data generated during flow execution. This endpoint supports both input and output data block retrieval with pagination.
+
+## Endpoint
+
+```http
+GET /session/{sessionId}/datablocks
+```
+
+### Path parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `sessionId` | string | Yes | The unique identifier of the session |
+
+## Request
+
+Query parameters control pagination and sorting:
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `flowId` | string | Yes | Flow identifier |
+| `environment` | string | Yes | Environment identifier |
+| `sessionId` | string | Yes | Session identifier |
+| `page` | number | No | Page number for pagination |
+| `size` | number | No | Number of items per page |
+| `sortBy` | string | Yes | Field to sort by |
+| `sortDesc` | boolean | Yes | Sort in descending order if true |
+
+## Response
+
+```json
+{
+  "dataBlocks": [
+    {
+      "type": "BasicIdentity",
+      "createdByStep": "doc_idv",
+      "createdAt": "2025-10-24T12:30:00Z",
+      "name": "Schmidt",
+      "familyName": "Schmidt",
+      "givenName": "Max",
+      "birthDate": "1985-08-22"
+    },
+    {
+      "type": "Credentials",
+      "createdByStep": "doc_idv",
+      "createdAt": "2025-10-24T12:30:00Z",
+      "credentialType": "io.idnow.idcheckio.<document code>",
+      "issuanceDate": "2025-12-07",
+      "expiryDate": "2035-12-07",
+      "issuer": {}
+    }
+  ]
+}
+```
+
+### Response parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `dataBlocks` | array | Array of data block objects |
+
+### Data block fields
+
+All data blocks include:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | Type of data block (e.g., `BasicIdentity`, `Credentials`) |
+| `createdByStep` | string | Step that created this data block |
+| `createdAt` | string | ISO 8601 timestamp when data block was created |
+
+#### BasicIdentity data block
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Full name |
+| `familyName` | string | Last name / surname |
+| `givenName` | string | First name / given name |
+| `birthDate` | string | Date of birth in `YYYY-MM-DD` format |
+
+#### Credentials data block
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `credentialType` | string | Type of credential |
+| `issuanceDate` | string | Date when credential was issued |
+| `expiryDate` | string | Date when credential expires |
+| `issuer` | object | Issuing authority information |
+
+## Example
+
+```bash
+curl https://api.idnow.io/v1/session/123/datablocks?flowId=wf_1a2b3c4d5e6f&environment=production&sessionId=123&sortBy=createdAt&sortDesc=false \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+## Notes
+
+- Data blocks are sorted by `createdAt` timestamp by default
+- Both input data blocks (provided at session creation) and output data blocks (generated during execution) are returned
+- Data blocks are linked to the steps that created them via the `createdByStep` field
+- All access attempts are logged for auditability and compliance
+- Objects are mapped to ensure backward compatibility

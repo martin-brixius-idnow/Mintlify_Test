@@ -1,0 +1,127 @@
+---
+title: "Create Session"
+description: "Initiate a new verification session for a specific flow"
+---
+
+## Overview
+
+Create a new session to start a verification flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
+
+## Endpoint
+
+```http
+POST /flows/{flowId}/sessions
+```
+
+### Path parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `flowId` | string | Yes | The unique identifier of the flow to execute |
+
+## Request
+
+```json
+{
+  "flowId": "string",
+  "environment": "string",
+  "input": [
+    {
+      "type": "BasicIdentity",
+      "name": "Max Schmidt",
+      "familyName": "Schmidt",
+      "givenName": "Max",
+      "birthDate": "1985-08-22"
+    },
+    {
+      "type": "DocumentImages",
+      "documentType": "ID",
+      "frontSide": "byte array",
+      "backSide": "byte array"
+    }
+  ]
+}
+```
+
+### Request parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `flowId` | string | Yes | Flow identifier to execute |
+| `environment` | string | Yes | Target environment (e.g., `production`, `sandbox`) |
+| `input` | array | Yes | Array of input data blocks |
+
+### Input data blocks
+
+#### BasicIdentity
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | Must be `BasicIdentity` |
+| `name` | string | No | Full name |
+| `familyName` | string | No | Last name / surname |
+| `givenName` | string | No | First name / given name |
+| `birthDate` | string | No | Date of birth in `YYYY-MM-DD` format |
+
+#### DocumentImages
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | Must be `DocumentImages` |
+| `documentType` | string | Yes | One of: `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` |
+| `frontSide` | byte array | Yes | Front side image of the document |
+| `backSide` | byte array | No | Back side image of the document |
+
+## Response
+
+```json
+{
+  "flowId": "string",
+  "flowVersion": "string",
+  "environment": "string",
+  "sessionContext": {
+    "sessionId": "123",
+    "sessionStatus": "created",
+    "createdAt": "2024-11-04T10:30:00Z"
+  }
+}
+```
+
+### Response parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `flowId` | string | Flow identifier |
+| `flowVersion` | string | Version of the flow being executed |
+| `environment` | string | Environment where the session was created |
+| `sessionContext` | object | Session metadata |
+| `sessionContext.sessionId` | string | Unique session identifier |
+| `sessionContext.sessionStatus` | string | Initial status: `created` |
+| `sessionContext.createdAt` | string | ISO 8601 timestamp of session creation |
+
+## Example
+
+```bash
+curl https://api.idnow.io/v1/flows/wf_1a2b3c4d5e6f/sessions \
+  -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "flowId": "wf_1a2b3c4d5e6f",
+    "environment": "production",
+    "input": [
+      {
+        "type": "BasicIdentity",
+        "familyName": "Schmidt",
+        "givenName": "Max",
+        "birthDate": "1985-08-22"
+      }
+    ]
+  }'
+```
+
+## Notes
+
+- Session status is set to `created` immediately upon successful creation
+- Input object format is analogous to the Datablock endpoint structure
+- Supports both interactive (customer-involved) and non-interactive (headless) flows

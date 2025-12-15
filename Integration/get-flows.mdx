@@ -1,0 +1,64 @@
+---
+title: "Get Flows"
+description: "Retrieve a list of available flows configured for your environment"
+---
+
+## Overview
+
+Use this endpoint to retrieve all flows available in your environment. The response provides essential metadata for each flow while maintaining GDPR compliance and performance optimization.
+
+## Endpoint
+
+```http
+GET /flows
+```
+
+## Request
+
+No request body is required for this endpoint.
+
+### Headers
+
+| Header | Type | Required | Description |
+|--------|------|----------|-------------|
+| `Authorization` | string | Yes | Bearer token for authentication |
+| `Content-Type` | string | Yes | Must be `application/json` |
+
+## Response
+
+Returns an array of flow objects with minimal metadata.
+
+```json
+{
+  "content": [
+    {
+      "flowID": "string",
+      "flowName": "string",
+      "flowDescription": "string"
+    }
+  ]
+}
+```
+
+### Response parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `content` | array | Array of flow objects |
+| `flowID` | string | Unique identifier for the flow |
+| `flowName` | string | Display name of the flow |
+| `flowDescription` | string | Description of the flow's purpose |
+
+## Example
+
+```bash
+curl https://api.idnow.io/v1/flows \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+## Notes
+
+- Response contains minimal metadata for GDPR compliance and performance optimization
+- Attribute names may be adjusted in future versions for consistency
+- All flows configured for your environment are returned in a single response

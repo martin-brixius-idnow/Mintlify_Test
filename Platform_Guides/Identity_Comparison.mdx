@@ -14,14 +14,14 @@ Ensures the identity information collected from different steps or documents ref
 - **Configurable Attributes**: Allows selection of specific attributes to compare
 - **Dual Comparison Modes**: Supports both strict and tolerant comparison modes
 - **ComparisonResults Output**: Produces ComparisonResults DataBlock with detailed verdict and traceability
-- **Transition Requirement**: Workflow must define transitions for both `match` and `failure` ports to handle all possible outcomes
+- **Transition Requirement**: flow must define transitions for both `match` and `failure` ports to handle all possible outcomes
 
 ## Configuration
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| leftOperand | string | Yes | Node ID that produced the first BasicIdentity DataBlock |
-| rightOperand | string | Yes | Node ID that produced the second BasicIdentity DataBlock |
+| leftOperand | string | Yes | step ID that produced the first BasicIdentity DataBlock |
+| rightOperand | string | Yes | step ID that produced the second BasicIdentity DataBlock |
 | attributes | array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
 | mode | enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
 
@@ -32,7 +32,7 @@ Ensures the identity information collected from different steps or documents ref
 
 **Input DataBlock Referencing:**
 
-The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) of the preceding nodes that produced the BasicIdentity DataBlocks to be compared. The values must correspond to existing node IDs in the workflow. The values of `leftOperand` and `rightOperand` must be different to ensure comparison between two distinct data sources.
+The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) of the preceding steps that produced the BasicIdentity DataBlocks to be compared. The values must correspond to existing step IDs in the flow. The values of `leftOperand` and `rightOperand` must be different to ensure comparison between two distinct data sources.
 
 ## Comparison Logic
 
@@ -44,14 +44,14 @@ The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) 
 
 ## Input Data
 
-Input requirements for this node.
+Input requirements for this step.
 
 | DataBlock Type | Required | Description |
 |----------------|----------|-------------|
-| BasicIdentity | Yes | First BasicIdentity DataBlock (from leftOperand node) |
-| BasicIdentity | Yes | Second BasicIdentity DataBlock (from rightOperand node) |
+| BasicIdentity | Yes | First BasicIdentity DataBlock (from leftOperand step) |
+| BasicIdentity | Yes | Second BasicIdentity DataBlock (from rightOperand step) |
 
-**Important:** This node requires exactly two BasicIdentity DataBlocks as input. The workflow validation system ensures that the nodes referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a BasicIdentity DataBlock.
+**Important:** This step requires exactly two BasicIdentity DataBlocks as input. The flow validation system ensures that the steps referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a BasicIdentity DataBlock.
 
 ## Output Data
 

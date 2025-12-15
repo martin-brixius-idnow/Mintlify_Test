@@ -24,21 +24,21 @@ Provides regulated remote identity verification via AutoIdent (fully automated, 
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `inputSources` | Object | No | - | Maps identity data sources to workflow step IDs for pre-filling the session |
+| `inputSources` | Object | No | - | Maps identity data sources to flow step IDs for pre-filling the session |
 | `shortname` | String | No | - | Managed at the credential configuration level on the platform |
 
 ---
 
-## Input Data
+## Input DataBlock
 
-Input requirements for this node.
+Input requirements for this step.
 
 | DataBlock          | Mandatory | Description                                          |
 |--------------------|----------|------------------------------------------------------|
 | `BasicIdentity`    | No      | BasicIdentity data to compare against attestation    |
 | `ExtendedIdentity` | No      | ExtendedIdentity data to compare against attestation |
 
-*If the DataBlock is not available, the node will execute normally without this information, and the workflow will proceed without error.
+*If the DataBlock is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
@@ -54,7 +54,7 @@ Verdicts for this DataBlock.
 
 ---
 
-## Output Data
+## Output DataBlock
 
 DataBlocks produced per verdict.
 

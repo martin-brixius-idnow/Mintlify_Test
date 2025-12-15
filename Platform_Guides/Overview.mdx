@@ -1,16 +1,16 @@
 ---
 title: Overview
-description: Flows, Nodes, Verdicts and DataBlocks.
+description: Flows, Steps, Verdicts and DataBlocks.
 ---
 
 This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
 
-- **Flow**: A workflow that runs from start to end and defines the operational steps leading to a final outcome.
-- **Start & End Node**: The flow ends in an End Node that determines whether the outcome is accepted or rejected.
-- **Nodes**: A node performs an operational step that reads inputs, writes DataBlocks, and produces a verdict.
-- **Verdicts**: A verdict defines the node’s result and determines the output DataBlocks and the next routing step (e.g., "verified", "fraud").
-- **DataBlocks**: Typed payloads that act as inputs or outputs of a node depending on its verdict.
-- **Ports**: Named exits that route the flow to the next node or an End Node.
+- **Flow**: A flow that runs from start to end and defines the operational steps leading to a final outcome.
+- **Start & End Step**: The flow ends in an End Step that determines whether the outcome is accepted or rejected.
+- **Steps**: A Step performs an operational step that reads inputs, writes DataBlocks, and produces a verdict.
+- **Verdicts**: A verdict defines the Step’s result and determines the output DataBlocks and the next routing step (e.g., "verified", "fraud").
+- **DataBlocks**: Typed payloads that act as inputs or outputs of a Step depending on its verdict.
+- **Routes**: Named exits that route the flow to the next Step or an End Step.
 
 ---
 
@@ -19,120 +19,120 @@ This page explains the core building blocks of the IDnow Trust Platform and how 
 
 At IDnow, a **flow** defines how input data moves through a series of steps until a final outcome is produced.
 
-![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-introduction.png)
+![Minimal flow with Start, a single processing Step, and an End Step.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-introduction.png)
 
-### Start and and End Node
+### Start and and End Step
 
-Every flow must contain exactly one **Start node** as its entry point and at least one **End node** representing a final outcome. Each execution of a flow always ends in an End node, and therefore always results in a final outcome of either `accepted` or `rejected`.
+Every flow must contain exactly one **Start Step** as its entry point and at least one **End Step** representing a final outcome. Each session of a flow always ends in an End Step, and therefore always results in a final outcome of either `accepted` or `rejected`.
 
-Between Start and End, you can add any combination of **operative nodes** (processing steps) to perform operations, transform data and control the routing of the flow.
+Between Start and End, you can add any combination of **operative Steps** (processing steps) to perform operations, transform data and control the routing of the flow.
 
-![Minimal flow with Start, a single processing node, and an End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
-*End nodes represent the final outcome of a flow*
+![Minimal flow with Start, a single processing Step, and an End Step.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
+*End Steps represent the final outcome of a flow*
 
 ---
 
-## Nodes
+## Steps
 
-**Nodes** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature.
+**Steps** are modular building blocks within a Trust Platform flow, each representing a single operational step. Typical examples include Identity Verification (IDV), AML Screening, Digital Signals or Electronic Signature.
 
-Between the Start and End nodes, other **operative nodes** perform operations and transform data or control workflow branching through **verdicts**.
+Between the Start and End Steps, other **operative Steps** perform operations and transform data or control flow branching through **verdicts**.
 
-Each node execution results in exactly one **verdict**, which in turn determines:
+Each Step session results in exactly one **verdict**, which in turn determines:
 
 - which **DataBlocks** are produced or updated, and  
-- how the flow continues via **ports** to either another node or an End node.
+- how the flow continues via **Routes** to either another Step or an End Step.
 
 ---
 
 ## Verdicts
 
-Each node can produce one or more **verdicts**, which describe the ***result*** of a node operation. As an example, for an Identity Verification (IDV) node, defined verdicts are
+Each Step can produce one or more **verdicts**, which describe the ***result*** of a Step operation. As an example, for an Identity Verification (IDV) Step, defined verdicts are
 
 - `verified`
 - `fraud`
 - `failure`
 
-In the flow, the verdict is used to select the next port: it either routes to a follow-up node or to an End node, which sets the final outcome shown in the API (for example, accepted or rejected). See also the chapter **ports** for more explanation.
+In the flow, the verdict is used to select the next route: it either routes to a follow-up Step or to an End Step, which sets the final outcome shown in the API (for example, accepted or rejected). See also the chapter **Routes** for more explanation.
 
 In the API response, each verdict includes structured data that explains the result.
 
-![IDV node with three outcomes: verified, fraud, and failure, each leading to a dedicated End node.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/2-trustplatform-idv-verdicts.png)
-*Example of an IDV node with multiple verdicts, each mapped to a dedicated End node.*
+![IDV Step with three outcomes: verified, fraud, and failure, each leading to a dedicated End Step.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/2-trustplatform-idv-verdicts.png)
+*Example of an IDV Step with multiple verdicts, each mapped to a dedicated End Step.*
 
 ---
 
 ## DataBlocks
 
-Each node consumes and produces typed **DataBlocks**. 
+Each Step consumes and produces typed **DataBlocks**. 
 
 Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
 
-DataBlocks keep data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a node.
+DataBlocks keep data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a Step.
 
-The DataBlock structure is preserved in the API response after a flow execution, making it easy to trace data from the initial input to the final outcome.
+The DataBlock structure is preserved in the API response after a flow session, making it easy to trace data from the initial input to the final outcome.
 
-### As Node Output
+### As Step Output
 
-A node’s **verdict** determines which DataBlocks it produces. 
+A Step’s **verdict** determines which DataBlocks it produces. 
 
-As an example, in an IDV workflow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. 
+As an example, in an IDV flow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. 
 
-Many DataBlocks also carry the node’s verdict to indicate the outcome of the check that generated them.
+Many DataBlocks also carry the Step’s verdict to indicate the outcome of the check that generated them.
 
-![IDV node producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/3-trustplatform-idv-datablocks.png)
+![IDV Step producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/3-trustplatform-idv-datablocks.png)
 
-*An IDV node generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
+*An IDV Step generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
 
-### As Node Input
+### As Step Input
 
-Some nodes, such as AML Screening
+Some Steps, such as AML Screening
 
 - produces a `PepAndSanctionsResults` DataBlock as output.
 - but **require** a `BasicIdentity` DataBlock as **input**.
 
-Each node defines which DataBlocks it requires and which it produces for each verdict. 
+Each Step defines which DataBlocks it requires and which it produces for each verdict. 
 
-DataBlocks flow from each node’s outputs to the inputs of the next nodes. These definitions allow the system to validate the flow, ensuring all required inputs are available before a node executes.The DataBlock can be included in the initial API request when a workflow is executed as shown in the example below.
+DataBlocks flow from each Step’s outputs to the inputs of the next Steps. These definitions allow the system to validate the flow, ensuring all required inputs are available before a Step executes.The DataBlock can be included in the initial API request when a flow is executed as shown in the example below.
 
-![Flow where an IDV node creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
+![Flow where an IDV Step creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
 
 ### Missing DataBlocks
 
-If a required DataBlock is missing, the node cannot execute. As an example, the AML Screening node requires a BasicIdentity DataBlock, which can be provided either 
+If a required DataBlock is missing, the Step cannot execute. As an example, the AML Screening Step requires a BasicIdentity DataBlock, which can be provided either 
 
 - in the initial API request or 
-- produced by an upstream node
+- produced by an upstream Step
 
-All outputs from a node are added to the workflow context, making them accessible to all of its descendant nodes. As a result, any node that generates a BasicIdentity, such as an IDV node, can satisfy the AML Screening node’s input requirement.
+All outputs from a Step are added to the flow context, making them accessible to all of its descendant Steps. As a result, any Step that generates a BasicIdentity, such as an IDV Step, can satisfy the AML Screening Step’s input requirement.
 
-![IDV node produces BasicIdentity as an outcome which is used as an inpot for AML Screening](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-overview.png)
+![IDV Step produces BasicIdentity as an outcome which is used as an inpot for AML Screening](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-overview.png)
 
 ### Duplications
 
-In more complex flows, a node may require multiple instances of the same DataBlock type as **input** (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the nodes input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
+In more complex flows, a Step may require multiple instances of the same DataBlock type as **input** (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the Steps input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
 
-When multiple upstream nodes generate DataBlocks of the same type as **output**, the platform currently uses the last produced instance.
+When multiple upstream Steps generate DataBlocks of the same type as **output**, the platform currently uses the last produced instance.
 
 ---
 
-## Ports
+## Routes
 
-**Ports** define how flows choose their next step. Ports are named exits on a node and determine which path the flow follows. Ports effectively turn node verdicts into transitions:
+**Routes** define how flows choose their next step. Routes are named exits on a Step and determine which path the flow follows. Routes effectively turn Step verdicts into transitions:
 
-- If a step ends in the `verified` scenario, the transition with port `"verified"` is taken.
-- If a transition has no port, it maps to the default scenario.
+- If a step ends in the `verified` scenario, the transition with route `"verified"` is taken.
+- If a transition has no route, it maps to the default scenario.
 
 A simplified transition object looks like this:
 
 ```json
 {
-  "id": "next_node_id",   // Identifier of the target node
-  "port": "verified"      // Named port for conditional transitions (e.g., "verified", "failure")
+  "id": "next_Step_id",   // Identifier of the target Step
+  "route": "verified"      // Named route for conditional transitions (e.g., "verified", "failure")
 }
 ```
 
-When a node is configured in Studio with multiple output scenarios, the scenario keys act as port names (for example, `verified`, `fraud_detected`, `capture_failed`, `default`).
+When a Step is configured in Studio with multiple output scenarios, the scenario keys act as route names (for example, `verified`, `fraud_detected`, `capture_failed`, `default`).
 
 ![More complex flow where verdicts define flow path and output Datablocks created](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-aml-basicidentity.png)
 
@@ -140,17 +140,17 @@ When a node is configured in Studio with multiple output scenarios, the scenario
 
 ## Putting It Together
 
-A Trust Platform flow is composed of nodes, verdicts, DataBlocks, and ports. When designing a flow:
+A Trust Platform flow is composed of Steps, verdicts, DataBlocks, and Routes. When designing a flow:
 
 1. **Define the initial process steps**  
-   For example, start with an ID verification node that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding ports, each connected to the appropriate next node or End node.
+   For example, start with an ID verification Step that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding Routes, each connected to the appropriate next Step or End Step.
 
-2. **Reuse outputs between nodes**  
-   DataBlocks produced by one node can be used as inputs to downstream nodes. For instance, a `BasicIdentity` DataBlock created during ID verification can be passed to an AML Screening node, which then produces its own verdict and `PepAndSanctionsResults` DataBlocks.
+2. **Reuse outputs between Steps**  
+   DataBlocks produced by one Step can be used as inputs to downstream Steps. For instance, a `BasicIdentity` DataBlock created during ID verification can be passed to an AML Screening Step, which then produces its own verdict and `PepAndSanctionsResults` DataBlocks.
 
-3. **Extend the workflow as needed**  
-   Add additional nodes for risk checks, digital signals, signatures, or evidence collection. Each node follows the same pattern of verdicts, DataBlocks, and ports.
+3. **Extend the flow as needed**  
+   Add additional Steps for risk checks, digital signals, signatures, or evidence collection. Each Step follows the same pattern of verdicts, DataBlocks, and Routes.
 
-*By combining nodes, verdicts, DataBlocks, and ports, you can build complex trust workflows  in the Trust Platform.*
+*By combining Steps, verdicts, DataBlocks, and Routes, you can build complex trust flows  in the Trust Platform.*
 
-By understanding these building blocks, you can compose complex trust workflows simply by wiring nodes together. The platform handles execution, data propagation, and audit trails automatically.
+By understanding these building blocks, you can compose complex trust flows simply by wiring Steps together. The platform handles session, data propagation, and audit trails automatically.

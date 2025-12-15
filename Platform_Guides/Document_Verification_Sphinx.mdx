@@ -5,16 +5,18 @@ description: Verifies identity using secure electronic documents with cryptograp
 
 ## Overview
 
-Verifies a user’s identity through data read from secure identity documents, offering high confidence without relying solely on visual inspection.
+Provides regulated remote identity verification via AutoIdent (fully automated, AI-driven) or VideoIdent (expert-assisted video). Users submit ID documents and biometrics via mobile or web, receiving verified identity data and fraud/success verdicts suitable for KYC/AML onboarding. Configurations are modular and must be aligned with applicable regulatory requirements.
 
 ---
 
 ## Key Features
 
-- **Document Capture** - Automatic capture and quality tools for identity documents
-- **AutoIdent** - Enriched by NFC capability to read out ePassports
-- **Cross-Validation** - Compare attestation data against other workflow steps
-- **Flexible Input Mapping** - Configure which steps provide identity data for comparison
+- **Verification Modes** - AutoIdent for automated checks; VideoIdent for live specialist verification  
+- **Document Checks** - AutoIdent performs AI-based validation; VideoIdent adds human inspection of layout, typography, and security features  
+- **Biometrics & Liveness** - AutoIdent uses face-matching and live-action checks; VideoIdent performs live comparison and spoofing detection  
+- **Expert Oversight** - AutoIdent escalates edge cases or runs mandatory review; VideoIdent always uses trained specialists  
+- **Regulatory Compliance** - Supports eIDAS, AML, GwG, PVID, BaFin, and FMA  
+- **Data Retention** - Default 60 days in production (30 days backups); optional extended retention and export available
 
 ---
 

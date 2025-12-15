@@ -65,8 +65,9 @@ The `basicIdentity` data block contains fundamental identity information extract
 |---------------|---------------------|-----------|
 | `familyName`  | Family name.        | No        |
 | `name`        | Name.               | Yes       |
-| `givenName`   | Given name.         | No        |
+| `givenName`   | Given name.         | Yes       |
 | `birthDate`   | Birth date.         | No        |
+| `birthPlace`   | Birth place.         | No        |
 
 ---
 
@@ -201,18 +202,24 @@ The ExtendedIdentity data block contains additional identity information beyond 
 
 ***Attributes***
 
-| Attribute                     | Description                                                                                                           | Mandatory |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
-| `portraitUrl`                 | S3 bucket URL pointing to the portrait image file (selfie image renamed to portrait).                               | Optional  |
-| `nationality`                 | Nationality.                                                                                                         | Optional  |
-| `personalAdministrativeNumber`| Personal administrative number (renamed from personalNumber).                                                       | Optional  |
-| `birthPlace`                  | Birth place.                                                                                                         | Optional  |
-| `address`                     | Address.                                                                                                             | Optional  |
-| `familyNameBirth`            | Family name at birth.                                                                                                | Optional  |
-| `givenNameBirth`             | Given name at birth.                                                                                                 | Optional  |
-| `email`                       | Email address.                                                                                                       | Optional  |
-| `phoneNumber`                 | Phone number.                                                                                                        | Optional  |
-| `sex`                         | Sex (renamed from gender).                                                                                          | Optional  |
+| Attribute                      | Description                                                                                                  | Mandatory |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------|-----------||
+| `portrait`                     | Portrait image for EUDI requirement (can be the same as `portraitUrl`).                                      | Optional  |
+| `nationality`                  | Nationality information.                                                                                     | Optional  |
+| `personalAdministrativeNumber` | Personal administrative number (same as SSN number?).                                                        | Optional  |
+| `address`                      | Address (general, free text).                                                                                | Optional  |
+| `residentAddress`             | The full address of the place (string).                                                                      | Optional  |
+| `residentStreet`              | Street of residence.                                                                                         | Optional  |
+| `residentHouseNumber`        | House number of residence.                                                                                   | Optional  |
+| `residentCountry`             | Alpha-2 country code as specified in ISO 3166-1.                                                             | Optional  |
+| `residentState`               | State or province of residence.                                                                              | Optional  |
+| `residentCity`                | City of residence.                                                                                           | Optional  |
+| `residentPostalCode`         | Postal code of residence.                                                                                    | Optional  |
+| `familyNameBirth`              | Family name at birth.                                                                                        | Optional  |
+| `givenNameBirth`               | Given name at birth.                                                                                         | Optional  |
+| `sex`                          | Sex (ISO 5218 sex codes: 0/1/2/9; renamed from gender).                                                      | Optional  |
+| `email`                        | Email address.                                                                                               | Optional  |
+| `phoneNumber`                  | Phone number.                                                                                                | Optional  |
 
 ---
 

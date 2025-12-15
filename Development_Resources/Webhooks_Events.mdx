@@ -28,9 +28,9 @@ All webhook events share a common structure:
 | `execution_id` | UUID | The identifier of the specific execution (session) |
 | `execution_status` | Enum | Current status of the flow |
 | `decision_outcome` | String | Final decision result, provided only when the flow has completed |
-| `last_node_id` | String | Identifier of the last executed node, ID is defined by you in the node configuration |
-| `last_node_type` | String | Name of the last executed node |
-| `last_node_status` | String | Status of the last executed node (e.g., Aborted) |
+| `last_step_id` | String | Identifier of the last executed step, ID is defined by you in the step configuration |
+| `last_step_type` | String | Name of the last executed step |
+| `last_step_status` | String | Status of the last executed step (e.g., Aborted) |
 
 <Info>
 The `event_id` remains the same across all retry attempts, while `delivery_id` increments.
@@ -83,7 +83,7 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "execution_id": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
   "execution_status": "RUNNING",
   "decision_outcome": NO_OUTCOME,
-  "last_step_id": "My Node",
+  "last_step_id": "My step",
   "last_step_type": "Start",
   "last_step_status": "COMPLETED"
 }
@@ -103,7 +103,7 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "execution_id": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
   "execution_status": "COMPLETED",
   "decision_outcome": "accepted",
-  "last_step_id": "My Node",
+  "last_step_id": "My step",
   "last_step_type": "END",
   "last_step_status": "COMPLETED"
 }
@@ -123,7 +123,7 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "execution_id": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
   "execution_status": "EXPIRED",
   "decision_outcome": NO_OUTCOME,
-  "last_step_id": "My node",
+  "last_step_id": "My step",
   "last_step_type": "DOC_ID:v2",
   "last_step_status": "EXPIRED"
 }

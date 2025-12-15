@@ -143,16 +143,16 @@
           {
             "group": "Create Sessions",
             "pages": [
-              "Integration/Get_Flows",
-              "Integration/Create_Session"
+              "Integration/get-flows",
+              "Integration/create-session"
             ]
           },
           {
             "group": "Receive Results",
             "pages": [
-              "Integration/Get_Results",
-              "Integration/Get_Datablocks",
-              "Integration/Get_Files"
+              "Integration/get-session-results",
+              "Integration/get-datablocks",
+              "Integration/get-files"
             ]              
           },
           {

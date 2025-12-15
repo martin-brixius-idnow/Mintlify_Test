@@ -1,11 +1,11 @@
 ---
 title: "Create Session"
-description: "Initiate a new verification session for a specific flow"
+description: "Initiate a new verification session for a flow"
 ---
 
 ## Overview
 
-Create a new session to start a verification flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
+Create a new session to start a flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
 
 ## Endpoint
 
@@ -51,26 +51,6 @@ POST /flows/{flowId}/sessions
 | `environment` | string | Yes | Target environment (e.g., `production`, `sandbox`) |
 | `input` | array | Yes | Array of input data blocks |
 
-### Input data blocks
-
-#### BasicIdentity
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `type` | string | Yes | Must be `BasicIdentity` |
-| `name` | string | No | Full name |
-| `familyName` | string | No | Last name / surname |
-| `givenName` | string | No | First name / given name |
-| `birthDate` | string | No | Date of birth in `YYYY-MM-DD` format |
-
-#### DocumentImages
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `type` | string | Yes | Must be `DocumentImages` |
-| `documentType` | string | Yes | One of: `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` |
-| `frontSide` | byte array | Yes | Front side image of the document |
-| `backSide` | byte array | No | Back side image of the document |
 
 ## Response
 

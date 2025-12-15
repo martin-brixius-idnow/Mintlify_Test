@@ -24,7 +24,7 @@ Electronic signing is a modular digital signature service enabling users to sign
 | Parameter | Type   | Required | Default | Description |
 |-----------|--------|----------|---------|-------------|
 | `signingConfiguration` | Object | Yes      | -       | A container for parameters that define the signature process. |
-| `signatureLevel`       | String (enum) | Yes | - | The signatureLevel selected in the workflow must be enabled and correctly configured for the customer's account within the underlying signature provider (e.g., InstantSign). A mismatch between the workflow definition and the provider's configuration may lead to a runtime error. |
+| `signatureLevel`       | String (enum) | Yes | - | The signatureLevel selected in the flow must be enabled and correctly configured for the customer's account within the underlying signature provider (e.g., InstantSign). A mismatch between the flow definition and the provider's configuration may lead to a runtime error. |
 
 **QES (Qualified Electronic Signature):** The highest level of assurance. Under eIDAS, a QES has the equivalent legal effect of a handwritten signature. It requires strict, verified identification of the signer before the signature is created.
 
@@ -32,9 +32,9 @@ Electronic signing is a modular digital signature service enabling users to sign
 
 ---
 
-## Input Data
+## Input DataBlock
 
-Input requirements for this node.
+Input requirements for this step.
 
 | DataBlock        | Mandatory                          | Description |
 |------------------|------------------------------------|-------------|
@@ -56,7 +56,7 @@ Verdicts for this DataBlock.
 | `failure`          | The signature process was initiated but did not complete successfully due to a handled error or a specific user action. This includes scenarios like the user explicitly canceling the process on the InstantSign's UI, or InstantSign returning a specific business rejection (e.g., user not eligible). |
 ---
 
-## Output Data
+## Output DataBlock
 
 DataBlocks produced per verdict.
 

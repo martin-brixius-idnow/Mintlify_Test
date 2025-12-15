@@ -14,8 +14,8 @@ Used when businesses want fast and highly trusted verification based on governme
 - **OID4VP and mdoc Protocols**: Implements OpenID for Verifiable Presentations and mdoc protocols
 - **Credential Request**: Requests and verifies EUDI Wallet credentials from the user's European Digital Identity Wallet
 - **Dynamic Output Configuration**: Output DataBlocks are dynamically determined based on the `requestedCredentials` configuration
-- **Credential to DataBlock Mapping**: Maps credential claims to DSL DataBlocks for seamless workflow integration
-- **No Input Required**: Does not require any input DataBlock from the workflow context
+- **Credential to DataBlock Mapping**: Maps credential claims to DSL DataBlocks for seamless flow integration
+- **No Input Required**: Does not require any input DataBlock from the flow context
 - **Multiple Credential Support**: Can request multiple credentials in a single verification session
 
 ---
@@ -27,19 +27,19 @@ Used when businesses want fast and highly trusted verification based on governme
 | `requestedCredentials` | array | Yes | A mandatory array that specifies the credentials requested from the user's wallet. Minimum 1 credential required. |
 | `requestedCredentials.type` | string | Yes | The URI identifying the type of credential requested. |
 | `requestedCredentials.format` | string | Yes | The format of the credential (e.g., `vc+sd-jwt`). |
-| `requestedCredentials.datablocks` | array | No | An optional array that maps the expected claims from this credential to known DataBlocks in the DSL (e.g., BasicIdentity, ExtendedIdentity). If this option is used, the corresponding DataBlock will be generated and added to the workflow context upon success. |
+| `requestedCredentials.datablocks` | array | No | An optional array that maps the expected claims from this credential to known DataBlocks in the DSL (e.g., BasicIdentity, ExtendedIdentity). If this option is used, the corresponding DataBlock will be generated and added to the flow context upon success. |
 
 ---
 
-## Input Data
+## Input DataBlock
 
-This node does not require any input DataBlock.
+This step does not require any input DataBlock.
 
 ---
 
-## Output Data
+## Output DataBlock
 
-The EUDI_WALLET_VERIFIER:v1 node produces different outputs depending on the presentation result. The output DataBlocks are dynamically determined based on the `requestedCredentials` configuration.
+The EUDI_WALLET_VERIFIER:v1 step produces different outputs depending on the presentation result. The output DataBlocks are dynamically determined based on the `requestedCredentials` configuration.
 
 | Verdict | DataBlocks Produced | Description |
 |----------|---------------------|-------------|

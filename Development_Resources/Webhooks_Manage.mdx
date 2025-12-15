@@ -4,9 +4,9 @@ description: 'Set up webhook endpoints, manage subscriptions, and monitor delive
 ---
 ## Overview
 
-In TrustPlatform, each flow runs as a session made up of one or more nodes, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes. 
+In TrustPlatform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes. 
 
-Because nodes run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
+Because steps run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
 
 <Info>
 See the full list of available webhook events here:  

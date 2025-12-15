@@ -1,11 +1,11 @@
 ---
 title: QES & AES
-description: Elecotronig signing with legally recognized assurance levels.
+description: Electronic signing with legally recognized assurance levels.
 ---
 
 ## Overview
 
-Enables users to sign documents electronically with high trust. Advanced Electronic Signatures (AES) support secure, high‑volume business processes, while Qualified Electronic Signatures (QES) provide the highest legal assurance and are suitable for regulated or high‑risk agreements.
+Electronic signing is a modular digital signature service enabling users to sign documents electronically with a legally binding qualified electronic signature (QES) under eIDAS. Documents are submitted via API, and users complete identity verification as required. Pre-identified user data can bypass verification if compliant. All signed documents must be PDFs, and evidence data is stored per eIDAS rules.
 
 ---
 
@@ -13,8 +13,8 @@ Enables users to sign documents electronically with high trust. Advanced Electro
 
 - **Supports QES & AES**: Can handle both Advanced and Qualified Electronic Signatures.  
 - **Identity Verification**: For QES, validates the signer's identity document and expiry date.  
+- **Pre-Identified Data Support**: Skips identification if data is validated.
 - **API Integration**: Constructs the API calls for the signature provider using the configured authentication and settings
-- **Session Management**: Interacts with the signature provider to manage the end-user signing session.  
 - **Output Generation**: Produces a `SignedDocumentsPackage` DataBlock upon successful completion.  
 
 ---

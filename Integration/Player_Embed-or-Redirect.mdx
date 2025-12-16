@@ -44,9 +44,15 @@ The API returns a session token that you'll use to direct users to the Player.
 
 ```json
 {
-  "sessionId": "abc123def456ghi789",
+  "flowId": "wf_1a2b3c4d5e6f",
+  "flowVersion": "1.0",
+  "environment": "production",
+  "sessionContext": {
+    "sessionId": "abc123def456ghi789",
+    "sessionStatus": "created",
+    "createdAt": "2024-11-04T10:30:00Z"
+  },
   "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-  "status": "Created",
 }
 ```
 
@@ -55,7 +61,7 @@ The API returns a session token that you'll use to direct users to the Player.
 | Field | Description |
 |-------|-------------|
 | `sessionId` | The specific session identifier |
-| `applicationId` | The specific application identifier |
+| `flowId` | The flow identifier |
 
 ---
 
@@ -69,22 +75,25 @@ Once you receive the session token from the API response, construct the Player U
 
 ```code-tabs
 const axios = require('axios');
-const FormData = require('form-data');
 
-const form = new FormData();
-form.append('BasicIdentity', JSON.stringify({
-  name: 'John Doe',
-  familyName: 'Doe',
-  givenName: 'John',
-  birthDate: '1990-01-15'
-}));
-// Optional: Add document images
-// form.append('DocumentImages', documentBuffer, 'document.jpg');
+const requestBody = {
+  flowId: flowId,
+  environment: 'production',
+  input: [
+    {
+      type: 'BasicIdentity',
+      name: 'John Doe',
+      familyName: 'Doe',
+      givenName: 'John',
+      birthDate: '1990-01-15'
+    }
+  ]
+};
 
-const response = await axios.post(`/flows/${flowId}/sessions`, form, {
+const response = await axios.post(`/flows/${flowId}/sessions`, requestBody, {
   headers: {
     'Authorization': `Bearer ${accessToken}`,
-    ...form.getHeaders()
+    'Content-Type': 'application/json'
   }
 });
 
@@ -96,16 +105,28 @@ const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=$
 
 ```code-tabs
 import requests
+import json
 
 url = f"/flows/{flow_id}/sessions"
-headers = {"Authorization": f"Bearer {access_token}"}
-data = {
-    'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
+headers = {
+    "Authorization": f"Bearer {access_token}",
+    "Content-Type": "application/json"
 }
-# Optional: Add binary files
-# files = {'DocumentImages': open('document.jpg', 'rb')}
+data = {
+    "flowId": flow_id,
+    "environment": "production",
+    "input": [
+        {
+            "type": "BasicIdentity",
+            "name": "John Doe",
+            "familyName": "Doe",
+            "givenName": "John",
+            "birthDate": "1990-01-15"
+        }
+    ]
+}
 
-response = requests.post(url, headers=headers, data=data)
+response = requests.post(url, headers=headers, json=data)
 result = response.json()
 
 session_token = result['sessionToken']
@@ -115,19 +136,37 @@ player_url = f"https://player-trustplatform.idnow.io/player/?session_token={sess
 **Java Implementation**:
 
 ```code-tabs
-HttpClient client = HttpClient.newHttpClient();
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-String requestBody = "BasicIdentity={"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}";
+HttpClient client = HttpClient.newHttpClient();
+ObjectMapper objectMapper = new ObjectMapper();
+
+Map<String, Object> requestBody = Map.of(
+    "flowId", flowId,
+    "environment", "production",
+    "input", List.of(
+        Map.of(
+            "type", "BasicIdentity",
+            "name", "John Doe",
+            "familyName", "Doe",
+            "givenName", "John",
+            "birthDate", "1990-01-15"
+        )
+    )
+);
+
+String jsonBody = objectMapper.writeValueAsString(requestBody);
 
 HttpRequest request = HttpRequest.newBuilder()
     .uri(URI.create("/flows/" + flowId + "/sessions"))
     .header("Authorization", "Bearer " + accessToken)
-    .header("Content-Type", "application/x-www-form-urlencoded")
-    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+    .header("Content-Type", "application/json")
+    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
     .build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-String sessionToken = extractSessionToken(response.body());
+JsonNode jsonResponse = objectMapper.readTree(response.body());
+String sessionToken = jsonResponse.get("sessionToken").asText();
 
 String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
@@ -137,28 +176,27 @@ String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=
 The Player is hosted by IDnow at:
 
 ```
-https://player-trustplatform.idnow.io/player/?sessionToken=[id]
+https://player-trustplatform.idnow.io/player/?session_token=[token]
 ```
 
 **Required Parameters**
 
 | Field | Description |
 |-------|-------------|
-| `sessionId` | The specific session identifier |
-| `applicationId` | The specific application identifier |
+| `session_token` | JWT token returned from the Create Session endpoint |
 
 
 **Example URLs**
 
 Starting verification:
 ```
-https://player-trustplatform.idnow.io/player/?sessionToken=abc123def456
+https://player-trustplatform.idnow.io/player/?session_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 Different environments may use different subdomains:
 
 ```
-https://player-trustplatform-staging.idnow.io/player/?sessionToken=abc123def456
+https://player-trustplatform-staging.idnow.io/player/?session_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 ---
@@ -180,14 +218,14 @@ This is the simplest and most reliable integration method where the user is dire
 **Web Browser**:
 ```code-tabs
 // Web Browser
-window.location.href = "https://player-trustplatform.idnow.io/player/?sessionToken=" + sessionId;
+window.location.href = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
 **Mobile App (iOS)**
 
 ```code-tabs
 // swift
-let playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=\(sessionId)"
+let playerURL = "https://player-trustplatform.idnow.io/player/?session_token=\(sessionToken)"
 if let url = URL(string: playerURL) {
     UIApplication.shared.open(url)
 }
@@ -197,7 +235,7 @@ if let url = URL(string: playerURL) {
 
 ```code-tabs
 // java
-String playerURL = "https://player-trustplatform.idnow.io/player/?sessionToken=" + sessionId;
+String playerURL = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(playerURL));
 startActivity(intent);
 ```
@@ -226,7 +264,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 **Implementation Steps**:
 
 1. Create flow session via API call
-2. Embed Player in iframe using returned flow sessionId
+2. Embed Player in iframe using returned session token
 3. Handle completion via callback URL or postMessage events
 
 
@@ -237,7 +275,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 <!-- After creating flow session via API -->
 <iframe
   id="idnow-player"
-  src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_SESSION_ID"
+  src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
   style="width: 100%; height: 600px; border: none;"
   allow="camera; microphone; geolocation; fullscreen"
   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -252,7 +290,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 <div id="verification-container" style="width: 100%; height: 600px;">
   <iframe
     id="idnow-player"
-    src="https://player-trustplatform.idnow.io/player/?sessionToken=YOUR_FLOW_SESSION_ID"
+    src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
     style="width: 100%; height: 100%; border: none;"
     allow="camera; microphone; geolocation; fullscreen"
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"

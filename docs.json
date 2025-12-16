@@ -188,13 +188,6 @@
             ]
           },
           {
-            "group": "SDKs & Libraries",
-            "pages": [
-              "Development_Resources/Web",
-              "Development_Resources/Mobile"
-            ]
-          },
-          {
             "group": "Error Handling",
             "pages": ["Development_Resources/Error_Handling"]
           }

@@ -13,24 +13,23 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 <Steps>
   <Step title="Authenticate once" icon="key">
-    Obtain an OAuth 2.0 access token via the <strong>Get Token</strong> endpoint and reuse it across all flows.
+    Obtain an OAuth 2.0 access token using the Get Token endpoint and reuse it across all flows.
   </Step>
-  
+
   <Step title="Receive available flows" icon="list-tree">
-    <code>GET /flows</code> — List all flows configured in your environment.
+    Use `GET /flows` to list all flows configured in your environment.
   </Step>
-  
+
   <Step title="Create a verification session" icon="play">
-    <code>POST /flows/&lt;flowId&gt;/sessions</code> — Start a new session for a given flow, provide input Datablocks, and receive a <code>sessionId</code> plus a <code>sessionToken</code> for the Player.
+    Start a new session with `POST /flows/FLOW_ID/sessions` and receive a sessionId and sessionToken.
   </Step>
-  
+
   <Step title="Track status and decisions" icon="bolt">
-    <code>GET /session/&lt;sessionId&gt;</code> — Poll for session status, decision outcome, timestamps, and the last executed step, without pulling full PII.
+    Poll `GET /session/SESSION_ID` to retrieve status, decision outcome, timestamps, and the last executed step.
   </Step>
-  
+
   <Step title="Fetch data and files on demand" icon="download">
-    <code>GET /session/&lt;sessionId&gt;/datablocks</code> — Retrieve structured identity data only when you actually need it.  
-    <code>GET /files/&lt;fileId&gt;</code> — Download document images and other binary artifacts referenced from Datablocks.
+    Retrieve identity data via `GET /session/SESSION_ID/datablocks` and files via `GET /files/FILE_ID` only when needed.
   </Step>
 </Steps>
 
@@ -39,122 +38,22 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 ## Why developers choose this API
 
 <CardGroup cols={2}>
-  <Card 
-    title="Privacy by default" 
-    icon="lock"
-    color="#10b981"
-  >
-    Session and flow endpoints return lean, decision-focused metadata and Datablock references rather than full raw PII. This minimizes data exposure by default and supports privacy-by-design principles. You explicitly choose when—and if—to retrieve underlying identity attributes, documents, or files.
+  <Card title="Privacy by default" icon="lock" color="#10b981">
+    Session and flow endpoints return lean decision metadata and Datablock references instead of raw PII. You control when sensitive data is accessed.
   </Card>
-  
-  <Card 
-    title="Clear session model" 
-    icon="arrows-maximize"
-    color="#3b82f6"
-  >
-    Flows define reusable business logic, while sessions represent individual user journeys. Start with <code>POST /flows/&lt;flowId&gt;/sessions</code>, then track progress and outcomes via <code>GET /session/&lt;sessionId&gt;</code>. This separation keeps integrations predictable and easy to reason about.
+
+  <Card title="Clear session model" icon="arrows-maximize" color="#3b82f6">
+    Flows define business logic. Sessions represent individual user journeys. This separation keeps integrations predictable and easy to reason about.
   </Card>
-  
-  <Card 
-    title="Audit-ready by design" 
-    icon="route"
-    color="#8b5cf6"
-  >
-    Each session records status, timestamps, subject references, and the last executed step. Combined with Datablocks and file references, this enables full decision traceability for compliance reviews, dispute resolution, and internal or external audits.
+
+  <Card title="Audit-ready by design" icon="route" color="#8b5cf6">
+    Sessions record status, timestamps, subject references, and the last executed step, enabling full decision traceability.
   </Card>
-  
-  <Card 
-    title="Flexible frontends" 
-    icon="display"
-    color="#f59e0b"
-  >
-    Use the same backend APIs for both frontend patterns. Pass the session token to the hosted Player via full-page redirects for maximum isolation, or embed it in an iframe for seamless in-app journeys—without changing backend logic.
+
+  <Card title="Flexible frontends" icon="display" color="#f59e0b">
+    Use the same backend APIs for redirects or embedded Player experiences without changing your integration.
   </Card>
 </CardGroup>
-
----
-
-## Integration paths
-
-<CardGroup cols={3}>
-  <Card
-    title="Authenticate"
-    icon="fingerprint"
-    href="/Integration/Authenticate"
-  >
-    Obtain an OAuth 2.0 access token using <strong>Get Token</strong>, and attach it as a bearer token to all subsequent API requests.
-  </Card>
-  
-  <Card
-    title="Get Flows"
-    icon="list-tree"
-    href="/Integration/get-flows"
-  >
-    Discover all available flows in your environment with <code>GET /flows</code>. Map them to onboarding, KYC, AML, or risk assessment journeys.
-  </Card>
-  
-  <Card
-    title="Create Session"
-    icon="rocket"
-    href="/Integration/create-session"
-  >
-    Start a new journey with <code>POST /flows/&lt;flowId&gt;/sessions</code>. Provide input Datablocks and receive a <code>sessionId</code> and <code>sessionToken</code>.
-  </Card>
-  
-  <Card
-    title="Get Session Results"
-    icon="chart-network"
-    href="/Integration/get-session-results"
-  >
-    Poll <code>GET /session/&lt;sessionId&gt;</code> to track status, completion, decision outcomes, and timestamps without automatically retrieving sensitive identity data.
-  </Card>
-  
-  <Card
-    title="Get Datablocks"
-    icon="database"
-    href="/Integration/get-datablocks"
-  >
-    Use <code>GET /session/&lt;sessionId&gt;/datablocks</code> to fetch structured Datablocks such as identities, verification results, documents, and credentials when deeper insight is required.
-  </Card>
-  
-  <Card
-    title="Get Files"
-    icon="file-image"
-    href="/Integration/get-files"
-  >
-    Retrieve files referenced by Datablocks—such as document images or selfies—via <code>GET /files/&lt;fileId&gt;</code>.
-  </Card>
-  
-  <Card
-    title="Embed or Redirect Player"
-    icon="browser"
-    href="/Integration/Player_Embed-or-Redirect"
-  >
-    Use the returned <code>sessionToken</code> to launch the hosted Player via redirect or embed it directly in your application.
-  </Card>
-</CardGroup>
-
----
-
-## You control everything
-
-<AccordionGroup>
-  <Accordion title="Data exposure" icon="shield-halved">
-    Keep your PII surface area intentionally small. Use session results for high-level decisions, and only call <code>GET /session/&lt;sessionId&gt;/datablocks</code> or <code>GET /files/&lt;fileId&gt;</code> when downstream processes truly require that data.
-  </Accordion>
-  
-  <Accordion title="Result granularity" icon="list-timeline">
-    Track session lifecycle events—status changes, timestamps, and the last executed step—via <code>GET /session/&lt;sessionId&gt;</code>. When needed, correlate results with Datablocks to understand exactly what checks ran and what evidence was collected.
-  </Accordion>
-  
-  <Accordion title="Session behavior" icon="clock">
-    Sessions begin in a <code>created</code> state and progress as users complete steps in the Player. Poll for state changes, detect completion or failure, and handle expiration to keep backend workflows in sync.
-  </Accordion>
-  
-  <Accordion title="Frontend integration" icon="display">
-    Redirect and embedded experiences share the same session model and APIs. The <code>sessionToken</code> securely binds frontend interactions to backend tracking, allowing you to evolve your UX without re-architecting your integration.
-  </Accordion>
-</AccordionGroup>
 
 ---
 
@@ -165,9 +64,9 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
   icon="code"
   href="/API_Reference/overview"
 >
-  Complete endpoint documentation with parameters, schemas, and copy-paste-ready examples.
+  Complete endpoint documentation with parameters, schemas, and examples.
 </Card>
 
 <Tip>
-  <strong>Pro tip:</strong> During development, inspect full payloads using <code>GET /session/&lt;sessionId&gt;/datablocks</code> and <code>GET /files/&lt;fileId&gt;</code>. In production, rely on lean session results and retrieve only the Datablocks and files your business truly needs for performance and compliance.
+  Pro tip: In development, inspect full payloads. In production, rely on lean session results and fetch Datablocks and files only when required.
 </Tip>

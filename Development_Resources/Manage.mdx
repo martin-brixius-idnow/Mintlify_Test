@@ -1,20 +1,20 @@
 ---
 title: "Manage"
-description: "Generate and manage credentials to authenticate API requests to Trustplatfrom"
+description: "Authenticate API requests to Trustplatform"
 ---
 
 ## Overview
+
+## Access API key management
+
+![API keys management interface showing the list of existing API keys.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Overview.png)
+*API keys management interface showing the list of existing API keys*
 
 API keys are used to securely authenticate your client applications with Trustplatform. Each API key consists of a 'Public key ID' and a 'Client secret' that work together to authenticate your API requests.
 
 You can create multiple API keys for different applications or environments, assign specific permissions to each key, and manage them through the IDnow Studio settings interface.
 
 > **Never share client secrets with anyone. Do not store API keys in version control.**
-
-## Access API key management
-
-![API keys management interface showing the list of existing API keys.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Overview.png)
-*End Steps represent the final outcome of a flow*
 
 To manage your API keys:
 
@@ -28,15 +28,15 @@ The API keys page displays:
 
 ## Create an API key
 
+![Create API key dialog and API key created confirmations.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Create.png)
+*Create API key dialog and API key created confirmations*
+
 To create a new API key:
 
 1. From the **API keys** page, select **New API key**.
 2. In the **Create API key** dialog, enter a descriptive **API key name** (for example, "Mobile app", "Web client", or "Integration Partner Name").
 
 ### Configure permissions
-
-![Create API key dialog and API key created confirmations.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Create.png)
-*End Steps represent the final outcome of a flow*
 
 3. Under **Permissions**, select the required permissions for this API key:
 
@@ -67,9 +67,10 @@ To create a new API key:
 
 Your new API key is now ready to use and will appear in the API keys list.
 
-![Save API key](images/Resources/API_Keys-Save-Key.png)
-
 ## View API key details
+
+![Save API key](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Save-Key.png)
+*Save API key*
 
 The API keys list shows important information about each credential:
 
@@ -84,6 +85,9 @@ This information helps you track and audit API key usage across your organizatio
 
 ## Edit an API key
 
+![Edit API key dialog showing editable fields and permissions](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Edit.png)
+*Edit API key dialog showing editable fields and permissions*
+
 You can edit the name, permissions, and regenerate the client secret of an existing API key.
 
 To edit an API key:
@@ -97,14 +101,15 @@ To edit an API key:
    - Modify **Permissions** by checking or unchecking the available options
    - **Regenerate** the client secret if needed
 
-![Edit API key dialog showing editable fields and permissions](images/Resources/API_Keys-Edit.png)
-
 4. After making your changes, select **Save changes**.
 5. To cancel without saving, select **Cancel**.
 
 > The **Public key ID** cannot be changed. It remains constant throughout the API key's lifecycle.
 
 ## Regenerate client secret
+
+![Regenerate client secret confirmation and updated credentials](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Regenerate.png)
+*Regenerate client secret confirmation and updated credentials*
 
 If you need to change your client secret for security reasons (for example, if it may have been compromised), you can regenerate it.
 
@@ -116,8 +121,6 @@ To regenerate the client secret:
 > **Important**: This will immediately revoke access for any application using the old client secret. You have to update all client applications using this API key.
 
 3. If you're ready to proceed, select **Regenerate client secret**. Otherwise, select **Cancel**.
-
-![Regenerate client secret confirmation and updated credentials](images/Resources/API_Keys-Regenerate.png)
 
 4. The **Client secret updated** dialog displays:
    - **Public key ID (unchanged)**: Your Public key ID remains the same
@@ -135,6 +138,9 @@ The old client secret is immediately revoked and cannot be used for authenticati
 
 ## Delete an API key
 
+![Delete API key confirmation dialog](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Resources/API_Keys-Delete.png)
+*Delete API key confirmation dialog*
+
 Deleting an API key permanently removes it and immediately revokes access for any application using that credential.
 
 To delete an API key:
@@ -146,8 +152,6 @@ To delete an API key:
    - Warning: "This will immediately revoke access for any application using this API key. You will not be able to recover this API key later."
 
 4. If you're certain you want to delete the API key, select **Delete API key**. Otherwise, select **Cancel**.
-
-![Delete API key confirmation dialog](images/Resources/API_Keys-Delete.png)
 
 > **This action cannot be undone.** Make sure to update or disable all applications using this API key before deletion to avoid service disruptions.
 

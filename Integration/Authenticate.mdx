@@ -31,7 +31,7 @@ To authenticate against Trustplatform APIs, you need to obtain your API client c
 
 Use your client credentials to request an access token. Trustplatform supports two client authentication methods:
 
-### Request Parameters
+***Request Parameters***
 
 | Parameter       | Description                                                                 | Required |
 |-----------------|-----------------------------------------------------------------------------|----------|
@@ -40,7 +40,7 @@ Use your client credentials to request an access token. Trustplatform supports t
 | `client_secret` | Your API client secret from the IDnow Dashboard.                            | Yes      |
 | `scope`         | The scopes required for your API requests (if applicable).                  | Optional |
 
-### Option A: Explicit Credentials (`client_secret_post`)
+***Option A***: Explicit Credentials (`client_secret_post`)
 
 Include your credentials directly in the request body:
 
@@ -53,7 +53,7 @@ curl --request POST https://<your-idnow-auth-server>/token \
   --data 'scope=<required-scopes>'
 ```
 
-### Option B: HTTP Basic Authentication (`client_secret_basic`)
+***Option B***: HTTP Basic Authentication (`client_secret_basic`)
 
 Base64 encode your credentials in the format `client_id:client_secret` and include in the Authorization header:
 
@@ -65,7 +65,7 @@ curl --request POST https://<your-idnow-auth-server>/token \
   --data 'scope=<required-scopes>'
 ```
 
-### Response
+***Response***
 
 If successful, you will receive an access token:
 
@@ -93,7 +93,7 @@ Accept: application/json
 Authorization: Bearer eyJh...QifQ.eyJ...hIOw
 ```
 
-### Example Request
+***Example Request***
 
 ```bash
 curl --request GET https://<your-idnow-api-host>/api/v1/identifications/<id> \

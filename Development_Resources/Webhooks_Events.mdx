@@ -64,9 +64,11 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "eventVersion": "123",
   "eventDeliverId": "1",
   "createdAt": "2025-11-24T10:15:30.123Z",
-  "flowId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d32",
-  "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6e",
-  "sessionStatus": "CREATED"
+  "payload": {
+    "flowId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d32",
+    "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6e",
+    "sessionStatus": "CREATED"
+  }
 }
 
 ```
@@ -82,12 +84,14 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "eventVersion": "123",
   "eventDeliveryId": "1",
   "createdAt": "2025-11-24T10:15:32.456Z",
-  "flowId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
-  "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
-  "sessionStatus": "RUNNING",
-  "lastStepId": "My step",
-  "lastStepType": "Start",
-  "lastStepStatus": "COMPLETED"
+  "payload": {
+    "flowId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
+    "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
+    "sessionStatus": "RUNNING",
+    "lastStepId": "My step",
+    "lastStepType": "Start",
+    "lastStepStatus": "COMPLETED"
+  }
 }
 
 ```
@@ -103,12 +107,14 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "eventVersion": "123",
   "eventDeliveryId": "1",
   "createdAt": "2025-11-24T10:18:45.789Z",
-  "flowId": "identity_verification_v2",
-  "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
-  "sessionStatus": "COMPLETED",
-  "lastStepId": "My step",
-  "lastStepType": "END",
-  "lastStepStatus": "COMPLETED"
+  "payload": {
+    "flowId": "identity_verification_v2",
+    "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
+    "sessionStatus": "COMPLETED",
+    "lastStepId": "My step",
+    "lastStepType": "END",
+    "lastStepStatus": "COMPLETED"
+  }
 }
 
 ```
@@ -124,12 +130,13 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   "eventVersion": "123",
   "eventDeliveryId": "1",
   "createdAt": "2025-11-24T11:15:30.654Z",
-  "flowId": "identity_verification_v2",
-  "sessionId": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
-  "sessionStatus": "EXPIRED",
-  "lastStepId": "My step",
-  "lastStepType": "DOC_ID:v2",
-  "lastStepStatus": "EXPIRED"
+  "payload": {
+    "flowId": "identity_verification_v2",
+    "sessionId": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
+    "sessionStatus": "EXPIRED",
+    "lastStepId": "My step",
+    "lastStepType": "DOC_ID:v2",
+    "lastStepStatus": "EXPIRED"
+  }
 }
-
 ```

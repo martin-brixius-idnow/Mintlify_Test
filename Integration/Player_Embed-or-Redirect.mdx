@@ -3,7 +3,7 @@ title: 'Embed or Redirect'
 description: 'Integrating Player into your frontend application'
 ---
 
-## Getting Started
+## Overview
 
 ### Prerequisites
 
@@ -29,7 +29,7 @@ Before integrating with the Player, you need to set up your flow:
 
 ---
 
-## Step 1. Create Flow Session
+## Create Flow Session
 
 Call the Session API to initiate a session.
 
@@ -38,7 +38,7 @@ Call the Session API to initiate a session.
 
 ---
 
-## Step 2. Obtain the Session Token
+## Obtain the Session Token
 
 The API returns a session token that you'll use to direct users to the Player.
 
@@ -59,7 +59,7 @@ The API returns a session token that you'll use to direct users to the Player.
 
 ---
 
-## Step 3. Construct Player URL
+## Construct Player URL
 
 Once you receive the session token from the API response, construct the Player URL by appending it as a query parameter. Direct your user to this URL to begin the verification process.
 
@@ -73,19 +73,19 @@ const FormData = require('form-data');
 
 const form = new FormData();
 form.append('BasicIdentity', JSON.stringify({
-  name: 'John Doe',
-  familyName: 'Doe',
-  givenName: 'John',
-  birthDate: '1990-01-15'
+  name: 'John Doe',
+  familyName: 'Doe',
+  givenName: 'John',
+  birthDate: '1990-01-15'
 }));
 // Optional: Add document images
 // form.append('DocumentImages', documentBuffer, 'document.jpg');
 
-const response = await axios.post(`/flows/${flowId}/${environment}/sessions`, form, {
-  headers: {
-    'Authorization': `Bearer ${accessToken}`,
-    ...form.getHeaders()
-  }
+const response = await axios.post(`/flows/${flowId}/sessions`, form, {
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    ...form.getHeaders()
+  }
 });
 
 const sessionToken = response.data.sessionToken;
@@ -97,10 +97,10 @@ const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=$
 ```code-tabs
 import requests
 
-url = f"/flows/{flow_id}/{environment}/sessions"
+url = f"/flows/{flow_id}/sessions"
 headers = {"Authorization": f"Bearer {access_token}"}
 data = {
-    'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
+    'BasicIdentity': '{"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}'
 }
 # Optional: Add binary files
 # files = {'DocumentImages': open('document.jpg', 'rb')}
@@ -117,14 +117,14 @@ player_url = f"https://player-trustplatform.idnow.io/player/?session_token={sess
 ```code-tabs
 HttpClient client = HttpClient.newHttpClient();
 
-String requestBody = "BasicIdentity={\"name\":\"John Doe\",\"familyName\":\"Doe\",\"givenName\":\"John\",\"birthDate\":\"1990-01-15\"}";
+String requestBody = "BasicIdentity={"name":"John Doe","familyName":"Doe","givenName":"John","birthDate":"1990-01-15"}";
 
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("/flows/" + flowId + "/" + environment + "/sessions"))
-    .header("Authorization", "Bearer " + accessToken)
-    .header("Content-Type", "application/x-www-form-urlencoded")
-    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-    .build();
+    .uri(URI.create("/flows/" + flowId + "/sessions"))
+    .header("Authorization", "Bearer " + accessToken)
+    .header("Content-Type", "application/x-www-form-urlencoded")
+    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+    .build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 String sessionToken = extractSessionToken(response.body());
@@ -163,7 +163,7 @@ https://player-trustplatform-staging.idnow.io/player/?sessionToken=abc123def456
 
 ---
 
-## Step 4. Choose Integration Method
+## Choose Integration Method
 
 ### Redirect Integration
 

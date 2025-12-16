@@ -1,11 +1,11 @@
 ---
 title: "Create Session"
-description: "Initiate a new verification session for a flow"
+description: "Initiate a new verification session for a specific flow"
 ---
 
 ## Overview
 
-Create a new session to start a flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
+Create a new session to start a verification flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
 
 ## Endpoint
 
@@ -51,6 +51,30 @@ POST /flows/{flowId}/sessions
 | `environment` | string | Yes | Target environment (e.g., `production`, `sandbox`) |
 | `input` | array | Yes | Array of input data blocks |
 
+### Input data blocks
+
+<Info>
+For a complete list of available data block types and their schemas, see [Core Concept: DataBlocks](https://idnow.mintlify.app/Platform_Guides/Core_Concept_DataBlocks).
+</Info>
+
+#### BasicIdentity
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | Must be `BasicIdentity` |
+| `name` | string | No | Full name |
+| `familyName` | string | No | Last name / surname |
+| `givenName` | string | No | First name / given name |
+| `birthDate` | string | No | Date of birth in `YYYY-MM-DD` format |
+
+#### DocumentImages
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | Must be `DocumentImages` |
+| `documentType` | string | Yes | One of: `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` |
+| `frontSide` | byte array | Yes | Front side image of the document |
+| `backSide` | byte array | No | Back side image of the document |
 
 ## Response
 
@@ -63,7 +87,8 @@ POST /flows/{flowId}/sessions
     "sessionId": "123",
     "sessionStatus": "created",
     "createdAt": "2024-11-04T10:30:00Z"
-  }
+  },
+  "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
@@ -78,6 +103,7 @@ POST /flows/{flowId}/sessions
 | `sessionContext.sessionId` | string | Unique session identifier |
 | `sessionContext.sessionStatus` | string | Initial status: `created` |
 | `sessionContext.createdAt` | string | ISO 8601 timestamp of session creation |
+| `sessionToken` | string | JWT token used to initialize the Player |
 
 ## Example
 
@@ -105,3 +131,4 @@ curl https://api.idnow.io/v1/flows/wf_1a2b3c4d5e6f/sessions \
 - Session status is set to `created` immediately upon successful creation
 - Input object format is analogous to the Datablock endpoint structure
 - Supports both interactive (customer-involved) and non-interactive (headless) flows
+- The `sessionToken` is a JWT that contains the session context and is used to initialize the Player

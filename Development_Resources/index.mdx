@@ -1,40 +1,41 @@
-
 ---
-title: "Overview"
-description: "Authenticate API requests to Trustplatform"
+title: Developer Resources
+description: Configure and operate your integration with IDnow Trustplatform.
 ---
 
-## Overview
+## Developer Resources
 
-Learn what you need to configure and operate your integration with IDnow Trustplatform. Use this section to set up secure API authentication, receive asynchronous updates via webhooks, and understand how errors are handled.
+Learn what you need to configure and operate your integration with **IDnow Trustplatform**. Use this section to set up secure API authentication, receive asynchronous updates via webhooks, and understand how errors are handled.
 
 ## Setup and integration
 
-[
-###### API credentials
+<CardGroup cols={2}>
+  <Card
+    title="API credentials"
+    href="/Development_Resources/Manage"
+  >
+    Create and manage API keys (Public key ID and Client secret), assign permissions, and handle credentials securely in Studio.
+  </Card>
 
-Create and manage API keys (Public key ID and Client secret), assign permissions, and handle credentials securely in Studio.
+  <Card
+    title="Webhooks"
+    href="/Development_Resources/Webhooks_Manage"
+  >
+    Set up HTTPS webhook endpoints in Studio to receive asynchronous updates about flows and steps, with automatic retries and idempotent processing using `event_id`.
+  </Card>
 
-](/Development_Resources/Manage)
+  <Card
+    title="Webhook security"
+    href="/Development_Resources/Webhooks_Secure"
+  >
+    Secure webhook endpoints using API tokens, optional JWT signatures, IP allowlisting, TLS 1.2+, and standard security headers.
+  </Card>
 
-[
-###### Webhooks
-
-Set up HTTPS webhook endpoints in Studio to receive asynchronous updates about flows and steps, with automatic retries and idempotent processing using `event_id`.
-
-](/Development_Resources/Webhooks_Manage)
-
-[
-###### Webhook security
-
-Secure webhook endpoints using API tokens, optional JWT signatures, IP allowlisting, TLS 1.2+, and standard security headers.
-
-](/Development_Resources/Webhooks_Secure)
-
-[
-###### Error handling
-
-Learn about Error Handling in IDnow Trustplatform.
-
-](/Development_Resources/Error_Handling)
+  <Card
+    title="Error handling"
+    href="/Development_Resources/Error_Handling"
+  >
+    Learn how errors are structured, returned, and handled in IDnow Trustplatform.
+  </Card>
+</CardGroup>
 

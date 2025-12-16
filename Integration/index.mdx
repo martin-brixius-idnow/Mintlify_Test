@@ -1,31 +1,36 @@
 ---
 title: "Overview"
-description: "Three endpoints. Zero friction. Ship identity flows in minutes."
+description: "Five endpoints. Zero friction. Ship identity flows in minutes."
 ---
 
 ## How it works
 
-Ship identity flows in minutes, not weeks. One authentication. Three endpoints. Unlimited workflows.
+Ship identity flows in minutes, not weeks. One authentication. A small, stable set of endpoints. Unlimited identity journeys.
 
 <Note>
-The API returns only what you need. No bloat. No unnecessary PII exposure. Request full data when you want it. Ignore it when you don't.
+By design, the API returns only essential metadata and datablock references by default. This keeps payloads small and limits PII exposure. When you need full identity data or documents, you fetch it explicitly via dedicated endpoints.
 </Note>
 
 <Steps>
   <Step title="Authenticate once" icon="key">
-    OAuth 2.0. Standard flow. Works everywhere.
+    Obtain an OAuth 2.0 access token via the <strong>Get Token</strong> endpoint and use it across all flows.
   </Step>
   
-  <Step title="Execute any workflow" icon="play">
-    `POST /v1/workflows/{id}/executions` — Start verification, login, signature, fraud check. Whatever you built.
+  <Step title="Receive available flows" icon="list-tree">
+    <code>GET /flows</code> — List all flows configured Platform.
   </Step>
   
-  <Step title="Get status instantly" icon="bolt">
-    `GET /v1/executions/{id}` — Poll for completion. Datablock references only. Fast responses.
+  <Step title="Create a verification session" icon="play">
+    <code>POST /flows/{flowId}/sessions</code> — Start a new session for a given flow, provide input Datablocks, and receive a <code>sessionId</code> plus a <code>sessionToken</code> for the Player.
   </Step>
   
-  <Step title="Fetch data on demand" icon="download">
-    `GET /v1/executions/{id}/datablocks` — Request identity data when you actually need it.
+  <Step title="Track status and decisions" icon="bolt">
+    <code>GET /session/{sessionId}</code> — Poll for session status, decision outcome, timestamps, and the last executed step — without pulling full PII.
+  </Step>
+  
+  <Step title="Fetch data and files on demand" icon="download">
+    <code>GET /session/{sessionId}/datablocks</code> — Retrieve structured identity data (Datablocks) when you actually need it.  
+    <code>GET /files/{fileId}</code> — Download document images and other binary artifacts referenced from Datablocks.
   </Step>
 </Steps>
 
@@ -39,31 +44,31 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="lock"
     color="#10b981"
   >
-    Datablock references, not raw PII. Minimize exposure. Maximize control.
+    Session and flow endpoints return lean, decision-focused metadata and Datablock references rather than full raw PII. This minimizes data exposure by default and supports privacy-by-design principles. You explicitly choose when—and if—to retrieve underlying identity attributes, documents, or files.
   </Card>
   
   <Card 
-    title="Expand what you need" 
+    title="Clear session model" 
     icon="arrows-maximize"
     color="#3b82f6"
   >
-    `expand[]=workflow_path` for audit trails. `expand[]=datablocks` for data. Your call.
+    Flows define reusable business logic, while sessions represent individual user journeys. Start with <code>POST /flows/{`{flowId}`}/sessions</code>, then track progress and outcomes via <code>GET /session/{`{sessionId}`}</code>. This separation keeps integrations predictable and easy to reason about.
   </Card>
   
   <Card 
-    title="Complete audit trails" 
+    title="Audit-ready by design" 
     icon="route"
     color="#8b5cf6"
   >
-    Every node. Every transition. Every timestamp. Full lineage when you expand.
+    Each session records status, timestamps, subject references, and the last executed step. Combined with Datablocks and file references, this enables full decision traceability for compliance reviews, dispute resolution, and internal or external audits.
   </Card>
   
   <Card 
-    title="Zero vendor lock-in" 
-    icon="code-branch"
+    title="Flexible frontends" 
+    icon="display"
     color="#f59e0b"
   >
-    Versioned endpoints. Swap workflows. Change providers. No rewrites.
+    Use the same backend APIs for both frontend patterns. Pass the session token to the hosted Player via full-page redirects for maximum isolation, or embed it in an iframe for seamless in-app journeys—without changing backend logic.
   </Card>
 </CardGroup>
 
@@ -71,37 +76,61 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 ## Integration paths
 
-<CardGroup cols={2}>
+<CardGroup cols={3}>
   <Card
     title="Authenticate"
     icon="fingerprint"
     href="/Integration/Authenticate"
   >
-    OAuth 2.0 credentials. Token refresh. Production-ready security.
+    Obtain an OAuth 2.0 access token using <strong>Get Token</strong>, and attach it as a bearer token to all subsequent API requests.
   </Card>
   
   <Card
-    title="Execute workflows"
+    title="Get Flows"
+    icon="list-tree"
+    href="/Integration/get-flows"
+  >
+    Discover all available flows in your environment with <code>GET /flows</code>. Map them to onboarding, KYC, AML, or risk assessment journeys.
+  </Card>
+  
+  <Card
+    title="Create Session"
     icon="rocket"
-    href="/Integration/Execute_Workflows"
+    href="/Integration/create-session"
   >
-    Launch any flow. Pass context. Track execution state.
+    Start a new journey with <code>POST /flows/{`{flowId}`}/sessions</code>. Provide input Datablocks and receive a <code>sessionId</code> and <code>sessionToken</code> for backend tracking and frontend user interaction.
   </Card>
   
   <Card
-    title="Retrieve results"
+    title="Get Session Results"
     icon="chart-network"
-    href="/Integration/Retrieve_Results"
+    href="/Integration/get-session-results"
   >
-    Poll for completion. Handle status transitions. Get references.
+    Poll <code>GET /session/{`{sessionId}`}</code> to track status, completion, decision outcomes, and timestamps—without automatically retrieving sensitive identity data.
   </Card>
   
   <Card
-    title="Fetch datablocks"
+    title="Get Datablocks"
     icon="database"
-    href="/Integration/Fetch_Datablocks"
+    href="/Integration/get-datablocks"
   >
-    Pull identity data, documents, signatures. Full control over what you access.
+    Use <code>GET /session/{`{sessionId}`}/datablocks</code> to fetch structured Datablocks such as identities, verification results, documents, and credentials when deeper insight is required.
+  </Card>
+  
+  <Card
+    title="Get Files"
+    icon="file-image"
+    href="/Integration/get-files"
+  >
+    Retrieve files referenced by Datablocks—such as document images or selfies—via <code>GET /files/{`{fileId}`}</code>.
+  </Card>
+  
+  <Card
+    title="Embed or Redirect Player"
+    icon="browser"
+    href="/Integration/Player_Embed-or-Redirect"
+  >
+    Use the returned <code>sessionToken</code> to launch the hosted Player via redirect or embed it directly in your application. Both approaches connect to the same session and backend APIs.
   </Card>
 </CardGroup>
 
@@ -111,19 +140,19 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 <AccordionGroup>
   <Accordion title="Data exposure" icon="shield-halved">
-    Request only the datablocks you need. Leave the rest untouched.
+    Keep your PII surface area intentionally small. Use session results for high-level decisions, and only call <code>GET /session/{`{sessionId}`}/datablocks</code> or <code>GET /files/{`{fileId}`}</code> when downstream processes truly require that data.
   </Accordion>
   
-  <Accordion title="Audit granularity" icon="list-timeline">
-    Expand workflow paths to see execution history down to the millisecond.
+  <Accordion title="Result granularity" icon="list-timeline">
+    Track session lifecycle events—status changes, timestamps, and the last executed step—via <code>GET /session/{`{sessionId}`}</code>. When needed, correlate results with Datablocks to understand exactly what checks ran and what evidence was collected.
   </Accordion>
   
   <Accordion title="Session behavior" icon="clock">
-    Set expiry. Manage state. Control lifecycle.
+    Sessions begin in a <code>created</code> state and progress as users complete steps in the Player. Poll for state changes, detect completion or failure, and handle expiration to keep backend workflows in sync.
   </Accordion>
   
-  <Accordion title="Custom context" icon="tags">
-    Attach metadata for your downstream systems. It flows through unchanged.
+  <Accordion title="Frontend integration" icon="display">
+    Redirect and embedded experiences share the same session model and APIs. The <code>sessionToken</code> securely binds frontend interactions to backend tracking, allowing you to evolve your UX without re-architecting your integration.
   </Accordion>
 </AccordionGroup>
 
@@ -136,9 +165,11 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
   icon="code"
   href="/API_Reference/overview"
 >
-  Every endpoint. Every parameter. Every schema. Copy-paste examples included.
+  Complete endpoint documentation with parameters, schemas, and copy-paste-ready examples.
 </Card>
 
 <Tip>
-**Pro tip:** Use `expand[]=workflow_path` in staging to debug flows. Use minimal responses in production to stay fast.
+  <strong>Pro tip:</strong> During development, inspect full payloads using <code>GET /session/{`{sessionId}`}/datablocks</code> and <code>GET /files/{`{fileId}`}</code>. In production, rely on lean session results and retrieve only the Datablocks and files your business truly needs for performance and compliance.
+</Tip>
+
 </Tip>

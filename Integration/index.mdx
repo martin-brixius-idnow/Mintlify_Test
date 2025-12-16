@@ -13,7 +13,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 <Steps>
   <Step title="Authenticate once" icon="key">
-    Obtain an OAuth 2.0 access token using the Get Token endpoint and reuse it across all flows.
+    Obtain an OAuth 2.0 access token using the `Get /Token` endpoint and reuse it across all flows.
   </Step>
 
   <Step title="Receive available flows" icon="list-tree">
@@ -21,15 +21,16 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
   </Step>
 
   <Step title="Create a verification session" icon="play">
-    Start a new session with `POST /flows/FLOW_ID/sessions` and receive a sessionId and sessionToken.
+    Start a new session with `POST /flows/{flowId}/sessions` and receive a sessionId and sessionToken.
   </Step>
 
   <Step title="Track status and decisions" icon="bolt">
-    Poll `GET /session/SESSION_ID` to retrieve status, decision outcome, timestamps, and the last executed step.
+    Poll `GET /session/{sessionnId}` to retrieve status, decision outcome, timestamps, and the last executed step.
   </Step>
 
   <Step title="Fetch data and files on demand" icon="download">
-    Retrieve identity data via `GET /session/SESSION_ID/datablocks` and files via `GET /files/FILE_ID` only when needed.
+    Retrieve identity data via `GET /session/{sessionnId}/datablocks` and files via `GET /files/{file
+Id}` only when needed.
   </Step>
 </Steps>
 
@@ -39,19 +40,19 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 <CardGroup cols={2}>
   <Card title="Privacy by default" icon="lock" color="#10b981">
-    Session and flow endpoints return lean decision metadata and Datablock references instead of raw PII. You control when sensitive data is accessed.
+    Endpoints return decision metadata and Datablock references, not raw PII. Fetch identity data or files only when needed.
   </Card>
 
   <Card title="Clear session model" icon="arrows-maximize" color="#3b82f6">
-    Flows define business logic. Sessions represent individual user journeys. This separation keeps integrations predictable and easy to reason about.
+    Flows define logic. Sessions track individual user runs. Start a session, then query its state and result.
   </Card>
 
   <Card title="Audit-ready by design" icon="route" color="#8b5cf6">
-    Sessions record status, timestamps, subject references, and the last executed step, enabling full decision traceability.
+    Sessions expose status, timestamps, subject references, and last executed step for traceability and audits.
   </Card>
 
   <Card title="Flexible frontends" icon="display" color="#f59e0b">
-    Use the same backend APIs for redirects or embedded Player experiences without changing your integration.
+    Use the same APIs for redirect or embedded Player integrations. Frontend choice does not affect backend logic.
   </Card>
 </CardGroup>
 
@@ -62,11 +63,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 <Card
   title="API Reference — Full specs"
   icon="code"
-  href="/API_Reference/overview"
+  href="/api-reference"
 >
   Complete endpoint documentation with parameters, schemas, and examples.
 </Card>
-
-<Tip>
-  Pro tip: In development, inspect full payloads. In production, rely on lean session results and fetch Datablocks and files only when required.
-</Tip>

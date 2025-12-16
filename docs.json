@@ -95,7 +95,6 @@
             "group": "Document-based IDV",
             "pages": [
               "Platform_Guides/Document_Verification_Sphinx",
-              "Platform_Guides/Document_Verification_IDcheck",
               "Platform_Guides/Document_Verification_Headless",
               "Platform_Guides/Identity_Comparison"
             ]

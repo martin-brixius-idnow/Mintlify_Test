@@ -13,24 +13,24 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 <Steps>
   <Step title="Authenticate once" icon="key">
-    Obtain an OAuth 2.0 access token via the <strong>Get Token</strong> endpoint and use it across all flows.
+    Obtain an OAuth 2.0 access token via the <strong>Get Token</strong> endpoint and reuse it across all flows.
   </Step>
   
   <Step title="Receive available flows" icon="list-tree">
-    <code>GET /flows</code> — List all flows configured Platform.
+    <code>GET /flows</code> — List all flows configured in your environment.
   </Step>
   
   <Step title="Create a verification session" icon="play">
-    <code>POST /flows/{flowId}/sessions</code> — Start a new session for a given flow, provide input Datablocks, and receive a <code>sessionId</code> plus a <code>sessionToken</code> for the Player.
+    <code>POST /flows/&lt;flowId&gt;/sessions</code> — Start a new session for a given flow, provide input Datablocks, and receive a <code>sessionId</code> plus a <code>sessionToken</code> for the Player.
   </Step>
   
   <Step title="Track status and decisions" icon="bolt">
-    <code>GET /session/{sessionId}</code> — Poll for session status, decision outcome, timestamps, and the last executed step — without pulling full PII.
+    <code>GET /session/&lt;sessionId&gt;</code> — Poll for session status, decision outcome, timestamps, and the last executed step, without pulling full PII.
   </Step>
   
   <Step title="Fetch data and files on demand" icon="download">
-    <code>GET /session/{sessionId}/datablocks</code> — Retrieve structured identity data (Datablocks) when you actually need it.  
-    <code>GET /files/{fileId}</code> — Download document images and other binary artifacts referenced from Datablocks.
+    <code>GET /session/&lt;sessionId&gt;/datablocks</code> — Retrieve structured identity data only when you actually need it.  
+    <code>GET /files/&lt;fileId&gt;</code> — Download document images and other binary artifacts referenced from Datablocks.
   </Step>
 </Steps>
 
@@ -52,7 +52,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="arrows-maximize"
     color="#3b82f6"
   >
-    Flows define reusable business logic, while sessions represent individual user journeys. Start with <code>POST /flows/{`{flowId}`}/sessions</code>, then track progress and outcomes via <code>GET /session/{`{sessionId}`}</code>. This separation keeps integrations predictable and easy to reason about.
+    Flows define reusable business logic, while sessions represent individual user journeys. Start with <code>POST /flows/&lt;flowId&gt;/sessions</code>, then track progress and outcomes via <code>GET /session/&lt;sessionId&gt;</code>. This separation keeps integrations predictable and easy to reason about.
   </Card>
   
   <Card 
@@ -98,7 +98,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="rocket"
     href="/Integration/create-session"
   >
-    Start a new journey with <code>POST /flows/{`{flowId}`}/sessions</code>. Provide input Datablocks and receive a <code>sessionId</code> and <code>sessionToken</code> for backend tracking and frontend user interaction.
+    Start a new journey with <code>POST /flows/&lt;flowId&gt;/sessions</code>. Provide input Datablocks and receive a <code>sessionId</code> and <code>sessionToken</code>.
   </Card>
   
   <Card
@@ -106,7 +106,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="chart-network"
     href="/Integration/get-session-results"
   >
-    Poll <code>GET /session/{`{sessionId}`}</code> to track status, completion, decision outcomes, and timestamps—without automatically retrieving sensitive identity data.
+    Poll <code>GET /session/&lt;sessionId&gt;</code> to track status, completion, decision outcomes, and timestamps without automatically retrieving sensitive identity data.
   </Card>
   
   <Card
@@ -114,7 +114,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="database"
     href="/Integration/get-datablocks"
   >
-    Use <code>GET /session/{`{sessionId}`}/datablocks</code> to fetch structured Datablocks such as identities, verification results, documents, and credentials when deeper insight is required.
+    Use <code>GET /session/&lt;sessionId&gt;/datablocks</code> to fetch structured Datablocks such as identities, verification results, documents, and credentials when deeper insight is required.
   </Card>
   
   <Card
@@ -122,7 +122,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="file-image"
     href="/Integration/get-files"
   >
-    Retrieve files referenced by Datablocks—such as document images or selfies—via <code>GET /files/{`{fileId}`}</code>.
+    Retrieve files referenced by Datablocks—such as document images or selfies—via <code>GET /files/&lt;fileId&gt;</code>.
   </Card>
   
   <Card
@@ -130,7 +130,7 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
     icon="browser"
     href="/Integration/Player_Embed-or-Redirect"
   >
-    Use the returned <code>sessionToken</code> to launch the hosted Player via redirect or embed it directly in your application. Both approaches connect to the same session and backend APIs.
+    Use the returned <code>sessionToken</code> to launch the hosted Player via redirect or embed it directly in your application.
   </Card>
 </CardGroup>
 
@@ -140,11 +140,11 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 <AccordionGroup>
   <Accordion title="Data exposure" icon="shield-halved">
-    Keep your PII surface area intentionally small. Use session results for high-level decisions, and only call <code>GET /session/{`{sessionId}`}/datablocks</code> or <code>GET /files/{`{fileId}`}</code> when downstream processes truly require that data.
+    Keep your PII surface area intentionally small. Use session results for high-level decisions, and only call <code>GET /session/&lt;sessionId&gt;/datablocks</code> or <code>GET /files/&lt;fileId&gt;</code> when downstream processes truly require that data.
   </Accordion>
   
   <Accordion title="Result granularity" icon="list-timeline">
-    Track session lifecycle events—status changes, timestamps, and the last executed step—via <code>GET /session/{`{sessionId}`}</code>. When needed, correlate results with Datablocks to understand exactly what checks ran and what evidence was collected.
+    Track session lifecycle events—status changes, timestamps, and the last executed step—via <code>GET /session/&lt;sessionId&gt;</code>. When needed, correlate results with Datablocks to understand exactly what checks ran and what evidence was collected.
   </Accordion>
   
   <Accordion title="Session behavior" icon="clock">
@@ -169,7 +169,5 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 </Card>
 
 <Tip>
-  <strong>Pro tip:</strong> During development, inspect full payloads using <code>GET /session/{`{sessionId}`}/datablocks</code> and <code>GET /files/{`{fileId}`}</code>. In production, rely on lean session results and retrieve only the Datablocks and files your business truly needs for performance and compliance.
-</Tip>
-
+  <strong>Pro tip:</strong> During development, inspect full payloads using <code>GET /session/&lt;sessionId&gt;/datablocks</code> and <code>GET /files/&lt;fileId&gt;</code>. In production, rely on lean session results and retrieve only the Datablocks and files your business truly needs for performance and compliance.
 </Tip>

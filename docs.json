@@ -137,11 +137,11 @@
             "pages": ["Integration/index"]
           },
           {
-            "group": "Authenticate",
+            "group": "Authentication",
             "pages": ["Integration/Authenticate"]
           },
           {
-            "group": "Create Sessions",
+            "group": "Initialize Session",
             "pages": [
               "Integration/get-flows",
               "Integration/create-session"

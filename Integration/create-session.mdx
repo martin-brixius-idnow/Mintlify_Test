@@ -19,7 +19,7 @@ POST /flows/{flowId}/sessions
 |-----------|------|----------|-------------|
 | `flowId` | string | Yes | The unique identifier of the flow to execute |
 
-## Request
+***Request***
 
 ```json
 {
@@ -76,7 +76,7 @@ For a complete list of available data block types and their schemas, see [Core C
 | `frontSide` | byte array | Yes | Front side image of the document |
 | `backSide` | byte array | No | Back side image of the document |
 
-## Response
+***Response***
 
 ```json
 {
@@ -105,7 +105,7 @@ For a complete list of available data block types and their schemas, see [Core C
 | `sessionContext.createdAt` | string | ISO 8601 timestamp of session creation |
 | `sessionToken` | string | JWT token used to initialize the Player |
 
-## Example
+***Example***
 
 ```bash
 curl https://api.idnow.io/v1/flows/wf_1a2b3c4d5e6f/sessions \

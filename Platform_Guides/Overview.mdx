@@ -3,6 +3,8 @@ title: Overview
 description: Flows, Steps, Verdicts and DataBlocks.
 ---
 
+## Introduction
+
 This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
 
 - **Flow**: A flow that runs from start to end and defines the operational steps leading to a final outcome.
@@ -21,7 +23,7 @@ At IDnow, a **flow** defines how input data moves through a series of steps unti
 
 ![Minimal flow with Start, a single processing Step, and an End Step.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-introduction.png)
 
-### Start and and End Step
+## Start and End Step
 
 Every flow must contain exactly one **Start Step** as its entry point and at least one **End Step** representing a final outcome. Each session of a flow always ends in an End Step, and therefore always results in a final outcome of either `accepted` or `rejected`.
 

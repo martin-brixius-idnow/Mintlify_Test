@@ -9,9 +9,7 @@ API keys are used to securely authenticate your client applications with Trustpl
 
 You can create multiple API keys for different applications or environments, assign specific permissions to each key, and manage them through the IDnow Studio settings interface.
 
-<Warning>
-  **Never share client secrets with anyone. Do not store API keys in version control.**
-</Warning>
+> **Never share client secrets with anyone. Do not store API keys in version control.**
 
 ## Access API key management
 
@@ -21,12 +19,11 @@ To manage your API keys:
 2. Navigate to **Settings** in the left sidebar.
 3. Under the **DEVELOPER** section, select **API keys**.
 
-<img src="images/Resources/API_Keys-Overview.png" alt="API keys management interface showing the list of existing API keys" />
+![API keys management interface showing the list of existing API keys](images/Resources/API_Keys-Overview.png)
 
 The API keys page displays:
 - **Environments**: Your available environments (Live, Staging, Draft) with their respective API endpoints
 - **API keys**: A list of all existing API keys with their names, creation details, and usage information
-
 
 ## Create an API key
 
@@ -45,35 +42,30 @@ To create a new API key:
 | **Read API resources** | Allows the API key to retrieve data from the API |
 | **Edit and create API resources** | Allows the API key to modify and create new resources via the API |
 
-<Info>
-  Select only the permissions that your application needs. This follows the principle of least privilege for better security.
-</Info>
+> Select only the permissions that your application needs. This follows the principle of least privilege for better security.
 
-<img src="images/Resources/API_Keys-Create.png" alt="Create API key dialog and API key created confirmation" />
+![Create API key dialog and API key created confirmation](images/Resources/API_Keys-Create.png)
 
 4. Select **Create API key**.
 
 ### Save your credentials
 
 5. The **API key created** dialog displays your credentials:
-   - **Public key ID**: Use this to identify your API key
-   - **Client secret**: Use this together with the Public key ID to authenticate
+   - **Public key ID**: Use this to identify your API key
+   - **Client secret**: Use this together with the Public key ID to authenticate
 
 6. Copy both values using the copy icons and store them securely in your system.
 
-<Warning>
-  **Make sure to copy the client secret now. You won't be able to see it again.**
-  
-  If you lose the client secret, you will need to regenerate it, which will require updating all applications using this API key.
-</Warning>
+> **Make sure to copy the client secret now. You won't be able to see it again.**
+>
+> If you lose the client secret, you will need to regenerate it, which will require updating all applications using this API key.
 
 7. Check the confirmation box **I have saved these credentials**.
 8. Select **Confirm**.
 
 Your new API key is now ready to use and will appear in the API keys list.
 
-<img src="images/Resources/API_Keys-Save-Key.png" alt="Save API key" />
-
+![Save API key](images/Resources/API_Keys-Save-Key.png)
 
 ## View API key details
 
@@ -82,9 +74,9 @@ The API keys list shows important information about each credential:
 - **API key name**: The descriptive name you assigned
 - **Creator and creation date**: Who created the API key and when (for example, "Created 2 months ago by Bob Michaels")
 - **Last used**: When the API key was last used for authentication (for example, "Last used 1 day ago")
-- **Actions**: 
-  - **View details**: Opens the edit dialog
-  - **Delete icon**: Removes the API key
+- **Actions**:
+  - **View details**: Opens the edit dialog
+  - **Delete icon**: Removes the API key
 
 This information helps you track and audit API key usage across your organization.
 
@@ -97,20 +89,18 @@ To edit an API key:
 1. From the API keys list, locate the API key you want to modify.
 2. Select **View details**.
 3. In the **Edit API key** dialog, you can:
-   - Update the **API key name**
-   - View the **Public key ID** (read-only, with copy functionality)
-   - See the masked **Client secret** (for security, the actual value is hidden)
-   - Modify **Permissions** by checking or unchecking the available options
-   - **Regenerate** the client secret if needed
+   - Update the **API key name**
+   - View the **Public key ID** (read-only, with copy functionality)
+   - See the masked **Client secret** (for security, the actual value is hidden)
+   - Modify **Permissions** by checking or unchecking the available options
+   - **Regenerate** the client secret if needed
 
-<img src="/mnt/data/API_Keys-Edit.png alt="Edit API key dialog showing editable fields and permissions" />
+![Edit API key dialog showing editable fields and permissions](images/Resources/API_Keys-Edit.png)
 
 4. After making your changes, select **Save changes**.
 5. To cancel without saving, select **Cancel**.
 
-<Info>
-  The **Public key ID** cannot be changed. It remains constant throughout the API key's lifecycle.
-</Info>
+> The **Public key ID** cannot be changed. It remains constant throughout the API key's lifecycle.
 
 ## Regenerate client secret
 
@@ -121,23 +111,19 @@ To regenerate the client secret:
 1. From the **Edit API key** dialog, select **Regenerate** next to the Client secret field.
 2. In the **Rotate client secret?** confirmation dialog, review the warning message.
 
-<Warning>
-  **Important**: This will immediately revoke access for any application using the old client secret. You have to update all client applications using this API key.
-</Warning>
+> **Important**: This will immediately revoke access for any application using the old client secret. You have to update all client applications using this API key.
 
 3. If you're ready to proceed, select **Regenerate client secret**. Otherwise, select **Cancel**.
 
-<img src="/mnt/data/API_Keys-Regenerate.png" alt="Regenerate client secret confirmation and updated credentials" />
+![Regenerate client secret confirmation and updated credentials](images/Resources/API_Keys-Regenerate.png)
 
 4. The **Client secret updated** dialog displays:
-   - **Public key ID (unchanged)**: Your Public key ID remains the same
-   - **Client secret**: Your new client secret
+   - **Public key ID (unchanged)**: Your Public key ID remains the same
+   - **Client secret**: Your new client secret
 
 5. Copy the new client secret using the copy icon and store it securely.
 
-<Warning>
-  **Make sure to copy the client secret now. You won't be able to see it again.**
-</Warning>
+> **Make sure to copy the client secret now. You won't be able to see it again.**
 
 6. Check the confirmation box **I have saved these credentials**.
 7. Select **Confirm**.
@@ -154,16 +140,14 @@ To delete an API key:
 1. From the API keys list, locate the API key you want to delete.
 2. Select the **Delete icon** (trash can).
 3. In the **Delete API key?** confirmation dialog, review the warning message:
-   - The API key name is displayed for confirmation
-   - Warning: "This will immediately revoke access for any application using this API key. You will not be able to recover this API key later."
+   - The API key name is displayed for confirmation
+   - Warning: "This will immediately revoke access for any application using this API key. You will not be able to recover this API key later."
 
 4. If you're certain you want to delete the API key, select **Delete API key**. Otherwise, select **Cancel**.
 
-<img src="images/Resources/API_Keys-Delete.png" alt="Delete API key confirmation dialog" />
+![Delete API key confirmation dialog](images/Resources/API_Keys-Delete.png)
 
-<Warning>
-  **This action cannot be undone.** Make sure to update or disable all applications using this API key before deletion to avoid service disruptions.
-</Warning>
+> **This action cannot be undone.** Make sure to update or disable all applications using this API key before deletion to avoid service disruptions.
 
 The API key is immediately deleted and can no longer be used to authenticate API requests.
 

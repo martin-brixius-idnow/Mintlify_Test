@@ -13,13 +13,13 @@ Create a new session to start a verification flow. The session begins in a `crea
 POST /flows/{flowId}/sessions
 ```
 
-### Path parameters
+***Path parameters***
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `flowId` | string | Yes | The unique identifier of the flow to execute |
 
-***Request***
+## Request
 
 ```json
 {
@@ -43,7 +43,7 @@ POST /flows/{flowId}/sessions
 }
 ```
 
-### Request parameters
+***Request parameters***
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -51,32 +51,7 @@ POST /flows/{flowId}/sessions
 | `environment` | string | Yes | Target environment (e.g., `production`, `sandbox`) |
 | `input` | array | Yes | Array of input data blocks |
 
-### Input data blocks
-
-<Info>
-For a complete list of available data block types and their schemas, see [Core Concept: DataBlocks](https://idnow.mintlify.app/Platform_Guides/Core_Concept_DataBlocks).
-</Info>
-
-#### BasicIdentity
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `type` | string | Yes | Must be `BasicIdentity` |
-| `name` | string | No | Full name |
-| `familyName` | string | No | Last name / surname |
-| `givenName` | string | No | First name / given name |
-| `birthDate` | string | No | Date of birth in `YYYY-MM-DD` format |
-
-#### DocumentImages
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `type` | string | Yes | Must be `DocumentImages` |
-| `documentType` | string | Yes | One of: `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` |
-| `frontSide` | byte array | Yes | Front side image of the document |
-| `backSide` | byte array | No | Back side image of the document |
-
-***Response***
+## Response
 
 ```json
 {
@@ -92,7 +67,7 @@ For a complete list of available data block types and their schemas, see [Core C
 }
 ```
 
-### Response parameters
+***Response parameters***
 
 | Parameter | Type | Description |
 |-----------|------|-------------|

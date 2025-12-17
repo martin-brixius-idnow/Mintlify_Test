@@ -147,8 +147,10 @@
             "pages": ["Development_Resources/index"]
           },
           {
-            "group": "API Credentials",
-            "pages": ["Development_Resources/Manage"]
+            "group": "Setup",
+            "pages": ["Development_Resources/API_Credentials"]
+            "pages": ["Development_Resources/Libaries_SDK"]
+            "pages": ["Development_Resources/Postman_Collolection"]    
           },
           {
             "group": "Webhooks",

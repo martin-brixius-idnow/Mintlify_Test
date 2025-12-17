@@ -13,40 +13,43 @@ mode: "custom"
     Your single, unified layer for identity verification, risk, and trust.
   </p>
 
-  ---
+ {/* Hero stays above this, on white background */}
 
-<div className="mt-4 max-w-2xl text-base text-slate-600">
-  <p className="font-medium text-slate-700">
-    Launch faster with ready-made solution templates, or design your own flows in minutes.
-  </p>
-  <p className="mt-1">
-    Integrate the Flow API once to run unlimited workflows and receive real-time event updates.
-  </p>
+<div className="mt-10 bg-slate-50 py-12">
+  <div className="mx-auto max-w-6xl px-6 text-center">
+
+    <p className="max-w-3xl mx-auto text-lg text-slate-700">
+      Launch faster with ready-made solution templates or your own custom flows.
+    </p>
+    <p className="mt-2 max-w-3xl mx-auto text-base text-slate-600">
+      Integrate the Flow API once to power unlimited workflows with real-time event updates.
+    </p>
+
+    <div className="mt-8">
+      <CardGroup cols={3} className="orange-cards">
+        <Card title="Get started" icon="list-check" href="/guides/setup">
+          Get an overview of the platform and get up and running in minutes.
+        </Card>
+        <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
+          Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
+        </Card>
+        <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
+          Integrate once and trigger any workflow through a single API.
+        </Card>
+      </CardGroup>
+    </div>
+
+    <div className="mt-4">
+      <CardGroup cols={1} className="orange-cards">
+        <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
+          Receive real-time updates for every flow and result.
+        </Card>
+      </CardGroup>
+    </div>
+
+  </div>
 </div>
 
-  ---
-
-  <div className="mt-10">
-    <CardGroup cols={3} className="orange-cards">
-      <Card title="Get started" icon="list-check" href="/guides/setup">
-        Get an overview of the platform and get up and running in minutes.
-      </Card>
-      <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
-        Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
-      </Card>
-      <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
-        Integrate once and trigger any workflow through a single API.
-      </Card>
-    </CardGroup>
-  </div>
-
-  <div className="mt-4">
-    <CardGroup cols={1} className="orange-cards">
-      <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
-        Receive real-time updates for every flow and result.
-      </Card>
-    </CardGroup>
-  </div>
 
   ---
 

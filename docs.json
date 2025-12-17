@@ -169,7 +169,7 @@
             ]
           },
           {
-            "group": "Event Notifications",
+            "group": "Webhooks",
             "pages": [
               "Development_Resources/Webhooks_Manage",
               "Development_Resources/Webhooks_Secure"

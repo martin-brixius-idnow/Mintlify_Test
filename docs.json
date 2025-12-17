@@ -95,8 +95,7 @@
             "group": "Document-based IDV",
             "pages": [
               "Platform_Guides/Document_Verification_Sphinx",
-              "Platform_Guides/Document_Verification_Headless",
-              "Platform_Guides/Identity_Comparison"
+              "Platform_Guides/Document_Verification_Headless"
             ]
           },
           {
@@ -125,6 +124,16 @@
             "group": "Screening",
             "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
           }
+          {
+            "group": "Action",
+            "pages": [
+              "Platform_Guides/Choice",
+              "Platform_Guides/Verification_Method_Selector",
+              "Platform_Guides/Identity_Comparison"
+            ]
+          },
+
+          
         ]
       },
       {

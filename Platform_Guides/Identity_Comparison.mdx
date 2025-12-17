@@ -42,7 +42,7 @@ The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) 
 | `noMatch`     | At least one pair of compared attribute values did not match based on the configured comparison mode. This verdict takes priority over `inconclusive` if there are also missing attribute values. |
 | `inconclusive`| One or more required attribute values are missing, making comparison impossible. No mismatches were detected among the available attributes. |
 
-## Input Data
+## Input DataBlock
 
 Input requirements for this step.
 
@@ -53,7 +53,7 @@ Input requirements for this step.
 
 **Important:** This step requires exactly two BasicIdentity DataBlocks as input. The flow validation system ensures that the steps referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a BasicIdentity DataBlock.
 
-## Output Data
+## Output DataBlock
 
 DataBlocks produced per verdict.
 

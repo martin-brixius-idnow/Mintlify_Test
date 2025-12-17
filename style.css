@@ -1,1 +1,18 @@
+.orange-cards .card {
+  background-color: #f97316; /* orange */
+  color: white;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.orange-cards .card svg {
+  color: white;
+  fill: white;
+  stroke: white;
+}
+
+/* Hover state */
+.orange-cards .card:hover {
+  background-color: #ea580c; /* darker orange */
+  transform: translateY(-2px);
+}
 

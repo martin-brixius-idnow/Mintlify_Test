@@ -8,46 +8,44 @@ mode: "center"
 Use solution templates or build your own flow in minutes.  
 Integrate the API, run unlimited workflows, and receive real-time updates for every event.
 
-<CardGroup cols={3}>
+<style>
+  .orange-cards .card {
+    background-color: #f97316;
+    color: white;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
 
-  <Card
-    title="Get started"
-    icon="list-check"
-    href="/guides/setup"
-  >
+  .orange-cards .card svg {
+    color: white;
+    fill: white;
+    stroke: white;
+  }
+
+  .orange-cards .card:hover {
+    background-color: #ea580c;
+    transform: translateY(-2px);
+  }
+</style>
+
+<CardGroup cols={3} className="orange-cards">
+  <Card title="Get started" icon="list-check" href="/guides/setup">
     Get an overview of the platform and get up and running in minutes.
   </Card>
 
-  <Card
-    title="Configure Flows"
-    icon="diagram-project"
-    href="/guides/workflows"
-  >
+  <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
     Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
   </Card>
 
-  <Card
-    title="Run Sessions & Receive Results"
-    icon="plug"
-    href="/guides/execute-flow"
-  >
+  <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
     Integrate once and trigger any workflow through a single API.
   </Card>
-
 </CardGroup>
 
-<CardGroup cols={1}>
-
-  <Card
-    title="Receive updates"
-    icon="bolt"
-    href="/guides/webhooks"
-  >
+<CardGroup cols={1} className="orange-cards">
+  <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
     Receive real-time updates for every flow and result.
   </Card>
-
 </CardGroup>
-
 
 ---
 

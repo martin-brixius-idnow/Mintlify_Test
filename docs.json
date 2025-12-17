@@ -111,7 +111,7 @@
         "tab": "Integration",
         "icon": "server",
         "groups": [
-          { "group": "Integrate", "pages": ["Integration/index"] },
+          { "group": "Integration", "pages": ["Integration/index"] },
           { "group": "Authentication", "pages": ["Integration/Authenticate"] },
           {
             "group": "Initialize Session",
@@ -143,7 +143,7 @@
         "icon": "tools",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Resources",
             "pages": [
               "Development_Resources/index"
             ]

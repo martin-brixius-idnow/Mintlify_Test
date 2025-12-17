@@ -1,42 +1,48 @@
-/* Base card style — Adyen-like */
-.orange-cards .idnow-card {
-  background-color: #ffffff !important;
-  color: #0a2540 !important; /* dark navy */
-  border: 1px solid #e6ebf1 !important;
-  cursor: pointer;
+/* Base card style in orange-cards groups */
+.orange-cards a {
+  background-color: #ffffff;
+  color: #0a2540; /* dark navy text */
+  border: 1px solid #e6ebf1;
+  border-radius: 1rem;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease,
     box-shadow 0.2s ease,
+    transform 0.2s ease,
     border-color 0.2s ease;
 }
 
-/* Title + body text inherit the card color */
-.orange-cards .idnow-card h3,
-.orange-cards .idnow-card p {
-  color: inherit !important;
+/* Let headings + body inherit color from the card */
+.orange-cards a h3,
+.orange-cards a p {
+  color: inherit;
 }
 
-/* Icons follow text color via currentColor */
-.orange-cards .idnow-card svg {
-  color: currentColor !important;
-  stroke: currentColor !important;
+/* Icons: follow the current text color */
+.orange-cards a svg {
+  color: #0a2540;
+  stroke: currentColor;
   fill: none;
-  transition: color 0.2s ease, stroke 0.2s ease;
+  transition: color 0.2s ease, stroke 0.2s ease, fill 0.2s ease;
 }
 
-/* Hover state — orange takeover */
-.orange-cards .idnow-card:hover {
-  background-color: #f97316 !important; /* orange */
-  color: #ffffff !important;            /* text becomes white */
-  transform: translateY(-2px);
+/* Hover state — orange background, white text + icons */
+.orange-cards a:hover {
+  background-color: #f97316; /* IDnow orange */
+  color: #ffffff;            /* text becomes white */
+  border-color: transparent;
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
-  border-color: transparent !important;
+  transform: translateY(-2px);
 }
 
-/* Icons automatically become white via currentColor */
-.orange-cards .idnow-card:hover svg {
-  color: #ffffff !important;
-  stroke: currentColor !important;
+/* Ensure inner text is white on hover */
+.orange-cards a:hover h3,
+.orange-cards a:hover p {
+  color: #ffffff;
+}
+
+/* Icons also turn white on hover */
+.orange-cards a:hover svg {
+  color: #ffffff;
+  stroke: currentColor;
 }

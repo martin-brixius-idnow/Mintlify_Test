@@ -1,7 +1,7 @@
-/* Base card style in orange-cards */
+/* Base style for cards in this group */
 .orange-cards [class*="Card_root"] {
   background-color: #ffffff !important;
-  color: #0a2540 !important; /* dark navy */
+  color: #0a2540 !important; /* dark text */
   border: 1px solid #e6ebf1 !important;
   border-radius: 1rem;
   cursor: pointer;
@@ -13,24 +13,19 @@
     border-color 0.2s ease;
 }
 
-/* Normal state: let inner text/icons use their own theme colours (no overrides) */
-
-/* HOVER: make everything inside white */
-.orange-cards [class*="Card_root"]:hover {
+/* HOVER: force ALL descendants to adopt orange bg + white text */
+.orange-cards [class*="Card_root"]:hover,
+.orange-cards [class*="Card_root"]:hover * {
   background-color: #f97316 !important; /* IDnow orange */
+  color: #ffffff !important;            /* text becomes white */
   border-color: transparent !important;
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
   transform: translateY(-2px);
 }
 
-/* Text (titles, body, etc.) */
-.orange-cards [class*="Card_root"]:hover *:not(svg) {
-  color: #ffffff !important;
-}
-
-/* Icons */
-.orange-cards [class*="Card_root"]:hover svg {
-  color: #ffffff !important;
-  stroke: currentColor !important;
-  fill: none !important;
+/* Icons: ensure strokes/fills are also white */
+.orange-cards [class*="Card_root"]:hover svg,
+.orange-cards [class*="Card_root"]:hover svg * {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }

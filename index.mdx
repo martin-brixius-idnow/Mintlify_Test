@@ -93,7 +93,7 @@ mode: "custom"
             API Explorer
           </div>
           <div className="mt-1 text-sm text-slate-100">
-            Explore Flow API endpoints, send test calls, and inspect responses.
+            Explore Flow API endpoints and inspect request and response examples.
           </div>
         </a>
 
@@ -106,7 +106,7 @@ mode: "custom"
             Server-side libraries
           </div>
           <div className="mt-1 text-sm text-slate-100">
-            Use official SDKs to call Trust Platform from your backend.
+            Get started fast with SDKs for seamless Trust Platform integration.
           </div>
         </a>
 
@@ -119,7 +119,7 @@ mode: "custom"
             Postman collections
           </div>
           <div className="mt-1 text-sm text-slate-100">
-            Import ready-made collections to replay common Trust Platform flows.
+            Import ready-made Postman collections to replay and test common Trust Platform flows..
           </div>
         </a>
 
@@ -132,7 +132,7 @@ mode: "custom"
             Webhooks
           </div>
           <div className="mt-1 text-sm text-slate-100">
-            Receive session status updates and decisions in your backend.
+            Receive real-time session status updates and decision events in your backend.
           </div>
         </a>
       </div>
@@ -159,13 +159,13 @@ mode: "custom"
           <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
             <div className="text-xs font-semibold text-slate-200">Request</div>
             <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
-{`curl https://api.idnow.io/v1/session/e7c2b6f1-4a9d-4e3c-8f61-9c5b2a3d8f47 \\
+{`curl https://api.idnow.io/v1/session/e7c2b6f1-4a9d-4e3c-8f61 \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "flowId": "capture",
     "environment": "live",
-    "sessionId": "e7c2b6f1-4a9d-4e3c-8f61-9c5b2a3d8f47"
+    "sessionId": "e7c2b6f1-4a9d-4e3c-8f61"
   }'`}
             </pre>
           </div>
@@ -176,7 +176,7 @@ mode: "custom"
 {`{
   "flowId": "capture",
   "environment": "live",
-  "sessionId": "e7c2b6f1-4a9d-4e3c-8f61-9c5b2a3d8f47",
+  "sessionId": "e7c2b6f1-4a9d-4e3c-8f61",
   "sessionStatus": "COMPLETED",
   "decisionOutcome": "accepted",
   "createdAt": "2024-11-04T10:30:00Z",

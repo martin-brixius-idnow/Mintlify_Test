@@ -1,47 +1,42 @@
 /* Base card style — Adyen-like */
 .orange-cards .card {
   background-color: #ffffff;
-  color: #0a2540; /* Adyen-like dark navy */
+  color: #0a2540; /* dark navy for text */
   border: 1px solid #e6ebf1;
+  cursor: pointer;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* Title + body text */
+/* Title + body text inherit the card color */
 .orange-cards .card h3,
 .orange-cards .card p {
   color: inherit;
 }
 
-/* Icons default */
+/* Icons: use currentColor so they follow the card/text color */
 .orange-cards .card svg {
-  color: #0a2540;
+  color: #0a2540;        /* default icon color */
+  stroke: currentColor;  /* stroke follows color */
   fill: none;
-  stroke: #0a2540;
-  transition: color 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+  transition: color 0.2s ease, stroke 0.2s ease;
 }
 
 /* Hover state — orange takeover */
 .orange-cards .card:hover {
   background-color: #f97316; /* orange */
-  color: white;
+  color: #ffffff;            /* text becomes white */
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
   border-color: transparent;
 }
 
-/* Hover text */
-.orange-cards .card:hover h3,
-.orange-cards .card:hover p {
-  color: white;
-}
-
-/* Hover icons */
+/* Icons also become white on hover */
 .orange-cards .card:hover svg {
-  color: white;
-  fill: none;
-  stroke: white;
+  color: #ffffff;
+  stroke: currentColor;
 }

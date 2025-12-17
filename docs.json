@@ -129,7 +129,7 @@
             ]
           },
           {
-            "group": "Webooks",
+            "group": "Webhooks",
             "pages": ["Development_Resources/Webhooks_Events"]
           },
           {
@@ -143,17 +143,33 @@
         "icon": "tools",
         "groups": [
           {
-            "group": "Resources",
-            "pages": ["Development_Resources/index"]
+            "group": "Overview",
+            "pages": [
+              "Development_Resources/index"
+            ]
           },
           {
-            "group": "Setup",
-            "pages": ["Development_Resources/API_Credentials"]
-            "pages": ["Development_Resources/Libraries_SDK"]
-            "pages": ["Development_Resources/Postman_Collolection"]    
+            "group": "Getting Started",
+            "pages": [
+              "Development_Resources/API_Credentials",
+              "Development_Resources/Roles_Access"
+            ]
           },
           {
-            "group": "Webhooks",
+            "group": "Integration Tools",
+            "pages": [
+              "Development_Resources/Libraries_SDK",
+              "Development_Resources/Postman_Collolection"
+            ]
+          },
+          {
+            "group": "UI & Branding",
+            "pages": [
+              "Development_Resources/Branding_Styling"
+            ]
+          },
+          {
+            "group": "Event Notifications",
             "pages": [
               "Development_Resources/Webhooks_Manage",
               "Development_Resources/Webhooks_Secure"
@@ -161,7 +177,9 @@
           },
           {
             "group": "Error Handling",
-            "pages": ["Development_Resources/Error_Handling"]
+            "pages": [
+              "Development_Resources/Error_Handling"
+            ]
           }
         ]
       }

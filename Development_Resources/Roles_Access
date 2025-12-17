@@ -1,0 +1,28 @@
+---
+title: "Roles & Access"
+description: "Assign roles and manage access in Trustplatform"
+---
+
+<div style="
+  background: #f4f5f7;
+  border-radius: 10px;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  margin: 2rem 0;
+  color: #222;
+  font-family: Inter, Arial, sans-serif;
+  text-align: center;
+">
+
+  <h1 style="color: #0057b8; font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem;">
+    Coming Soon
+  </h1>
+  <p style="font-size: 1.1rem; color: #444; opacity: 0.8; margin: 0;">
+    This documentation page is not ready yet.
+  </p>
+
+</div>

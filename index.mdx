@@ -25,26 +25,45 @@ mode: "custom"
     </p>
 
     <div className="mt-8">
-      <CardGroup cols={3} className="orange-cards text-center">
-        <Card title="Get started" icon="list-check" href="/Development_Resources/Manage">
-          Create API Credentials and Authenticate your API request.
-        </Card>
-        <Card title="Configure Flows" icon="diagram-project" href="/Platform_Guides/Overview">
-          Design and control identity and risk flows in Studio.
-        </Card>
-        <Card title="Run Sessions & Receive Results" icon="plug" href="/Integration">
-          Trigger any flow through one API to access every capability.
-        </Card>
-      </CardGroup>
-    </div>
+<CardGroup cols={3} className="orange-cards text-center">
+  <Card
+    title="Get started"
+    icon="list-check"
+    href="/guides/setup"
+    className="idnow-card"
+  >
+    Set up your first flow and go live in minutes.
+  </Card>
 
-    <div className="mt-4">
-      <CardGroup cols={1} className="orange-cards text-center">
-        <Card title="Receive updates" icon="bolt" href="/Development_Resources/Webhooks_Manage">
-          Subscribe to webhooks and get notifications for important updates.
-        </Card>
-      </CardGroup>
-    </div>
+  <Card
+    title="Configure Flows"
+    icon="diagram-project"
+    href="/guides/workflows"
+    className="idnow-card"
+  >
+    Design and control identity and risk flows from a single place.
+  </Card>
 
+  <Card
+    title="Run Sessions & Receive Results"
+    icon="plug"
+    href="/guides/execute-flow"
+    className="idnow-card"
+  >
+    Trigger any flow through one API and retrieve decisions instantly.
+  </Card>
+</CardGroup>
+
+<CardGroup cols={1} className="orange-cards text-center mt-4">
+  <Card
+    title="Receive updates"
+    icon="bolt"
+    href="/guides/webhooks"
+    className="idnow-card"
+  >
+    Subscribe to webhooks for every event, step, and final result.
+  </Card>
+</CardGroup>
+    </div>
   </div>
 </div>

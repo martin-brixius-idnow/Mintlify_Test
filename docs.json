@@ -149,7 +149,7 @@
           {
             "group": "Setup",
             "pages": ["Development_Resources/API_Credentials"]
-            "pages": ["Development_Resources/Libaries_SDK"]
+            "pages": ["Development_Resources/Libraries_SDK"]
             "pages": ["Development_Resources/Postman_Collolection"]    
           },
           {

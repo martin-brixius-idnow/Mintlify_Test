@@ -132,67 +132,123 @@ mode: "custom"
           </div>
         </a>
 
+<div className="mt-16 rounded-3xl bg-slate-900 px-6 py-10 text-slate-50">
+  <div className="mx-auto max-w-6xl">
+
+    <h2 className="text-2xl font-semibold text-slate-50 text-center md:text-left">
+      Launch faster with ready-made solution templates or your own custom flows.
+    </h2>
+    <p className="mt-2 max-w-3xl text-sm md:text-base text-slate-300 text-center md:text-left">
+      Integrate the Flow API once to power unlimited workflows with real-time event updates.
+    </p>
+
+    <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
+
+      {/* LEFT: Trust Platform developer resources */}
+      <div className="space-y-3">
         <a
-          href="/Development_Resources"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-900 hover:-translate-y-0.5"
+          href="/api-reference"
+          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
         >
           <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            SDKs & tools
+            API Explorer
           </div>
           <div className="mt-1 text-sm text-slate-100">
-            Use SDKs, Postman collections, and examples to speed up integration.
+            Explore Flow API endpoints, send test calls, and inspect responses.
+          </div>
+        </a>
+
+        <a
+          href="/sdks"
+          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+        >
+          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Server-side libraries
+          </div>
+          <div className="mt-1 text-sm text-slate-100">
+            Use official SDKs to call Trust Platform from your backend.
+          </div>
+        </a>
+
+        <a
+          href="/guides/postman"
+          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+        >
+          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Postman collections
+          </div>
+          <div className="mt-1 text-sm text-slate-100">
+            Import ready-made collections to replay common Trust Platform flows.
+          </div>
+        </a>
+
+        <a
+          href="/guides/webhooks"
+          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+        >
+          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Webhooks
+          </div>
+          <div className="mt-1 text-sm text-slate-100">
+            Receive session status updates and decisions in your backend.
           </div>
         </a>
       </div>
 
-      {/* RIGHT: sample Flow API call */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-        <div className="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3">
+      {/* RIGHT: GET /session/{sessionId} example */}
+      <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-800/80 p-6">
+        <div className="flex flex-col gap-3 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="text-sm font-semibold text-slate-50">
-              Create a verification session
+              Get session results
             </div>
             <div className="mt-1 text-xs text-slate-400">
-              Example request using the Flow API
+              Retrieve the status and decision outcome of a Trust Platform session.
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="rounded-full bg-emerald-500/10 px-2 py-1 text-emerald-300">
-              POST
+              GET
             </span>
-            <span className="text-slate-300">/sessions</span>
+            <span className="text-slate-200">/session/{'{'}sessionId{'}'}</span>
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+          <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
             <div className="text-xs font-semibold text-slate-200">Request</div>
             <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
-{`{
-  "flowId": "kyc_standard_eu",
-  "externalReference": "CUSTOMER_123",
-  "applicant": {
-    "firstName": "Alex",
-    "lastName": "Meyer",
-    "email": "alex.meyer@example.com"
-  },
-  "redirectUrls": {
-    "success": "https://example.com/success",
-    "failure": "https://example.com/failure"
-  }
-}`}
+{`curl https://api.idnow.io/v1/session/123 \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "flowId": "wf_1a2b3c4d5e6f",
+    "environment": "production",
+    "sessionId": "123"
+  }'`}
             </pre>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+          <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
             <div className="text-xs font-semibold text-slate-200">Response</div>
             <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
 {`{
-  "sessionId": "sess_9f3a2b7c",
-  "status": "pending",
-  "url": "https://trust.idnow.io/start/sess_9f3a2b7c",
-  "createdAt": "2025-01-15T10:24:01Z"
+  "flowId": "wf_1a2b3c4d5e6f",
+  "environment": "production",
+  "sessionId": "123",
+  "sessionStatus": "in progress",
+  "decisionOutcome": "accepted",
+  "createdAt": "2024-11-04T10:30:00Z",
+  "updatedAt": "2024-11-04T10:35:00Z",
+  "lastStep": {
+    "stepName": "end_approved",
+    "stepType": "END",
+    "verdict": "completed"
+  }
 }`}
             </pre>
           </div>
@@ -200,11 +256,11 @@ mode: "custom"
 
         <div className="mt-1">
           <a
-            href="/api-reference"
+            href="/Integration/get-session-results"
             className="inline-flex items-center justify-center rounded-full bg-[#2563eb] px-4 py-2 text-xs font-semibold text-white
                        shadow-sm transition hover:bg-[#1d4ed8]"
           >
-            See full Flow API reference
+            See full example in Get Session Results
           </a>
         </div>
       </div>

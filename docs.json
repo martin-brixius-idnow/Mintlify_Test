@@ -33,23 +33,6 @@
         "pages": ["index"]
       },
       {
-        "tab": "Getting Started",
-        "icon": "rocket",
-        "groups": [
-          {
-            "group": "Setup",
-            "pages": [
-              "Getting_Started/Test_Account",
-              "Getting_Started/Access_Management"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": ["Platform_Guides/Branding"]
-          }
-        ]
-      },
-      {
         "tab": "Solution Templates",
         "icon": "sparkles",
         "groups": [

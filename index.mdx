@@ -1,203 +1,112 @@
 ---
 title: "Welcome to IDnow Trust Platform"
-mode: "center"
+mode: "custom"
 ---
 
-Use solution templates or build your own flow in minutes.  
-Integrate the API, run unlimited workflows, and receive real-time updates for every event.
+<div className="mx-auto max-w-5xl px-6 py-12">
 
-<CardGroup cols={3} className="orange-cards">
-  <Card title="Get started" icon="list-check" href="/guides/setup">
-    Get an overview of the platform and get up and running in minutes.
-  </Card>
+  # Welcome to IDnow Trust Platform
 
-  <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
-    Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
-  </Card>
+  IDnow Trust Platform is your single, unified platform for identity, risk, and trust.  
+  Use solution templates or build your own flow in minutes. Integrate the API, run
+  unlimited workflows, and receive real-time updates for every event.
 
-  <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
-    Integrate once and trigger any workflow through a single API.
-  </Card>
-</CardGroup>
+  <CardGroup cols={3} className="orange-cards">
+    <Card title="Get started" icon="list-check" href="/guides/setup">
+      Get an overview of the platform and get up and running in minutes.
+    </Card>
+    <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
+      Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
+    </Card>
+    <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
+      Integrate once and trigger any workflow through a single API.
+    </Card>
+  </CardGroup>
 
-<CardGroup cols={1} className="orange-cards">
-  <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
-    Receive real-time updates for every flow and result.
-  </Card>
-</CardGroup>
+  <CardGroup cols={1} className="orange-cards">
+    <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
+      Receive real-time updates for every flow and result.
+    </Card>
+  </CardGroup>
 
+  ---
 
----
+  ## Verification, Signatures, and Trust
+  <Note>Unified in one platform</Note>
 
-## Verification, Signatures, and Trust
+  <CardGroup cols={3}>
+    <Card title="Document Verification" icon="id-card" href="/guides/document-verification" color="#3b82f6">
+      Capture, extract, and verify IDs.
+    </Card>
+    <Card title="Data Verification" icon="database" href="/guides/data-verification" color="#3b82f6">
+      Verify identity from data only.
+    </Card>
+    <Card title="eID Login" icon="shield-check" href="/guides/eid-login" color="#3b82f6">
+      Authenticate with EU eIDs and wallets.
+    </Card>
+    <Card title="QES Signatures" icon="file-signature" href="/guides/qes-signatures" color="#3b82f6">
+      Collect eIDAS-compliant signatures.
+    </Card>
+    <Card title="Device Trust" icon="mobile" href="/guides/device-trust" color="#3b82f6">
+      Score device, browser, and network.
+    </Card>
+    <Card title="Risk Signals" icon="chart-line" href="/guides/risk-signals" color="#3b82f6">
+      Combine fraud, PEP, and sanctions checks.
+    </Card>
+  </CardGroup>
 
-<Note>
-Unified in one platform
-</Note>
+  ---
 
-<CardGroup cols={3}>
-  <Card
-    title="Document Verification"
-    icon="id-card"
-    href="/guides/document-verification"
-    color="#3b82f6"
-  >
-    Capture, extract, and verify IDs.
-  </Card>
-  
-  <Card
-    title="Data Verification"
-    icon="database"
-    href="/guides/data-verification"
-    color="#3b82f6"
-  >
-    Verify identity from data only.
-  </Card>
-  
-  <Card
-    title="eID Login"
-    icon="shield-check"
-    href="/guides/eid-login"
-    color="#3b82f6"
-  >
-    Authenticate with EU eIDs and wallets.
-  </Card>
-  
-  <Card
-    title="QES Signatures"
-    icon="file-signature"
-    href="/guides/qes-signatures"
-    color="#3b82f6"
-  >
-    Collect eIDAS-compliant signatures.
-  </Card>
-  
-  <Card
-    title="Device Trust"
-    icon="mobile"
-    href="/guides/device-trust"
-    color="#3b82f6"
-  >
-    Score device, browser, and network.
-  </Card>
-  
-  <Card
-    title="Risk Signals"
-    icon="chart-line"
-    href="/guides/risk-signals"
-    color="#3b82f6"
-  >
-    Combine fraud, PEP, and sanctions checks.
-  </Card>
-</CardGroup>
+  ## Compliance and Trust
 
----
+  <CardGroup cols={3}>
+    <Card title="eIDAS" icon="stamp" href="/guides/compliance/eidas" color="#10b981">
+      Support ADeS and QES.
+    </Card>
+    <Card title="EU Data Residency" icon="globe-europe" href="/guides/compliance/data-residency" color="#10b981">
+      Keep processing in the EU.
+    </Card>
+    <Card title="Audit Trail" icon="clipboard-list" href="/guides/compliance/audit-trail" color="#10b981">
+      Inspect workflow paths and verdicts when needed.
+    </Card>
+  </CardGroup>
 
-## Compliance and Trust
+  ---
 
-<CardGroup cols={3}>
-  <Card
-    title="eIDAS"
-    icon="stamp"
-    href="/guides/compliance/eidas"
-    color="#10b981"
-  >
-    Support ADeS and QES.
-  </Card>
-  
-  <Card
-    title="EU Data Residency"
-    icon="globe-europe"
-    href="/guides/compliance/data-residency"
-    color="#10b981"
-  >
-    Keep processing in the EU.
-  </Card>
-  
-  <Card
-    title="Audit Trail"
-    icon="clipboard-list"
-    href="/guides/compliance/audit-trail"
-    color="#10b981"
-  >
-    Inspect workflow paths and verdicts when needed.
-  </Card>
-</CardGroup>
+  ## Tools You'll Use
 
----
+  <CardGroup cols={3}>
+    <Card title="API Explorer" icon="magnifying-glass-chart" href="/api-reference">
+      Send test calls and inspect responses.
+    </Card>
+    <Card title="Flow Builder" icon="diagram-project" href="/guides/flow-builder">
+      Design and version workflows visually.
+    </Card>
+    <Card title="SDKs" icon="code" href="/sdks">
+      Use client and server SDKs for quick integration.
+    </Card>
+    <Card title="Postman" icon="paper-plane" href="/guides/postman">
+      Import collections and replay common flows.
+    </Card>
+    <Card title="Credentials" icon="key" href="/guides/credentials">
+      Manage access across teams.
+    </Card>
+    <Card title="Webhooks" icon="webhook" href="/guides/webhooks">
+      Connect events into your backend and tools.
+    </Card>
+  </CardGroup>
 
-## Tools You'll Use
+  ---
 
-<CardGroup cols={3}>
-  <Card
-    title="API Explorer"
-    icon="magnifying-glass-chart"
-    href="/api-reference"
-  >
-    Send test calls and inspect responses.
-  </Card>
-  
-  <Card
-    title="Flow Builder"
-    icon="diagram-project"
-    href="/guides/flow-builder"
-  >
-    Design and version workflows visually.
-  </Card>
-  
-  <Card
-    title="SDKs"
-    icon="code"
-    href="/sdks"
-  >
-    Use client and server SDKs for quick integration.
-  </Card>
-  
-  <Card
-    title="Postman"
-    icon="paper-plane"
-    href="/guides/postman"
-  >
-    Import collections and replay common flows.
-  </Card>
-  
-  <Card
-    title="Credentials"
-    icon="key"
-    href="/guides/credentials"
-  >
-    Manage access across teams.
-  </Card>
-  
-  <Card
-    title="Webhooks"
-    icon="webhook"
-    href="/guides/webhooks"
-  >
-    Connect events into your backend and tools.
-  </Card>
-</CardGroup>
+  ## Ready to Build?
 
----
+  <CardGroup cols={2}>
+    <Card title="Get Started Guide" icon="book-open" href="/get-started" color="#fa6a40">
+      Follow the minimal path to your first live flow.
+    </Card>
+    <Card title="Open API Explorer" icon="magnifying-glass-chart" href="/api-reference" color="#fa6a40">
+      Explore endpoints and responses now.
+    </Card>
+  </CardGroup>
 
-## Ready to Build?
-
-<CardGroup cols={2}>
-  <Card
-    title="Get Started Guide"
-    icon="book-open"
-    href="/get-started"
-    color="#fa6a40"
-  >
-    Follow the minimal path to your first live flow.
-  </Card>
-  
-  <Card
-    title="Open API Explorer"
-    icon="magnifying-glass-chart"
-    href="/api-reference"
-    color="#fa6a40"
-  >
-    Explore endpoints and responses now.
-  </Card>
-</CardGroup>
+</div>

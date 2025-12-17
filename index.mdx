@@ -159,13 +159,13 @@ mode: "custom"
           <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
             <div className="text-xs font-semibold text-slate-200">Request</div>
             <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
-{`curl https://api.idnow.io/v1/session/123 \\
+{`curl https://api.idnow.io/v1/session/e7c2b6f1-4a9d-4e3c-8f61-9c5b2a3d8f47 \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "flowId": "wf_1a2b3c4d5e6f",
-    "environment": "production",
-    "sessionId": "123"
+    "flowId": "capture",
+    "environment": "live",
+    "sessionId": "e7c2b6f1-4a9d-4e3c-8f61-9c5b2a3d8f47"
   }'`}
             </pre>
           </div>
@@ -174,10 +174,10 @@ mode: "custom"
             <div className="text-xs font-semibold text-slate-200">Response</div>
             <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
 {`{
-  "flowId": "wf_1a2b3c4d5e6f",
-  "environment": "production",
-  "sessionId": "123",
-  "sessionStatus": "in progress",
+  "flowId": "capture",
+  "environment": "live",
+  "sessionId": "e7c2b6f1-4a9d-4e3c-8f61-9c5b2a3d8f47",
+  "sessionStatus": "COMPLETED",
   "decisionOutcome": "accepted",
   "createdAt": "2024-11-04T10:30:00Z",
   "updatedAt": "2024-11-04T10:35:00Z",

@@ -1,18 +1,47 @@
-/* Orange CardGroup styling */
+/* Base card style — Adyen-like */
 .orange-cards .card {
+  background-color: #ffffff;
+  color: #0a2540; /* Adyen-like dark navy */
+  border: 1px solid #e6ebf1;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Title + body text */
+.orange-cards .card h3,
+.orange-cards .card p {
+  color: inherit;
+}
+
+/* Icons default */
+.orange-cards .card svg {
+  color: #0a2540;
+  fill: none;
+  stroke: #0a2540;
+  transition: color 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+}
+
+/* Hover state — orange takeover */
+.orange-cards .card:hover {
   background-color: #f97316; /* orange */
   color: white;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.orange-cards .card svg {
-  color: white;
-  fill: white;
-  stroke: white;
-}
-
-/* Hover state */
-.orange-cards .card:hover {
-  background-color: #ea580c; /* darker orange */
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
+  border-color: transparent;
+}
+
+/* Hover text */
+.orange-cards .card:hover h3,
+.orange-cards .card:hover p {
+  color: white;
+}
+
+/* Hover icons */
+.orange-cards .card:hover svg {
+  color: white;
+  fill: none;
+  stroke: white;
 }

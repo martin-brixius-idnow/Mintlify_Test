@@ -3,12 +3,25 @@ title: "Welcome to IDnow Trust Platform"
 mode: "custom"
 ---
 
-<div className="mt-8 bg-slate-50 py-12">
+{/* HERO */}
+<div className="mx-auto max-w-6xl px-6 py-16 text-left">
+  <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900">
+    Welcome to IDnow <span className="text-[#fa6a40]">Trust Platform</span>
+  </h1>
+
+  <p className="mt-4 max-w-2xl text-lg text-slate-700">
+    Your single, unified layer for identity verification, risk, and trust.
+  </p>
+</div>
+
+{/* GREY BAND: SUBHEAD + TILES */}
+<div className="bg-slate-50 py-12">
   <div className="mx-auto max-w-6xl px-6 text-center">
 
-    <p className="max-w-3xl mx-auto text-lg text-slate-700">
+    <h2 className="text-2xl font-semibold text-slate-900">
       Launch faster with ready-made solution templates or your own custom flows.
-    </p>
+    </h2>
+
     <p className="mt-2 max-w-3xl mx-auto text-base text-slate-600">
       Integrate the Flow API once to power unlimited workflows with real-time event updates.
     </p>
@@ -38,3 +51,99 @@ mode: "custom"
   </div>
 </div>
 
+{/* MAIN SECTIONS */}
+<div className="mx-auto max-w-6xl px-6 py-16 space-y-12">
+
+  {/* Verification, Signatures, and Trust */}
+  <section>
+    <h2 className="text-xl font-semibold text-slate-900">
+      Verification, Signatures, and Trust
+    </h2>
+    <p className="mt-1 text-sm font-medium text-slate-500">
+      Unified in one platform.
+    </p>
+
+    <div className="mt-4">
+      <CardGroup cols={3}>
+        <Card title="Document Verification" icon="id-card" href="/guides/document-verification" color="#3b82f6">
+          Capture, extract, and verify IDs.
+        </Card>
+        <Card title="Data Verification" icon="database" href="/guides/data-verification" color="#3b82f6">
+          Verify identity from data only.
+        </Card>
+        <Card title="eID Login" icon="shield-check" href="/guides/eid-login" color="#3b82f6">
+          Authenticate with EU eIDs and wallets.
+        </Card>
+        <Card title="QES Signatures" icon="file-signature" href="/guides/qes-signatures" color="#3b82f6">
+          Collect eIDAS-compliant signatures.
+        </Card>
+        <Card title="Device Trust" icon="mobile" href="/guides/device-trust" color="#3b82f6">
+          Score device, browser, and network.
+        </Card>
+        <Card title="Risk Signals" icon="chart-line" href="/guides/risk-signals" color="#3b82f6">
+          Combine fraud, PEP, and sanctions checks.
+        </Card>
+      </CardGroup>
+    </div>
+  </section>
+
+  <hr className="border-slate-100" />
+
+  {/* Compliance and Trust */}
+  <section>
+    <h2 className="text-xl font-semibold text-slate-900">
+      Compliance and Trust
+    </h2>
+
+    <div className="mt-4">
+      <CardGroup cols={3}>
+        <Card title="eIDAS" icon="stamp" href="/guides/compliance/eidas" color="#10b981">
+          Support ADeS and QES.
+        </Card>
+        <Card title="EU Data Residency" icon="globe-europe" href="/guides/compliance/data-residency" color="#10b981">
+          Keep processing in the EU.
+        </Card>
+        <Card title="Audit Trail" icon="clipboard-list" href="/guides/compliance/audit-trail" color="#10b981">
+          Inspect workflow paths and verdicts when needed.
+        </Card>
+      </CardGroup>
+    </div>
+  </section>
+
+  <hr className="border-slate-100" />
+
+  {/* Tools You'll Use */}
+  <section>
+    <h2 className="text-xl font-semibold text-slate-900">
+      Tools You'll Use
+    </h2>
+
+    <div className="mt-4">
+      <CardGroup cols={3}>
+        <Card title="API Explorer" icon="magnifying-glass-chart" href="/api-reference">
+          Send test calls and inspect responses.
+        </Card>
+        <Card title="Flow Builder" icon="diagram-project" href="/guides/flow-builder">
+          Design and version workflows visually.
+        </Card>
+        <Card title="SDKs" icon="code" href="/sdks">
+          Use client and server SDKs for quick integration.
+        </Card>
+        <Card title="Postman" icon="paper-plane" href="/guides/postman">
+          Import collections and replay common flows.
+        </Card>
+        <Card title="Credentials" icon="key" href="/guides/credentials">
+          Manage access across teams.
+        </Card>
+        <Card title="Webhooks" icon="webhook" href="/guides/webhooks">
+          Connect events into your backend and tools.
+        </Card>
+      </CardGroup>
+    </div>
+  </section>
+
+  <hr className="border-slate-100" />
+
+  {/* Ready to Build? */}
+  <section>
+    <h

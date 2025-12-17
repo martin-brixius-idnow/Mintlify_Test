@@ -1,7 +1,7 @@
-/* Base card style — targets Mintlify Card root inside orange-cards */
+/* Base card style in orange-cards */
 .orange-cards [class*="Card_root"] {
   background-color: #ffffff !important;
-  color: #0a2540 !important; /* dark navy text */
+  color: #0a2540 !important; /* dark navy */
   border: 1px solid #e6ebf1 !important;
   border-radius: 1rem;
   cursor: pointer;
@@ -13,37 +13,24 @@
     border-color 0.2s ease;
 }
 
-/* Let headings + body inherit from the card color */
-.orange-cards [class*="Card_root"] h3,
-.orange-cards [class*="Card_root"] p {
-  color: inherit !important;
-}
+/* Normal state: let inner text/icons use their own theme colours (no overrides) */
 
-/* Icons follow the text color via currentColor */
-.orange-cards [class*="Card_root"] svg {
-  color: currentColor !important;
-  stroke: currentColor !important;
-  fill: none;
-  transition: color 0.2s ease, stroke 0.2s ease, fill 0.2s ease;
-}
-
-/* Hover state — orange background, white text + icons */
+/* HOVER: make everything inside white */
 .orange-cards [class*="Card_root"]:hover {
   background-color: #f97316 !important; /* IDnow orange */
-  color: #ffffff !important;            /* text becomes white */
   border-color: transparent !important;
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
   transform: translateY(-2px);
 }
 
-/* Ensure inner text is white on hover */
-.orange-cards [class*="Card_root"]:hover h3,
-.orange-cards [class*="Card_root"]:hover p {
+/* Text (titles, body, etc.) */
+.orange-cards [class*="Card_root"]:hover *:not(svg) {
   color: #ffffff !important;
 }
 
-/* Icons also turn white on hover */
+/* Icons */
 .orange-cards [class*="Card_root"]:hover svg {
   color: #ffffff !important;
   stroke: currentColor !important;
+  fill: none !important;
 }

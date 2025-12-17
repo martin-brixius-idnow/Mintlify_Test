@@ -1,15 +1,15 @@
-```json
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "IDnow Trust Platform",
-  "favicon": "/favicon.png",
+  "name": "IDnow Trustplatform",
 
   "colors": {
     "primary": "#ff6336",
     "light": "#ff6336",
     "dark": "#ff6336"
   },
+
+  "favicon": "/favicon.png",
 
   "logo": {
     "light": "/logo/images.png",
@@ -19,16 +19,8 @@
   "versions": {
     "current": "v1",
     "list": [
-      {
-        "id": "v1",
-        "label": "v1 (Current)",
-        "path": "/"
-      },
-      {
-        "id": "v0.9",
-        "label": "v0.9",
-        "path": "/v0.9"
-      }
+      { "id": "v1", "label": "v1 (Current)", "path": "/" },
+      { "id": "v0.9", "label": "v0.9", "path": "/v0.9" }
     ]
   },
 
@@ -37,9 +29,7 @@
   },
 
   "navigation": {
-    "versions": {
-      "default": "v1"
-    },
+    "versions": { "default": "v1" },
 
     "anchors": [
       {
@@ -54,10 +44,7 @@
         "tab": "Get Started",
         "icon": "book",
         "groups": [
-          {
-            "group": "Trust Platform",
-            "pages": ["index"]
-          },
+          { "group": "Trust Platform", "pages": ["index"] },
           {
             "group": "Setup",
             "pages": [
@@ -68,27 +55,6 @@
           {
             "group": "Customization",
             "pages": ["Platform_Guides/Branding"]
-          }
-        ]
-      },
-
-      {
-        "tab": "Solution Templates",
-        "icon": "sparkles",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Solution_Templates/index"]
-          },
-          {
-            "group": "Templates",
-            "pages": [
-              "Solution_Templates/Digital_Onboarding",
-              "Solution_Templates/Qualified_Electronic_Signature",
-              "Solution_Templates/AML_Compliance",
-              "Solution_Templates/Fraud_Prevention",
-              "Solution_Templates/Age_Verification"
-            ]
           }
         ]
       },
@@ -106,35 +72,6 @@
             ]
           },
           {
-            "group": "Document-based IDV",
-            "pages": [
-              "Platform_Guides/Document_Verification_Sphinx",
-              "Platform_Guides/Document_Verification_Headless"
-            ]
-          },
-          {
-            "group": "Biometric Authentication",
-            "pages": [
-              "Platform_Guides/Biometric_Enrollment",
-              "Platform_Guides/Biometric_Verification"
-            ]
-          },
-          {
-            "group": "eID",
-            "pages": ["Platform_Guides/eID_France_Identité"]
-          },
-          {
-            "group": "Electronic Signatures",
-            "pages": ["Platform_Guides/Electronic_Signature"]
-          },
-          {
-            "group": "Fraud Signals",
-            "pages": [
-              "Platform_Guides/Device_Intelligence",
-              "Platform_Guides/Email_Phone_Verification"
-            ]
-          },
-          {
             "group": "Screening",
             "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
           },
@@ -147,110 +84,19 @@
             ]
           }
         ]
-      },
-
-      {
-        "tab": "Integration",
-        "icon": "server",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Integration/index"]
-          },
-          {
-            "group": "Authentication",
-            "pages": ["Integration/Authenticate"]
-          },
-          {
-            "group": "Initialize Session",
-            "pages": [
-              "Integration/get-flows",
-              "Integration/create-session"
-            ]
-          },
-          {
-            "group": "Receive Results",
-            "pages": [
-              "Integration/get-session-results",
-              "Integration/get-datablocks",
-              "Integration/get-files"
-            ]
-          },
-          {
-            "group": "Webhooks",
-            "pages": ["Development_Resources/Webhooks_Events"]
-          },
-          {
-            "group": "Navigate Player",
-            "pages": ["Integration/Player_Embed-or-Redirect"]
-          }
-        ]
-      },
-
-      {
-        "tab": "Resources",
-        "icon": "tools",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": ["Development_Resources/index"]
-          },
-          {
-            "group": "API Credentials",
-            "pages": ["Development_Resources/Manage"]
-          },
-          {
-            "group": "Webhooks",
-            "pages": [
-              "Development_Resources/Webhooks_Manage",
-              "Development_Resources/Webhooks_Secure"
-            ]
-          },
-          {
-            "group": "Error Handling",
-            "pages": ["Development_Resources/Error_Handling"]
-          }
-        ]
       }
     ]
   },
 
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      },
-      {
-        "label": "API Explorer",
-        "href": "/api-reference"
-      }
+      { "label": "Support", "href": "mailto:hi@mintlify.com" },
+      { "label": "API Explorer", "href": "/api-reference" }
     ],
     "primary": {
       "type": "button",
       "label": "Studio",
       "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
-  },
-
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "cursor",
-      "vscode"
-    ]
-  },
-
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   }
 }
-```

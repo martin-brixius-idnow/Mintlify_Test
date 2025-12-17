@@ -2,6 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "IDnow Trustplatform",
+  "homepage": "index",
   "colors": {
     "primary": "#ff6336",
     "light": "#ff6336",
@@ -27,22 +28,9 @@
     ],
     "tabs": [
       {
-        "tab": "Get Started",
+        "tab": "Home",
         "icon": "book",
-        "groups": [
-          { "group": "Trust Platform", "pages": ["index"] },
-          {
-            "group": "Setup",
-            "pages": [
-              "Getting_Started/Test_Account",
-              "Getting_Started/Access_Management"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": ["Platform_Guides/Branding"]
-          }
-        ]
+        "href": "/"
       },
       {
         "tab": "Solution Templates",

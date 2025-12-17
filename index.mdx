@@ -71,94 +71,96 @@ mode: "custom"
   </div>
 </div>
 
-<div className="mt-16">
-  <div className="mx-auto max-w-6xl rounded-3xl bg-slate-900 py-10 px-6 text-slate-50">
+<div className="bg-slate-50 pb-16">
+  <div className="mx-auto max-w-6xl px-6 mt-4">
+    <div className="rounded-3xl bg-slate-900 text-slate-50">
+      <div className="px-6 py-10">
 
-    <h2 className="text-2xl font-semibold text-slate-50 text-center">
-      Discover Trust Platform developer resources
-    </h2>
-    <p className="mt-2 max-w-3xl mx-auto text-base text-slate-300 text-center">
-      Everything you need to explore the Flow API, design flows, and plug Trust Platform into your stack.
-    </p>
+        <h2 className="text-2xl font-semibold text-slate-50 text-center">
+          Discover Trust Platform developer resources
+        </h2>
+        <p className="mt-2 max-w-3xl mx-auto text-base text-slate-300 text-center">
+          Everything you need to explore the Flow API, design flows, and plug Trust Platform into your stack.
+        </p>
 
-    <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
+        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
 
-      <div className="space-y-3">
-        <a
-          href="/api-reference"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            API Explorer
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Explore Flow API endpoints and inspect request and response examples.
-          </div>
-        </a>
+          <div className="space-y-3">
+            <a
+              href="/api-reference"
+              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+            >
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                API Explorer
+              </div>
+              <div className="mt-1 text-sm text-slate-100">
+                Explore Flow API endpoints and inspect request and response examples.
+              </div>
+            </a>
 
-        <a
-          href="/sdks"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Server-side libraries
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Get started fast with SDKs for seamless Trust Platform integration.
-          </div>
-        </a>
+            <a
+              href="/sdks"
+              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+            >
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Server-side libraries
+              </div>
+              <div className="mt-1 text-sm text-slate-100">
+                Get started fast with SDKs for seamless Trust Platform integration.
+              </div>
+            </a>
 
-        <a
-          href="/guides/postman"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Postman collections
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Import ready-made Postman collections to replay and test common Trust Platform flows.
-          </div>
-        </a>
+            <a
+              href="/guides/postman"
+              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+            >
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Postman collections
+              </div>
+              <div className="mt-1 text-sm text-slate-100">
+                Import ready-made Postman collections to replay and test common Trust Platform flows.
+              </div>
+            </a>
 
-        <a
-          href="/guides/webhooks"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Webhooks
+            <a
+              href="/guides/webhooks"
+              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
+                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
+            >
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Webhooks
+              </div>
+              <div className="mt-1 text-sm text-slate-100">
+                Receive real-time session status updates and decision events in your backend.
+              </div>
+            </a>
           </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Receive real-time session status updates and decision events in your backend.
-          </div>
-        </a>
-      </div>
 
-      <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-800/80 p-6">
-        <div className="flex flex-col gap-3 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="text-sm font-semibold text-slate-50">
-              Get session results
+          <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-800/80 p-6">
+            <div className="flex flex-col gap-3 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div className="text-sm font-semibold text-slate-50">
+                  Get session results
+                </div>
+                <div className="mt-1 text-xs text-slate-400">
+                  Retrieve the status and decision outcome of a Trust Platform session.
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-mono">
+                <span className="rounded-full bg-emerald-500/10 px-2 py-1 text-emerald-300">
+                  GET
+                </span>
+                <span className="text-slate-200">/session/{'{'}sessionId{'}'}</span>
+              </div>
             </div>
-            <div className="mt-1 text-xs text-slate-400">
-              Retrieve the status and decision outcome of a Trust Platform session.
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="rounded-full bg-emerald-500/10 px-2 py-1 text-emerald-300">
-              GET
-            </span>
-            <span className="text-slate-200">/session/{'{'}sessionId{'}'}</span>
-          </div>
-        </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
-            <div className="text-xs font-semibold text-slate-200">Request</div>
-            <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
+                <div className="text-xs font-semibold text-slate-200">Request</div>
+                <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
 {`curl https://api.idnow.io/v1/session/e7c2b6f1-4a9d-4e3c-8f61 \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
@@ -167,12 +169,12 @@ mode: "custom"
     "environment": "live",
     "sessionId": "e7c2b6f1-4a9d-4e3c-8f61"
   }'`}
-            </pre>
-          </div>
+                </pre>
+              </div>
 
-          <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
-            <div className="text-xs font-semibold text-slate-200">Response</div>
-            <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
+              <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
+                <div className="text-xs font-semibold text-slate-200">Response</div>
+                <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
 {`{
   "flowId": "capture",
   "environment": "live",
@@ -187,21 +189,23 @@ mode: "custom"
     "verdict": "completed"
   }
 }`}
-            </pre>
-          </div>
-        </div>
+                </pre>
+              </div>
+            </div>
 
-        <div className="mt-1">
-          <a
-            href="/Integration/get-session-results"
-            className="inline-flex items-center justify-center rounded-full bg-[#2563eb] px-4 py-2 text-xs font-semibold text-white
-                       shadow-sm transition hover:bg-[#1d4ed8]"
-          >
-            See full reference in API Explorer
-          </a>
+            <div className="mt-1">
+              <a
+                href="/Integration/get-session-results"
+                className="inline-flex items-center justify-center rounded-full bg-[#2563eb] px-4 py-2 text-xs font-semibold text-white
+                           shadow-sm transition hover:bg-[#1d4ed8]"
+              >
+                See full reference in API Explorer
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
   </div>
 </div>

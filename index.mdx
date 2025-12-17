@@ -25,112 +25,51 @@ mode: "custom"
     </p>
 
     <div className="mt-8">
-<CardGroup cols={3} className="orange-cards text-center">
-  <Card
-    title="Get started"
-    icon="list-check"
-    href="/guides/setup"
-    className="idnow-card"
-  >
-    Create API credentials and securely authenticate every API request.
-  </Card>
+      <CardGroup cols={3} className="orange-cards text-center">
+        <Card
+          title="Get started"
+          icon="list-check"
+          href="/guides/setup"
+          className="idnow-card"
+        >
+          Create API credentials and securely authenticate every API request.
+        </Card>
 
-  <Card
-    title="Configure Flows"
-    icon="diagram-project"
-    href="/guides/workflows"
-    className="idnow-card"
-  >
-    Design and orchestrate identity and risk flows in minutes with Studio.
-  </Card>
+        <Card
+          title="Configure Flows"
+          icon="diagram-project"
+          href="/guides/workflows"
+          className="idnow-card"
+        >
+          Design and orchestrate identity and risk flows in minutes with Studio.
+        </Card>
 
-  <Card
-    title="Run Sessions and Get Results"
-    icon="plug"
-    href="/guides/execute-flow"
-    className="idnow-card"
-  >
-   Trigger any flow through a single API to access every capability.
-  </Card>
-</CardGroup>
-
-<CardGroup cols={1} className="orange-cards text-center mt-4">
-  <Card
-    title="Receive Updates"
-    icon="bolt"
-    href="/guides/webhooks"
-    className="idnow-card"
-  >
-    Subscribe to webhooks and receive events for important updates.
-  </Card>
-</CardGroup>
+        <Card
+          title="Run Sessions and Get Results"
+          icon="plug"
+          href="/guides/execute-flow"
+          className="idnow-card"
+        >
+          Trigger any flow through a single API to access every capability.
+        </Card>
+      </CardGroup>
     </div>
+
+    <div className="mt-4">
+      <CardGroup cols={1} className="orange-cards text-center">
+        <Card
+          title="Receive Updates"
+          icon="bolt"
+          href="/guides/webhooks"
+          className="idnow-card"
+        >
+          Subscribe to webhooks and receive events for important updates.
+        </Card>
+      </CardGroup>
+    </div>
+
   </div>
 </div>
-
-<div className="mt-16 rounded-3xl bg-slate-950 px-6 py-10 text-slate-50">
-  <div className="mx-auto max-w-6xl">
-    <h2 className="text-xl md:text-2xl font-semibold">
-      Discover Trust Platform developer resources
-    </h2>
-    <p className="mt-2 text-sm md:text-base text-slate-300">
-      Everything you need to explore the Flow API, design flows, and plug Trust Platform into your stack.
-    </p>
-
-    <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
-      {/* LEFT: resource tiles */}
-      <div className="space-y-3">
-        <a
-          href="/api-reference"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-900 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            API Explorer
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Send test Flow API calls and inspect responses in the browser.
-          </div>
-        </a>
-
-        <a
-          href="/Solution_Templates"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-900 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Solution templates
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Start from prebuilt onboarding, KYC, and compliance journeys.
-          </div>
-        </a>
-
-        <a
-          href="/guides/flow-builder"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-900 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Flow Builder (Studio)
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Design, test, and version flows visually in Studio.
-          </div>
-        </a>
-
-        <a
-          href="/guides/webhooks"
-          className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-4 text-left
-                     transition hover:border-[#fa6a40] hover:bg-slate-900 hover:-translate-y-0.5"
-        >
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Webhooks
-          </div>
-          <div className="mt-1 text-sm text-slate-100">
-            Subscribe to Trust Platform events and keep your systems in sync.
-          </div>
-        </a>
 
 <div className="mt-16 rounded-3xl bg-slate-900 px-6 py-10 text-slate-50">
   <div className="mx-auto max-w-6xl">
@@ -144,7 +83,6 @@ mode: "custom"
 
     <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
 
-      {/* LEFT: Trust Platform developer resources */}
       <div className="space-y-3">
         <a
           href="/api-reference"
@@ -199,7 +137,6 @@ mode: "custom"
         </a>
       </div>
 
-      {/* RIGHT: GET /session/{sessionId} example */}
       <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-800/80 p-6">
         <div className="flex flex-col gap-3 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 md:flex-row md:items-center md:justify-between">
           <div>
@@ -264,7 +201,7 @@ mode: "custom"
           </a>
         </div>
       </div>
+
     </div>
   </div>
 </div>
-

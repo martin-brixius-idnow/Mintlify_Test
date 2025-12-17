@@ -42,13 +42,7 @@
           },
           {
             "group": "Templates",
-            "pages": [
-              "Solution_Templates/Digital_Onboarding",
-              "Solution_Templates/Qualified_Electronic_Signature",
-              "Solution_Templates/AML_Compliance",
-              "Solution_Templates/Fraud_Prevention",
-              "Solution_Templates/Age_Verification"
-            ]
+            "pages": []
           }
         ]
       },

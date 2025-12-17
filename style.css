@@ -1,9 +1,10 @@
-/* Base card style in orange-cards groups */
-.orange-cards a {
-  background-color: #ffffff;
-  color: #0a2540; /* dark navy text */
-  border: 1px solid #e6ebf1;
+/* Base card style — targets Mintlify Card root inside orange-cards */
+.orange-cards [class*="Card_root"] {
+  background-color: #ffffff !important;
+  color: #0a2540 !important; /* dark navy text */
+  border: 1px solid #e6ebf1 !important;
   border-radius: 1rem;
+  cursor: pointer;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
@@ -12,37 +13,37 @@
     border-color 0.2s ease;
 }
 
-/* Let headings + body inherit color from the card */
-.orange-cards a h3,
-.orange-cards a p {
-  color: inherit;
+/* Let headings + body inherit from the card color */
+.orange-cards [class*="Card_root"] h3,
+.orange-cards [class*="Card_root"] p {
+  color: inherit !important;
 }
 
-/* Icons: follow the current text color */
-.orange-cards a svg {
-  color: #0a2540;
-  stroke: currentColor;
+/* Icons follow the text color via currentColor */
+.orange-cards [class*="Card_root"] svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
   fill: none;
   transition: color 0.2s ease, stroke 0.2s ease, fill 0.2s ease;
 }
 
 /* Hover state — orange background, white text + icons */
-.orange-cards a:hover {
-  background-color: #f97316; /* IDnow orange */
-  color: #ffffff;            /* text becomes white */
-  border-color: transparent;
+.orange-cards [class*="Card_root"]:hover {
+  background-color: #f97316 !important; /* IDnow orange */
+  color: #ffffff !important;            /* text becomes white */
+  border-color: transparent !important;
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
   transform: translateY(-2px);
 }
 
 /* Ensure inner text is white on hover */
-.orange-cards a:hover h3,
-.orange-cards a:hover p {
-  color: #ffffff;
+.orange-cards [class*="Card_root"]:hover h3,
+.orange-cards [class*="Card_root"]:hover p {
+  color: #ffffff !important;
 }
 
 /* Icons also turn white on hover */
-.orange-cards a:hover svg {
-  color: #ffffff;
-  stroke: currentColor;
+.orange-cards [class*="Card_root"]:hover svg {
+  color: #ffffff !important;
+  stroke: currentColor !important;
 }

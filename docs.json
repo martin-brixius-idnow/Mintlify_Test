@@ -1,4 +1,4 @@
-{
+e{
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "IDnow Trustplatform",
@@ -143,7 +143,7 @@
         "icon": "tools",
         "groups": [
           {
-            "group": "Resources",
+            "group": "Overview",
             "pages": [
               "Development_Resources/index"
             ]

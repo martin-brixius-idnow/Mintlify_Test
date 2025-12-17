@@ -1,13 +1,21 @@
+```json
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "IDnow Trustplatform",
+  "name": "IDnow Trust Platform",
+  "favicon": "/favicon.png",
+
   "colors": {
     "primary": "#ff6336",
     "light": "#ff6336",
     "dark": "#ff6336"
   },
-  "favicon": "/favicon.png",
+
+  "logo": {
+    "light": "/logo/images.png",
+    "dark": "/logo/images.png"
+  },
+
   "versions": {
     "current": "v1",
     "list": [
@@ -23,18 +31,24 @@
       }
     ]
   },
+
+  "openapi": {
+    "path": "/path/to/your/openapi.json"
+  },
+
   "navigation": {
     "versions": {
       "default": "v1"
     },
+
     "anchors": [
       {
         "name": "API Reference",
         "icon": "square-terminal",
-        "url": "api-reference",
-        "openapi": "/path/to/your/openapi.json"
+        "url": "api-reference"
       }
     ],
+
     "tabs": [
       {
         "tab": "Get Started",
@@ -53,18 +67,17 @@
           },
           {
             "group": "Customization",
-            "pages": [
-              "Platform_Guides/Branding"
-            ]
+            "pages": ["Platform_Guides/Branding"]
           }
         ]
       },
+
       {
         "tab": "Solution Templates",
         "icon": "sparkles",
         "groups": [
           {
-            "group": "Solution Templates",
+            "group": "Overview",
             "pages": ["Solution_Templates/index"]
           },
           {
@@ -79,12 +92,13 @@
           }
         ]
       },
+
       {
         "tab": "Platform",
         "icon": "cube",
         "groups": [
           {
-            "group": "Core Concept",
+            "group": "Core Concepts",
             "pages": [
               "Platform_Guides/Overview",
               "Platform_Guides/Core_Concept_DataBlocks",
@@ -123,25 +137,24 @@
           {
             "group": "Screening",
             "pages": ["Platform_Guides/PEP_Sanctions_Screening"]
-          }
+          },
           {
-            "group": "Action",
+            "group": "Actions",
             "pages": [
               "Platform_Guides/Choice",
               "Platform_Guides/Verification_Method_Selector",
               "Platform_Guides/Identity_Comparison"
             ]
-          },
-
-          
+          }
         ]
       },
+
       {
         "tab": "Integration",
         "icon": "server",
         "groups": [
           {
-            "group": "Integrate",
+            "group": "Overview",
             "pages": ["Integration/index"]
           },
           {
@@ -161,27 +174,25 @@
               "Integration/get-session-results",
               "Integration/get-datablocks",
               "Integration/get-files"
-            ]              
+            ]
           },
           {
-            "group": "Webooks",
-            "pages": [
-              "Development_Resources/Webhooks_Events"
-            ]              
+            "group": "Webhooks",
+            "pages": ["Development_Resources/Webhooks_Events"]
           },
-          
           {
             "group": "Navigate Player",
             "pages": ["Integration/Player_Embed-or-Redirect"]
           }
         ]
       },
+
       {
         "tab": "Resources",
         "icon": "tools",
         "groups": [
           {
-            "group": "Resources",
+            "group": "Overview",
             "pages": ["Development_Resources/index"]
           },
           {
@@ -203,10 +214,7 @@
       }
     ]
   },
-  "logo": {
-    "light": "/logo/images.png",
-    "dark": "/logo/images.png"
-  },
+
   "navbar": {
     "links": [
       {
@@ -215,7 +223,7 @@
       },
       {
         "label": "API Explorer",
-        "href": "https://idnow.mintlify.app/api-reference"
+        "href": "/api-reference"
       }
     ],
     "primary": {
@@ -224,6 +232,7 @@
       "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
   },
+
   "contextual": {
     "options": [
       "copy",
@@ -231,11 +240,11 @@
       "chatgpt",
       "claude",
       "perplexity",
-      "mcp",
       "cursor",
       "vscode"
     ]
   },
+
   "footer": {
     "socials": {
       "x": "https://x.com/mintlify",
@@ -244,3 +253,4 @@
     }
   }
 }
+```

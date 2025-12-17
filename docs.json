@@ -57,9 +57,9 @@
         "icon": "cube",
         "groups": [
           {
-            "group": "Core Concept",
+            "group": "Overview",
             "pages": [
-              "Platform_Guides/Overview",
+              "Platform_Guides/Core_Concept",
               "Platform_Guides/Core_Concept_DataBlocks",
               "Platform_Guides/Platform_Lifecycle"
             ]

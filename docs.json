@@ -74,7 +74,7 @@
           {
             "group": "Biometric Authentication",
             "pages": [
-              "Platform_Guides/Biometric_Enrollment",
+              "platform_guides/biometric_enrollment",
               "Platform_Guides/Biometric_Verification"
             ]
           },

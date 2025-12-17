@@ -3,34 +3,43 @@ title: "Welcome to IDnow Trust Platform"
 mode: "custom"
 ---
 
-<div className="mx-auto max-w-6xl px-6 py-12">
+<div className="mx-auto max-w-6xl px-6 py-16 text-left">
 
-  # Welcome to IDnow Trust Platform
+  <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900">
+    Build identity, risk, and trust in one platform
+  </h1>
 
-  Build secure, compliant identity journeys on a single, unified platform for identity, risk, and trust.  
-  Explore guides, templates, and API references for every step of your IDnow integration.
+  <p className="mt-4 max-w-2xl text-lg text-slate-700">
+    Welcome to IDnow Trust Platform – your single, unified layer for identity verification, risk, and trust.
+    Explore guides, templates, and API references for every step of your IDnow integration.
+  </p>
 
-  Use our ready-made solution templates or build your own flow in minutes. Integrate the flow API once to run
-  unlimited workflows and receive real-time updates for every event.
+  <p className="mt-2 max-w-2xl text-base text-slate-600">
+    Use our ready-made solution templates or build your own flow in minutes. Integrate the flow API once to run
+    unlimited workflows and receive real-time updates for every event.
+  </p>
 
-  <CardGroup cols={3} className="orange-cards">
-    <Card title="Get started" icon="list-check" href="/guides/setup">
-      Get an overview of the platform and get up and running in minutes.
-    </Card>
-    <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
-      Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
-    </Card>
-    <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
-      Integrate once and trigger any workflow through a single API.
-    </Card>
-  </CardGroup>
+  <div className="mt-10">
+    <CardGroup cols={3} className="orange-cards">
+      <Card title="Get started" icon="list-check" href="/guides/setup">
+        Get an overview of the platform and get up and running in minutes.
+      </Card>
+      <Card title="Configure Flows" icon="diagram-project" href="/guides/workflows">
+        Orchestrate identity, risk, and authentication with ready-made templates or custom nodes.
+      </Card>
+      <Card title="Run Sessions & Receive Results" icon="plug" href="/guides/execute-flow">
+        Integrate once and trigger any workflow through a single API.
+      </Card>
+    </CardGroup>
+  </div>
 
-  <CardGroup cols={1} className="orange-cards">
-    <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
-      Receive real-time updates for every flow and result.
-    </Card>
-  </CardGroup>
+  <div className="mt-4">
+    <CardGroup cols={1} className="orange-cards">
+      <Card title="Receive updates" icon="bolt" href="/guides/webhooks">
+        Receive real-time updates for every flow and result.
+      </Card>
+    </CardGroup>
+  </div>
 
   ---
-
 </div>

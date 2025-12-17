@@ -1,3 +1,4 @@
+/* Orange CardGroup styling */
 .orange-cards .card {
   background-color: #f97316; /* orange */
   color: white;
@@ -15,4 +16,3 @@
   background-color: #ea580c; /* darker orange */
   transform: translateY(-2px);
 }
-

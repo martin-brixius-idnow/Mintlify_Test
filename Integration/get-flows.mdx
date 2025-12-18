@@ -1,9 +1,7 @@
 ---
-title: "Get Flows"
+title: "Get flows"
 description: "Retrieve a list of available flows configured for your environment"
 ---
-
-## Overview
 
 Use this endpoint to retrieve all flows available in your environment. The response provides essential metadata for each flow.
 
@@ -19,10 +17,10 @@ No request body is required for this endpoint.
 
 ***Headers***
 
-| Header | Type | Required | Description |
-|--------|------|----------|-------------|
-| `Authorization` | string | Yes | Bearer token for authentication |
-| `Content-Type` | string | Yes | Must be `application/json` |
+| Header          | Type   | Required | Description |
+|-----------------|--------|----------|-------------|
+| `Authorization` | String | Yes | Bearer token for authentication |
+| `Content-Type`  | String | Yes | Must be `application/json` |
 
 ## Response
 
@@ -42,12 +40,12 @@ Returns an array of flow objects with minimal metadata.
 
 ***Response parameters***
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `content` | array | Array of flow objects |
-| `flowID` | string | Unique identifier for the flow |
-| `flowName` | string | Display name of the flow |
-| `flowDescription` | string | Description of the flow's purpose |
+| Parameter         | Type   | Description |
+|-------------------|--------|-------------|
+| `content`         | Array  | Array of flow objects |
+| `flowID`          | String | Unique identifier for the flow |
+| `flowName`        | String | Display name of the flow |
+| `flowDescription` | String | Description of the flow's purpose |
 
 ## Example
 

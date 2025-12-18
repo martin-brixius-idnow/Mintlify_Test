@@ -3,17 +3,15 @@ title: France Identité
 description: Verifies a user’s identity using the France Identité mobile app.
 ---
 
-## Overview
-
 Provides a secure verification option where users prove their identity through France’s national digital identity app. Ideal for fast, trusted onboarding or identity verification processes.
 
 ---
 
-## Key Features
+## Key features
 
-- ***OIDC-based Authentication***: Secure authentication using France Identité via OpenID Connect.
-- ***Seamless Redirection***: Redirects users to France Identité for login and returns them post-authentication.
-- ***Ready-to-Use***: No additional configuration needed for integration
+- ***OIDC-based authentication***: Secure authentication using France Identité via OpenID Connect.
+- ***Seamless redirection***: Redirects users to France Identité for login and returns them post-authentication.
+- ***Ready-to-use***: No additional configuration needed for integration
 
 ---
 
@@ -23,30 +21,30 @@ This step does not require any specific configuration options.
 
 ---
 
-## Input DataBlock
+## Input data blocks
 
-This step does not require any input DataBlock.
+This step does not require any input data blocks.
 
 ---
 
 ## Verdicts
 
-Verdicts for this DataBlock.
+Verdicts for this data block.
 
 | Verdict | Description |
 |---------|-------------|
 | `verified` | The user's identity has been successfully authenticated by the France Identité wallet. The user has consented to sharing their data, and the OIDC flow has completed with the reception of an ID Token containing the verified attributes. |
 | `canceled` | The user actively interrupted the process. This can occur either by explicitly cancelling the authentication or by refusing to grant consent at the data sharing step. |
-| `not_verified` | The authentication attempt failed. The identity could not be verified because the user failed to authenticate with their wallet (e.g., by entering an incorrect PIN). |
+| `not_verified` | The authentication attempt failed. The identity could not be verified because the user failed to authenticate with their wallet (e.g. by entering an incorrect PIN). |
 
 ---
 
-## Output DataBlock
+## Output data blocks
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Verdict | DataBlocks Produced | Notes |
-|---------|---------------------|-------|
-| **verified** | `BasicIdentity`, `ExtendedIdentity`, `AuthenticationResult` | |
-| **canceled** | `AuthenticationResult` | |
-| **not_verified** | `AuthenticationResult` | |
+| Verdict        | Data blocks produced   | Notes |
+|----------------|------------------------|-------|
+| `verified`     | `BasicIdentity`, `ExtendedIdentity`, `AuthenticationResult` | |
+| `canceled`     | `AuthenticationResult` | |
+| `not_verified` | `AuthenticationResult` | |

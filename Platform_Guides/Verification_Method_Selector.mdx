@@ -1,33 +1,33 @@
---
-title: Verification Method Selector
-description: Presents users with a list of identity verification methods and routes the workflow based on user selection.
+---
+title: Verification method selector
+description: Allow users to choose their preferred identity verification method.
 ---
 
-## Overview
+Display a list of identity verification methods to the user. The user will be directed to the verification method of their choice.
 
-The purpose of this step is to enable the display of a page within a workflow that presents users with a list of client-specified identity verification methods. Based on the choice made by the user, they are then directed to the step associated with the chosen method.
+---
 
-## Key Features
+## Key features
 
-- **User-Driven Selection**: Displays a selection page in Player with available verification methods
-- **Dynamic Ports**: Creates output ports dynamically based on configured methods
-- **Method Assets**: Each method includes display assets (label, image, country)
-- **Flexible Routing**: No constraints on the type of step that can be associated with transitions
+- **User-driven selection**: Shows the user a selection page with the available verification methods.
+- **Dynamic ports**: Creates output ports dynamically based on configured methods
+- **Method assets**: Each method includes display assets (label, image, country)
+- **Flexible routing**: No constraints on the type of step that can be associated with transitions
 
 
 ## Configuration
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| methods | array | Yes | A list of unique string identifiers for the verification methods to be offered (e.g., doc_id, france_identite, eudi_wallet). Each string is used to name a corresponding dynamic output port. Minimum 1 method required. |
+| Attribute | Type  | Required | Description |
+|-----------|-------|----------|-------------|
+| `methods` | Array | Yes | A list of unique string identifiers for the verification methods to be offered (e.g. doc_id, france_identite, eudi_wallet). Each string is used to name a corresponding dynamic output port. Minimum 1 method required. |
 
-**Frontend Implications:**
+**Frontend implications:**
 
 Each method that can be defined as an option is associated with a set of assets intended for displaying a selection block, which contains the radio button for the selection:
 
 - A label associated with the method (its title)
 - An image displayed within the block
-- The country to which this method is associated (e.g., "France" for France Identité or "Germany" for AusweisID)
+- The country to which this method is associated (e.g. "France" for France Identité or "Germany" for AusweisID)
 
 ## Example
 
@@ -41,12 +41,10 @@ Each method that can be defined as an option is associated with a set of assets 
 }
 ```
 
-## Input DataBlock
+## Input data blocks
 
-This step has no static input DataBlock. It does not consume any DataBlocks.
+This step does not require any input data blocks.
 
-## Output DataBlock
+## Output data blocks
 
-This step does not produce any output DataBlock. 
-
-
+This step does not produce any output data blocks. 

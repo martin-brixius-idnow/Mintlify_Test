@@ -1,10 +1,9 @@
 ---
-title: 'Manage'
+title: 'Manage webhooks'
 description: 'Set up webhook endpoints, manage subscriptions, and monitor delivery'
 ---
-## Overview
 
-In TrustPlatform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes. 
+In Trust Platform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes.
 
 Because steps run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
 
@@ -22,6 +21,7 @@ See the full list of available webhook events here:
 - Automatic retries for transient failures
 </Info>
 ---
+
 ## Checklist
 
 Before receiving webhooks, complete these steps:
@@ -48,10 +48,12 @@ Before receiving webhooks, complete these steps:
   </Accordion>
 </AccordionGroup>
 ---
+
 ## Setup
+
 Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it’s no longer required. 
 
-### 1. Expose an Endpoint
+### 1. Expose an endpoint
 
 Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 seconds.
 
@@ -67,13 +69,14 @@ Return 2xx **immediately**, then process events asynchronously to avoid timeouts
 | **Capacity** | Handle expected event volume |
 | **Idempotency** | Process duplicates safely using event_id |
 ---
-### 2. Setup Webhooks in Studio
 
-Set up your webhook endpoint in IDnow Studio.
+### 2. Set up webhooks on IDnow
+
+Set up your webhook endpoint on IDnow:
 
 <Steps>
   <Step title="Navigate to Settings">
-    Go to **Settings** then **Webhooks** in Studio.
+    Go to **Settings** then **Webhooks** in the IDnow dashboard.
   </Step>
   <Step title="Add endpoint URL">
     Enter your HTTPS endpoint URL and description.
@@ -90,9 +93,10 @@ Set up your webhook endpoint in IDnow Studio.
 Configure separate endpoints for **test**, **preprod**, and **live** environments.
 </Info>
 ---
-### 3. Handle Webhooks
 
-#### Verify the Source
+### 3. Handle webhooks
+
+#### Verify the source
 
 <AccordionGroup>
   <Accordion title="Validate IP address" icon="network-wired">
@@ -103,7 +107,8 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Accordion>
 </AccordionGroup>
 ---
-#### Process the Event
+
+#### Process the event
 
 <Steps>
   <Step title="Return 2xx immediately">
@@ -117,7 +122,8 @@ Configure separate endpoints for **test**, **preprod**, and **live** environment
   </Step>
 </Steps>
 ---
-#### Prevent Failures
+
+#### Prevent failures
 
 Your endpoint must respond within **10 seconds**. Responses taking longer are treated as failures and trigger retries.
 
@@ -125,14 +131,15 @@ Your endpoint must respond within **10 seconds**. Responses taking longer are tr
 Process webhook events asynchronously. Acknowledge receipt immediately (return HTTP 2xx) and queue the event for background processing.
 </Tip>
 ---
-#### Retry Logic
+
+#### Retry logic
 
 IDnow automatically retries failed deliveries:
 
-| Attempt | Delay | Total Elapsed Time |
-|---------|-------|-------------------|
-| 1st retry | 2 seconds | 2s |
-| 2nd retry | 4 seconds | 6s |
+| Attempt   | Delay     | Total elapsed time |
+|-----------|-----------|--------------------|
+| 1st retry | 2 seconds | 2s  |
+| 2nd retry | 4 seconds | 6s  |
 | 3rd retry | 8 seconds | 14s |
 
 **Retry conditions:**

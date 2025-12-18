@@ -3,60 +3,58 @@ title: IDcheck
 description: Automated identity verification with document scanning and face matching.
 ---
 
-## Overview
-
 IDcheck provides automated document-based identity verification with optional biometric face matching for fast, compliant onboarding and real-time fraud detection. Users capture ID documents and (optionally) biometric samples via SDK or API, while the backend verifies document authenticity, security features, and biometric consistency. Supports a wide range of government IDs and can include specialist review and advanced fraud detection.
 
 ---
 
-## Key Features
+## Key features
 
-- **Interactive Capture** - SDK-guided document and biometric collection on Web, iOS or Android.
-- **AI-Powered Analysis** - Automatic recognition, OCR, MRZ/VIZ checks, barcode reading, security feature detection, and consistency checks.
-- **Advanced Fraud Signal**: Detects repeated documents, synthetic identities, device/IP anomalies, and validates IBAN ownership.
-- **Multi-Document Support** - ID, passport, permits, visas, licenses, health cards.
-- **Biometric Verification** - Confirms ID ownership with optional video-liveness to prevent spoofing.
-- **Manual Review Option** - High-risk cases routed to trained specialists for 24/7 manual verification.
-- **Flexible Consent** - SDK or customer-managed consent handling
+- **Interactive capture**: SDK-guided document and biometric collection on Web, iOS or Android.
+- **AI-powered analysis**: Automatic recognition, OCR, MRZ/VIZ checks, barcode reading, security feature detection, and consistency checks.
+- **Advanced fraud signal**: Detects repeated documents, synthetic identities, device/IP anomalies, and validates IBAN ownership.
+- **Multi-document support**: ID, passport, permits, visas, licenses, health cards.
+- **Biometric verification**: Confirms ID ownership with optional video-liveness to prevent spoofing.
+- **Manual review option**: High-risk cases routed to trained specialists for 24/7 manual verification.
+- **Flexible consent**: SDK or customer-managed consent handling.
 
 ---
 
 ## Configuration
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `documentTypes` | Array | **Yes** | - | Document types to accept: `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` |
-| `biometricSampleTypes` | Array | No | `[]` | Biometric capture: `SELFIE`, `VIDEO`. Empty array = disabled |
-| `biometricConsentHandling` | String | No | `SDK` | Consent collection: `SDK` (handled during capture) or `CUSTOMER` (pre-collected) |
+| Parameter                  | Type   | Required | Default | Description |
+|----------------------------|--------|----------|---------|-------------|
+| `documentTypes`            | Array  | Yes      | -       | Document types to accept: `ID`, `PASSPORT`, `RESIDENT_PERMIT`, `VISA`, `DRIVING_LICENSE`, `HEALTH_CARD` |
+| `biometricSampleTypes`     | Array  | No       | `[]`    | Biometric capture: `SELFIE`, `VIDEO`. Empty array = disabled |
+| `biometricConsentHandling` | String | No       | `SDK`   | Consent collection: `SDK` (handled during capture) or `CUSTOMER` (pre-collected) |
 
 ---
 
-## Input DataBlock
+## Input data blocks
 
-This step does not require any input DataBlock.
+This step does not require any input data blocks.
 
 ---
 
 ## Verdicts
 
-Verdicts for this DataBlock.
+Verdicts for this data block.
 
-| Verdict | Description |
-|---------|-------------|
-| `verified` | The document and biometric samples (if configured) were successfully processed and data was extracted. Identity verification completed successfully. |
+| Verdict          | Description |
+|------------------|-------------|
+| `verified`       | The document and biometric samples (if configured) were successfully processed and data was extracted. Identity verification completed successfully. |
 | `fraud_detected` | Fraud was detected on the document or biometric samples (if configured), or they were no longer valid. No identity data is extracted for security reasons. |
 | `capture_failed` | The quality of the provided images did not allow for processing. Common causes include blur, glare, poor lighting, or incomplete document visibility. |
-| `default` | A technical or unexpected error occurred during processing. This includes service unavailability, timeouts, or processing failures. |
+| `default`        | A technical or unexpected error occurred during processing. This includes service unavailability, timeouts, or processing failures. |
 
 ---
 
-## Output DataBlock
+## Output data blocks
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Verdict | DataBlocks Produced | Notes |
-|---------|---------------------|-------|
-| **verified** | `DocumentVerification`, `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `BiometricSamples`* | `BiometricSamples` only if biometricSampleTypes configured |
+| Verdict             | Data blocks produced  | Notes |
+|--------------------|------------------------|-------|
+| **verified**       | `DocumentVerification`, `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `BiometricSamples`* | `BiometricSamples` only if biometricSampleTypes configured |
 | **fraud_detected** | `DocumentVerification` | No identity data extracted |
 | **capture_failed** | `DocumentVerification` | Contains quality failure reasons |
-| **default** | `DocumentVerification` | Contains error details |
+| **default**        | `DocumentVerification` | Contains error details |

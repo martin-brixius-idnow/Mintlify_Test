@@ -1,9 +1,7 @@
 ---
-title: "Get Session Results"
+title: "Get session results"
 description: "Retrieve the status and results of a flow session"
 ---
-
-## Overview
 
 Retrieve detailed information about a specific session, including its current status, decision outcome, and session history. The response follows data minimization principles by default, returning only essential metadata.
 
@@ -15,9 +13,9 @@ GET /session/{sessionId}
 
 ***Path parameters***
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `sessionId` | string | Yes | The unique identifier of the session |
+| Parameter   | Type   | Required | Description |
+|-------------|--------|----------|-------------|
+| `sessionId` | String | Yes | The unique identifier of the session |
 
 ## Request
 
@@ -31,11 +29,11 @@ GET /session/{sessionId}
 
 ***Request parameters***
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `flowId` | string | Yes | Flow identifier |
-| `environment` | string | Yes | Environment where the session exists |
-| `sessionId` | string | Yes | Session identifier |
+| Parameter     | Type   | Required | Description |
+|---------------|--------|----------|-------------|
+| `flowId`      | String | Yes      | Flow identifier |
+| `environment` | String | Yes      | Environment where the session exists |
+| `sessionId`   | String | Yes      | Session identifier |
 
 ## Response
 
@@ -63,24 +61,24 @@ GET /session/{sessionId}
 
 ***Response parameters***
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `flowId` | string | Flow identifier |
-| `flowVersion` | string | Version of the flow executed |
-| `environment` | string | Environment identifier |
-| `subjectId` | string | Reference ID for the subject |
-| `sessionId` | string | Unique session identifier |
-| `sessionStatus` | string | Current status (e.g., `created`, `in progress`, `completed`) |
-| `createdAt` | string | ISO 8601 timestamp when session was created |
-| `startedAt` | string | ISO 8601 timestamp when processing started (null if not started) |
-| `updatedAt` | string | ISO 8601 timestamp of last update |
-| `completedAt` | string | ISO 8601 timestamp when session completed |
-| `expiresAt` | string | ISO 8601 timestamp when session expires |
-| `decisionOutcome` | string | Final decision (e.g., `accepted`, `rejected`) |
-| `lastStep` | object | Information about the last executed step |
-| `lastStep.stepName` | string | Name of the step |
-| `lastStep.stepType` | string | Type of step (e.g., `END`, `CHECK`) |
-| `lastStep.verdict` | string | Step verdict (e.g., `completed`, `failed`) |
+| Parameter           | Type   | Description |
+|---------------------|--------|-------------|
+| `flowId`            | String | Flow identifier |
+| `flowVersion`       | String | Version of the flow executed |
+| `environment`       | String | Environment identifier |
+| `subjectId`         | String | Reference ID for the subject |
+| `sessionId`         | String | Unique session identifier |
+| `sessionStatus`     | String | Current status (e.g. `created`, `in progress`, `completed`) |
+| `createdAt`         | String | ISO 8601 timestamp when session was created |
+| `startedAt`         | String | ISO 8601 timestamp when processing started (null if not started) |
+| `updatedAt`         | String | ISO 8601 timestamp of last update |
+| `completedAt`       | String | ISO 8601 timestamp when session completed |
+| `expiresAt`         | String | ISO 8601 timestamp when session expires |
+| `decisionOutcome`   | String | Final decision (e.g. `accepted`, `rejected`) |
+| `lastStep`          | Object | Information about the last executed step |
+| `lastStep.stepName` | String | Name of the step |
+| `lastStep.stepType` | String | Type of step (e.g. `END`, `CHECK`) |
+| `lastStep.verdict`  | String | Step verdict (e.g. `completed`, `failed`) |
 
 ## Example
 
@@ -99,5 +97,5 @@ curl https://api.idnow.io/v1/session/123 \
 
 - Response implements data minimization by default for GDPR compliance
 - If the session status is not `accepted`, the `lastStep` object provides debugging context
-- Datablock references are separated to allow granular access control
+- Data block references are separated to allow granular access control
 - All timestamps follow ISO 8601 format

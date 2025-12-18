@@ -1,54 +1,49 @@
 ---
-title: EUDI Wallet
+title: EUDI wallet
 description: Verifies users using their European Digital Identity Wallet.
 ---
-
-## Overview
 
 Used when businesses want fast and highly trusted verification based on government‑issued digital identity. Users can securely share verified personal information from their EU Digital Identity Wallet, enabling smooth onboarding with strong, authoritative identity assurance.
 
 ---
 
-## Key Features
+## Key features
 
 - **OID4VP and mdoc Protocols**: Implements OpenID for Verifiable Presentations and mdoc protocols
-- **Credential Request**: Requests and verifies EUDI Wallet credentials from the user's European Digital Identity Wallet
-- **Dynamic Output Configuration**: Output DataBlocks are dynamically determined based on the `requestedCredentials` configuration
-- **Credential to DataBlock Mapping**: Maps credential claims to DSL DataBlocks for seamless flow integration
-- **No Input Required**: Does not require any input DataBlock from the flow context
-- **Multiple Credential Support**: Can request multiple credentials in a single verification session
+- **Credential request**: Requests and verifies EUDI wallet credentials from the user's European Digital Identity Wallet
+- **Dynamic output configuration**: Output data blocks are dynamically determined based on the `requestedCredentials` configuration
+- **Credential to data block mapping**: Maps credential claims to DSL data blocks for seamless flow integration
+- **No input required**: Does not require any input data block from the flow context
+- **Multiple credential support**: Can request multiple credentials in a single verification session
 
 ---
 
 ## Configuration
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `requestedCredentials` | array | Yes | A mandatory array that specifies the credentials requested from the user's wallet. Minimum 1 credential required. |
-| `requestedCredentials.type` | string | Yes | The URI identifying the type of credential requested. |
-| `requestedCredentials.format` | string | Yes | The format of the credential (e.g., `vc+sd-jwt`). |
-| `requestedCredentials.datablocks` | array | No | An optional array that maps the expected claims from this credential to known DataBlocks in the DSL (e.g., BasicIdentity, ExtendedIdentity). If this option is used, the corresponding DataBlock will be generated and added to the flow context upon success. |
+| Attribute                         | Type   | Required | Description |
+|-----------------------------------|--------|----------|-------------|
+| `requestedCredentials`            | Array  | Yes      | A mandatory array that specifies the credentials requested from the user's wallet. Minimum 1 credential required. |
+| `requestedCredentials.type`       | String | Yes      | The URI identifying the type of credential requested. |
+| `requestedCredentials.format`     | String | Yes      | The format of the credential (e.g. `vc+sd-jwt`). |
+| `requestedCredentials.datablocks` | Array  | No       | An optional array that maps the expected claims from this credential to known data blocks in the DSL (e.g. `BasicIdentity`, `ExtendedIdentity`). If this option is used, the corresponding data block will be generated and added to the flow context upon success. |
 
 ---
 
-## Input DataBlock
+## Input data blocks
 
-This step does not require any input DataBlock.
+This step does not require any input data blocks.
 
 ---
 
-## Output DataBlock
+## Output data blocks
 
-The EUDI_WALLET_VERIFIER:v1 step produces different outputs depending on the presentation result. The output DataBlocks are dynamically determined based on the `requestedCredentials` configuration.
+The EUDI wallet step produces different outputs depending on the presentation result. The output data blocks are dynamically determined based on the `requestedCredentials` configuration.
 
-| Verdict | DataBlocks Produced | Description |
-|----------|---------------------|-------------|
-| `verified` | PresentationResult, DataBlocks specified in options.requestedCredentials.datablocks (e.g., BasicIdentity, ExtendedIdentity) | Successful wallet presentation. The user has authenticated with their EUDI wallet and consented to sharing the requested credentials through a verifiable or mdoc presentation. |
-| `cancelled` | PresentationResult | The user actively interrupted the process. This can occur either by explicitly refusing the data sharing. |
-| `not_verified` | PresentationResult | The presentation attempt failed. The credential presented is not valid or the presentation made by the holder does not satisfy the query. |
-| `default` | PresentationResult | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
+| Verdict        | Data blocks produced    | Description |
+|----------------|-------------------------|-------------|
+| `verified`     | `PresentationResult`, Data blocks specified in `options.requestedCredentials.datablocks` (e.g. `BasicIdentity`, `ExtendedIdentity`) | Successful wallet presentation. The user has authenticated with their EUDI wallet and consented to sharing the requested credentials through a verifiable or mdoc presentation. |
+| `cancelled`    | `PresentationResult`    | The user actively interrupted the process. This can occur either by explicitly refusing the data sharing. |
+| `not_verified` | `PresentationResult`    | The presentation attempt failed. The credential presented is not valid or the presentation made by the holder does not satisfy the query. |
+| `default`      | `PresentationResult`    | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
 
-**Dynamic Output:** The `verified` scenario uses a dynamic function based on configuration options. All unique DataBlocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.
-
-## Best Practices
-
+**Dynamic output:** The `verified` scenario uses a dynamic function based on configuration options. All unique data blocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.

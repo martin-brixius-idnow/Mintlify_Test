@@ -3,41 +3,39 @@ title: Headless
 description: Automated verification using pre‑captured document and face images.
 ---
 
-## Overview
-
 Designed for flows where the business already has user images and wants to verify them automatically, without prompting the user to interact again.
 
 ---
 
-## Key Features
+## Key features
 
-- **Headless Processing**: Processes pre-captured data without user interaction during step execution
-- **Consent Required**: Requires BiometricSamples with `consent = true`
-- **Document Validation**: Validates document authenticity
-- **Identity Extraction**: Extracts identity information from documents
+- **Headless processing**: Processes pre-captured data without user interaction during step execution
+- **Consent required**: Requires `BiometricSamples` with `consent = true`
+- **Document validation**: Validates document authenticity
+- **Identity extraction**: Extracts identity information from documents
 
 ---
 
 ## Configuration
 
-|  Parameter            | Type   | Description                                                                                                                                                       |
-|-----------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| biometricProcessing          | object | A container for parameters related to biometric verification. If this object is not provided, no biometric analysis is performed. The IDCheck.io realm configuration must be aligned with the options set in this step. |
-| biometricProcessing.sampleType | enum   | Defines the type of biometric sample provided. Currently, only the value `SELFIE` is supported.                                                                    |
+|  Parameter                       | Type   |                                                 |
+|----------------------------------|--------|-------------------------------------------------|
+| `biometricProcessing`            | Object | A container for parameters related to biometric verification. If this object is not provided, no biometric analysis is performed. The IDCheck.io realm configuration must be aligned with the options set in this step. |
+| `biometricProcessing.sampleType` | Enum   | Defines the type of biometric sample provided. Currently, only the value `SELFIE` is supported.                                                                    |
 
 
 ---
 
-## Input DataBlock
+## Input data blocks
 
 Input requirements for this step.
 
-| DataBlock Type | Required | Description |
-|----------------|----------|-------------|
-| `DocumentImages` | Yes | Pre-captured document images (front and/or back side) |
-| `BiometricSamples` | Yes | Pre-captured biometric data with `consent = true` |
+| Data block type    | Required | Description |
+|--------------------|----------|-------------|
+| `DocumentImages`   | Yes      | Pre-captured document images (front and/or back side) |
+| `BiometricSamples` | Yes      | Pre-captured biometric data with `consent = true` |
 
-If the consent field in the BiometricSamples DataBlock is set to true, Idnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
+If the consent field in the `BiometricSamples` data block is set to true, IDnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
 
 ---
 
@@ -47,13 +45,13 @@ This step does not produce any verdicts.
 
 ---
 
-## Output DataBlock
+## Output data blocks
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Scenario | DataBlocks Produced | Description |
-|----------|---------------------|-------------|
-| verified | `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `BiometricSamples` | Successful document processing with identity extraction |
-| fraud_detected | `DocumentVerification` | Document identified as fraudulent |
-| capture_failed | `DocumentVerification` | Document capture failed |
-| default | `DocumentVerification` | Unexpected or technical error during processing |
+| Scenario         | Data blocks produced | Description |
+|------------------|---------------------|-------------|
+| `verified`       | `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `BiometricSamples` | Successful document processing with identity extraction |
+| `fraud_detected` | `DocumentVerification` | Document identified as fraudulent |
+| `capture_failed` | `DocumentVerification` | Document capture failed |
+| `default`        | `DocumentVerification` | Unexpected or technical error during processing |

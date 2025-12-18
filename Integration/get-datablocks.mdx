@@ -1,11 +1,9 @@
 ---
-title: "Get Datablocks"
-description: "Retrieve input and output DataBlocks for a session"
+title: "Get data blocks"
+description: "Retrieve input and output data blocks for a session"
 ---
 
-## Overview
-
-Retrieve all DataBlocks associated with a specific session. DataBlocks contain the input data provided when creating the session and output data generated during flow execution. This endpoint supports both input and output data block retrieval with pagination.
+Retrieve all data blocks associated with a specific session. Data blocks contain the input data provided when creating the session and output data generated during flow execution. This endpoint supports both input and output data block retrieval with pagination.
 
 ## Endpoint
 
@@ -15,23 +13,23 @@ GET /session/{sessionId}/datablocks
 
 ***Path parameters***
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `sessionId` | string | Yes | The unique identifier of the session |
+| Parameter   | Type | Required | Description |
+|-------------|------|----------|-------------|
+| `sessionId` | String | Yes | The unique identifier of the session |
 
 ## Request
 
 Query parameters control pagination and sorting:
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `flowId` | string | Yes | Flow identifier |
-| `environment` | string | Yes | Environment identifier |
-| `sessionId` | string | Yes | Session identifier |
-| `page` | number | No | Page number for pagination |
-| `size` | number | No | Number of items per page |
-| `sortBy` | string | Yes | Field to sort by |
-| `sortDesc` | boolean | Yes | Sort in descending order if true |
+| Parameter     | Type    | Required | Description |
+|---------------|---------|----------|-------------|
+| `flowId`      | String  | Yes      | Flow identifier |
+| `environment` | String  | Yes      | Environment identifier |
+| `sessionId`   | String  | Yes      | Session identifier |
+| `page`        | Number  | No       | Page number for pagination |
+| `size`        | Number  | No       | Number of items per page |
+| `sortBy`      | String  | Yes      | Field to sort by |
+| `sortDesc`    | Boolean | Yes      | Sort in descending order if true |
 
 ## Response
 
@@ -62,22 +60,20 @@ Query parameters control pagination and sorting:
 
 ***Response parameters***
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `dataBlocks` | array | Array of data block objects |
+| Parameter    | Type  | Description |
+|--------------|-------|-------------|
+| `dataBlocks` | Array | Array of data block objects |
 
-***Data block fields***
+All data blocks include these fields:
 
-All DataBlocks include:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `type` | string | Type of data block (e.g., `BasicIdentity`, `Credentials`) |
-| `createdByStep` | string | Step that created this data block |
-| `createdAt` | string | ISO 8601 timestamp when data block was created |
+| Field           | Type   | Description |
+|-----------------|--------|-------------|
+| `type`          | String | Type of data block (e.g. `BasicIdentity`, `Credentials`) |
+| `createdByStep` | String | Step that created this data block |
+| `createdAt`     | String | ISO 8601 timestamp when data block was created |
 
 <Info>
-For a complete list of available data block types and their schemas, see [Core Concept: DataBlocks](https://idnow.mintlify.app/Platform_Guides/Core_Concept_DataBlocks).
+For a complete list of available data block types and their schemas, see [Core Concept: Data blocks](https://idnow.mintlify.app/Platform_Guides/Core_Concept_DataBlocks).
 </Info>
 
 ## Example
@@ -90,7 +86,7 @@ curl https://api.idnow.io/v1/session/123/datablocks?flowId=wf_1a2b3c4d5e6f&envir
 
 ## Notes
 
-- DataBlocks are sorted by `createdAt` timestamp by default
-- Both input DataBlocks (provided at session creation) and output DataBlocks (generated during execution) are returned
-- DataBlocks are linked to the steps that created them via the `createdByStep` field
+- Data blocks are sorted by `createdAt` timestamp by default
+- Both input data blocks (provided at session creation) and output data blocks (generated during execution) are returned
+- Data blocks are linked to the steps that created them via the `createdByStep` field
 - All access attempts are logged for auditability and compliance

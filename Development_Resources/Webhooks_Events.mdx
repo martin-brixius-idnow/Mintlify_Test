@@ -1,20 +1,17 @@
 ---
-title: 'Handle Events'
+title: 'Handle events'
 description: 'Understand webhook event types and payload structure'
 ---
 
-## Overview
-
-Idnow sends webhook events for different stages of a session. Each event provides information about the current state of the configured flow journey.
+IDnow sends webhook events for different stages of a session. Each event provides information about the current state of the configured flow journey.
 
 <Info>
 All events use thin payloads. No personally identifiable information (PII) is included by default.  
-To learn how to configure Webhooks, see the guide here:  
-[Configure Webhooks →](https://idnow.mintlify.app/Development_Resources/Webhooks_Manage)
+To learn more, see the [Configure Webhooks](https://idnow.mintlify.app/Development_Resources/Webhooks_Manage)
 </Info>
 
 ---
-## Event Payload Structure
+## Event payload structure
 
 All webhook events share a common structure:
 
@@ -27,35 +24,35 @@ All webhook events share a common structure:
 | `createdAt`      | ISO 8601  | When the webhook was sent                                                                        |
 | `flowId`         | String    | The identifier of the flow that was triggered                                                    |
 | `sessionId`      | UUID      | The identifier of the specific session                                                           |
-| `sessionStatus`| Enum      | Current status of the flow                                                                       |
+| `sessionStatus`  | Enum      | Current status of the flow                                                                       |
 | `lastStepId`     | String    | Identifier of the last executed step, ID is defined by you in the step configuration             |
 | `lastStepType`   | String    | Name of the last executed step                                                                   |
-| `lastStepStatus` | String    | Status of the last executed step (e.g., Aborted)                                                 |
+| `lastStepStatus` | String    | Status of the last executed step (e.g. `Aborted`)                                                 |
 
 <Info>
 The `eventId` remains the same across all retry attempts, while `eventDeliverId` increments.
 </Info>
 
 ---
-## Session Events
+## Session events
 
-Idnow sends the following event types when a session changes state:
+IDnow sends the following event types when a session changes state:
 
-| Event Type | Description |
-|------------|-------------|
-| session.created | Flow is initialized and ready to start |
-| session.started | User has begun the verification journey |
-| session.completed | Flow ends with final outcome |
-| session.expired | Flow expiry TTL reached, no longer usable |
-| session.aborted | Flow ends by user interaction with no final outcome |
-| session.error | Flow enters ERROR state and stops processing |
+| Event type          | Description |
+|---------------------|-------------|
+| `session.created`   | Flow is initialized and ready to start |
+| `session.started`   | User has begun the verification journey |
+| `session.completed` | Flow ends with final outcome |
+| `session.expired`   | Flow expiry TTL reached, no longer usable |
+| `session.aborted`   | Flow ends by user interaction with no final outcome |
+| `session.error`     | Flow enters ERROR state and stops processing |
 
 ---
-## Event Payloads Examples
+## Event payloads examples
 
 All webhook payloads are a minimal, machine-readable JSON message that delivers metadata about an event and will never include any PII. You can fetch full details from the API when needed by using the respective `session_id`. 
 
-### session.created
+### `session.created`
 
 ```json
 {
@@ -70,12 +67,11 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
     "sessionStatus": "CREATED"
   }
 }
-
 ```
 
 ---
 
-### session.started
+### `session.started`
 
 ```json
 {
@@ -93,12 +89,11 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
     "lastStepStatus": "COMPLETED"
   }
 }
-
 ```
 
 ---
 
-### session.completed
+### `session.completed`
 
 ```json
 {
@@ -116,12 +111,11 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
     "lastStepStatus": "COMPLETED"
   }
 }
-
 ```
 
 ---
 
-### session.expired
+### `session.expired`
 
 ```json
 {

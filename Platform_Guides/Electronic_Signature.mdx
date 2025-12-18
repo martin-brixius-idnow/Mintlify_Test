@@ -1,30 +1,28 @@
 ---
-title: QES & AES
+title: QES and AES
 description: Electronic signing with legally recognized assurance levels.
 ---
-
-## Overview
 
 Electronic signing is a modular digital signature service enabling users to sign documents electronically with a legally binding qualified electronic signature (QES) under eIDAS. Documents are submitted via API, and users complete identity verification as required. Pre-identified user data can bypass verification if compliant. All signed documents must be PDFs, and evidence data is stored per eIDAS rules.
 
 ---
 
-## Key Features
+## Key features
 
-- **Supports QES & AES**: Can handle both Advanced and Qualified Electronic Signatures.  
-- **Identity Verification**: For QES, validates the signer's identity document and expiry date.  
-- **Pre-Identified Data Support**: Skips identification if data is validated.
-- **API Integration**: Constructs the API calls for the signature provider using the configured authentication and settings
-- **Output Generation**: Produces a `SignedDocumentsPackage` DataBlock upon successful completion.  
+- **Supports QES and AES**: Can handle both Advanced and Qualified Electronic Signatures.  
+- **Identity verification**: For QES, validates the signer's identity document and expiry date.  
+- **Pre-identified data support**: Skips identification if data is validated.
+- **API integration**: Constructs the API calls for the signature provider using the configured authentication and settings.
+- **Output generation**: Produces a `SignedDocumentsPackage` data block upon successful completion.  
 
 ---
 
 ## Configuration
 
-| Parameter | Type   | Required | Default | Description |
-|-----------|--------|----------|---------|-------------|
-| `signingConfiguration` | Object | Yes      | -       | A container for parameters that define the signature process. |
-| `signatureLevel`       | String (enum) | Yes | - | The signatureLevel selected in the flow must be enabled and correctly configured for the customer's account within the underlying signature provider (e.g., InstantSign). A mismatch between the flow definition and the provider's configuration may lead to a runtime error. |
+| Parameter              | Type          | Required | Default | Description |
+|------------------------|---------------|----------|---------|-------------|
+| `signingConfiguration` | Object        | Yes      | -       | A container for parameters that define the signature process. |
+| `signatureLevel`       | String (enum) | Yes      | -       | The `signatureLevel` selected in the flow must be enabled and correctly configured for the customer's account within the underlying signature provider (e.g. `InstantSign`). A mismatch between the flow definition and the provider's configuration may lead to a runtime error. |
 
 **QES (Qualified Electronic Signature):** The highest level of assurance. Under eIDAS, a QES has the equivalent legal effect of a handwritten signature. It requires strict, verified identification of the signer before the signature is created.
 
@@ -32,36 +30,35 @@ Electronic signing is a modular digital signature service enabling users to sign
 
 ---
 
-## Input DataBlock
+## Input data blocks
 
 Input requirements for this step.
 
-| DataBlock        | Mandatory                          | Description |
+| Data block        | Mandatory                         | Description |
 |------------------|------------------------------------|-------------|
-| `BasicIdentity`  | Yes                                | Always required. It provides the signer's fundamental identity information (e.g., name, date of birth), which is essential for any signature level. |
+| `BasicIdentity`  | Yes                                | Always required. It provides the signer's fundamental identity information (e.g. name, date of birth), which is essential for any signature level. |
 | `DocumentData`   | Yes if `signatureLevel` is `QES`   | Required only if `signatureLevel` is QES. It provides the information of the identity document of the signer expected for a QES signature. Its `expiryDate` attribute is used to pre-validate the signer's identity document, which is a mandatory check for a QES process. |
-| `DocumentsToSign`| Yes                                | Always required. It contains the references to the documents uploaded by the customers that the end-user must sign. The signature should be applied according to the template referenced in the DataBlock and defined in the InstantSign configuration. |
+| `DocumentsToSign`| Yes                                | Always required. It contains the references to the documents uploaded by the customers that the end-user must sign. The signature should be applied according to the template referenced in the data block and defined in the InstantSign configuration. |
 
 ---
 
 ## Verdicts
 
-Verdicts for this DataBlock.
-
+Verdicts for this data block.
 
 | Verdict            | Description |
 |--------------------|-------------|
 | `success`          | The signature process completed successfully. All mandatory documents have been signed, and any optional documents have been either signed or skipped by the user. The produced SignedDocumentsPackage contains the identifier transaction and a reference to the archive containing all the signed documents and (regulatory proofs). |
-| `identity_expired` | The process was aborted before initiating the signature process. A pre-check determined that the signer's identity document has expired, based on the expiryDate from the input DocumentData. |
-| `failure`          | The signature process was initiated but did not complete successfully due to a handled error or a specific user action. This includes scenarios like the user explicitly canceling the process on the InstantSign's UI, or InstantSign returning a specific business rejection (e.g., user not eligible). |
+| `identity_expired` | The process was aborted before initiating the signature process. A pre-check determined that the signer's identity document has expired, based on the `expiryDate` from the input `DocumentData`. |
+| `failure`          | The signature process was initiated but did not complete successfully due to a handled error or a specific user action. This includes scenarios like the user explicitly canceling the process on the InstantSign's UI, or InstantSign returning a specific business rejection (e.g. user not eligible). |
 ---
 
-## Output DataBlock
+## Output data blocks
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Verdict | DataBlocks Produced          | Notes |
-|---------|------------------------------|-------|
-| **success** | `SignedDocumentsPackage` | |
-| **identity_expired** | `∅` | |
-| **failure** | `∅` | |
+| Verdict            | Data blocks produced      | Notes |
+|--------------------|---------------------------|-------|
+| `success`          | `SignedDocumentsPackage`  |       |
+| `identity_expired` | None                      |       |
+| `failure`          | None                      |       |

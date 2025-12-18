@@ -1,25 +1,23 @@
 ---
-title: Get Token
-description: Learn how to obtain an API token to authenticate with Trustplatform APIs.
+title: Get token
+description: Learn how to obtain an API token to authenticate with Trust Platform APIs.
 ---
 
-## Overview
-
-Learn how to set up authentication and obtain an API token to connect to Trustplatform APIs.
+Learn how to set up authentication and obtain an API token to connect to Trust Platform APIs.
 
 IDnow uses OAuth 2.0 with the client credentials grant type for API authentication.
 
 This guide shows you how to:
 
-1. Get your API client credentials from the IDnow Dashboard
+1. Get your API client credentials from the IDnow dashboard
 2. Obtain an access token using your credentials
 3. Make an authenticated API request
 
 ---
 
-## Get Credentials
+## Get credentials
 
-To authenticate against Trustplatform APIs, you need to obtain your API client credentials (`client_id` and `client_secret`).
+To authenticate against Trust Platform APIs, you need to obtain your API client credentials (`client_id` and `client_secret`).
 
 <Info>
   For detailed instructions, refer to <a href="https://idnow.mintlify.app/Development_Resources/Manage" target="_blank" rel="noopener noreferrer">Manage API Credentials</a>.
@@ -27,20 +25,20 @@ To authenticate against Trustplatform APIs, you need to obtain your API client c
 
 ---
 
-## Obtain Access Token
+## Obtain access token
 
-Use your client credentials to request an access token. Trustplatform supports two client authentication methods:
+Use your client credentials to request an access token. Trust Platform supports two client authentication methods:
 
-***Request Parameters***
+***Request parameters***
 
-| Parameter       | Description                                                                 | Required |
-|-----------------|-----------------------------------------------------------------------------|----------|
-| `grant_type`    | OAuth 2.0 grant type. Use `client_credentials` for server-to-server auth.  | Yes      |
-| `client_id`     | Your API client ID from the IDnow Dashboard.                                | Yes      |
-| `client_secret` | Your API client secret from the IDnow Dashboard.                            | Yes      |
-| `scope`         | The scopes required for your API requests (if applicable).                  | Optional |
+| Parameter       | Description                                                               | Required |
+|-----------------|---------------------------------------------------------------------------|----------|
+| `grant_type`    | OAuth 2.0 grant type. Use `client_credentials` for server-to-server auth. | Yes      |
+| `client_id`     | Your API client ID from the IDnow dashboard.                              | Yes      |
+| `client_secret` | Your API client secret from the IDnow dashboard.                          | Yes      |
+| `scope`         | The scopes required for your API requests (if applicable).                | Optional |
 
-***Option A***: Explicit Credentials (`client_secret_post`)
+***Option A***: Explicit credentials (`client_secret_post`)
 
 Include your credentials directly in the request body:
 
@@ -82,7 +80,7 @@ If successful, you will receive an access token:
 
 ---
 
-## Make API Request
+## Make an API request
 
 Now that you have a valid access token, you can make requests to IDnow APIs. Include the access token in the `Authorization` header using the `Bearer` scheme:
 
@@ -93,7 +91,7 @@ Accept: application/json
 Authorization: Bearer eyJh...QifQ.eyJ...hIOw
 ```
 
-***Example Request***
+***Example request***
 
 ```bash
 curl --request GET https://<your-idnow-api-host>/api/v1/identifications/<id> \

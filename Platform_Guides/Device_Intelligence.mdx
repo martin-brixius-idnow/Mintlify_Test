@@ -26,9 +26,9 @@ Helps determine whether the device appears safe, familiar, and genuine or if the
 
 ---
 
-## Input data block
+## Input data blocks
 
-This step does not require any input data block.
+This step does not require any input data blocks.
 
 ---
 
@@ -44,24 +44,24 @@ Verdicts for this data block.
 | `inconclusive` | A verdict could not be reached because the confidence score was below the required threshold. |
 ---
 
-## Output data block
+## Output data blocks
 
 Data blocks produced per verdict.
 
-| Verdict         | Data blocks produced | Notes |
-|-----------------|----------------------|-------|
-| **trusted**     | `DeviceSignals`      |       |
-| **suspicious**  | `DeviceSignals`      |       |
-| **not_trusted** | `DeviceSignals`      |       |
-| **inconclusive**| `DeviceSignals`      |       |
+| Verdict        | Data blocks produced | Notes |
+|----------------|----------------------|-------|
+| `trusted`      | `DeviceSignals`      |       |
+| `suspicious`   | `DeviceSignals`      |       |
+| `not_trusted`  | `DeviceSignals`      |       |
+| `inconclusive` | `DeviceSignals`      |       |
 
 ---
 
 ## Output mapping
 
-| Result                                         | Mapped output |
-|------------------------------------------------|---------------|
-| `confidence.score < confidenceScoreThreshold`  | `inconclusive`|
-| `suspectScore < suspiciousUserThreshold`       | `trusted`     |
-| `suspectScore > suspiciousUserThreshold`       | `suspicious`  |
-| `suspectScore > notTrustedUserThreshold`       | `not_trusted` |
+| Result                                        | Mapped output |
+|-----------------------------------------------|---------------|
+| `confidence.score < confidenceScoreThreshold` | `inconclusive`|
+| `suspectScore < suspiciousUserThreshold`      | `trusted`     |
+| `suspectScore > suspiciousUserThreshold`      | `suspicious`  |
+| `suspectScore > notTrustedUserThreshold`      | `not_trusted` |

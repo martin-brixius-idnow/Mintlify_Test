@@ -26,7 +26,7 @@ Designed for flows where the business already has user images and wants to verif
 
 ---
 
-## Input data block
+## Input data blocks
 
 Input requirements for this step.
 
@@ -35,7 +35,7 @@ Input requirements for this step.
 | `DocumentImages`   | Yes      | Pre-captured document images (front and/or back side) |
 | `BiometricSamples` | Yes      | Pre-captured biometric data with `consent = true` |
 
-If the consent field in the BiometricSamples data block is set to true, IDnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
+If the consent field in the `BiometricSamples` data block is set to true, IDnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
 
 ---
 
@@ -45,7 +45,7 @@ This step does not produce any verdicts.
 
 ---
 
-## Output data block
+## Output data blocks
 
 Data blocks produced per verdict.
 

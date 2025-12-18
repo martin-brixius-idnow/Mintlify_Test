@@ -29,9 +29,9 @@ Helps businesses identify suspicious or trustworthy behaviour based on email, ph
 
 ---
 
-## Input data block
+## Input data blocks
 
-If the input sources are not specified, the step attempts to retrieve the information directly from the execution context. In other words, it will fetch the latest available data blocks (`BasicIdentity`, `ExtendedIdentity`, and `DeviceSignals` if they exist).
+If the input sources are not specified, this step attempts to retrieve the information directly from the execution context. In other words, it will fetch the latest available data blocks (`BasicIdentity`, `ExtendedIdentity`, and `DeviceSignals`) if they exist.
 
 ---
 
@@ -41,20 +41,20 @@ Verdicts for this data block.
 
 | Verdict        | Description |
 |----------------|-------------|
-| `trusted`      | The score computed is greater than or equal to trustedUserThreshold. |
-| `suspicious`   | The score computed is less than or equal to suspiciousUserThreshold. |
-| `not_trusted`  | The score computed is between suspiciousUserThreshold and trustedUserThreshold. |
+| `trusted`      | The score computed is greater than or equal to `trustedUserThreshold`. |
+| `suspicious`   | The score computed is less than or equal to `suspiciousUserThreshold`. |
+| `not_trusted`  | The score computed is between `suspiciousUserThreshold` and `trustedUserThreshold`. |
 | `inconclusive` | The provider cannot compute a definitive score or assessment. |
 
 ---
 
-## Output data block
+## Output data blocks
 
 Data blocks produced per verdict.
 
 | Verdict          | Data blocks produced | Notes |
 |------------------|----------------------|-------|
-| **trusted**      | `DigitalSignals`     |       |
-| **suspicious**   | `DigitalSignals`     |       |
-| **not_trusted**  | `DigitalSignals`     |       |
-| **inconclusive** |                      |       |
+| `trusted`        | `DigitalSignals`     |       |
+| `suspicious`     | `DigitalSignals`     |       |
+| `not_trusted`    | `DigitalSignals`     |       |
+| `inconclusive`   |                      |       |

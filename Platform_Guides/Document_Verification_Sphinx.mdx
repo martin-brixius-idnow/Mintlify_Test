@@ -20,23 +20,23 @@ Provides regulated remote identity verification via AutoIdent (fully automated, 
 
 ## Configuration
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `inputSources` | Object | No | - | Maps identity data sources to flow step IDs for pre-filling the session |
-| `shortname` | String | No | - | Managed at the credential configuration level on the platform |
+| Parameter      | Type   | Required | Default | Description |
+|----------------|--------|----------|---------|-------------|
+| `inputSources` | Object | No       | - | Maps identity data sources to flow step IDs for pre-filling the session |
+| `shortname`    | String | No       | - | Managed at the credential configuration level on the platform |
 
 ---
 
-## Input data block
+## Input data blocks
 
 Input requirements for this step.
 
-| Data block          | Mandatory | Description                                          |
-|--------------------|----------|------------------------------------------------------|
+| Data block         | Mandatory | Description                                        |
+|--------------------|----------|-----------------------------------------------------|
 | `BasicIdentity`    | No      | BasicIdentity data to compare against attestation    |
 | `ExtendedIdentity` | No      | ExtendedIdentity data to compare against attestation |
 
-*If the data block is not available, the step will execute normally without this information, and the flow will proceed without error.
+If the data block is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
@@ -44,22 +44,22 @@ Input requirements for this step.
 
 Verdicts for this data block.
 
-| Verdict | Description |
-|---------|-------------|
-| `verified` | Successful document processing with identity extraction. User's documents were successfully verified, either automatically or by an agent. |
+| Verdict          | Description |
+|------------------|-------------|
+| `verified`       | Successful document processing with identity extraction. User's documents were successfully verified, either automatically or by an agent. |
 | `fraud_detected` | Document identified as fraudulent. This occurs when fraud is confirmed after manual review. No identity data is extracted. |
-| `cancelled` | The verification process was cancelled by the agent, for instance due to blurry images or unusable documents. |
+| `cancelled`      | The verification process was cancelled by the agent, for instance due to blurry images or unusable documents. |
 
 ---
 
-## Output data block
+## Output data blocks
 
 Data blocks produced per verdict.
 
-| Verdict | Data blocks produced | Notes |
-|---------|---------------------|-------|
-| **verified** | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
-| **fraud_detected** | `DocumentVerification` | Contains fraud detection details |
-| **aborted** | - | No data blocks produced |
-| **cancelled** | `DocumentVerification` | Contains cancellation reason |
-| **default** | - | No data blocks produced |
+| Verdict          | Data blocks produced   | Notes |
+|------------------|------------------------|-------|
+| `verified`       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
+| `fraud_detected` | `DocumentVerification` | Contains fraud detection details |
+| `aborted`        | -                      | No data blocks produced |
+| `cancelled`      | `DocumentVerification` | Contains cancellation reason |
+| `default`        | -                      | No data blocks produced |

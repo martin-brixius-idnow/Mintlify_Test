@@ -30,7 +30,7 @@ Electronic signing is a modular digital signature service enabling users to sign
 
 ---
 
-## Input data block
+## Input data blocks
 
 Input requirements for this step.
 
@@ -49,16 +49,16 @@ Verdicts for this data block.
 | Verdict            | Description |
 |--------------------|-------------|
 | `success`          | The signature process completed successfully. All mandatory documents have been signed, and any optional documents have been either signed or skipped by the user. The produced SignedDocumentsPackage contains the identifier transaction and a reference to the archive containing all the signed documents and (regulatory proofs). |
-| `identity_expired` | The process was aborted before initiating the signature process. A pre-check determined that the signer's identity document has expired, based on the expiryDate from the input DocumentData. |
+| `identity_expired` | The process was aborted before initiating the signature process. A pre-check determined that the signer's identity document has expired, based on the `expiryDate` from the input `DocumentData`. |
 | `failure`          | The signature process was initiated but did not complete successfully due to a handled error or a specific user action. This includes scenarios like the user explicitly canceling the process on the InstantSign's UI, or InstantSign returning a specific business rejection (e.g., user not eligible). |
 ---
 
-## Output data block
+## Output data blocks
 
 Data blocks produced per verdict.
 
-| Verdict              | Data blocks produced      | Notes |
-|----------------------|---------------------------|-------|
-| **success**          | `SignedDocumentsPackage`  |       |
-| **identity_expired** | None                      |       |
-| **failure**          | None                      |       |
+| Verdict            | Data blocks produced      | Notes |
+|--------------------|---------------------------|-------|
+| `success`          | `SignedDocumentsPackage`  |       |
+| `identity_expired` | None                      |       |
+| `failure`          | None                      |       |

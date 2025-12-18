@@ -50,7 +50,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 ## Configuration
 
-### Device Signals
+**Device Signals**
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 }
 ```
 
-### Electronic Signature
+**Electronic Signature**
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -109,7 +109,7 @@ Provide these DataBlocks when creating a session:
 
 ## Output DataBlocks
 
-### Trusted Device Path
+**Trusted Device Path**
 
 When device signals indicate high trust and signature succeeds:
 
@@ -118,7 +118,7 @@ When device signals indicate high trust and signature succeeds:
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
 
-### Untrusted Device Path 
+**Untrusted Device Path**
 
 When device signals trigger identity re-verification:
 

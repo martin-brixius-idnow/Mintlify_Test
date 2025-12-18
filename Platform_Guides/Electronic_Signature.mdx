@@ -12,7 +12,7 @@ Electronic signing is a modular digital signature service enabling users to sign
 - **Supports QES and AES**: Can handle both Advanced and Qualified Electronic Signatures.  
 - **Identity verification**: For QES, validates the signer's identity document and expiry date.  
 - **Pre-identified data support**: Skips identification if data is validated.
-- **API integration**: Constructs the API calls for the signature provider using the configured authentication and settings
+- **API integration**: Constructs the API calls for the signature provider using the configured authentication and settings.
 - **Output generation**: Produces a `SignedDocumentsPackage` data block upon successful completion.  
 
 ---
@@ -36,7 +36,7 @@ Input requirements for this step.
 
 | Data block        | Mandatory                         | Description |
 |------------------|------------------------------------|-------------|
-| `BasicIdentity`  | Yes                                | Always required. It provides the signer's fundamental identity information (e.g., name, date of birth), which is essential for any signature level. |
+| `BasicIdentity`  | Yes                                | Always required. It provides the signer's fundamental identity information (e.g. name, date of birth), which is essential for any signature level. |
 | `DocumentData`   | Yes if `signatureLevel` is `QES`   | Required only if `signatureLevel` is QES. It provides the information of the identity document of the signer expected for a QES signature. Its `expiryDate` attribute is used to pre-validate the signer's identity document, which is a mandatory check for a QES process. |
 | `DocumentsToSign`| Yes                                | Always required. It contains the references to the documents uploaded by the customers that the end-user must sign. The signature should be applied according to the template referenced in the data block and defined in the InstantSign configuration. |
 

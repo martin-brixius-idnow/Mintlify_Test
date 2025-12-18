@@ -20,12 +20,12 @@ Used when businesses want fast and highly trusted verification based on governme
 
 ## Configuration
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `requestedCredentials` | Array | Yes | A mandatory array that specifies the credentials requested from the user's wallet. Minimum 1 credential required. |
-| `requestedCredentials.type` | String | Yes | The URI identifying the type of credential requested. |
-| `requestedCredentials.format` | String | Yes | The format of the credential (e.g., `vc+sd-jwt`). |
-| `requestedCredentials.datablocks` | Array | No | An optional array that maps the expected claims from this credential to known data blocks in the DSL (e.g., BasicIdentity, ExtendedIdentity). If this option is used, the corresponding data block will be generated and added to the flow context upon success. |
+| Attribute                         | Type   | Required | Description |
+|-----------------------------------|--------|----------|-------------|
+| `requestedCredentials`            | Array  | Yes      | A mandatory array that specifies the credentials requested from the user's wallet. Minimum 1 credential required. |
+| `requestedCredentials.type`       | String | Yes      | The URI identifying the type of credential requested. |
+| `requestedCredentials.format`     | String | Yes      | The format of the credential (e.g., `vc+sd-jwt`). |
+| `requestedCredentials.datablocks` | Array  | No       | An optional array that maps the expected claims from this credential to known data blocks in the DSL (e.g., BasicIdentity, ExtendedIdentity). If this option is used, the corresponding data block will be generated and added to the flow context upon success. |
 
 ---
 
@@ -39,12 +39,12 @@ This step does not require any input data block.
 
 The EUDI_WALLET_VERIFIER:v1 step produces different outputs depending on the presentation result. The output data blocks are dynamically determined based on the `requestedCredentials` configuration.
 
-| Verdict | Data blocks produced | Description |
-|----------|---------------------|-------------|
-| `verified` | PresentationResult, Data blocks specified in options.requestedCredentials.datablocks (e.g., BasicIdentity, ExtendedIdentity) | Successful wallet presentation. The user has authenticated with their EUDI wallet and consented to sharing the requested credentials through a verifiable or mdoc presentation. |
-| `cancelled` | PresentationResult | The user actively interrupted the process. This can occur either by explicitly refusing the data sharing. |
-| `not_verified` | PresentationResult | The presentation attempt failed. The credential presented is not valid or the presentation made by the holder does not satisfy the query. |
-| `default` | PresentationResult | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
+| Verdict        | Data blocks produced    | Description |
+|----------------|-------------------------|-------------|
+| `verified`     | `PresentationResult`, Data blocks specified in `options.requestedCredentials.datablocks` (e.g. `BasicIdentity`, `ExtendedIdentity`) | Successful wallet presentation. The user has authenticated with their EUDI wallet and consented to sharing the requested credentials through a verifiable or mdoc presentation. |
+| `cancelled`    | `PresentationResult`    | The user actively interrupted the process. This can occur either by explicitly refusing the data sharing. |
+| `not_verified` | `PresentationResult`    | The presentation attempt failed. The credential presented is not valid or the presentation made by the holder does not satisfy the query. |
+| `default`      | `PresentationResult`    | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
 
 **Dynamic output:** The `verified` scenario uses a dynamic function based on configuration options. All unique data blocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.
 

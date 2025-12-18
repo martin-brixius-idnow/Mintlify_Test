@@ -61,24 +61,24 @@ GET /session/{sessionId}
 
 ***Response parameters***
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `flowId` | String | Flow identifier |
-| `flowVersion` | String | Version of the flow executed |
-| `environment` | String | Environment identifier |
-| `subjectId` | String | Reference ID for the subject |
-| `sessionId` | String | Unique session identifier |
-| `sessionStatus` | String | Current status (e.g., `created`, `in progress`, `completed`) |
-| `createdAt` | String | ISO 8601 timestamp when session was created |
-| `startedAt` | String | ISO 8601 timestamp when processing started (null if not started) |
-| `updatedAt` | String | ISO 8601 timestamp of last update |
-| `completedAt` | String | ISO 8601 timestamp when session completed |
-| `expiresAt` | String | ISO 8601 timestamp when session expires |
-| `decisionOutcome` | String | Final decision (e.g., `accepted`, `rejected`) |
-| `lastStep` | Object | Information about the last executed step |
+| Parameter           | Type   | Description |
+|---------------------|--------|-------------|
+| `flowId`            | String | Flow identifier |
+| `flowVersion`       | String | Version of the flow executed |
+| `environment`       | String | Environment identifier |
+| `subjectId`         | String | Reference ID for the subject |
+| `sessionId`         | String | Unique session identifier |
+| `sessionStatus`     | String | Current status (e.g., `created`, `in progress`, `completed`) |
+| `createdAt`         | String | ISO 8601 timestamp when session was created |
+| `startedAt`         | String | ISO 8601 timestamp when processing started (null if not started) |
+| `updatedAt`         | String | ISO 8601 timestamp of last update |
+| `completedAt`       | String | ISO 8601 timestamp when session completed |
+| `expiresAt`         | String | ISO 8601 timestamp when session expires |
+| `decisionOutcome`   | String | Final decision (e.g., `accepted`, `rejected`) |
+| `lastStep`          | Object | Information about the last executed step |
 | `lastStep.stepName` | String | Name of the step |
 | `lastStep.stepType` | String | Type of step (e.g., `END`, `CHECK`) |
-| `lastStep.verdict` | String | Step verdict (e.g., `completed`, `failed`) |
+| `lastStep.verdict`  | String | Step verdict (e.g., `completed`, `failed`) |
 
 ## Example
 

@@ -10,7 +10,7 @@ Designed for flows where the business already has user images and wants to verif
 ## Key features
 
 - **Headless processing**: Processes pre-captured data without user interaction during step execution
-- **Consent required**: Requires BiometricSamples with `consent = true`
+- **Consent required**: Requires `BiometricSamples` with `consent = true`
 - **Document validation**: Validates document authenticity
 - **Identity extraction**: Extracts identity information from documents
 
@@ -18,10 +18,10 @@ Designed for flows where the business already has user images and wants to verif
 
 ## Configuration
 
-|  Parameter            | Type   |                                                 |
-|-----------------------|--------|-------------------------------------------------|
-| biometricProcessing            | Object | A container for parameters related to biometric verification. If this object is not provided, no biometric analysis is performed. The IDCheck.io realm configuration must be aligned with the options set in this step. |
-| biometricProcessing.sampleType | Enum   | Defines the type of biometric sample provided. Currently, only the value `SELFIE` is supported.                                                                    |
+|  Parameter                       | Type   |                                                 |
+|----------------------------------|--------|-------------------------------------------------|
+| `biometricProcessing`            | Object | A container for parameters related to biometric verification. If this object is not provided, no biometric analysis is performed. The IDCheck.io realm configuration must be aligned with the options set in this step. |
+| `biometricProcessing.sampleType` | Enum   | Defines the type of biometric sample provided. Currently, only the value `SELFIE` is supported.                                                                    |
 
 
 ---
@@ -30,10 +30,10 @@ Designed for flows where the business already has user images and wants to verif
 
 Input requirements for this step.
 
-| Data block type | Required | Description |
-|-----------------|----------|-------------|
-| `DocumentImages` | Yes | Pre-captured document images (front and/or back side) |
-| `BiometricSamples` | Yes | Pre-captured biometric data with `consent = true` |
+| Data block type    | Required | Description |
+|--------------------|----------|-------------|
+| `DocumentImages`   | Yes      | Pre-captured document images (front and/or back side) |
+| `BiometricSamples` | Yes      | Pre-captured biometric data with `consent = true` |
 
 If the consent field in the BiometricSamples data block is set to true, IDnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
 
@@ -49,9 +49,9 @@ This step does not produce any verdicts.
 
 Data blocks produced per verdict.
 
-| Scenario | Data blocks produced | Description |
-|----------|---------------------|-------------|
-| verified | `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `BiometricSamples` | Successful document processing with identity extraction |
-| fraud_detected | `DocumentVerification` | Document identified as fraudulent |
-| capture_failed | `DocumentVerification` | Document capture failed |
-| default | `DocumentVerification` | Unexpected or technical error during processing |
+| Scenario         | Data blocks produced | Description |
+|------------------|---------------------|-------------|
+| `verified`       | `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `BiometricSamples` | Successful document processing with identity extraction |
+| `fraud_detected` | `DocumentVerification` | Document identified as fraudulent |
+| `capture_failed` | `DocumentVerification` | Document capture failed |
+| `default`        | `DocumentVerification` | Unexpected or technical error during processing |

@@ -16,17 +16,17 @@ Ensures the identity information collected from different steps or documents ref
 
 ## Configuration
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `leftOperand` | String | Yes | step ID that produced the first BasicIdentity data block |
-| `rightOperand` | String | Yes | step ID that produced the second BasicIdentity data block |
-| `attributes` | Array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
-| `mode` | Enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
+| Attribute      | Type   | Required | Description |
+|----------------|--------|----------|-------------|
+| `leftOperand`  | String | Yes      | ID of the step that produced the first `BasicIdentity` data block  |
+| `rightOperand` | String | Yes      | ID of the step that produced the second `BasicIdentity` data block |
+| `attributes`   | Array  | Yes      | List of `BasicIdentity` attributes to compare (e.g., `familyName`, `givenName`, `birthDate`). Minimum 1 attribute required. |
+| `mode`         | Enum   | Yes      | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
 
 **Comparison mode details:**
 
-- **strict**: Name comparison requires all words from both names to have "close enough" matches. Date comparison requires the two dates to be exactly the same.
-- **tolerant**: Name comparison requires at least one word from the first name to have a "close enough" match in the second name. Date comparison requires year and month to match (day is ignored).
+- `strict`: Name comparison requires all words from both names to have "close enough" matches. Date comparison requires the two dates to be exactly the same.
+- `tolerant`: Name comparison requires at least one word from the first name to have a "close enough" match in the second name. Date comparison requires year and month to match (day is ignored).
 
 **Input data block referencing:**
 
@@ -44,10 +44,10 @@ The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) 
 
 Input requirements for this step.
 
-| Data block type | Required | Description |
-|-----------------|----------|-------------|
-| BasicIdentity   | Yes      | First BasicIdentity data block (from leftOperand step) |
-| BasicIdentity   | Yes      | Second BasicIdentity data block (from rightOperand step) |
+| Data block type   | Required | Description |
+|-------------------|----------|-------------|
+| `BasicIdentity`   | Yes      | First `BasicIdentity` data block (from `leftOperand` step) |
+| `BasicIdentity`   | Yes      | Second `BasicIdentity` data block (from `rightOperand` step) |
 
 **Important:** This step requires exactly two BasicIdentity data blocks as input. The flow validation system ensures that the steps referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a BasicIdentity data block.
 
@@ -56,6 +56,6 @@ Input requirements for this step.
 Data blocks produced per verdict.
 
 | Scenario | Data blocks produced | Description |
-|----------|---------------------|-------------|
-| match | `ComparisonResults` | All specified attributes match between the two BasicIdentity sources |
-| failure | `ComparisonResults` | One or more specified attributes do not match or are missing, preventing the expected comparison between the two BasicIdentity sources |
+|----------|----------------------|-------------|
+| match    | `ComparisonResults`  | All specified attributes match between the two BasicIdentity sources |
+| failure  | `ComparisonResults`  | One or more specified attributes do not match or are missing, preventing the expected comparison between the two BasicIdentity sources |

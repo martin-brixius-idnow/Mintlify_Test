@@ -80,9 +80,9 @@ Your webhook endpoint must support TLS 1.2 or higher. IDnow validates your endpo
 
 IDnow includes these headers with every webhook request:
 
-| Header | Description |
-|--------|-------------|
-| `Authorization` | Your API token |
+| Header              | Description |
+|---------------------|-------------|
+| `Authorization`     | Your API token |
 | `X-Idnow-Signature` | JWT signature of the payload |
-| `Content-Type` | Always `application/json` |
-| `User-Agent` | IDnow webhook service identifier |
+| `Content-Type`      | Always `application/json` |
+| `User-Agent`        | IDnow webhook service identifier |

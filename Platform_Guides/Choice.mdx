@@ -17,8 +17,8 @@ A decision step represents a conditional branching point in the workflow. Decisi
 
 ## Configuration
 
-| Attribute | Type   | Required | Description |
-|-----------|--------|----------|-------------|
+| Attribute   | Type   | Required | Description |
+|-------------|--------|----------|-------------|
 | `choices`   | Array  | Yes      | Array of choice objects that define conditional branches. Must contain at least one choice object. Evaluated sequentially in array order until one matches. |
 | `default`   | String | Yes      | Default route name when no choices match. Must correspond to a route defined in the next array. |
 
@@ -30,8 +30,8 @@ Each choice can contain multiple conditions in the conditions array. All conditi
 
 Each choice object defines a conditional branch with its target route.
 
-| Attribute  | Type   | Required | Description |
-|------------|--------|----------|-------------|
+| Attribute    | Type   | Required | Description |
+|--------------|--------|----------|-------------|
 | `conditions` | Array  | Yes      | Array of condition objects that must ALL be true (AND logic). |
 | `then`       | String | Yes      | route name to use when all conditions in this choice are satisfied. Must correspond to a route defined in the next array. |
 
@@ -39,12 +39,12 @@ Each choice object defines a conditional branch with its target route.
 
 Each condition object defines a single comparison to evaluate.
 
-| Attribute   | Type | Required | Description |
-|-------------|------|----------|-------------|
-| leftOperand | String | Yes | The path to the field to evaluate. Uses dot notation for nested access (e.g., "documentVerification.verdict"). |
-| operator    | Enum | Yes | Comparison operator to apply. See Condition Operators below. |
-| value       | Any | Conditional | Single value for comparison. Required for operators: gt, lt, gte, lte, eq, ne. |
-| range       | Array | Conditional | Array of two values [lower, upper] for range operations. Required for operators: between, not_between. |
+| Attribute     | Type   | Required | Description |
+|---------------|--------|----------|-------------|
+| `leftOperand` | String | Yes | The path to the field to evaluate. Uses dot notation for nested access (e.g., "documentVerification.verdict"). |
+| `operator`    | Enum   | Yes | Comparison operator to apply. See Condition Operators below. |
+| `value`       | Any    | Conditional | Single value for comparison. Required for operators: gt, lt, gte, lte, eq, ne. |
+| `range`       | Array  | Conditional | Array of two values [lower, upper] for range operations. Required for operators: between, not_between. |
 
 **`leftOperand` details:**
 

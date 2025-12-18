@@ -3,7 +3,7 @@ title: 'Manage webhooks'
 description: 'Set up webhook endpoints, manage subscriptions, and monitor delivery'
 ---
 
-In Trust Platform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes. 
+In Trust Platform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes.
 
 Because steps run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
 
@@ -136,10 +136,10 @@ Process webhook events asynchronously. Acknowledge receipt immediately (return H
 
 IDnow automatically retries failed deliveries:
 
-| Attempt | Delay | Total elapsed time |
-|---------|-------|-------------------|
-| 1st retry | 2 seconds | 2s |
-| 2nd retry | 4 seconds | 6s |
+| Attempt   | Delay     | Total elapsed time |
+|-----------|-----------|--------------------|
+| 1st retry | 2 seconds | 2s  |
+| 2nd retry | 4 seconds | 6s  |
 | 3rd retry | 8 seconds | 14s |
 
 **Retry conditions:**

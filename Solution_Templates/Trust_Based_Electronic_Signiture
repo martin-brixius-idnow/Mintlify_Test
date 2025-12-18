@@ -1,0 +1,67 @@
+---
+title: "Trust-Based Electronic Signature with Doc-based IDV Fallback"
+description: "Enable document signing with pre-verified identities and device trust assessment"
+---
+
+# Trust-Based Electronic Signature with Doc-based IDV Fallback
+
+## Use Case
+
+This solution enables users with previously verified identities to sign documents without repeating full identity verification. It uses device trust signals to determine whether existing identity data can be reused or if additional verification is required.
+
+**Business Value:**
+- Reuse verified identity data from previous verification sessions
+- Risk-based routing via device trust assessment
+- Streamlined signing for trusted devices while maintaining security for unknown devices
+
+**How It Works:**
+- The system assess device trustworthiness using behavioral and technical signals
+- Trusted devices proceed directly to signing using pre-verified identity
+- Untrusted devices require document-based identity verification before signing
+
+---
+
+## Flow Logic
+
+### Step Overview
+
+| Step | Purpose |
+|------|---------|
+| Start | Entry point; collects input DataBlocks |
+| Device Intelligence | Analyzes device trustworthiness |
+| 3a. Electronic Signature | Enables document signing (trusted path) |
+| 3b. Document-based IDV (Capture) | Verifies identity via document upload (untrusted path) |
+| End | Final decision: accepted or rejected |
+
+### Verdict Routing
+
+This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
+
+| Step | Verdict | Meaning | Action |
+|------|---------|---------|--------|
+| Device Intelligence | `trusted` | Device recognized, normal behavior | Proceed to Electronic Signature |
+| | `suspicious`, `not_trusted`, `inconclusive`, else | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
+| Electronic Signature | `success` | Signing completed successfully | Session Accepted |
+| | `identity_expired` | Pre-verified identity exceeded validity period | Session Rejected |
+| Document-based IDV (Capture) | `verified` | Identity confirmed via document check | Session Accepted |
+| | `fraud_detected`, `aborted`, `cancelled`, else | Fraud, user abandonment, or errors | Session Rejected |
+
+---
+
+## Configuration
+
+### Device Signals
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `suspiciousUserThreshold` | integer (≥0) | Threshold for "suspicious" classification based on suspectScore |
+| `notTrustedUserThreshold` | integer (≥0) | Threshold for "not_trusted" classification based on suspectScore |
+| `confidenceScoreThreshold` | float (0-100) | Minimum fingerprint confidence; below this value result is "inconclusive" |
+
+**Example:**
+```json
+{
+  "suspiciousUserThreshold": 50,
+  "notTrustedUserThreshold": 75,
+  "confidenceScoreThreshold": 60.0
+}

@@ -18,10 +18,10 @@ Ensures the identity information collected from different steps or documents ref
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `leftOperand` | string | Yes | step ID that produced the first BasicIdentity data block |
-| `rightOperand` | string | Yes | step ID that produced the second BasicIdentity data block |
-| `attributes` | array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
-| `mode` | enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
+| `leftOperand` | String | Yes | step ID that produced the first BasicIdentity data block |
+| `rightOperand` | String | Yes | step ID that produced the second BasicIdentity data block |
+| `attributes` | Array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
+| `mode` | Enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
 
 **Comparison mode details:**
 

@@ -19,10 +19,10 @@ Electronic signing is a modular digital signature service enabling users to sign
 
 ## Configuration
 
-| Parameter | Type   | Required | Default | Description |
-|-----------|--------|----------|---------|-------------|
-| `signingConfiguration` | Object | Yes      | -       | A container for parameters that define the signature process. |
-| `signatureLevel`       | String (enum) | Yes | - | The signatureLevel selected in the flow must be enabled and correctly configured for the customer's account within the underlying signature provider (e.g., InstantSign). A mismatch between the flow definition and the provider's configuration may lead to a runtime error. |
+| Parameter              | Type          | Required | Default | Description |
+|------------------------|---------------|----------|---------|-------------|
+| `signingConfiguration` | Object        | Yes      | -       | A container for parameters that define the signature process. |
+| `signatureLevel`       | String (enum) | Yes      | -       | The `signatureLevel` selected in the flow must be enabled and correctly configured for the customer's account within the underlying signature provider (e.g., `InstantSign`). A mismatch between the flow definition and the provider's configuration may lead to a runtime error. |
 
 **QES (Qualified Electronic Signature):** The highest level of assurance. Under eIDAS, a QES has the equivalent legal effect of a handwritten signature. It requires strict, verified identification of the signer before the signature is created.
 

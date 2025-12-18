@@ -15,7 +15,7 @@ GET /session/{sessionId}/datablocks
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `sessionId` | string | Yes | The unique identifier of the session |
+| `sessionId` | String | Yes | The unique identifier of the session |
 
 ## Request
 
@@ -23,13 +23,13 @@ Query parameters control pagination and sorting:
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `flowId` | string | Yes | Flow identifier |
-| `environment` | string | Yes | Environment identifier |
-| `sessionId` | string | Yes | Session identifier |
-| `page` | number | No | Page number for pagination |
-| `size` | number | No | Number of items per page |
-| `sortBy` | string | Yes | Field to sort by |
-| `sortDesc` | boolean | Yes | Sort in descending order if true |
+| `flowId` | String | Yes | Flow identifier |
+| `environment` | String | Yes | Environment identifier |
+| `sessionId` | String | Yes | Session identifier |
+| `page` | Number | No | Page number for pagination |
+| `size` | Number | No | Number of items per page |
+| `sortBy` | String | Yes | Field to sort by |
+| `sortDesc` | Boolean | Yes | Sort in descending order if true |
 
 ## Response
 
@@ -62,7 +62,7 @@ Query parameters control pagination and sorting:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `dataBlocks` | array | Array of data block objects |
+| `dataBlocks` | Array | Array of data block objects |
 
 ***Data block fields***
 
@@ -70,9 +70,9 @@ All data blocks include:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | Type of data block (e.g., `BasicIdentity`, `Credentials`) |
-| `createdByStep` | string | Step that created this data block |
-| `createdAt` | string | ISO 8601 timestamp when data block was created |
+| `type` | String | Type of data block (e.g., `BasicIdentity`, `Credentials`) |
+| `createdByStep` | String | Step that created this data block |
+| `createdAt` | String | ISO 8601 timestamp when data block was created |
 
 <Info>
 For a complete list of available data block types and their schemas, see [Core Concept: Data blocks](https://idnow.mintlify.app/Platform_Guides/Core_Concept_DataBlocks).

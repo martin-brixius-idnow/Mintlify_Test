@@ -28,16 +28,16 @@ Designed for flows where the business already has user images and wants to verif
 
 ---
 
-## Input DataBlock
+## Input data block
 
 Input requirements for this step.
 
-| DataBlock Type | Required | Description |
+| Data block Type | Required | Description |
 |----------------|----------|-------------|
 | `DocumentImages` | Yes | Pre-captured document images (front and/or back side) |
 | `BiometricSamples` | Yes | Pre-captured biometric data with `consent = true` |
 
-If the consent field in the BiometricSamples DataBlock is set to true, Idnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
+If the consent field in the BiometricSamples data block is set to true, Idnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
 
 ---
 
@@ -47,11 +47,11 @@ This step does not produce any verdicts.
 
 ---
 
-## Output DataBlock
+## Output data block
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Scenario | DataBlocks Produced | Description |
+| Scenario | Data blocks Produced | Description |
 |----------|---------------------|-------------|
 | verified | `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `BiometricSamples` | Successful document processing with identity extraction |
 | fraud_detected | `DocumentVerification` | Document identified as fraudulent |

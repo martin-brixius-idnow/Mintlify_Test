@@ -31,15 +31,15 @@ IDcheck provides automated document-based identity verification with optional bi
 
 ---
 
-## Input DataBlock
+## Input data block
 
-This step does not require any input DataBlock.
+This step does not require any input data block.
 
 ---
 
 ## Verdicts
 
-Verdicts for this DataBlock.
+Verdicts for this data block.
 
 | Verdict | Description |
 |---------|-------------|
@@ -50,11 +50,11 @@ Verdicts for this DataBlock.
 
 ---
 
-## Output DataBlock
+## Output data block
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Verdict | DataBlocks Produced | Notes |
+| Verdict | Data blocks Produced | Notes |
 |---------|---------------------|-------|
 | **verified** | `DocumentVerification`, `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `BiometricSamples`* | `BiometricSamples` only if biometricSampleTypes configured |
 | **fraud_detected** | `DocumentVerification` | No identity data extracted |

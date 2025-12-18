@@ -17,11 +17,11 @@ Used when customers want to activate facial recognition as a secure method for f
 
 ---
 
-## Input DataBlock
+## Input Data Block
 
 Input requirements for this step.
 
-| DataBlock | Mandatory | Description |
+| Data Block | Mandatory | Description |
 |----------:|:---------:|-------------|
 | `UserReference` | Optional | Contains the unique subject identifier or the user alias (mail/tel etc). |
 | `BiometricSamples` or `DocumentImages` | Conditional | An image source is required: `BiometricSamples` (priority) or `DocumentImages`. |
@@ -30,7 +30,7 @@ Input requirements for this step.
 
 ## Verdicts
 
-Verdicts for this DataBlock.
+Verdicts for this Data Block.
 
 | Verdict | Description |
 |---------|-------------|
@@ -40,11 +40,11 @@ Verdicts for this DataBlock.
 
 ---
 
-## Output DataBlock
+## Output Data Block
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Scenario         | DataBlocks Produced      | Description |
+| Scenario         | Data blocks Produced      | Description |
 |------------------|-------------------------|-------------|
 | accepted        | `AuthenticatorCredential` | The enrollment was successful. The authentication means has been created and is associated with the subject.
 

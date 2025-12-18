@@ -29,22 +29,22 @@ Provides regulated remote identity verification via AutoIdent (fully automated, 
 
 ---
 
-## Input DataBlock
+## Input data block
 
 Input requirements for this step.
 
-| DataBlock          | Mandatory | Description                                          |
+| Data block          | Mandatory | Description                                          |
 |--------------------|----------|------------------------------------------------------|
 | `BasicIdentity`    | No      | BasicIdentity data to compare against attestation    |
 | `ExtendedIdentity` | No      | ExtendedIdentity data to compare against attestation |
 
-*If the DataBlock is not available, the step will execute normally without this information, and the flow will proceed without error.
+*If the data block is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
 ## Verdicts
 
-Verdicts for this DataBlock.
+Verdicts for this data block.
 
 | Verdict | Description |
 |---------|-------------|
@@ -54,14 +54,14 @@ Verdicts for this DataBlock.
 
 ---
 
-## Output DataBlock
+## Output data block
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Verdict | DataBlocks Produced | Notes |
+| Verdict | Data blocks Produced | Notes |
 |---------|---------------------|-------|
 | **verified** | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
 | **fraud_detected** | `DocumentVerification` | Contains fraud detection details |
-| **aborted** | - | No DataBlocks produced |
+| **aborted** | - | No data blocks produced |
 | **cancelled** | `DocumentVerification` | Contains cancellation reason |
-| **default** | - | No DataBlocks produced |
+| **default** | - | No data blocks produced |

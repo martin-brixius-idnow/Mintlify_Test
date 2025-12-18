@@ -30,7 +30,7 @@ This solution template enables users with previously verified identities (e.g. a
 
 | Step | Purpose |
 | --- | --- |
-| 1. `Start` | Entry point; collects input DataBlocks |
+| 1. `Start` | Entry point; collects input data blocks |
 | 2. `Device Intelligence` | Analyzes device trustworthiness |
 | 3a. `Electronic Signature` | Enables document signing (trusted path) |
 | 3b. ` Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
@@ -79,7 +79,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 ***Signature Levels:***
 
-| Level | Legal Effect | Required Input DataBlocks |
+| Level | Legal Effect | Required Input Data Blocks |
 | --- | --- | --- |
 | **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
 | **AES** | Uniquely linked to signer. No regulated identity-proofing required. | `ExtendedIdentity`, `DocumentsToSign` |
@@ -96,11 +96,11 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 ---
 
-## Input DataBlocks
+## Input Data Blocks
 
-Provide these DataBlocks when creating a session:
+Provide these data blocks when creating a session:
 
-| DataBlock Type | Description | Required For |
+| Data block type | Description | Required For |
 | --- | --- | --- |
 | `BasicIdentity` | Pre-verified identity data | All flows |
 | `DocumentData` | Identity document information | QES signature level |
@@ -110,13 +110,13 @@ Provide these DataBlocks when creating a session:
 
 ---
 
-## Output DataBlocks
+## Output Data Blocks
 
 ***Trusted Device Path***
 
 When device signals indicate high trust and signature succeeds:
 
-| DataBlock Type | Created By | Description |
+| Data block type | Created By | Description |
 | --- | --- | --- |
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
@@ -125,7 +125,7 @@ When device signals indicate high trust and signature succeeds:
 
 When device signals trigger identity re-verification:
 
-| DataBlock Type | Created By Step | Description |
+| Data block type | Created By Step | Description |
 | --- | --- | --- |
 | `DeviceSignals` | Device Signals | Device trust assessment results |
 | `DocumentImages` |  Document-based IDV (Capture) | Uploaded document images |
@@ -225,7 +225,7 @@ When device signals trigger identity re-verification:
 }
 ```
 
-### 3. Retrieve DataBlocks
+### 3. Retrieve Data Blocks
 
 **Request:** `GET /session/sess_abc123/datablocks`
 

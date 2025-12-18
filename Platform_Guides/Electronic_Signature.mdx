@@ -15,7 +15,7 @@ Electronic signing is a modular digital signature service enabling users to sign
 - **Identity Verification**: For QES, validates the signer's identity document and expiry date.  
 - **Pre-Identified Data Support**: Skips identification if data is validated.
 - **API Integration**: Constructs the API calls for the signature provider using the configured authentication and settings
-- **Output Generation**: Produces a `SignedDocumentsPackage` DataBlock upon successful completion.  
+- **Output Generation**: Produces a `SignedDocumentsPackage` data block upon successful completion.  
 
 ---
 
@@ -32,22 +32,21 @@ Electronic signing is a modular digital signature service enabling users to sign
 
 ---
 
-## Input DataBlock
+## Input data block
 
 Input requirements for this step.
 
-| DataBlock        | Mandatory                          | Description |
+| Data block        | Mandatory                          | Description |
 |------------------|------------------------------------|-------------|
 | `BasicIdentity`  | Yes                                | Always required. It provides the signer's fundamental identity information (e.g., name, date of birth), which is essential for any signature level. |
 | `DocumentData`   | Yes if `signatureLevel` is `QES`   | Required only if `signatureLevel` is QES. It provides the information of the identity document of the signer expected for a QES signature. Its `expiryDate` attribute is used to pre-validate the signer's identity document, which is a mandatory check for a QES process. |
-| `DocumentsToSign`| Yes                                | Always required. It contains the references to the documents uploaded by the customers that the end-user must sign. The signature should be applied according to the template referenced in the DataBlock and defined in the InstantSign configuration. |
+| `DocumentsToSign`| Yes                                | Always required. It contains the references to the documents uploaded by the customers that the end-user must sign. The signature should be applied according to the template referenced in the data block and defined in the InstantSign configuration. |
 
 ---
 
 ## Verdicts
 
-Verdicts for this DataBlock.
-
+Verdicts for this data block.
 
 | Verdict            | Description |
 |--------------------|-------------|
@@ -56,11 +55,11 @@ Verdicts for this DataBlock.
 | `failure`          | The signature process was initiated but did not complete successfully due to a handled error or a specific user action. This includes scenarios like the user explicitly canceling the process on the InstantSign's UI, or InstantSign returning a specific business rejection (e.g., user not eligible). |
 ---
 
-## Output DataBlock
+## Output data block
 
-DataBlocks produced per verdict.
+Data blocks produced per verdict.
 
-| Verdict | DataBlocks Produced          | Notes |
+| Verdict | Data blocks Produced          | Notes |
 |---------|------------------------------|-------|
 | **success** | `SignedDocumentsPackage` | |
 | **identity_expired** | `∅` | |

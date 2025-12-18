@@ -1,6 +1,6 @@
 ---
 title: Core Concept
-description: Flows, Steps, Verdicts and DataBlocks.
+description: Flows, Steps, Verdicts and Data Blocks.
 ---
 
 ## Introduction
@@ -9,9 +9,9 @@ This page explains the core building blocks of the IDnow Trust Platform and how 
 
 - **Flow**: A flow that runs from start to end and defines the operational steps leading to a final outcome.
 - **Start & End Step**: The flow ends in an End Step that determines whether the outcome is accepted or rejected.
-- **Steps**: A Step performs an operational step that reads inputs, writes DataBlocks, and produces a verdict.
-- **Verdicts**: A verdict defines the Step’s result and determines the output DataBlocks and the next routing step (e.g., "verified", "fraud").
-- **DataBlocks**: Typed payloads that act as inputs or outputs of a Step depending on its verdict.
+- **Steps**: A Step performs an operational step that reads inputs, writes data blocks, and produces a verdict.
+- **Verdicts**: A verdict defines the Step’s result and determines the output data blocks and the next routing step (e.g., "verified", "fraud").
+- **Data blocks**: Typed payloads that act as inputs or outputs of a Step depending on its verdict.
 - **Routes**: Named exits that route the flow to the next Step or an End Step.
 
 ---
@@ -42,7 +42,7 @@ Between the Start and End Steps, other **operative Steps** perform operations an
 
 Each Step session results in exactly one **verdict**, which in turn determines:
 
-- which **DataBlocks** are produced or updated, and  
+- which **data blocks** are produced or updated, and  
 - how the flow continues via **Routes** to either another Step or an End Step.
 
 ---
@@ -64,44 +64,44 @@ In the API response, each verdict includes structured data that explains the res
 
 ---
 
-## DataBlocks
+## Data blocks
 
-Each Step consumes and produces typed **DataBlocks**. 
+Each Step consumes and produces typed **Data blocks**. 
 
-Examples of such DataBlocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
+Examples of such Data blocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
 
-DataBlocks keep data consistent as it moves through the flow. The platform determines which DataBlocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a Step.
+Data blocks keep data consistent as it moves through the flow. The platform determines which data blocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a Step.
 
-The DataBlock structure is preserved in the API response after a flow session, making it easy to trace data from the initial input to the final outcome.
+The data block structure is preserved in the API response after a flow session, making it easy to trace data from the initial input to the final outcome.
 
 ### As Step Output
 
-A Step’s **verdict** determines which DataBlocks it produces. 
+A Step’s **verdict** determines which data blocks it produces. 
 
 As an example, in an IDV flow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. 
 
-Many DataBlocks also carry the Step’s verdict to indicate the outcome of the check that generated them.
+Many data blocks also carry the Step’s verdict to indicate the outcome of the check that generated them.
 
-![IDV Step producing different DataBlocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/3-trustplatform-idv-datablocks.png)
+![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/3-trustplatform-idv-datablocks.png)
 
-*An IDV Step generates different DataBlocks depending on whether the verdict is verified, fraud, or failure.*
+*An IDV Step generates different data blocks depending on whether the verdict is verified, fraud, or failure.*
 
 ### As Step Input
 
 Some Steps, such as AML Screening
 
-- produces a `PepAndSanctionsResults` DataBlock as output.
-- but **require** a `BasicIdentity` DataBlock as **input**.
+- produces a `PepAndSanctionsResults` data block as output.
+- but **require** a `BasicIdentity` data block as **input**.
 
-Each Step defines which DataBlocks it requires and which it produces for each verdict. 
+Each Step defines which data blocks it requires and which it produces for each verdict. 
 
-DataBlocks flow from each Step’s outputs to the inputs of the next Steps. These definitions allow the system to validate the flow, ensuring all required inputs are available before a Step executes.The DataBlock can be included in the initial API request when a flow is executed as shown in the example below.
+Data blocks flow from each Step’s outputs to the inputs of the next Steps. These definitions allow the system to validate the flow, ensuring all required inputs are available before a Step executes. The data block can be included in the initial API request when a flow is executed as shown in the example below.
 
-![Flow where an IDV Step creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
+![Flow where an IDV Step creates a BasicIdentity data block that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults data block.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
 
-### Missing DataBlocks
+### Missing data blocks
 
-If a required DataBlock is missing, the Step cannot execute. As an example, the AML Screening Step requires a BasicIdentity DataBlock, which can be provided either 
+If a required data block is missing, the Step cannot execute. As an example, the AML Screening Step requires a BasicIdentity data block, which can be provided either 
 
 - in the initial API request or 
 - produced by an upstream Step
@@ -112,9 +112,9 @@ All outputs from a Step are added to the flow context, making them accessible to
 
 ### Duplications
 
-In more complex flows, a Step may require multiple instances of the same DataBlock type as **input** (for example, two `BasicIdentity` DataBlocks for comparison). In such cases, the Steps input array contains the same DataBlock type multiple times, with each occurrence representing a separate instance.
+In more complex flows, a Step may require multiple instances of the same data block type as **input** (for example, two `BasicIdentity` data blocks for comparison). In such cases, the Steps input array contains the same data block type multiple times, with each occurrence representing a separate instance.
 
-When multiple upstream Steps generate DataBlocks of the same type as **output**, the platform currently uses the last produced instance.
+When multiple upstream Steps generate data blocks of the same type as **output**, the platform currently uses the last produced instance.
 
 ---
 
@@ -136,23 +136,23 @@ A simplified transition object looks like this:
 
 When a Step is configured in Studio with multiple output scenarios, the scenario keys act as route names (for example, `verified`, `fraud_detected`, `capture_failed`, `default`).
 
-![More complex flow where verdicts define flow path and output Datablocks created](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-aml-basicidentity.png)
+![More complex flow where verdicts define flow path and output data blocks created](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-aml-basicidentity.png)
 
 ---
 
 ## Putting It Together
 
-A Trust Platform flow is composed of Steps, verdicts, DataBlocks, and Routes. When designing a flow:
+A Trust Platform flow is composed of Steps, verdicts, data blocks, and Routes. When designing a flow:
 
 1. **Define the initial process steps**  
    For example, start with an ID verification Step that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding Routes, each connected to the appropriate next Step or End Step.
 
 2. **Reuse outputs between Steps**  
-   DataBlocks produced by one Step can be used as inputs to downstream Steps. For instance, a `BasicIdentity` DataBlock created during ID verification can be passed to an AML Screening Step, which then produces its own verdict and `PepAndSanctionsResults` DataBlocks.
+   Data blocks produced by one Step can be used as inputs to downstream Steps. For instance, a `BasicIdentity` data block created during ID verification can be passed to an AML Screening Step, which then produces its own verdict and `PepAndSanctionsResults` data blocks.
 
 3. **Extend the flow as needed**  
-   Add additional Steps for risk checks, digital signals, signatures, or evidence collection. Each Step follows the same pattern of verdicts, DataBlocks, and Routes.
+   Add additional Steps for risk checks, digital signals, signatures, or evidence collection. Each Step follows the same pattern of verdicts, data blocks, and Routes.
 
-*By combining Steps, verdicts, DataBlocks, and Routes, you can build complex trust flows  in the Trust Platform.*
+*By combining Steps, verdicts, data blocks, and Routes, you can build complex trust flows  in the Trust Platform.*
 
 By understanding these building blocks, you can compose complex trust flows simply by wiring Steps together. The platform handles session, data propagation, and audit trails automatically.

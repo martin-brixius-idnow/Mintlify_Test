@@ -1,5 +1,5 @@
 ---
-title: "Trust-Based Electronic Signature "
+title: "Trust-Based Electronic Signature with Doc-based IDV Fallback"
 description: "Enable document signing with pre-verified identities and device trust assessment"
 ---
 
@@ -10,11 +10,13 @@ description: "Enable document signing with pre-verified identities and device tr
 This solution enables users with previously verified identities to sign documents without repeating full identity verification. It uses device trust signals to determine whether existing identity data can be reused or if additional verification is required.
 
 **Business Value:**
+
 - Reuse verified identity data from previous verification sessions
 - Risk-based routing via device trust assessment
 - Streamlined signing for trusted devices while maintaining security for unknown devices
 
 **How It Works:**
+
 - The system assess device trustworthiness using behavioral and technical signals
 - Trusted devices proceed directly to signing using pre-verified identity
 - Untrusted devices require document-based identity verification before signing
@@ -26,7 +28,7 @@ This solution enables users with previously verified identities to sign document
 ### Step Overview
 
 | Step | Purpose |
-|------|---------|
+| --- | --- |
 | Start | Entry point; collects input DataBlocks |
 | Device Intelligence | Analyzes device trustworthiness |
 | 3a. Electronic Signature | Enables document signing (trusted path) |
@@ -38,13 +40,13 @@ This solution enables users with previously verified identities to sign document
 This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
 
 | Step | Verdict | Meaning | Action |
-|------|---------|---------|--------|
+| --- | --- | --- | --- |
 | Device Intelligence | `trusted` | Device recognized, normal behavior | Proceed to Electronic Signature |
-| | `suspicious`, `not_trusted`, `inconclusive`, else | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
+| Device Intelligence | `suspicious`, `not_trusted`, `inconclusive`, else | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
 | Electronic Signature | `success` | Signing completed successfully | Session Accepted |
-| | `identity_expired` | Pre-verified identity exceeded validity period | Session Rejected |
+| Electronic Signature | `identity_expired` | Pre-verified identity exceeded validity period | Session Rejected |
 | Document-based IDV (Capture) | `verified` | Identity confirmed via document check | Session Accepted |
-| | `fraud_detected`, `aborted`, `cancelled`, else | Fraud, user abandonment, or errors | Session Rejected |
+| Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, else | Fraud, user abandonment, or errors | Session Rejected |
 
 ---
 
@@ -53,12 +55,13 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 ### Device Signals
 
 | Parameter | Type | Description |
-|-----------|------|-------------|
+| --- | --- | --- |
 | `suspiciousUserThreshold` | integer (≥0) | Threshold for "suspicious" classification based on suspectScore |
 | `notTrustedUserThreshold` | integer (≥0) | Threshold for "not_trusted" classification based on suspectScore |
 | `confidenceScoreThreshold` | float (0-100) | Minimum fingerprint confidence; below this value result is "inconclusive" |
 
 **Example:**
+
 ```json
 {
   "suspiciousUserThreshold": 50,
@@ -70,17 +73,18 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 ### Electronic Signature
 
 | Parameter | Type | Description |
-|-----------|------|-------------|
+| --- | --- | --- |
 | `signingConfiguration.signatureLevel` | enum | QES or AES (required) |
 
 **Signature Levels:**
 
 | Level | Legal Effect | Required Input DataBlocks |
-|-------|--------------|---------------------------|
+| --- | --- | --- |
 | **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
 | **AES** | Uniquely linked to signer. No regulated identity-proofing required. | `ExtendedIdentity`, `DocumentsToSign` |
 
 **Example:**
+
 ```json
 {
   "signingConfiguration": {
@@ -96,7 +100,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 Provide these DataBlocks when creating a session:
 
 | DataBlock Type | Description | Required For |
-|----------------|-------------|--------------|
+| --- | --- | --- |
 | `ExtendedIdentity` | Pre-verified identity data | All flows |
 | `DocumentData` | Identity document information | QES signature level |
 | `DocumentsToSign` | Documents requiring signature | All flows |
@@ -112,7 +116,7 @@ Provide these DataBlocks when creating a session:
 When device signals indicate high trust and signature succeeds:
 
 | DataBlock Type | Created By | Description |
-|----------------|------------|-------------|
+| --- | --- | --- |
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
 
@@ -121,7 +125,7 @@ When device signals indicate high trust and signature succeeds:
 When device signals trigger identity re-verification:
 
 | DataBlock Type | Created By | Description |
-|----------------|------------|-------------|
+| --- | --- | --- |
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `DocumentImages` | Document verification step | Uploaded document images |
 | `DocumentData` | Document verification step | Extracted document data |
@@ -177,6 +181,7 @@ When device signals trigger identity re-verification:
 **Request:** `GET /session/sess_abc123`
 
 **Response:**
+
 ```json
 {
   "flowName": "trust_based_electronic_signiture",
@@ -224,6 +229,7 @@ When device signals trigger identity re-verification:
 **Request:** `GET /session/sess_abc123/datablocks`
 
 **Response:**
+
 ```json
 {
   "dataBlocks": [

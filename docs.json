@@ -43,7 +43,7 @@
           {
             "group": "Templates",
             "pages": ["Solution_Templates/Trust_Based_Electronic_Signiture"]
-          },
+          }
         ]
       },
       {
@@ -138,9 +138,7 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": [
-              "Development_Resources/index"
-            ]
+            "pages": ["Development_Resources/index"]
           },
           {
             "group": "Getting Started",
@@ -158,9 +156,7 @@
           },
           {
             "group": "UI & Branding",
-            "pages": [
-              "Development_Resources/Branding_Styling"
-            ]
+            "pages": ["Development_Resources/Branding_Styling"]
           },
           {
             "group": "Webhooks",
@@ -171,9 +167,7 @@
           },
           {
             "group": "Error Handling",
-            "pages": [
-              "Development_Resources/Error_Handling"
-            ]
+            "pages": ["Development_Resources/Error_Handling"]
           }
         ]
       }

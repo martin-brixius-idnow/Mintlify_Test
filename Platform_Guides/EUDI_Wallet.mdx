@@ -10,7 +10,7 @@ Used when businesses want fast and highly trusted verification based on governme
 ## Key features
 
 - **OID4VP and mdoc Protocols**: Implements OpenID for Verifiable Presentations and mdoc protocols
-- **Credential request**: Requests and verifies EUDI Wallet credentials from the user's European Digital Identity Wallet
+- **Credential request**: Requests and verifies EUDI wallet credentials from the user's European Digital Identity Wallet
 - **Dynamic output configuration**: Output data blocks are dynamically determined based on the `requestedCredentials` configuration
 - **Credential to data block mapping**: Maps credential claims to DSL data blocks for seamless flow integration
 - **No input required**: Does not require any input data block from the flow context
@@ -37,7 +37,7 @@ This step does not require any input data blocks.
 
 ## Output data blocks
 
-The EUDI_WALLET_VERIFIER:v1 step produces different outputs depending on the presentation result. The output data blocks are dynamically determined based on the `requestedCredentials` configuration.
+The EUDI wallet step produces different outputs depending on the presentation result. The output data blocks are dynamically determined based on the `requestedCredentials` configuration.
 
 | Verdict        | Data blocks produced    | Description |
 |----------------|-------------------------|-------------|
@@ -47,6 +47,3 @@ The EUDI_WALLET_VERIFIER:v1 step produces different outputs depending on the pre
 | `default`      | `PresentationResult`    | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
 
 **Dynamic output:** The `verified` scenario uses a dynamic function based on configuration options. All unique data blocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.
-
-## Best practices
-

@@ -3,18 +3,16 @@ title: 'Secure'
 description: 'Implement security best practices to verify webhook authenticity'
 ---
 
-## Overview
-
 Secure your webhook endpoints to ensure that incoming requests genuinely originate from IDnow and have not been tampered with.
 
 ## Authentication
 
-Idnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from Idnow.
+IDnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from IDnow.
 
 ---
 ### API Token
 
-You must provide an API token when configuring your webhook endpoint in Studio. Idnow includes this token in the request header.
+You must provide an API token when configuring your webhook endpoint in Studio. IDnow includes this token in the request header.
 
 <Steps>
   <Step title="Add your API token">
@@ -39,10 +37,10 @@ JWT signature verification is optional but recommended for production environmen
 ---
 ## IP Whitelisting
 
-Restrict your webhook endpoint to only accept requests from Idnow IP addresses.
+Restrict your webhook endpoint to only accept requests from IDnow IP addresses.
 
 <Info>
-Idnow maintains a limited and stable list of IP addresses for webhook delivery.
+IDnow maintains a limited and stable list of IP addresses for webhook delivery.
 </Info>
 
 ### IP Ranges
@@ -62,7 +60,7 @@ Contact your account manager for the current production IP ranges.
 ---
 ## TLS Requirements
 
-Your webhook endpoint must support TLS 1.2 or higher. Idnow validates your endpoint's TLS configuration during setup.
+Your webhook endpoint must support TLS 1.2 or higher. IDnow validates your endpoint's TLS configuration during setup.
 
 <CardGroup cols={2}>
   <Card title="TLS 1.2" icon="check">
@@ -76,12 +74,11 @@ Your webhook endpoint must support TLS 1.2 or higher. Idnow validates your endpo
 ---
 ## Security Headers
 
-Idnow includes these headers with every webhook request:
+IDnow includes these headers with every webhook request:
 
 | Header | Description |
 |--------|-------------|
 | `Authorization` | Your API token |
 | `X-Idnow-Signature` | JWT signature of the payload |
 | `Content-Type` | Always `application/json` |
-| `User-Agent` | Idnow webhook service identifier |
-
+| `User-Agent` | IDnow webhook service identifier |

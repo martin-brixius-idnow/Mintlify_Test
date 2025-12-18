@@ -7,13 +7,13 @@ description: "Enable document signing with pre-verified identities and device tr
 
 This solution template enables users with previously verified identities (e.g. acquired in bank onboarding process) to sign documents without repeating full identity verification. It uses device trust signals to determine whether existing identity data can be reused or if additional verification is required.
 
-**Business Value:**
+***Business Value:***
 
 - Reuse verified identity data from previous verification sessions
 - Risk-based routing via device trust intelligence
 - Streamlined signing for trusted devices while maintaining document-based IDV for suspiciosus devices
 
-**How It Works:**
+***How It Works:***
 
 - The system assess device trustworthiness using behavioral and technical signals
 - Trusted devices proceed directly to signing using pre-verified identity
@@ -23,7 +23,7 @@ This solution template enables users with previously verified identities (e.g. a
 
 ## Flow Logic
 
-**Step Overview**
+***Step Overview***
 
 | Step | Purpose |
 | --- | --- |
@@ -33,7 +33,7 @@ This solution template enables users with previously verified identities (e.g. a
 | 3b. ` Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
 | `End` | Final decision: accepted or rejected |
 
-**Verdict Routing**
+***Verdict Routing***
 
 This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
 
@@ -50,7 +50,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 ## Configuration
 
-**Device Signals**
+***Device Signals***
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -68,20 +68,20 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 }
 ```
 
-**Electronic Signature**
+***Electronic Signature***
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `signingConfiguration.signatureLevel` | enum | QES or AES (required) |
 
-**Signature Levels:**
+***Signature Levels:***
 
 | Level | Legal Effect | Required Input DataBlocks |
 | --- | --- | --- |
 | **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
 | **AES** | Uniquely linked to signer. No regulated identity-proofing required. | `ExtendedIdentity`, `DocumentsToSign` |
 
-**Example:**
+***Example:***
 
 ```json
 {
@@ -109,7 +109,7 @@ Provide these DataBlocks when creating a session:
 
 ## Output DataBlocks
 
-**Trusted Device Path**
+***Trusted Device Path***
 
 When device signals indicate high trust and signature succeeds:
 
@@ -118,7 +118,7 @@ When device signals indicate high trust and signature succeeds:
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
 
-**Untrusted Device Path**
+***Untrusted Device Path***
 
 When device signals trigger identity re-verification:
 

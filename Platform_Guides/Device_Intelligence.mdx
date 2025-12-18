@@ -1,5 +1,5 @@
 ---
-title: Device Intelligence
+title: Device intelligence
 description: Evaluates the trustworthiness of the customer’s device.
 ---
 
@@ -7,7 +7,7 @@ Helps determine whether the device appears safe, familiar, and genuine or if the
 
 ---
 
-## Key Features
+## Key features
 
 - Integrates ***device signals services*** (e.g., Fingerprint) to assess device risk and detect fraud attempts.
 - ***Analyses automation***, environment manipulation, VMs/emulators, and behavioral anomalies.
@@ -18,7 +18,7 @@ Helps determine whether the device appears safe, familiar, and genuine or if the
 
 ## Configuration
 
-| Parameter                   | Type   | Required | Default | Description |
+| Parameter                  | Type   | Required | Default | Description |
 |----------------------------|--------|----------|---------|-------------|
 | `suspiciousUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered â€œsuspiciousâ€ based on suspectScore. |
 | `notTrustedUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered â€œnot_trustedâ€ based on suspectScore. |
@@ -49,18 +49,18 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-| Verdict         | Data blocks Produced | Notes |
-|-----------------|---------------------|-------|
-| **trusted**     | `DeviceSignals`     |       |
-| **suspicious**  | `DeviceSignals`     |       |
-| **not_trusted** | `DeviceSignals`     |       |
-| **inconclusive**| `DeviceSignals`     |       |
+| Verdict         | Data blocks produced | Notes |
+|-----------------|----------------------|-------|
+| **trusted**     | `DeviceSignals`      |       |
+| **suspicious**  | `DeviceSignals`      |       |
+| **not_trusted** | `DeviceSignals`      |       |
+| **inconclusive**| `DeviceSignals`      |       |
 
 ---
 
-## Output Mapping
+## Output mapping
 
-| Result                                         | Mapped Output |
+| Result                                         | Mapped output |
 |------------------------------------------------|---------------|
 | `confidence.score < confidenceScoreThreshold`  | `inconclusive`|
 | `suspectScore < suspiciousUserThreshold`       | `trusted`     |

@@ -1,5 +1,5 @@
 ---
-title: 'Handle Events'
+title: 'Handle events'
 description: 'Understand webhook event types and payload structure'
 ---
 
@@ -12,7 +12,7 @@ To learn how to configure Webhooks, see the guide here:
 </Info>
 
 ---
-## Event Payload Structure
+## Event payload structure
 
 All webhook events share a common structure:
 
@@ -35,11 +35,11 @@ The `eventId` remains the same across all retry attempts, while `eventDeliverId`
 </Info>
 
 ---
-## Session Events
+## Session events
 
 IDnow sends the following event types when a session changes state:
 
-| Event Type | Description |
+| Event type | Description |
 |------------|-------------|
 | session.created | Flow is initialized and ready to start |
 | session.started | User has begun the verification journey |
@@ -49,11 +49,11 @@ IDnow sends the following event types when a session changes state:
 | session.error | Flow enters ERROR state and stops processing |
 
 ---
-## Event Payloads Examples
+## Event payloads examples
 
 All webhook payloads are a minimal, machine-readable JSON message that delivers metadata about an event and will never include any PII. You can fetch full details from the API when needed by using the respective `session_id`. 
 
-### session.created
+### `session.created`
 
 ```json
 {
@@ -73,7 +73,7 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
 
 ---
 
-### session.started
+### `session.started`
 
 ```json
 {
@@ -96,7 +96,7 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
 
 ---
 
-### session.completed
+### `session.completed`
 
 ```json
 {
@@ -119,7 +119,7 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
 
 ---
 
-### session.expired
+### `session.expired`
 
 ```json
 {

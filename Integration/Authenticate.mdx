@@ -1,5 +1,5 @@
 ---
-title: Get Token
+title: Get token
 description: Learn how to obtain an API token to authenticate with Trust Platform APIs.
 ---
 
@@ -15,7 +15,7 @@ This guide shows you how to:
 
 ---
 
-## Get Credentials
+## Get credentials
 
 To authenticate against Trust Platform APIs, you need to obtain your API client credentials (`client_id` and `client_secret`).
 
@@ -25,11 +25,11 @@ To authenticate against Trust Platform APIs, you need to obtain your API client 
 
 ---
 
-## Obtain Access Token
+## Obtain access token
 
 Use your client credentials to request an access token. Trust Platform supports two client authentication methods:
 
-***Request Parameters***
+***Request parameters***
 
 | Parameter       | Description                                                                 | Required |
 |-----------------|-----------------------------------------------------------------------------|----------|
@@ -38,7 +38,7 @@ Use your client credentials to request an access token. Trust Platform supports 
 | `client_secret` | Your API client secret from the IDnow Dashboard.                            | Yes      |
 | `scope`         | The scopes required for your API requests (if applicable).                  | Optional |
 
-***Option A***: Explicit Credentials (`client_secret_post`)
+***Option A***: Explicit credentials (`client_secret_post`)
 
 Include your credentials directly in the request body:
 
@@ -80,7 +80,7 @@ If successful, you will receive an access token:
 
 ---
 
-## Make API Request
+## Make an API request
 
 Now that you have a valid access token, you can make requests to IDnow APIs. Include the access token in the `Authorization` header using the `Bearer` scheme:
 
@@ -91,7 +91,7 @@ Accept: application/json
 Authorization: Bearer eyJh...QifQ.eyJ...hIOw
 ```
 
-***Example Request***
+***Example request***
 
 ```bash
 curl --request GET https://<your-idnow-api-host>/api/v1/identifications/<id> \

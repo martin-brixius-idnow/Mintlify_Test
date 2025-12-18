@@ -7,11 +7,11 @@ Used when strong, real‑time identity confirmation is required. The user comple
 
 ---
 
-## Key Features
+## Key features
 
-- ***Verification Initialization***: Creates an authentication request and sends a UI directive to the client to start the biometric verification process.
-- ***Signal Waiting***: Waits for a signal containing the authentication result.
-- ***Result Processing***: Once the signal is received, it computes the final authentication result by verifying the transaction or processing failure information.
+- ***Verification initialization***: Creates an authentication request and sends a UI directive to the client to start the biometric verification process.
+- ***Signal waiting***: Waits for a signal containing the authentication result.
+- ***Result processing***: Once the signal is received, it computes the final authentication result by verifying the transaction or processing failure information.
 
 This step is ideal for scenarios where strong biometric authentication is required as part of an identity flow.
 
@@ -19,15 +19,15 @@ This step is ideal for scenarios where strong biometric authentication is requir
 
 ## Configuration
 
-This step requires no configuration options. It uses the Third Party configuration parameters defined at the infrastructure level.
+This step requires no configuration options. It uses the Third Party configuration parameters defined on the infrastructure level.
 
 ---
 
-## Input Data Block
+## Input data block
 
 Input requirements for this step.
 
-| Data Block       | Mandatory | Description |
+| Data block      | Mandatory | Description |
 |-----------------|-----------|-------------|
 | `UserReference` | Yes       | Contains the unique subject identifier (subjectId) necessary to identify the user in the Keyless system. |
 
@@ -44,7 +44,7 @@ Verdicts for this data block.
 
 ---
 
-## Output Data Block
+## Output data block
 
 Data blocks produced per verdict.
 

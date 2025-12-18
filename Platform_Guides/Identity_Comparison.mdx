@@ -1,38 +1,38 @@
 ---
-title: Identity Comparison
+title: Identity comparison
 description: Compares identity details from two different sources.
 ---
 
 Ensures the identity information collected from different steps or documents refers to the same person, improving decision accuracy.
 
-## Key Features
+## Key features
 
-- **Dual Source Comparison**: Compares identity data from two different sources
-- **Requires Two Distinct Data Blocks**: Requires two distinct BasicIdentity data blocks
-- **Configurable Attributes**: Allows selection of specific attributes to compare
-- **Dual Comparison Modes**: Supports both strict and tolerant comparison modes
-- **ComparisonResults Output**: Produces a ComparisonResults data block with detailed verdict and traceability
-- **Transition Requirement**: flow must define transitions for both `match` and `failure` ports to handle all possible outcomes
+- **Dual source comparison**: Compares identity data from two different sources
+- **Requires two distinct data blocks**: Requires two distinct BasicIdentity data blocks
+- **Configurable attributes**: Allows selection of specific attributes to compare
+- **Dual comparison modes**: Supports both strict and tolerant comparison modes
+- **`ComparisonResults` output**: Produces a ComparisonResults data block with detailed verdict and traceability
+- **Transition requirement**: flow must define transitions for both `match` and `failure` ports to handle all possible outcomes
 
 ## Configuration
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| leftOperand | string | Yes | step ID that produced the first BasicIdentity data block |
-| rightOperand | string | Yes | step ID that produced the second BasicIdentity data block |
-| attributes | array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
-| mode | enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
+| `leftOperand` | string | Yes | step ID that produced the first BasicIdentity data block |
+| `rightOperand` | string | Yes | step ID that produced the second BasicIdentity data block |
+| `attributes` | array | Yes | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
+| `mode` | enum | Yes | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
 
-**Comparison Mode Details:**
+**Comparison mode details:**
 
 - **strict**: Name comparison requires all words from both names to have "close enough" matches. Date comparison requires the two dates to be exactly the same.
 - **tolerant**: Name comparison requires at least one word from the first name to have a "close enough" match in the second name. Date comparison requires year and month to match (day is ignored).
 
-**Input Data Block Referencing:**
+**Input data block referencing:**
 
 The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) of the preceding steps that produced the BasicIdentity data blocks to be compared. The values must correspond to existing step IDs in the flow. The values of `leftOperand` and `rightOperand` must be different to ensure comparison between two distinct data sources.
 
-## Comparison Logic
+## Comparison logic
 
 | Outcome       | Description |
 |---------------|-------------|
@@ -44,10 +44,10 @@ The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) 
 
 Input requirements for this step.
 
-| Data block Type | Required | Description |
-|----------------|----------|-------------|
-| BasicIdentity | Yes | First BasicIdentity data block (from leftOperand step) |
-| BasicIdentity | Yes | Second BasicIdentity data block (from rightOperand step) |
+| Data block type | Required | Description |
+|-----------------|----------|-------------|
+| BasicIdentity   | Yes      | First BasicIdentity data block (from leftOperand step) |
+| BasicIdentity   | Yes      | Second BasicIdentity data block (from rightOperand step) |
 
 **Important:** This step requires exactly two BasicIdentity data blocks as input. The flow validation system ensures that the steps referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a BasicIdentity data block.
 
@@ -55,7 +55,7 @@ Input requirements for this step.
 
 Data blocks produced per verdict.
 
-| Scenario | Data blocks Produced | Description |
+| Scenario | Data blocks produced | Description |
 |----------|---------------------|-------------|
 | match | `ComparisonResults` | All specified attributes match between the two BasicIdentity sources |
 | failure | `ComparisonResults` | One or more specified attributes do not match or are missing, preventing the expected comparison between the two BasicIdentity sources |

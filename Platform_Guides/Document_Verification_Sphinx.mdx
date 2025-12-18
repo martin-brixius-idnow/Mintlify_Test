@@ -7,14 +7,14 @@ Provides regulated remote identity verification via AutoIdent (fully automated, 
 
 ---
 
-## Key Features
+## Key features
 
-- **Verification Modes** - AutoIdent for automated checks; VideoIdent for live specialist verification  
-- **Document Checks** - AutoIdent performs AI-based validation; VideoIdent adds human inspection of layout, typography, and security features  
-- **Biometrics & Liveness** - AutoIdent uses face-matching and live-action checks; VideoIdent performs live comparison and spoofing detection  
-- **Expert Oversight** - AutoIdent escalates edge cases or runs mandatory review; VideoIdent always uses trained specialists  
-- **Regulatory Compliance** - Supports eIDAS, AML, GwG, PVID, BaFin, and FMA  
-- **Data Retention** - Default 60 days in production (30 days backups); optional extended retention and export available
+- **Verification modes** - AutoIdent for automated checks; VideoIdent for live specialist verification  
+- **Document checks** - AutoIdent performs AI-based validation; VideoIdent adds human inspection of layout, typography, and security features  
+- **Biometrics and liveness** - AutoIdent uses face-matching and live-action checks; VideoIdent performs live comparison and spoofing detection  
+- **Expert oversight** - AutoIdent escalates edge cases or runs mandatory review; VideoIdent always uses trained specialists  
+- **Regulatory compliance** - Supports eIDAS, AML, GwG, PVID, BaFin, and FMA  
+- **Data retention** - Default 60 days in production (30 days backups); optional extended retention and export available
 
 ---
 
@@ -56,7 +56,7 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-| Verdict | Data blocks Produced | Notes |
+| Verdict | Data blocks produced | Notes |
 |---------|---------------------|-------|
 | **verified** | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
 | **fraud_detected** | `DocumentVerification` | Contains fraud detection details |

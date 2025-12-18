@@ -1,5 +1,5 @@
 ---
-title: EUDI Wallet
+title: EUDI wallet
 description: Verifies users using their European Digital Identity Wallet.
 ---
 
@@ -7,14 +7,14 @@ Used when businesses want fast and highly trusted verification based on governme
 
 ---
 
-## Key Features
+## Key features
 
 - **OID4VP and mdoc Protocols**: Implements OpenID for Verifiable Presentations and mdoc protocols
-- **Credential Request**: Requests and verifies EUDI Wallet credentials from the user's European Digital Identity Wallet
-- **Dynamic Output Configuration**: Output data blocks are dynamically determined based on the `requestedCredentials` configuration
-- **Credential to data block Mapping**: Maps credential claims to DSL data blocks for seamless flow integration
-- **No Input Required**: Does not require any input data block from the flow context
-- **Multiple Credential Support**: Can request multiple credentials in a single verification session
+- **Credential request**: Requests and verifies EUDI Wallet credentials from the user's European Digital Identity Wallet
+- **Dynamic output configuration**: Output data blocks are dynamically determined based on the `requestedCredentials` configuration
+- **Credential to data block mapping**: Maps credential claims to DSL data blocks for seamless flow integration
+- **No input required**: Does not require any input data block from the flow context
+- **Multiple credential support**: Can request multiple credentials in a single verification session
 
 ---
 
@@ -39,14 +39,14 @@ This step does not require any input data block.
 
 The EUDI_WALLET_VERIFIER:v1 step produces different outputs depending on the presentation result. The output data blocks are dynamically determined based on the `requestedCredentials` configuration.
 
-| Verdict | Data blocks Produced | Description |
+| Verdict | Data blocks produced | Description |
 |----------|---------------------|-------------|
 | `verified` | PresentationResult, Data blocks specified in options.requestedCredentials.datablocks (e.g., BasicIdentity, ExtendedIdentity) | Successful wallet presentation. The user has authenticated with their EUDI wallet and consented to sharing the requested credentials through a verifiable or mdoc presentation. |
 | `cancelled` | PresentationResult | The user actively interrupted the process. This can occur either by explicitly refusing the data sharing. |
 | `not_verified` | PresentationResult | The presentation attempt failed. The credential presented is not valid or the presentation made by the holder does not satisfy the query. |
 | `default` | PresentationResult | Unexpected or technical error during processing. This can include wallet service unavailability or protocol errors. |
 
-**Dynamic Output:** The `verified` scenario uses a dynamic function based on configuration options. All unique data blocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.
+**Dynamic output:** The `verified` scenario uses a dynamic function based on configuration options. All unique data blocks requested across all credentials (via the `datablocks` attribute) are collected and included in the output, along with PresentationResult which is always included.
 
-## Best Practices
+## Best practices
 

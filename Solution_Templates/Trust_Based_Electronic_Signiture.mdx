@@ -1,5 +1,5 @@
 ---
-title: "Trust-Based Electronic Signature"
+title: "Trust-Based electronic signature"
 description: "Enable document signing with pre-verified identities and device trust assessment"
 ---
 
@@ -7,14 +7,13 @@ This solution template enables users with previously verified identities (e.g. a
 
 ![Trust-Based Electronic Signiture.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Templates_Trust_Based_Electronic_Signiture.png)
 
-
-***Business Value:***
+***Business value:***
 
 - Reuse verified identity data from previous verification sessions
 - Risk-based routing via device trust intelligence
 - Streamlined signing for trusted devices while maintaining document-based IDV for suspiciosus devices
 
-***How It Works:***
+***How it works:***
 
 - The system assess device trustworthiness using behavioral and technical signals
 - Trusted devices proceed directly to signing using pre-verified identity
@@ -22,9 +21,9 @@ This solution template enables users with previously verified identities (e.g. a
 
 ---
 
-## Flow Logic
+## Flow logic
 
-***Step Overview***
+***Step overview***
 
 | Step | Purpose |
 | --- | --- |
@@ -34,7 +33,7 @@ This solution template enables users with previously verified identities (e.g. a
 | 3b. ` Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
 | 4. `End` | Final decision: accepted or rejected |
 
-***Verdict Routing***
+***Verdict routing***
 
 This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
 
@@ -51,7 +50,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 ## Configuration
 
-***Device Signals***
+***Device signals***
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -69,13 +68,13 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 }
 ```
 
-***Electronic Signature***
+***Electronic signature***
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `signingConfiguration.signatureLevel` | enum | QES or AES (required) |
 
-***Signature Levels:***
+***Signature levels:***
 
 | Level | Legal Effect | Required Input Data Blocks |
 | --- | --- | --- |
@@ -94,7 +93,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 ---
 
-## Input Data Blocks
+## Input data blocks
 
 Provide these data blocks when creating a session:
 
@@ -108,9 +107,9 @@ Provide these data blocks when creating a session:
 
 ---
 
-## Output Data Blocks
+## Output data blocks
 
-***Trusted Device Path***
+***Trusted device path***
 
 When device signals indicate high trust and signature succeeds:
 
@@ -119,7 +118,7 @@ When device signals indicate high trust and signature succeeds:
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
 
-***Untrusted Device Path***
+***Untrusted device path***
 
 When device signals trigger identity re-verification:
 

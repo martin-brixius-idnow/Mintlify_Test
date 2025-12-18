@@ -13,7 +13,7 @@ The system ensures data flow consistency by:
 
 ---
 
-## AuthenticationResult
+## `AuthenticationResult`
 
 The AuthenticationResult data block contains the result of a biometric authentication process and uses a discriminated union based on the `result` field to represent either a successful or failed authentication.
 
@@ -21,39 +21,39 @@ The AuthenticationResult data block contains the result of a biometric authentic
 
 | Attribute              | Description                                                                                          | Mandatory |
 |------------------------|------------------------------------------------------------------------------------------------------|-----------|
-| `result`               | Discriminator that determines the result type (`"success"` or `"failure"`).                         | Yes       |
+| `result`               | Discriminator that determines the result type (`"success"` or `"failure"`).                          | Yes       |
 | `provider`             | Authentication service provider.                                                                     | Yes       |
-| `credentialId`         | Unique identifier of the credential used (or attempted).                                            | Yes       |
-| `credentialType`       | Type of credential (e.g., `"FACE"`, `"FINGERPRINT"`, `"FIDO_KEY"`).                                 | Yes       |
-| `subjectId`            | Identifier of the authenticated (or attempted) subject.                                             | Yes       |
-| `requestId`            | Unique identifier of the authentication request.                                                    | Yes       |
-| `authenticatedAt`      | ISO 8601 timestamp of successful authentication (success variant).                                  | Yes (success) |
-| `attemptedAt`          | ISO 8601 timestamp of the authentication attempt (failure variant).                                 | Yes (failure) |
-| `reason.code`          | Standardized error code identifying the type of failure (failure variant).                          | Yes (failure) |
-| `reason.details`       | Detailed error message (failure variant).                                                           | Optional (failure) |
+| `credentialId`         | Unique identifier of the credential used (or attempted).                                             | Yes       |
+| `credentialType`       | Type of credential (e.g., `"FACE"`, `"FINGERPRINT"`, `"FIDO_KEY"`).                                  | Yes       |
+| `subjectId`            | Identifier of the authenticated (or attempted) subject.                                              | Yes       |
+| `requestId`            | Unique identifier of the authentication request.                                                     | Yes       |
+| `authenticatedAt`      | ISO 8601 timestamp of successful authentication (success variant).                                   | Yes (success) |
+| `attemptedAt`          | ISO 8601 timestamp of the authentication attempt (failure variant).                                  | Yes (failure) |
+| `reason.code`          | Standardized error code identifying the type of failure (failure variant).                           | Yes (failure) |
+| `reason.details`       | Detailed error message (failure variant).                                                            | Optional (failure) |
 
 
 ---
 
-## AuthenticatorCredential
+## `AuthenticatorCredential`
 
 The AuthenticatorCredential data block represents a concrete authentication credential that has been issued, enrolled or created and is associated with a subject.
 
 ***Attributes***
 
-| Attribute        | Description                                                                                                           | Mandatory |
-|------------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
-| `credentialId`   | Unique identifier returned by the provider.                                                                          | Yes       |
-| `credentialType` | Technology / modality (e.g. `FACE`, `FINGERPRINT`, `FIDO_KEY`, `PASSWORD`).                                          | Yes       |
-| `subjectId`      | Internal immutable identifier of the entity (links the credential to a subject).                                    | Yes       |
-| `provider`       | System that manages the credential (e.g. `KEYLESS`, `PLATFORM`, `CUSTOM`, `INTERNAL_CA`).                            | Yes       |
-| `status`         | Lifecycle status of the credential (e.g. `ACTIVE`, `REVOKED`, `SUSPENDED`, `EXPIRED`).                               | Yes       |
-| `createdAt`      | ISO 8601 timestamp of initial creation.                                                                              | Yes       |
-| `updatedAt`      | ISO 8601 timestamp of last modification (equals `createdAt` if never updated).                                      | Yes       |
+| Attribute        | Description                                                                                    | Mandatory |
+|------------------|------------------------------------------------------------------------------------------------|-----------|
+| `credentialId`   | Unique identifier returned by the provider.                                                    | Yes       |
+| `credentialType` | Technology / modality (e.g. `FACE`, `FINGERPRINT`, `FIDO_KEY`, `PASSWORD`).                    | Yes       |
+| `subjectId`      | Internal immutable identifier of the entity (links the credential to a subject).               | Yes       |
+| `provider`       | System that manages the credential (e.g. `KEYLESS`, `PLATFORM`, `CUSTOM`, `INTERNAL_CA`).      | Yes       |
+| `status`         | Lifecycle status of the credential (e.g. `ACTIVE`, `REVOKED`, `SUSPENDED`, `EXPIRED`).         | Yes       |
+| `createdAt`      | ISO 8601 timestamp of initial creation.                                                        | Yes       |
+| `updatedAt`      | ISO 8601 timestamp of last modification (equals `createdAt` if never updated).                 | Yes       |
 
 ---
 
-## BasicIdentity
+## `BasicIdentity`
 
 The `basicIdentity` data block contains fundamental identity information extracted from documents.
 
@@ -65,26 +65,26 @@ The `basicIdentity` data block contains fundamental identity information extract
 | `name`        | Name.               | Yes       |
 | `givenName`   | Given name.         | Yes       |
 | `birthDate`   | Birth date.         | No        |
-| `birthPlace`   | Birth place.         | No        |
+| `birthPlace`   | Birth place.       | No        |
 
 ---
 
-## BiometricSamples
+## `BiometricSamples`
 
 The BiometricSamples data block contains references to biometric data captured from the end-user and is used as input or output of biometric processes.
 
 ***Attributes***
 
-| Attribute  | Description                                                                                                             | Mandatory |
-|-----------|-------------------------------------------------------------------------------------------------------------------------|-----------|
-| `faceUrl` | S3 bucket URL pointing to the captured face image (selfie).                                                             | Yes       |
-| `consent` | Indicates user consent for biometric processing; usage depends on context (headless vs SDK-driven steps).              | Optional  |
+| Attribute | Description                                                                                               | Mandatory |
+|-----------|-----------------------------------------------------------------------------------------------------------|-----------|
+| `faceUrl` | S3 bucket URL pointing to the captured face image (selfie).                                               | Yes       |
+| `consent` | Indicates user consent for biometric processing; usage depends on context (headless vs SDK-driven steps). | Optional  |
 
 ---
 
-## Check
+## `Check`
 
-The Check JSON Object represents an individual verification check performed on a document or identity.
+The `Check` JSON object represents an individual verification check performed on a document or identity.
 
 ***Attributes***
 
@@ -95,15 +95,14 @@ The Check JSON Object represents an individual verification check performed on a
 
 ---
 
-## ComparisonResults
+## `ComparisonResults`
 
-Short description:  
 The ComparisonResults data block contains the output of a comparison between two sets of data, including verdict and attribute-level details.
 
 ***Attributes***
 
-| Attribute              | Description                                                                                       | Mandatory |
-|------------------------|---------------------------------------------------------------------------------------------------|-----------|
+| Attribute              | Description                                                                                      | Mandatory |
+|------------------------|--------------------------------------------------------------------------------------------------|-----------|
 | `verdict`              | Overall result of the comparison (`match` / `noMatch` / `inconclusive`).                         | Yes       |
 | `leftOperand`          | Id of the step whose data was used as left operand.                                              | Yes       |
 | `rightOperand`         | Id of the step whose data was used as right operand.                                             | Yes       |
@@ -113,30 +112,30 @@ The ComparisonResults data block contains the output of a comparison between two
 
 ---
 
-## DeviceSignals
+## `DeviceSignals`
 
 The DeviceSignals data block encapsulates information about the end-user's device, browser, and network environment for risk assessment and fraud detection.
 
 ***Attributes***
 
-| Attribute                     | Description                                                                                                             | Mandatory |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------|-----------|
-| `userReference`              | Identifier to link the assessment to a specific user or session.                                                       | Optional  |
-| `provider`                   | Service that performed the assessment.                                                                                 | Yes       |
-| `timestamp`                  | ISO 8601 timestamp of when the assessment was completed.                                                               | Yes       |
-| `services`                   | Array listing specific services/signals analyzed (e.g., `["ip", "emails", "phone"]`).                                  | Yes       |
-| `inputSources.basicIdentity` | Step ID that provided basic identity data.                                                                             | Optional  |
-| `inputSources.extendedIdentity` | Step ID that provided extended identity data.                                                                      | Optional  |
-| `inputSources.deviceSignals` | Step ID that provided device signal data.                                                                              | Optional  |
-| `result`                     | Final qualitative outcome: `trusted`, `suspicious`, `not_trusted`, or `inconclusive`.                                  | Yes       |
-| `score`                      | Numerical trust score as a percentage.                                                                                 | Yes       |
-| `reasons[].code`            | Machine-readable code for the reason (e.g., `"RE029"`).                                                                 | Mandatory (per reason) |
-| `reasons[].details`         | Human-readable explanation of the reason.                                                                               | Mandatory (per reason) |
-| `signals`                    | Complete, raw JSON response received from the provider.                                                                | Yes       |
+| Attribute                     | Description                                                                               | Mandatory |
+|------------------------------|--------------------------------------------------------------------------------------------|-----------|
+| `userReference`              | Identifier to link the assessment to a specific user or session.                           | Optional  |
+| `provider`                   | Service that performed the assessment.                                                     | Yes       |
+| `timestamp`                  | ISO 8601 timestamp of when the assessment was completed.                                   | Yes       |
+| `services`                   | Array listing specific services/signals analyzed (e.g., `["ip", "emails", "phone"]`).      | Yes       |
+| `inputSources.basicIdentity` | Step ID that provided basic identity data.                                                 | Optional  |
+| `inputSources.extendedIdentity` | Step ID that provided extended identity data.                                           | Optional  |
+| `inputSources.deviceSignals` | Step ID that provided device signal data.                                                  | Optional  |
+| `result`                     | Final qualitative outcome: `trusted`, `suspicious`, `not_trusted`, or `inconclusive`.      | Yes       |
+| `score`                      | Numerical trust score as a percentage.                                                     | Yes       |
+| `reasons[].code`            | Machine-readable code for the reason (e.g., `"RE029"`).                                     | Mandatory (per reason) |
+| `reasons[].details`         | Human-readable explanation of the reason.                                                   | Mandatory (per reason) |
+| `signals`                    | Complete, raw JSON response received from the provider.                                    | Yes       |
 
 ---
 
-## DocumentData
+## `DocumentData`
 
 The DocumentData data block contains information about processed documents.
 
@@ -153,7 +152,7 @@ The DocumentData data block contains information about processed documents.
 
 ---
 
-## DocumentImages
+## `DocumentImages`
  
 The DocumentImages data block contains references to image files stored in S3 buckets.
 
@@ -166,23 +165,21 @@ The DocumentImages data block contains references to image files stored in S3 bu
 
 ---
 
-## DocumentsToSign
-
-Short description:
+## `DocumentsToSign`
 
 The DocumentsToSign data block references the documents uploaded by the customer that the end-user needs to sign, and the corresponding template id.
 
 ***Attributes***
 
-| Attribute                 | Description                                                                                      | Mandatory |
-|---------------------------|--------------------------------------------------------------------------------------------------|-----------|
+| Attribute                 | Description                                                                                     | Mandatory |
+|---------------------------|-------------------------------------------------------------------------------------------------|-----------|
 | `documents`               | Array of document objects to be included in the signing process (must contain at least one).    | Yes       |
 | `documents[].templateId`  | Identifier linking the runtime document to a document template / definition.                    | Yes       |
 | `documents[].sourceUrl`   | URL (e.g. S3) pointing to the actual source file to be signed.                                  | Yes       |
 
 ---
 
-## DocumentVerification
+## `DocumentVerification`
 
 The DocumentVerification data block contains the results of document verification processes; only error checks are returned in `failedChecks`.
 
@@ -195,7 +192,7 @@ The DocumentVerification data block contains the results of document verificatio
 
 ---
 
-## ExtendedIdentity
+## `ExtendedIdentity`
 
 The ExtendedIdentity data block contains additional identity information beyond basic fields.
 
@@ -222,7 +219,7 @@ The ExtendedIdentity data block contains additional identity information beyond 
 
 ---
 
-## DigitalSignals
+## `DigitalSignals`
 
 The DigitalSignals data block is the structured output generated by the `DIGITAL_SIGNALS:v1` step and acts as a detailed receipt of the trust assessment based on email, phone and IP.
 
@@ -244,7 +241,7 @@ The DigitalSignals data block is the structured output generated by the `DIGITAL
 
 ---
 
-## PepAndSanctionsResults
+## `PepAndSanctionsResults`
 
 The PepAndSanctionsResults data block contains results from PEP and sanctions screening services.
 
@@ -257,7 +254,7 @@ The PepAndSanctionsResults data block contains results from PEP and sanctions sc
 
 ---
 
-## PresentationResult
+## `PresentationResult`
 
 The PresentationResult data block encapsulates the complete outcome of an EUDI Wallet credential presentation session, including metadata, presented credentials and error information in case of failure.
 
@@ -292,36 +289,36 @@ The PresentationResult data block encapsulates the complete outcome of an EUDI W
 
 ---
 
-## SessionContext
+## `SessionContext`
 
 The SessionContext data block consolidates information about the end-user's technical environment, combining client-side and server-side data.
 
 ***Attributes (client)***
 
-| Attribute                               | Description                                                                                          | Mandatory          |
-|-----------------------------------------|------------------------------------------------------------------------------------------------------|--------------------|
-| `client.browser.userAgent`             | Full user-agent string reported by the browser.                                                      | Always Present     |
-| `client.browser.language`              | Preferred language of the user (e.g. `"en-US"`).                                                     | Always Present     |
-| `client.browser.cookiesEnabled`        | Indicates whether cookies are enabled.                                                               | Always Present     |
-| `client.browser.vendor`                | Vendor of the browser (e.g. `"Google Inc."`).                                                        | Always Present     |
-| `client.device.type`                   | Device type (`mobile`, `tablet`, `desktop`).                                                         | Always Present     |
-| `client.device.screen.width`           | Screen width in pixels.                                                                              | Always Present     |
-| `client.device.screen.height`          | Screen height in pixels.                                                                             | Always Present     |
-| `client.device.screen.colorDepth`      | Screen color depth.                                                                                  | Always Present     |
-| `client.device.hardwareConcurrency`    | Number of logical processor cores (depends on browser API support).                                  | Optional           |
-| `client.os.platform`                   | OS/platform identifier (e.g. `"Win32"`, `"MacIntel"`).                                               | Always Present (attribute exists, may be empty) |
-| `client.timezone.name`                 | IANA timezone name (e.g. `"Europe/Paris"`).                                                          | Always Present     |
-| `client.timezone.offset`               | Timezone offset from UTC in minutes.                                                                 | Always Present     |
-| `client.network.online`                | Online status of the browser.                                                                        | Always Present     |
-| `client.network.effectiveType`         | Effective connection quality (e.g. `slow-2g`, `2g`, `3g`, `4g`).                                     | Optional           |
-| `client.network.type`                  | Underlying connection technology (e.g. `wifi`, `cellular`, `ethernet`).                              | Optional           |
-| `client.network.downlink`              | Estimated download bandwidth in Mbps.                                                                | Optional           |
-| `client.network.rtt`                   | Estimated round-trip time in ms.                                                                     | Optional           |
+| Attribute                              | Description                                                               | Mandatory          |
+|----------------------------------------|---------------------------------------------------------------------------|--------------------|
+| `client.browser.userAgent`             | Full user-agent string reported by the browser.                           | Always Present     |
+| `client.browser.language`              | Preferred language of the user (e.g. `"en-US"`).                          | Always Present     |
+| `client.browser.cookiesEnabled`        | Indicates whether cookies are enabled.                                    | Always Present     |
+| `client.browser.vendor`                | Vendor of the browser (e.g. `"Google Inc."`).                             | Always Present     |
+| `client.device.type`                   | Device type (`mobile`, `tablet`, `desktop`).                              | Always Present     |
+| `client.device.screen.width`           | Screen width in pixels.                                                   | Always Present     |
+| `client.device.screen.height`          | Screen height in pixels.                                                  | Always Present     |
+| `client.device.screen.colorDepth`      | Screen color depth.                                                       | Always Present     |
+| `client.device.hardwareConcurrency`    | Number of logical processor cores (depends on browser API support).       | Optional           |
+| `client.os.platform`                   | OS/platform identifier (e.g. `"Win32"`, `"MacIntel"`).                    | Always Present (attribute exists, may be empty) |
+| `client.timezone.name`                 | IANA timezone name (e.g. `"Europe/Paris"`).                               | Always Present     |
+| `client.timezone.offset`               | Timezone offset from UTC in minutes.                                      | Always Present     |
+| `client.network.online`                | Online status of the browser.                                             | Always Present     |
+| `client.network.effectiveType`         | Effective connection quality (e.g. `slow-2g`, `2g`, `3g`, `4g`).          | Optional           |
+| `client.network.type`                  | Underlying connection technology (e.g. `wifi`, `cellular`, `ethernet`).   | Optional           |
+| `client.network.downlink`              | Estimated download bandwidth in Mbps.                                     | Optional           |
+| `client.network.rtt`                   | Estimated round-trip time in ms.                                          | Optional           |
 
 ***Attributes (server)***
 
-| Attribute                                  | Description                                                                                      | Mandatory          |
-|--------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------|
+| Attribute                                 | Description                                                                                      | Mandatory          |
+|-------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------|
 | `server.network.ipAddress`                | Client's public IP address.                                                                      | Always Present     |
 | `server.network.geolocation.countryCode`  | ISO country code (e.g. `"FR"`, `"US"`).                                                          | Optional (object optional) |
 | `server.network.geolocation.region`       | Region / state / province.                                                                       | Optional           |
@@ -332,15 +329,15 @@ The SessionContext data block consolidates information about the end-user's tech
 
 ---
 
-## SignedDocumentsPackage
+## `SignedDocumentsPackage`
 
 The SignedDocumentsPackage data block is the successful output of the `ELECTRONIC_SIGNATURE:v1` step and contains information about the signature process and signed documents.
 
 ***Attributes***
 
-| Attribute                          | Description                                                                                         | Mandatory |
-|------------------------------------|-----------------------------------------------------------------------------------------------------|-----------|
-| `signatureProcessId`              | Identifier of the signature process (transaction number).                                           | Yes       |
+| Attribute                        | Description                                                                                         | Mandatory |
+|----------------------------------|-----------------------------------------------------------------------------------------------------|-----------|
+| `signatureProcessId`             | Identifier of the signature process (transaction number).                                           | Yes       |
 | `signedDocuments.mode`           | Delivery mode: `"archive"`, `"items"`, or `"both"`.                                                 | Yes       |
 | `signedDocuments.archiveUrl`     | Direct download URL for the ZIP archive containing signed documents (depending on `mode`).         | Optional  |
 | `signedDocuments.documents`      | Array of signed document objects (depending on `mode`).                                             | Optional  |
@@ -351,7 +348,7 @@ The SignedDocumentsPackage data block is the successful output of the `ELECTRONI
 
 ---
 
-## UserReference
+## `UserReference`
 
 The UserReference data block carries a reference to a user and contains the subject identifier provided by the customer.
 

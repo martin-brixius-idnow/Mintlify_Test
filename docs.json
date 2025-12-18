@@ -42,8 +42,8 @@
           },
           {
             "group": "Templates",
-            "pages": []
-          }
+            "pages": ["Solution_Templates/Trust_Based_Electronic_Signiture"]
+          },
         ]
       },
       {

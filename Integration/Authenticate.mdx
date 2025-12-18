@@ -9,7 +9,7 @@ IDnow uses OAuth 2.0 with the client credentials grant type for API authenticati
 
 This guide shows you how to:
 
-1. Get your API client credentials from the IDnow Dashboard
+1. Get your API client credentials from the IDnow dashboard
 2. Obtain an access token using your credentials
 3. Make an authenticated API request
 
@@ -31,12 +31,12 @@ Use your client credentials to request an access token. Trust Platform supports 
 
 ***Request parameters***
 
-| Parameter       | Description                                                                 | Required |
-|-----------------|-----------------------------------------------------------------------------|----------|
-| `grant_type`    | OAuth 2.0 grant type. Use `client_credentials` for server-to-server auth.  | Yes      |
-| `client_id`     | Your API client ID from the IDnow Dashboard.                                | Yes      |
-| `client_secret` | Your API client secret from the IDnow Dashboard.                            | Yes      |
-| `scope`         | The scopes required for your API requests (if applicable).                  | Optional |
+| Parameter       | Description                                                               | Required |
+|-----------------|---------------------------------------------------------------------------|----------|
+| `grant_type`    | OAuth 2.0 grant type. Use `client_credentials` for server-to-server auth. | Yes      |
+| `client_id`     | Your API client ID from the IDnow dashboard.                              | Yes      |
+| `client_secret` | Your API client secret from the IDnow dashboard.                          | Yes      |
+| `scope`         | The scopes required for your API requests (if applicable).                | Optional |
 
 ***Option A***: Explicit credentials (`client_secret_post`)
 

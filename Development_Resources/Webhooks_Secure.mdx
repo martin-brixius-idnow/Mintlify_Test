@@ -10,15 +10,16 @@ Secure your webhook endpoints to ensure that incoming requests genuinely origina
 IDnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from IDnow.
 
 ---
+
 ### API token
 
-You must provide an API token when configuring your webhook endpoint in Studio. IDnow includes this token in the request header.
+You must provide an API token when configuring your webhook endpoint in the IDnow dashboard. IDnow includes this token in the request header.
 
 <Steps>
   <Step title="Add your API token">
-    Configure your API token in Studio when setting up the webhook endpoint.
+    Configure your API token in the IDnow dashboard when setting up the webhook endpoint.
   </Step>
-  
+
   <Step title="Verify the token">
     Check the token in the request header matches your expected value.
   </Step>

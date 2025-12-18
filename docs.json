@@ -187,7 +187,7 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Studio",
+      "label": "Dashboard",
       "href": "https://hub.hub.dev.eu.idnow.io/auth/login"
     }
   },

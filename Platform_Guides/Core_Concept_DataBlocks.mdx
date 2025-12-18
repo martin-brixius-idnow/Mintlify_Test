@@ -24,7 +24,7 @@ The `AuthenticationResult` data block contains the result of a biometric authent
 | `result`               | Discriminator that determines the result type (`"success"` or `"failure"`).     | Yes                |
 | `provider`             | Authentication service provider.                                                | Yes                |
 | `credentialId`         | Unique identifier of the credential used (or attempted).                        | Yes                |
-| `credentialType`       | Type of credential (e.g., `"FACE"`, `"FINGERPRINT"`, `"FIDO_KEY"`).             | Yes                |
+| `credentialType`       | Type of credential (e.g. `"FACE"`, `"FINGERPRINT"`, `"FIDO_KEY"`).             | Yes                |
 | `subjectId`            | Identifier of the authenticated (or attempted) subject.                         | Yes                |
 | `requestId`            | Unique identifier of the authentication request.                                | Yes                |
 | `authenticatedAt`      | ISO 8601 timestamp of successful authentication (success variant).              | Yes (success)      |
@@ -123,13 +123,13 @@ The `DeviceSignals` data block encapsulates information about the end-user's dev
 | `userReference`                 | Identifier to link the assessment to a specific user or session.                           | Optional  |
 | `provider`                      | Service that performed the assessment.                                                     | Yes       |
 | `timestamp`                     | ISO 8601 timestamp of when the assessment was completed.                                   | Yes       |
-| `services`                      | Array listing specific services/signals analyzed (e.g., `["ip", "emails", "phone"]`).      | Yes       |
+| `services`                      | Array listing specific services/signals analyzed (e.g. `["ip", "emails", "phone"]`).      | Yes       |
 | `inputSources.basicIdentity`    | Step ID that provided basic identity data.                                                 | Optional  |
 | `inputSources.extendedIdentity` | Step ID that provided extended identity data.                                              | Optional  |
 | `inputSources.deviceSignals`    | Step ID that provided device signal data.                                                  | Optional  |
 | `result`                        | Final qualitative outcome: `trusted`, `suspicious`, `not_trusted`, or `inconclusive`.      | Yes       |
 | `score`                         | Numerical trust score as a percentage.                                                     | Yes       |
-| `reasons[].code`                | Machine-readable code for the reason (e.g., `"RE029"`).                                    | Mandatory (per reason) |
+| `reasons[].code`                | Machine-readable code for the reason (e.g. `"RE029"`).                                    | Mandatory (per reason) |
 | `reasons[].details`             | Human-readable explanation of the reason.                                                  | Mandatory (per reason) |
 | `signals`                       | Complete, raw JSON response received from the provider.                                    | Yes       |
 

@@ -5,6 +5,8 @@ description: Compares identity details from two different sources.
 
 Ensures the identity information collected from different steps or documents refers to the same person, improving decision accuracy.
 
+---
+
 ## Key features
 
 - **Dual source comparison**: Compares identity data from two different sources
@@ -20,7 +22,7 @@ Ensures the identity information collected from different steps or documents ref
 |----------------|--------|----------|-------------|
 | `leftOperand`  | String | Yes      | ID of the step that produced the first `BasicIdentity` data block  |
 | `rightOperand` | String | Yes      | ID of the step that produced the second `BasicIdentity` data block |
-| `attributes`   | Array  | Yes      | List of `BasicIdentity` attributes to compare (e.g., `familyName`, `givenName`, `birthDate`). Minimum 1 attribute required. |
+| `attributes`   | Array  | Yes      | List of `BasicIdentity` attributes to compare (e.g. `familyName`, `givenName`, `birthDate`). Minimum 1 attribute required. |
 | `mode`         | Enum   | Yes      | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied. |
 
 **Comparison mode details:**

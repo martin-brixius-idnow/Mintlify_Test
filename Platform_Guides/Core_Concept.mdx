@@ -8,7 +8,7 @@ This page explains the core building blocks of the IDnow Trust Platform and how 
 - **Flow**: A flow that runs from start to end and defines the operational steps leading to a final outcome.
 - **Start and end step**: The flow ends in an End step that determines whether the outcome is accepted or rejected.
 - **Steps**: A Step performs an operational step that reads inputs, writes data blocks, and produces a verdict.
-- **Verdicts**: A verdict defines the Step’s result and determines the output data blocks and the next routing step (e.g., `"verified"`, `"fraud"`).
+- **Verdicts**: A verdict defines the Step’s result and determines the output data blocks and the next routing step (e.g. `"verified"`, `"fraud"`).
 - **Data blocks**: Typed payloads that act as inputs or outputs of a step depending on its verdict.
 - **Routes**: Named exits that route the flow to the next Step or an End step.
 
@@ -127,7 +127,7 @@ A simplified transition object looks like this:
 ```json
 {
   "id": "next_step_id",   // Identifier of the target Step
-  "route": "verified"      // Named route for conditional transitions (e.g., "verified", "failure")
+  "route": "verified"      // Named route for conditional transitions (e.g. "verified", "failure")
 }
 ```
 

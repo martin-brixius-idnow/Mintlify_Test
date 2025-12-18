@@ -27,7 +27,7 @@ All webhook events share a common structure:
 | `sessionStatus`  | Enum      | Current status of the flow                                                                       |
 | `lastStepId`     | String    | Identifier of the last executed step, ID is defined by you in the step configuration             |
 | `lastStepType`   | String    | Name of the last executed step                                                                   |
-| `lastStepStatus` | String    | Status of the last executed step (e.g., Aborted)                                                 |
+| `lastStepStatus` | String    | Status of the last executed step (e.g. `Aborted`)                                                 |
 
 <Info>
 The `eventId` remains the same across all retry attempts, while `eventDeliverId` increments.

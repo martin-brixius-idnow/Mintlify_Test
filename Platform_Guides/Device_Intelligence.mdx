@@ -9,7 +9,7 @@ Helps determine whether the device appears safe, familiar, and genuine or if the
 
 ## Key features
 
-- Integrates ***device signals services*** (e.g., Fingerprint) to assess device risk and detect fraud attempts.
+- Integrates ***device signals services*** (e.g. Fingerprint) to assess device risk and detect fraud attempts.
 - ***Analyses automation***, environment manipulation, VMs/emulators, and behavioral anomalies.
 - ***Configurable risk thresholds*** via `suspiciousUserThreshold`, `notTrustedUserThreshold`, and `confidenceScoreThreshold`.
 - ***Output mapping*** based on `suspectScore` and `confidence.score` thresholds.
@@ -20,9 +20,9 @@ Helps determine whether the device appears safe, familiar, and genuine or if the
 
 | Parameter                  | Type   | Required | Default | Description |
 |----------------------------|--------|----------|---------|-------------|
-| `suspiciousUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered â€œsuspiciousâ€ based on suspectScore. |
-| `notTrustedUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered â€œnot_trustedâ€ based on suspectScore. |
-| `confidenceScoreThreshold` | Float  | -        | -       | Sets the minimum fingerprint confidence.score below which the result is deemed â€œinconclusiveâ€ and routed to 
+| `suspiciousUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered `suspicious` based on `suspectScore`. |
+| `notTrustedUserThreshold`  | Integer| -        | -       | Defines the threshold at which a user is considered `not_trusted` based on `suspectScore`. |
+| `confidenceScoreThreshold` | Float  | -        | -       | Sets the minimum fingerprint `confidence.score` below which the result is deemed `inconclusive` and routed to that output. |
 
 ---
 

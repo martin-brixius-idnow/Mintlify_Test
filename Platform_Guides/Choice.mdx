@@ -5,6 +5,8 @@ description: A decision step represents a conditional branching point in the wor
 
 A decision step represents a conditional branching point in the workflow. Decision steps evaluate conditions and route execution to different paths based on the result.
 
+---
+
 ## Key features
 
 - **Multiple outgoing transitions**: Must have multiple outgoing transitions
@@ -41,7 +43,7 @@ Each condition object defines a single comparison to evaluate.
 
 | Attribute     | Type   | Required | Description |
 |---------------|--------|----------|-------------|
-| `leftOperand` | String | Yes | The path to the field to evaluate. Uses dot notation for nested access (e.g., "documentVerification.verdict"). |
+| `leftOperand` | String | Yes | The path to the field to evaluate. Uses dot notation for nested access (e.g. "documentVerification.verdict"). |
 | `operator`    | Enum   | Yes | Comparison operator to apply. See Condition Operators below. |
 | `value`       | Any    | Conditional | Single value for comparison. Required for operators: gt, lt, gte, lte, eq, ne. |
 | `range`       | Array  | Conditional | Array of two values [lower, upper] for range operations. Required for operators: between, not_between. |

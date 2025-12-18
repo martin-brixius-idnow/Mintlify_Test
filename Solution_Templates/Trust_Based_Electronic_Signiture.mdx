@@ -7,13 +7,13 @@ description: "Enable document signing with pre-verified identities and device tr
 
 ### Use Case
 
-This solution enables users with previously verified identities to sign documents without repeating full identity verification. It uses device trust signals to determine whether existing identity data can be reused or if additional verification is required.
+This solution template enables users with previously verified identities (e.g. acquired in bank onboarding process) to sign documents without repeating full identity verification. It uses device trust signals to determine whether existing identity data can be reused or if additional verification is required.
 
 **Business Value:**
 
 - Reuse verified identity data from previous verification sessions
-- Risk-based routing via device trust assessment
-- Streamlined signing for trusted devices while maintaining security for unknown devices
+- Risk-based routing via device trust intelligence
+- Streamlined signing for trusted devices while maintaining document-based IDV for suspiciosus devices
 
 **How It Works:**
 
@@ -25,28 +25,28 @@ This solution enables users with previously verified identities to sign document
 
 ## Flow Logic
 
-### Step Overview
+**Step Overview**
 
 | Step | Purpose |
 | --- | --- |
-| Start | Entry point; collects input DataBlocks |
-| Device Intelligence | Analyzes device trustworthiness |
-| 3a. Electronic Signature | Enables document signing (trusted path) |
-| 3b. Document-based IDV (Capture) | Verifies identity via document upload (untrusted path) |
-| End | Final decision: accepted or rejected |
+| `Start` | Entry point; collects input DataBlocks |
+| `Device Intelligence` | Analyzes device trustworthiness |
+| 3a. `Electronic Signature` | Enables document signing (trusted path) |
+| 3b. ` Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
+| `End` | Final decision: accepted or rejected |
 
-### Verdict Routing
+**Verdict Routing**
 
 This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
 
 | Step | Verdict | Meaning | Action |
 | --- | --- | --- | --- |
 | Device Intelligence | `trusted` | Device recognized, normal behavior | Proceed to Electronic Signature |
-| Device Intelligence | `suspicious`, `not_trusted`, `inconclusive`, else | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
-| Electronic Signature | `success` | Signing completed successfully | Session Accepted |
-| Electronic Signature | `identity_expired` | Pre-verified identity exceeded validity period | Session Rejected |
-| Document-based IDV (Capture) | `verified` | Identity confirmed via document check | Session Accepted |
-| Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, else | Fraud, user abandonment, or errors | Session Rejected |
+| Device Intelligence | `suspicious`, `not_trusted`, `inconclusive`, `else` | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
+| Electronic Signature | `success` | Signing completed successfully | Session outcome `accepted` |
+| Electronic Signature | `identity_expired` | Pre-verified identity exceeded validity period | Session outcome `rejected` |
+| Document-based IDV (Capture) | `verified` | Identity confirmed via Document-based IDV | Session outcome `accepted` |
+| Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, `else` | Fraud, user abandonment, or errors | Session outcome `rejected` |
 
 ---
 
@@ -66,7 +66,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 {
   "suspiciousUserThreshold": 50,
   "notTrustedUserThreshold": 75,
-  "confidenceScoreThreshold": 60.0
+  "confidenceScoreThreshold": 60
 }
 ```
 
@@ -101,11 +101,11 @@ Provide these DataBlocks when creating a session:
 
 | DataBlock Type | Description | Required For |
 | --- | --- | --- |
-| `ExtendedIdentity` | Pre-verified identity data | All flows |
+| `BasicIdentity` | Pre-verified identity data | All flows |
 | `DocumentData` | Identity document information | QES signature level |
 | `DocumentsToSign` | Documents requiring signature | All flows |
 
-**Note:** `DeviceSignals` are auto-collected by the platform.
+**Note:** `DeviceSignals` are auto-collected by Trust Platform.
 
 ---
 
@@ -120,19 +120,19 @@ When device signals indicate high trust and signature succeeds:
 | `DeviceSignals` | device_signals | Device trust assessment results |
 | `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
 
-### Untrusted Device Path (Document Verification)
+### Untrusted Device Path 
 
 When device signals trigger identity re-verification:
 
-| DataBlock Type | Created By | Description |
+| DataBlock Type | Created By Step | Description |
 | --- | --- | --- |
-| `DeviceSignals` | device_signals | Device trust assessment results |
-| `DocumentImages` | Document verification step | Uploaded document images |
-| `DocumentData` | Document verification step | Extracted document data |
-| `ExtendedIdentity` | Document verification step | Verified identity data |
-| `BiometricSamples` | Document verification step | Liveness/selfie capture |
+| `DeviceSignals` | Device Signals | Device trust assessment results |
+| `DocumentImages` |  Document-based IDV (Capture) | Uploaded document images |
+| `DocumentData` |  Document-based IDV (Capture) | Extracted document data |
+| `ExtendedIdentity` | Document-based IDV (Capture) | Verified identity data |
+| `BiometricSamples` |  Document-based IDV (Capture) | Liveness/selfie capture |
 | `DocumentVerification` | Document verification step | Verification results |
-| `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
+| `SignedDocumentsPackage` | Electronic Signature | Signed documents and metadata |
 
 ---
 
@@ -197,7 +197,7 @@ When device signals trigger identity re-verification:
   "expiresAt": "2025-12-18T22:30:00Z",
   "decisionOutcome": "accepted",
   "lastStep": {
-    "stepName": "ENDe",
+    "stepName": "END",
     "stepType": "STEP",
     "verdict": "accepted"
   },

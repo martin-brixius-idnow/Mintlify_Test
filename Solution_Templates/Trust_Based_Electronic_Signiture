@@ -1,5 +1,5 @@
 ---
-title: "Trust-Based Electronic Signature"
+title: "Trust-Based Electronic Signature with Doc-based IDV Fallback"
 description: "Enable document signing with pre-verified identities and device trust assessment"
 ---
 
@@ -65,3 +65,210 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
   "notTrustedUserThreshold": 75,
   "confidenceScoreThreshold": 60.0
 }
+```
+
+### Electronic Signature
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `signingConfiguration.signatureLevel` | enum | QES or AES (required) |
+
+**Signature Levels:**
+
+| Level | Legal Effect | Required Input DataBlocks |
+|-------|--------------|---------------------------|
+| **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
+| **AES** | Uniquely linked to signer. No regulated identity-proofing required. | `ExtendedIdentity`, `DocumentsToSign` |
+
+**Example:**
+```json
+{
+  "signingConfiguration": {
+    "signatureLevel": "QES"
+  }
+}
+```
+
+---
+
+## Input DataBlocks
+
+Provide these DataBlocks when creating a session:
+
+| DataBlock Type | Description | Required For |
+|----------------|-------------|--------------|
+| `ExtendedIdentity` | Pre-verified identity data | All flows |
+| `DocumentData` | Identity document information | QES signature level |
+| `DocumentsToSign` | Documents requiring signature | All flows |
+
+**Note:** `DeviceSignals` are auto-collected by the platform.
+
+---
+
+## Output DataBlocks
+
+### Trusted Device Path
+
+When device signals indicate high trust and signature succeeds:
+
+| DataBlock Type | Created By | Description |
+|----------------|------------|-------------|
+| `DeviceSignals` | device_signals | Device trust assessment results |
+| `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
+
+### Untrusted Device Path (Document Verification)
+
+When device signals trigger identity re-verification:
+
+| DataBlock Type | Created By | Description |
+|----------------|------------|-------------|
+| `DeviceSignals` | device_signals | Device trust assessment results |
+| `DocumentImages` | Document verification step | Uploaded document images |
+| `DocumentData` | Document verification step | Extracted document data |
+| `ExtendedIdentity` | Document verification step | Verified identity data |
+| `BiometricSamples` | Document verification step | Liveness/selfie capture |
+| `DocumentVerification` | Document verification step | Verification results |
+| `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
+
+---
+
+## API Integration Example
+
+**Scenario:** Trusted device completes signature successfully
+
+### 1. Create Session
+
+**Request:** `POST /flows/{flowId}/sessions`
+
+```json
+{
+  "flowName": "trust_based_electronic_signiture",
+  "environment": "live",
+  "input": [
+    {
+      "type": "ExtendedIdentity",
+      "familyName": "Schmidt",
+      "givenName": "Max",
+      "birthDate": "1985-08-22"
+    },
+    {
+      "type": "DocumentData",
+      "documentType": "ID",
+      "documentNumber": "T22000126",
+      "issuanceDate": "2020-05-10",
+      "expiryDate": "2030-05-10",
+      "issuingCountry": "DE"
+    },
+    {
+      "type": "DocumentsToSign",
+      "documents": [
+        {
+          "templateId": "tmpl_loan_agreement_v2",
+          "sourceUrl": "https://storage.idnow.io/docs/loan_789.pdf"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 2. Check Session Status
+
+**Request:** `GET /session/sess_abc123`
+
+**Response:**
+```json
+{
+  "flowName": "trust_based_electronic_signiture",
+  "flowVersion": "1.0",
+  "environment": "live",
+  "subjectId": "customer_ref_12345",
+  "sessionId": "sess_abc123",
+  "sessionStatus": "completed",
+  "createdAt": "2025-12-18T10:30:00Z",
+  "startedAt": "2025-12-18T10:30:15Z",
+  "updatedAt": "2025-12-18T10:32:45Z",
+  "completedAt": "2025-12-18T10:32:45Z",
+  "expiresAt": "2025-12-18T22:30:00Z",
+  "decisionOutcome": "accepted",
+  "lastStep": {
+    "stepName": "ENDe",
+    "stepType": "STEP",
+    "verdict": "accepted"
+  },
+  "stepHistory": [
+    {
+      "stepName": "session_started",
+      "stepType": "START",
+      "verdict": "continue",
+      "completedAt": "2025-12-18T10:30:15Z"
+    },
+    {
+      "stepName": "device_signals",
+      "stepType": "STEP",
+      "verdict": "trusted",
+      "completedAt": "2025-12-18T10:30:18Z"
+    },
+    {
+      "stepName": "electronic_signature",
+      "stepType": "STEP",
+      "verdict": "success",
+      "completedAt": "2025-12-18T10:32:45Z"
+    }
+  ]
+}
+```
+
+### 3. Retrieve DataBlocks
+
+**Request:** `GET /session/sess_abc123/datablocks`
+
+**Response:**
+```json
+{
+  "dataBlocks": [
+    {
+      "type": "DeviceSignals",
+      "createdByStep": "device_signals",
+      "userReference": "customer_ref_12345",
+      "provider": "Fingerprint",
+      "timestamp": "2025-12-18T10:30:18Z",
+      "services": ["device", "ip", "browser"],
+      "inputSources": {
+        "extendedIdentity": "session_started"
+      },
+      "result": "trusted",
+      "score": 85,
+      "reasons": [
+        {
+          "code": "DEVICE_RECOGNIZED",
+          "details": "Device previously used for successful transactions"
+        }
+      ],
+      "signals": {
+        "deviceId": "dev_xyz789abc",
+        "ipAddress": "192.168.1.100",
+        "browser": "Chrome/120.0",
+        "os": "Windows 11",
+        "vpnDetected": false
+      }
+    },
+    {
+      "type": "SignedDocumentsPackage",
+      "createdByStep": "electronic_signature",
+      "signatureProcessId": "tx_987654321",
+      "signedDocuments": {
+        "mode": "both",
+        "archiveUrl": "https://storage.idnow.io/signed/archive_abc123.zip",
+        "documents": [
+          {
+            "templateId": "tmpl_loan_agreement_v2",
+            "signedUrl": "https://storage.idnow.io/signed/loan_789_signed.pdf"
+          }
+        ]
+      },
+      "createdAt": "2025-12-18T10:32:45Z"
+    }
+  ]
+}
+```

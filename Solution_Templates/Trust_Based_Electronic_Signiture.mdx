@@ -3,21 +3,23 @@ title: "Trust-Based electronic signature"
 description: "Enable document signing with pre-verified identities and device trust assessment"
 ---
 
-This solution template enables users with previously verified identities (e.g. acquired in bank onboarding process) to sign documents without repeating full identity verification. It uses device trust signals to determine whether the user’s device and network are trusted enough to allow an electronic signature without requiring an immediate identity verification..
+Enables document signing for users who already have ***verified AML identity data***, while intelligently adapting the flow based on device trust signals to balance ***security and user experience***.
 
 ![Trust-Based Electronic Signiture.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Templates_Trust_Based_Electronic_Signiture.png)
 
-***Business value:***
+In this recommended flow, the customer’s system uses ***existing AML-compliant identity data*** from a previous verification to issue a signature without requiring users to repeat full identity proofing. Before the signature is created, the platform performs a ***device trust assessment***, evaluating behavioral and technical signals to determine whether the device and network environment appear safe.
 
-- Reuse verified identity data from previous verification sessions
-- Risk-based routing via device trust intelligence
-- Streamlined signing for trusted devices while maintaining document-based IDV for suspiciosus devices
+If the environment ***is trusted***, the process continues seamlessly using the stored identity data. If the environment is ***suspicious or untrusted***, the flow introduces a ***light dynamic verification step***, prompting the user to provide a fresh set of identity evidence. This adaptive approach applies “healthy friction” only when risk is detected, ensuring compliance and fraud prevention while maintaining a smooth experience for low-risk users.
 
-***How it works:***
+This trust-based signature flow helps organizations ***optimize security, compliance, and user experience***, protecting against identity misuse and device-based fraud while keeping high completion rates.
 
-- The system assess device trustworthiness using behavioral and technical signals
-- Trusted devices proceed directly to signing using pre-verified identity
-- Untrusted devices require document-based identity verification before signing
+Key benefits
+
+- ***Adaptive trust decisioning*** – Dynamically routes sessions based on device and network risk signals.
+- ***Frictionless experience for trusted users*** – Enables immediate signing using existing AML identity data.
+- ***Healthy friction for suspicious sessions*** – Requests renewed verification only when anomalies are detected.
+- ***Optimized risk and UX balance*** – Strengthens fraud prevention without compromising conversion.
+- ***Compliance-ready*** – Maintains alignment with AML and eIDAS requirements for secure electronic signatures.
 
 ---
 

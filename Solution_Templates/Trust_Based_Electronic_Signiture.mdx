@@ -3,7 +3,7 @@ title: "Trust-Based electronic signature"
 description: "Enable document signing with pre-verified identities and device trust assessment"
 ---
 
-This solution template enables users with previously verified identities (e.g. acquired in bank onboarding process) to sign documents without repeating full identity verification. It uses device trust signals to determine whether existing identity data can be reused or if additional verification is required.
+This solution template enables users with previously verified identities (e.g. acquired in bank onboarding process) to sign documents without repeating full identity verification. It uses device trust signals to determine whether the user’s device and network are trusted enough to allow an electronic signature without requiring an immediate identity verification..
 
 ![Trust-Based Electronic Signiture.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Templates_Trust_Based_Electronic_Signiture.png)
 
@@ -43,7 +43,7 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 | Device Intelligence | `suspicious`, `not_trusted`, `inconclusive`, `else` | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
 | Electronic Signature | `success` | Signing completed successfully | Session outcome `accepted` |
 | Electronic Signature | `identity_expired` | Pre-verified identity exceeded validity period | Session outcome `rejected` |
-| Document-based IDV (Capture) | `verified` | Identity confirmed via Document-based IDV | Session outcome `accepted` |
+| Document-based IDV (Capture) | `verified` | Identity confirmed via Document-based IDV | Route to Electronic Signature  |
 | Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, `else` | Fraud, user abandonment, or errors | Session outcome `rejected` |
 
 ---
@@ -68,6 +68,8 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 }
 ```
 
+
+
 ***Electronic signature***
 
 | Parameter | Type | Description |
@@ -80,6 +82,8 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 | --- | --- | --- |
 | **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
 | **AES** | Uniquely linked to signer. No regulated identity-proofing required. | `ExtendedIdentity`, `DocumentsToSign` |
+
+**Note**: The value associated with the signature level must be aligned with the configuration defined on InstantSign.
 
 ***Example:***
 
@@ -131,6 +135,8 @@ When device signals trigger identity re-verification:
 | `BiometricSamples` |  Document-based IDV (Capture) | Liveness/selfie capture |
 | `DocumentVerification` | Document verification step | Verification results |
 | `SignedDocumentsPackage` | Electronic Signature | Signed documents and metadata |
+
+*The listed output datablocks represent the data returned after the identity has been successfully verified and the documents have been signed. Other verdicts will produce a different combination of output data blocks. 
 
 ---
 

@@ -5,9 +5,9 @@ description: "Enable document signing with pre-verified identities and device tr
 
 Enables document signing for users who already have ***verified AML identity data***, while intelligently adapting the flow based on device trust signals to balance ***security and user experience***.
 
-![Trust-Based Electronic Signiture.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Templates_Trust_Based_Electronic_Signiture.png)
-
 In this recommended flow, the customer’s system uses ***existing AML-compliant identity data*** from a previous verification to issue a signature without requiring users to repeat full identity proofing. Before the signature is created, the platform performs a ***device trust assessment***, evaluating behavioral and technical signals to determine whether the device and network environment appear safe.
+
+![Trust-Based Electronic Signiture.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Templates_Trust_Based_Electronic_Signiture.png)
 
 If the environment ***is trusted***, the process continues seamlessly using the stored identity data. If the environment is ***suspicious or untrusted***, the flow introduces a ***light dynamic verification step***, prompting the user to provide a fresh set of identity evidence. This adaptive approach applies “healthy friction” only when risk is detected, ensuring compliance and fraud prevention while maintaining a smooth experience for low-risk users.
 

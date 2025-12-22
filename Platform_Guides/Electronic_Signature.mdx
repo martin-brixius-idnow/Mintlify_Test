@@ -1,19 +1,22 @@
 ---
-title: QES and AES
+title: Instant Signature Issuance
 description: Electronic signing with legally recognized assurance levels.
 ---
 
-Electronic signing is a modular digital signature service enabling users to sign documents electronically with a legally binding qualified electronic signature (QES) under eIDAS. Documents are submitted via API, and users complete identity verification as required. Pre-identified user data can bypass verification if compliant. All signed documents must be PDFs, and evidence data is stored per eIDAS rules.
+Enables real‑time electronic signature issuance using verified identity data already available at the time of signing.
 
----
+This step is designed for flows where AML‑compliant identity data has already been verified and can be provided to IDnow instantly — either by the customer’s system or through a reusable identity scheme. It uses that data, along with the document metadata and the document itself, to issue a signature immediately without initiating a new identity verification.
 
-## Key features
+Instant Signature Issuance supports both Qualified Electronic Signatures (QES) and Advanced Electronic Signatures (AES) in accordance with eIDAS and AML requirements. Because all required inputs are accessible in real time, this step executes instantly and provides an optimal balance between compliance and user experience — ideal for trusted, high‑speed processes such as digital agreements, account management, or in‑platform signing flows.
 
-- **Supports QES and AES**: Can handle both Advanced and Qualified Electronic Signatures.  
-- **Identity verification**: For QES, validates the signer's identity document and expiry date.  
-- **Pre-identified data support**: Skips identification if data is validated.
-- **API integration**: Constructs the API calls for the signature provider using the configured authentication and settings.
-- **Output generation**: Produces a `SignedDocumentsPackage` data block upon successful completion.  
+### Key features
+
+***Real‑time execution*** – Issues signatures instantly using available verified identity data.
+***Supports QES and AES*** – Fully compliant with eIDAS signature levels.
+***Reusable identity integration*** – Leverages AML‑verified identities or reusable identity schemes.
+***Low friction*** – No need for the user to repeat verification during signing.
+
+*Ideal for trusted environments – Optimized for users and transactions with pre‑established trust.
 
 ---
 

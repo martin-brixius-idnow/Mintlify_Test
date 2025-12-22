@@ -3,18 +3,25 @@ title: Capture
 description: Verifies identity using secure electronic documents with cryptographic protection.
 ---
 
-Provides regulated remote identity verification via AutoIdent (fully automated, AI-driven) or VideoIdent (expert-assisted video). Users submit ID documents and biometrics via mobile or web, receiving verified identity data and fraud/success verdicts suitable for KYC/AML onboarding. Configurations are modular and must be aligned with applicable regulatory requirements.
+Verifies identity using secure identity documents through multiple verification modes, adapted to business and regulatory needs.
+
+In Capture mode, the end user completes verification through the IDnow front end, which guides them step by step in providing the required identity evidence. This includes capturing document images, performing biometric checks (such as face matching and liveness detection), and optionally reading electronic document chips via NFC. The IDnow front end ensures high-quality image capture, proper lighting checks, and guided user interaction, while maintaining a compliant and user-friendly verification experience.
+
+This contrasts with the Headless approach, where customers collect document and biometric data within their own front end and submit it to IDnow via API for verification. In Capture mode, IDnow takes full responsibility for the evidence collection process, optimizing data quality and regulatory compliance.
+
+Users can complete verification through automated visual verification (AI-driven document and security feature checks), automated NFC verification (secure chip reading for eID-supported documents), or agent-assisted verification (review by trained identity specialists). Each mode ensures compliance with regulations such as eIDAS, AML, GwG, and BaFin. Configurations are modular, enabling flexible integration across fully automated or hybrid identity verification flows.
 
 ---
 
 ## Key features
 
-- **Verification modes**: AutoIdent for automated checks; VideoIdent for live specialist verification  
-- **Document checks**: AutoIdent performs AI-based validation; VideoIdent adds human inspection of layout, typography, and security features  
-- **Biometrics and liveness**: AutoIdent uses face-matching and live-action checks; VideoIdent performs live comparison and spoofing detection  
-- **Expert oversight**: AutoIdent escalates edge cases or runs mandatory review; VideoIdent always uses trained specialists  
-- **Regulatory compliance**: Supports eIDAS, AML, GwG, PVID, BaFin, and FMA  
-- **Data retention**: Default 60 days in production (30 days backups); optional extended retention and export available
+- ***Automated visual verification*** - AI-based analysis of ID document authenticity, integrity, and visual security features.
+- Automated NFC verification*** - Secure reading and validation of embedded NFC chips in electronic identity documents.
+- Agent-assisted verification*** - Expert review for complex, regulated, or escalated cases to maximize accuracy.
+- ***Capture front end*** – IDnow’s user interface collects document images, biometric samples, and NFC data directly from the end user.
+- Optimized data quality*** - Built-in guidance ensures correct document positioning, image sharpness, and proper lighting for improved verification outcomes.
+- Configurable workflows*** - Automated and manual verification modes can be combined or sequenced based on business or regulatory requirements.
+- Regulatory alignment*** - Fully compliant with eIDAS, AML, GwG, and BaFin standards for secure remote identity verification.
 
 ---
 

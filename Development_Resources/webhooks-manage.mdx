@@ -1,0 +1,145 @@
+---
+title: Manage webhooks
+description: Set up webhook endpoints, manage subscriptions, and monitor delivery
+---
+
+In Trust Platform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes.
+
+Because steps run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
+
+:::info
+See the full list of available webhook events here: [Webhook Events →](/docs/integration/webhooks-events)
+:::
+
+:::info
+**Key characteristics:** - Thin payloads only (never contains PII) - All events sent by default - Asynchronous delivery (order not guaranteed) - Automatic retries for transient failures
+:::
+
+## Checklist
+
+Before receiving webhooks, complete these steps:
+
+<details>
+<summary>1. Expose a secure HTTPS endpoint</summary>
+
+Your endpoint must support **TLS 1.2 or higher** for receiving POST requests.
+
+</details>
+
+<details>
+<summary>2. Allowlist official IDnow IP ranges</summary>
+
+Block unauthorized sources by accepting requests only from documented IDnow IPs.
+
+</details>
+
+<details>
+<summary>3. Enable JWT signature verification (recommended)</summary>
+
+Use our signed JTW to verify webhook authenticity and prevent spoofing.
+
+</details>
+
+<details>
+<summary>4. Respond with HTTP 2xx within 10 seconds</summary>
+
+Return a success status quickly and process events asynchronously in the background.
+
+</details>
+
+<details>
+<summary>5. Use event_id for idempotency</summary>
+
+Track `event_id` to detect and skip duplicate deliveries caused by retries.
+
+</details>
+
+## Setup
+
+Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it's no longer required.
+
+### 1. Expose an endpoint
+
+Your endpoint must support HTTPS with TLS 1.2+ and return HTTP 2xx within 10 seconds.
+
+:::tip
+Return 2xx **immediately**, then process events asynchronously to avoid timeouts.
+:::
+
+| Requirement       | Details                                  |
+| ----------------- | ---------------------------------------- |
+| **Protocol**      | HTTPS with TLS 1.2+                      |
+| **Response time** | Return 2xx within 10 seconds             |
+| **Capacity**      | Handle expected event volume             |
+| **Idempotency**   | Process duplicates safely using event_id |
+
+---
+
+### 2. Set up webhooks on IDnow
+
+Set up your webhook endpoint on IDnow:
+
+1. **Navigate to Settings**: Go to **Settings** then **Webhooks** in the IDnow dashboard.
+2. **Add endpoint URL**: Enter your HTTPS endpoint URL and description.
+3. **Set secret key**: Provide a secret key for authentication.
+4. **Subscribe to events**: Select specific events or receive all events by default.
+
+:::info
+Configure separate endpoints for **staging**, and **live** environments.
+:::
+
+---
+
+### 3. Handle webhooks
+
+#### Verify the source
+
+<details>
+<summary>Validate IP address</summary>
+
+Accept requests only from IDnow's documented IP ranges.
+
+</details>
+
+<details>
+<summary>Verify JWT signature</summary>
+
+Optionally, use your secret key to validate the JWT in the request header. See the Security page for details.
+
+</details>
+
+#### Process the event
+
+1. **Return 2xx immediately**: Respond within 10 seconds to acknowledge receipt.
+2. **Check for duplicates**: Use event_id to detect already-processed events.
+3. **Queue for processing**: Add the event to a background queue.
+
+#### Prevent failures
+
+Your endpoint must respond within **10 seconds**. Responses taking longer are treated as failures and trigger retries.
+
+:::tip
+Process webhook events asynchronously. Acknowledge receipt immediately (return HTTP 2xx) and queue the event for background processing.
+:::
+
+#### Retry logic
+
+IDnow automatically retries failed deliveries:
+
+| Attempt   | Delay     | Total elapsed time |
+| --------- | --------- | ------------------ |
+| 1st retry | 2 seconds | 2s                 |
+| 2nd retry | 4 seconds | 6s                 |
+| 3rd retry | 8 seconds | 14s                |
+
+**Retry conditions:**
+- Transient errors (5xx status codes)
+- Network errors (timeout, connection refused)
+- Endpoint unavailable
+
+**No retry for:**
+- Client errors (4xx status codes)
+- Authentication failures
+- Invalid endpoint URL
+
+After maximum retries, the event is moved to the **dead letter queue**.

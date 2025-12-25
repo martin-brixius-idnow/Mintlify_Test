@@ -156,7 +156,7 @@
           },
           {
             "group": "UI and branding",
-            "pages": ["Development_Resources/Branding_Styling"]
+            "pages": ["Development_Resources/branding"]
           },
           {
             "group": "Webhooks",
@@ -167,7 +167,7 @@
           },
           {
             "group": "Error handling",
-            "pages": ["Development_Resources/error-handling"]
+            "pages": ["Development_Resources/error-codes"]
           }
         ]
       }

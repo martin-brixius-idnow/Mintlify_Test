@@ -143,15 +143,15 @@
           {
             "group": "Getting started",
             "pages": [
-              "Development_Resources/API_Credentials",
+              "Development_Resources/api-credentials",
               "Development_Resources/Roles_Access"
             ]
           },
           {
             "group": "Integration tools",
             "pages": [
-              "Development_Resources/Libraries_SDK",
-              "Development_Resources/Postman_Collection"
+              "Development_Resources/libraries-sdk",
+              "Development_Resources/postman-collection"
             ]
           },
           {
@@ -161,13 +161,13 @@
           {
             "group": "Webhooks",
             "pages": [
-              "Development_Resources/Webhooks_Manage",
-              "Development_Resources/Webhooks_Secure"
+              "Development_Resources/manage-webhooks",
+              "Development_Resources/secure-webhooks"
             ]
           },
           {
             "group": "Error handling",
-            "pages": ["Development_Resources/Error_Handling"]
+            "pages": ["Development_Resources/error-handling"]
           }
         ]
       }

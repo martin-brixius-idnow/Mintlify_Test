@@ -111,7 +111,7 @@
           { "group": "Overview", "pages": ["Integration/integration"] },
           { "group": "Authentication", "pages": ["Integration/authenticate"] },
           {
-            "group": "Initialize Session",
+            "group": "Initialize session",
             "pages": [
               "Integration/get-flows",
               "Integration/create-session"

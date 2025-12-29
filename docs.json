@@ -128,7 +128,7 @@
           },
           {
             "group": "Navigate player",
-            "pages": ["Integration/Player_Embed-or-Redirect"]
+            "pages": ["Integration/player-embed-or-redirect"]
           }
         ]
       },

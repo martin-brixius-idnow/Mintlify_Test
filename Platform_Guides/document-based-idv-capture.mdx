@@ -10,7 +10,6 @@ In Capture mode, the end user completes verification through the IDnow front end
 This contrasts with the Headless approach, where customers collect document and biometric data within their own front end and submit it to IDnow via API for verification. In Capture mode, IDnow takes full responsibility for the evidence collection process, optimizing data quality and regulatory compliance.
 
 Users can complete verification through automated visual verification (AI-driven document and security feature checks), automated NFC verification (secure chip reading for eID-supported documents), or agent-assisted verification (review by trained identity specialists). Each mode ensures compliance with regulations such as eIDAS, AML, GwG, and BaFin. Configurations are modular, enabling flexible integration across fully automated or hybrid identity verification flows.
-
 ---
 
 ## Key features
@@ -39,12 +38,12 @@ Users can complete verification through automated visual verification (AI-driven
 Input requirements for this step.
 
 
-| DataBlock          | Mandatory | Description                                          |
+| Data block          | Mandatory | Description                                          |
 | ------------------ | --------- | ---------------------------------------------------- |
 | `BasicIdentity`    | No        | BasicIdentity data to compare against attestation    |
 | `ExtendedIdentity` | No        | ExtendedIdentity data to compare against attestation |
 
-\*If the DataBlock is not available, the step will execute normally without this information, and the flow will proceed without error.
+\*If the Data block is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
@@ -70,6 +69,6 @@ Data blocks produced per verdict.
 | ------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | **verified**       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
 | **fraud_detected** | `DocumentVerification`                                                                                            | Contains fraud detection details         |
-| **aborted**        | -                                                                                                                 | No DataBlocks produced                   |
+| **aborted**        | -                                                                                                                 | No Data blocks produced                   |
 | **cancelled**      | `DocumentVerification`                                                                                            | Contains cancellation reason             |
-| **default**        | -                                                                                                                 | No DataBlocks produced                   |
+| **default**        | -                                                                                                                 | No Data blocks produced                   |

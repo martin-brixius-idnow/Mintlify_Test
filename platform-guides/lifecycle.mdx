@@ -1,0 +1,27 @@
+---
+title: Lifecycle
+description: Transition states of IDnow sessions
+---
+
+A **session** is created when the endpoint `POST /flows/{flowId}/sessions` is called.
+
+Immediately after creation, the initial `sessionStatus` of the session is `In Progress`, and remains so while the flow steps are executed.
+
+From `In Progress`, a flow session can transition into one of the **terminal states** described below. Once a flow session reaches a terminal state, it stops normal step processing and ends.
+
+
+:::info
+`sessionStatus` is included in every `GET /sessions/{sessionId}` response and in all webhook events triggered during an active session.
+:::
+
+
+## `sessionStatus`
+
+| `sessionStatus` | Entry condition | Meaning | Notes |
+|-----------------|-----------------|---------|-------------------|
+| **In Progress** | Created immediately when `POST /flows/{flowId}/sessions` is called | Flow steps are being executed. User is progressing through the journey. TTL has not expired. | Can transition to: `Completed`, `Aborted`, `Expired`, `Error` |
+| **Completed**   | Session finishes all steps without expiry, abort, or error         | Session ended successfully. Business decision reached. | Metadata outcome: `Accepted` or `Rejected`. Technical state remains `Completed`. |
+| **Aborted**     | User explicitly stops the session via an Abort action              | User intentionally dropped out. No further automated processing occurs. | Cannot be restarted. Represents user-driven termination. |
+| **Expired**     | TTL reached while session still `In Progress`                      | Session out due to inactivity or incomplete progression. | Cannot be restarted. |
+| **Error**       | Any step encounters a technical failure                            | Technical failure during execution (system exception, integration failure, etc.). Normal flow cannot continue. | Reflects technical failure, not a business decision. |
+

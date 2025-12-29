@@ -1,6 +1,6 @@
 ---
 title: Secure webooks
-description: Implement security best practices
+description: Implement security best practices to protect your webhook endpoints.
 ---
 
 Secure your webhook endpoints to ensure that incoming requests genuinely originate from IDnow and have not been tampered with.
@@ -17,8 +17,8 @@ You must provide an API token when configuring your webhook endpoint in the IDno
 
 **Steps:**
 
-1. **Add your API token** - Configure your API token in the IDnow dashboard when setting up the webhook endpoint.
-2. **Verify the token** - Check the token in the request header matches your expected value.
+1. **Add your API token**: Configure your API token in the IDnow dashboard when setting up the webhook endpoint.
+2. **Verify the token**: Check the token in the request header matches your expected value.
 
 ---
 
@@ -62,7 +62,7 @@ Contact your account manager for the current production IP ranges.
 
 Your webhook endpoint must support TLS 1.2 or higher. IDnow validates your endpoint's TLS configuration during setup.
 
-**Supported TLS Versions:**
+Supported TLS versions:
 
 - **TLS 1.2**: Supported and recommended
 - **TLS 1.3**: Supported and recommended

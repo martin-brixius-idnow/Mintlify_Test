@@ -3,50 +3,50 @@ title: "Trust-based electronic signature"
 description: "Enable document signing with pre-verified identities and device trust assessment"
 ---
 
-Enables document signing for users who already have ***verified AML identity data***, while intelligently adapting the flow based on device trust signals to balance ***security and user experience***.
+Enables document signing for users who already have **verified AML identity data**, while intelligently adapting the flow based on device trust signals to balance **security and user experience**.
 
-In this recommended flow, the customer’s system uses ***existing AML-compliant identity data*** from a previous verification to issue a signature without requiring users to repeat full identity proofing. Before the signature is created, the platform performs a ***device trust assessment***, evaluating behavioral and technical signals to determine whether the device and network environment appear safe.
+In this recommended flow, the customer’s system uses **existing AML-compliant identity data** from a previous verification to issue a signature without requiring users to repeat full identity proofing. Before the signature is created, the platform performs a **device trust assessment**, evaluating behavioral and technical signals to determine whether the device and network environment appear safe.
 
 ![Instant signature issuance.](/img/templates_trust_based_electronic_signature.png)
 
-If the environment ***is trusted***, the process continues seamlessly using the stored identity data. If the environment is ***suspicious or untrusted***, the flow introduces a ***light dynamic verification step***, prompting the user to provide a fresh set of identity evidence. This adaptive approach applies “healthy friction” only when risk is detected, ensuring compliance and fraud prevention while maintaining a smooth experience for low-risk users.
+If the environment **is trusted**, the process continues seamlessly using the stored identity data. If the environment is **suspicious or untrusted**, the flow introduces a **light dynamic verification step**, prompting the user to provide a fresh set of identity evidence. This adaptive approach applies “healthy friction” only when risk is detected, ensuring compliance and fraud prevention while maintaining a smooth experience for low-risk users.
 
-This trust-based signature flow helps organizations ***optimize security, compliance, and user experience***, protecting against identity misuse and device-based fraud while keeping high completion rates.
+This trust-based signature flow helps organizations **optimize security, compliance, and user experience**, protecting against identity misuse and device-based fraud while keeping high completion rates.
 
 ---
 
 ## Key benefits
 
-- ***Adaptive trust decisioning*** – Dynamically routes sessions based on device and network risk signals.
-- ***Frictionless experience for trusted users*** – Enables immediate signing using existing AML identity data.
-- ***Healthy friction for suspicious sessions*** – Requests renewed verification only when anomalies are detected.
-- ***Optimized risk and UX balance*** – Strengthens fraud prevention without compromising conversion.
-- ***Compliance-ready*** – Maintains alignment with AML and eIDAS requirements for secure electronic signatures.
+- **Adaptive trust decisioning**: Dynamically routes sessions based on device and network risk signals.
+- **Frictionless experience for trusted users**: Enables immediate signing using existing AML identity data.
+- **Healthy friction for suspicious sessions**: Requests renewed verification only when anomalies are detected.
+- **Optimized risk and UX balance**: Strengthens fraud prevention without compromising conversion.
+- **Compliance-ready**: Maintains alignment with AML and eIDAS requirements for secure electronic signatures.
 
 ---
 
-## Flow Logic
+## Flow logic
 
 **_Step overview_**
 
-| Step                                | Purpose                                                    |
-| ----------------------------------- | ---------------------------------------------------------- |
-| 1. `Start`                          | Entry point; collects input DataBlocks                     |
-| 2. `Device intelligence`            | Analyzes device trustworthiness                            |
-| 3a. `Instant signature issuance`          | Enables document signing (trusted path)                    |
-| 3b. ` Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
-| 4. `End`                            | Final decision: accepted or rejected                       |
+| Step                               | Purpose                                                    |
+| -----------------------------------| ---------------------------------------------------------- |
+| 1. `Start`                         | Entry point; collects input data blocks                    |
+| 2. `Device intelligence`           | Analyzes device trustworthiness                            |
+| 3a. `Instant signature issuance`   | Enables document signing (trusted path)                    |
+| 3b. `Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
+| 4. `End`                           | Final decision: accepted or rejected                       |
 
-**_Verdict Routing_**
+**_Verdict routing_**
 
 This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
 
 | Step                         | Verdict                                             | Meaning                                        | Action                                |
 | ---------------------------- | --------------------------------------------------- | ---------------------------------------------- | ------------------------------------- |
-| Device intelligence          | `trusted`                                           | Device recognized, normal behavior             | Proceed to Instant signature issuance       |
+| Device intelligence          | `trusted`                                           | Device recognized, normal behavior             | Proceed to Instant signature issuance |
 | Device intelligence          | `suspicious`, `not_trusted`, `inconclusive`, `else` | Unknown device or anomalies detected           | Route to Document-based IDV (Capture) |
-| Instant signature issuance         | `success`                                           | Signing completed successfully                 | Session outcome `accepted`            |
-| Instant signature issuance         | `identity_expired`                                  | Pre-verified identity exceeded validity period | Session outcome `rejected`            |
+| Instant signature issuance   | `success`                                           | Signing completed successfully                 | Session outcome `accepted`            |
+| Instant signature issuance   | `identity_expired`                                  | Pre-verified identity exceeded validity period | Session outcome `rejected`            |
 | Document-based IDV (Capture) | `verified`                                          | Identity confirmed via Document-based IDV      | Session outcome `accepted`            |
 | Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, `else`    | Fraud, user abandonment, or errors             | Session outcome `rejected`            |
 
@@ -76,11 +76,11 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 | Parameter                             | Type | Description           |
 | ------------------------------------- | ---- | --------------------- |
-| `signingConfiguration.signatureLevel` | enum | QES or AES (required) |
+| `signingConfiguration.signatureLevel` | Enum | QES or AES (required) |
 
 **_Signature levels:_**
 
-| Level   | Legal effect                                                                        | Required input data blocks                             |
+| Level   | Legal effect                                                                        | Required input data blocks                            |
 | ------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
 | **AES** | Uniquely linked to signer. No regulated identity-proofing required.                 | `ExtendedIdentity`, `DocumentsToSign`                 |
@@ -101,13 +101,13 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 Provide these data blocks when creating a session:
 
-| Data block Type    | Description                   | Required For        |
+| Data block type   | Description                   | Required for        |
 | ----------------- | ----------------------------- | ------------------- |
 | `BasicIdentity`   | Pre-verified identity data    | All flows           |
 | `DocumentData`    | Identity document information | QES signature level |
 | `DocumentsToSign` | Documents requiring signature | All flows           |
 
-**Note:** `DeviceSignals` are auto-collected by Trust Platform.
+**Note:** `DeviceSignals` are auto-collected by IDnow.
 
 ---
 
@@ -117,16 +117,16 @@ Provide these data blocks when creating a session:
 
 When device signals indicate high trust and signature succeeds:
 
-| DataBlock Type           | Created By           | Description                     |
-| ------------------------ | -------------------- | ------------------------------- |
-| `DeviceSignals`          | device_signals       | Device trust assessment results |
-| `SignedDocumentsPackage` | Instant signature issuance | Signed documents and metadata   |
+| Data block type          | Created by                 | Description                         |
+| ------------------------ | -------------------------- | ----------------------------------- |
+| `DeviceSignals`          | `device_signals`           | Device trust assessment results     |
+| `SignedDocumentsPackage` | Instant signature issuance | Signed documents and metadata       |
 
-**_Untrusted Device Path_**
+**_Untrusted device path_**
 
 When device signals trigger identity re-verification:
 
-| Data block type           | Created By Step              | Description                     |
+| Data block type          | Created by step              | Description                     |
 | ------------------------ | ---------------------------- | ------------------------------- |
 | `DeviceSignals`          | Device Signals               | Device trust assessment results |
 | `DocumentImages`         | Document-based IDV (Capture) | Uploaded document images        |
@@ -134,7 +134,7 @@ When device signals trigger identity re-verification:
 | `ExtendedIdentity`       | Document-based IDV (Capture) | Verified identity data          |
 | `BiometricSamples`       | Document-based IDV (Capture) | Liveness/selfie capture         |
 | `DocumentVerification`   | Document verification step   | Verification results            |
-| `SignedDocumentsPackage` | Instant signature issuance         | Signed documents and metadata   |
+| `SignedDocumentsPackage` | Instant signature issuance   | Signed documents and metadata   |
 
 ---
 

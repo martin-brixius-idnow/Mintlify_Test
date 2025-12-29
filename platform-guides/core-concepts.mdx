@@ -1,16 +1,16 @@
 ---
-title: Core concept
+title: Core concepts
 description: Flows, steps, verdicts and data blocks
 ---
 
-This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
+The core building blocks of IDnow are:
 
 - **Flow**: A flow that runs from start to end and defines the operational steps leading to a final outcome.
-- **Start & End Step**: The flow ends in an End Step that determines whether the outcome is accepted or rejected.
+- **Start and End steps**: The flow ends in an End step that determines whether the outcome is accepted or rejected.
 - **Steps**: A Step performs an operational step that reads inputs, writes data blocks, and produces a verdict.
 - **Verdicts**: A verdict defines the Step’s result and determines the output data blocks and the next routing step (e.g. `"verified"`, `"fraud"`).
 - **Data blocks**: Typed payloads that act as inputs or outputs of a step depending on its verdict.
-- **Routes**: Named exits that route the flow to the next Step or an End step.
+- **Routes**: Named exits that route the flow to the next step or an End step.
 
 ---
 
@@ -18,16 +18,16 @@ This page explains the core building blocks of the IDnow Trust Platform and how 
 
 A **flow** defines how input data moves through a series of steps until a final outcome is produced.
 
-![Minimal flow with Start, a single processing Step, and an End Step.](/img/trustplatform-flow-introduction.png)
+![Minimal flow with Start, a single processing step, and an End step.](/img/core-concepts/flows.png)
 
-## Start and end step
+## Start and End steps
 
-Every flow must contain exactly one **Start step** as its entry point and at least one **End step** representing a final outcome. Each session of a flow always ends in an End step, and therefore always results in a final outcome of either `accepted` or `rejected`.
+Every flow must contain exactly one **Start step** as its entry point, and at least one **End step** representing a final outcome. Each session of a flow always ends in an End step, and therefore always results in a final outcome of either `accepted` or `rejected`.
 
-Between the Start step and the End step, you can add any combination of **operative steps** (processing steps) to perform operations, transform data and control the routing of the flow.
+Between the Start step and the End step, you can add any combination of **processing steps** to perform operations, transform data and control the routing of the flow.
 
-![Minimal flow with Start, a single processing Step, and an End Step.](/img/1-trustplatform-basic-flow.png)
-_End Steps represent the final outcome of a flow_
+![Minimal flow with Start, a single processing step, and an End step.](/img/1-trustplatform-basic-flow.png)
+_End steps represent the final outcome of a flow_
 
 ---
 
@@ -35,7 +35,7 @@ _End Steps represent the final outcome of a flow_
 
 **Steps** are modular building blocks within a flow, each representing a single operational step. Typical examples include Identity verification (IDV), AML screening, Digital signals or Electronic Signature.
 
-Between the Start step and the End step, other **operative steps** perform operations and transform data or control flow branching through **verdicts**.
+Between the Start step and the End step, other **processing steps** perform operations and transform data or control flow branching through **verdicts**.
 
 Each step session results in exactly one **verdict**, which in turn determines:
 
@@ -56,8 +56,8 @@ In the flow, the verdict is used to select the next route: it either routes to a
 
 In the API response, each verdict includes structured data that explains the result.
 
-![IDV Step with three outcomes: verified, fraud, and failure, each leading to a dedicated End Step.](/img/2-trustplatform-idv-verdicts.png)
-_Example of an IDV Step with multiple verdicts, each mapped to a dedicated End Step._
+![IDV Step with three outcomes: verified, fraud, and failure, each leading to a dedicated End step.](/img/core-concepts/verdicts.png)
+_Example of an IDV step with multiple verdicts, each mapped to a dedicated End step._
 
 ---
 
@@ -79,7 +79,7 @@ As an example, in an identity verification flow, a capture failure produces no `
 
 Many data blocks also carry the step’s verdict to indicate the outcome of the check that generated them.
 
-![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](/img/3-trustplatform-idv-datablocks.png)
+![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](/img/core-concepts/datablocks.png)
 
 _An Identity verification step generates different data blocks depending on whether the verdict is verified, fraud, or failure._
 
@@ -126,7 +126,7 @@ A simplified transition object looks like this:
 
 ```json
 {
-  "id": "next_Step_id", // Identifier of the target Step
+  "id": "next_step_id", // Identifier of the target Step
   "route": "verified" // Named route for conditional transitions (e.g., "verified", "failure")
 }
 ```
@@ -150,6 +150,4 @@ A flow is composed of steps, verdicts, data blocks, and routes. When designing a
 3. **Extend the flow as needed**  
    Add additional steps for risk checks, digital signals, signatures, or evidence collection. Each step follows the same pattern of verdicts, data blocks, and routes.
 
-_By combining steps, verdicts, data blocks, and routes, you can build complex trust flows._
-
-By understanding these building blocks, you can compose complex trust flows simply by wiring steps together. The platform handles session, data propagation, and audit trails automatically.
+By combining steps, verdicts, data blocks, and routes, you can build complex trust flows. IDnow manages end-user sessions, data propagation and audit trails.

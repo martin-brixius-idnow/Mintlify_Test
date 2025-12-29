@@ -19,12 +19,12 @@ Ensures the identity information collected from different steps or documents ref
 
 ## Configuration
 
-| Attribute    | Type   | Required | Description                                                                                                         |
-| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| leftOperand  | string | Yes      | step ID that produced the first BasicIdentity Data block                                                             |
-| rightOperand | string | Yes      | step ID that produced the second BasicIdentity Data block                                                            |
-| attributes   | array  | Yes      | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
-| mode         | enum   | Yes      | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied.                               |
+| Attribute      | Type   | Required | Description                                                                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------- |
+| `leftOperand`  | String | Yes      | step ID that produced the first BasicIdentity Data block                                                            |
+| `rightOperand` | String | Yes      | step ID that produced the second BasicIdentity Data block                                                           |
+| `attributes`   | Array  | Yes      | List of BasicIdentity attributes to compare (e.g., familyName, givenName, birthDate). Minimum 1 attribute required. |
+| `mode`         | Enum   | Yes      | Comparison mode: `'strict'` or `'tolerant'`. Determines the comparison logic applied.                               |
 
 **Comparison mode details:**
 
@@ -37,21 +37,21 @@ The `leftOperand` and `rightOperand` fields must contain the identifiers (`id`) 
 
 ## Comparison logic
 
-| Outcome        | Description                                                                                                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `match`        | All specified attributes in the attributes list were successfully compared according to the configured comparison mode (strict or tolerant), and all values matched.                              |
+| Outcome        | Description |
+| -------------- | ----------- |
+| `match`        | All specified attributes in the attributes list were successfully compared according to the configured comparison mode (strict or tolerant), and all values matched. |
 | `noMatch`      | At least one pair of compared attribute values did not match based on the configured comparison mode. This verdict takes priority over `inconclusive` if there are also missing attribute values. |
-| `inconclusive` | One or more required attribute values are missing, making comparison impossible. No mismatches were detected among the available attributes.                                                      |
+| `inconclusive` | One or more required attribute values are missing, making comparison impossible. No mismatches were detected among the available attributes. |
 
 ## Input data blocks
 
 Input requirements for this step.
 
 
-| Data block Type | Required | Description                                             |
-| -------------- | -------- | ------------------------------------------------------- |
-| BasicIdentity  | Yes      | First BasicIdentity Data block (from leftOperand step)   |
-| BasicIdentity  | Yes      | Second BasicIdentity Data block (from rightOperand step) |
+| Data block type   | Required | Description                                                  |
+| ----------------- | -------- | ------------------------------------------------------------ |
+| `BasicIdentity`   | Yes      | First `BasicIdentity` data block (from `leftOperand` step)   |
+| `BasicIdentity`   | Yes      | Second `BasicIdentity` data block (from `rightOperand` step) |
 
 **Important:** This step requires exactly two `BasicIdentity` data blocks as input. The flow validation system ensures that the steps referenced by `leftOperand` and `rightOperand` are predecessors of the comparison step and that each produces a `BasicIdentity` data block.
 

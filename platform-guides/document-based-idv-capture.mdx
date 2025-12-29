@@ -15,13 +15,13 @@ Users can complete verification through automated visual verification (AI-driven
 
 ## Key features
 
-- ***Automated visual verification*** - AI-based analysis of ID document authenticity, integrity, and visual security features.
-- ***Automated NFC verification*** - Secure reading and validation of embedded NFC chips in electronic identity documents.
-- Agent-assisted verification*** - Expert review for complex, regulated, or escalated cases both in Autoident and VideoIndent products.
-- ***Capture frontend*** – Guided user interface collect document images, biometric samples, and NFC data directly from the end user through SDKs.
-- ***Optimized data quality*** - Built-in guidance ensures correct document positioning, image sharpness, and proper lighting for improved verification outcomes.
-- ***Configurable workflows*** - Automated and manual verification modes can be combined or sequenced based on business or regulatory requirements.
-- ***Regulatory alignment*** - Fully compliant with eIDAS, AML, GwG, EAA and BaFin standards for secure remote identity verification.
+- **Automated visual verification**: AI-based analysis of ID document authenticity, integrity, and visual security features.
+- **Automated NFC verification**: Secure reading and validation of embedded NFC chips in electronic identity documents.
+- Agent-assisted verification**: Expert review for complex, regulated, or escalated cases both in Autoident and VideoIndent products.
+- **Capture frontend**: Guided user interface collect document images, biometric samples, and NFC data directly from the end user through SDKs.
+- **Optimized data quality**: Built-in guidance ensures correct document positioning, image sharpness, and proper lighting for improved verification outcomes.
+- **Configurable workflows**: Automated and manual verification modes can be combined or sequenced based on business or regulatory requirements.
+- **Regulatory alignment**: Fully compliant with eIDAS, AML, GwG, EAA and BaFin standards for secure remote identity verification.
 
 ---
 
@@ -38,20 +38,18 @@ Users can complete verification through automated visual verification (AI-driven
 
 Input requirements for this step.
 
-
-| Data block          | Mandatory | Description                                          |
+| Data block         | Mandatory | Description                                          |
 | ------------------ | --------- | ---------------------------------------------------- |
 | `BasicIdentity`    | No        | BasicIdentity data to compare against attestation    |
 | `ExtendedIdentity` | No        | ExtendedIdentity data to compare against attestation |
 
-\*If the Data block is not available, the step will execute normally without this information, and the flow will proceed without error.
+\*If the data block is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
 ## Verdicts
 
 Verdicts for this data block.
-
 
 | Verdict          | Description                                                                                                                                |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -63,13 +61,12 @@ Verdicts for this data block.
 
 ## Output data blocks
 
-Data blocks produced per verdict.
+Data blocks produced per verdict:
 
-
-| Verdict            | Data blocks produced                                                                                               | Notes                                    |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Verdict            | Data blocks produced   | Notes |
+| ------------------ | ---------------------- | ----- |
 | **verified**       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
-| **fraud_detected** | `DocumentVerification`                                                                                            | Contains fraud detection details         |
-| **aborted**        | -                                                                                                                 | No Data blocks produced                   |
-| **cancelled**      | `DocumentVerification`                                                                                            | Contains cancellation reason             |
-| **default**        | -                                                                                                                 | No Data blocks produced                   |
+| **fraud_detected** | `DocumentVerification` | Contains fraud detection details |
+| **aborted**        | None                   | |
+| **cancelled**      | `DocumentVerification` | Contains cancellation reason |
+| **default**        | None                   | No Data blocks produced |

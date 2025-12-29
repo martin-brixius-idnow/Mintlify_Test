@@ -33,16 +33,16 @@
         "pages": ["index"]
       },
       {
-        "tab": "Solution templates",
+        "tab": "Templates",
         "icon": "sparkles",
         "groups": [
           {
             "group": "Overview",
-            "pages": ["Solution_Templates/index"]
+            "pages": ["templates/index"]
           },
           {
             "group": "Templates",
-            "pages": ["Solution_Templates/trust-based-electronic-signature"]
+            "pages": ["templates/trust-based-electronic-signature"]
           }
         ]
       },
@@ -53,53 +53,53 @@
           {
             "group": "Overview",
             "pages": [
-              "Platform_Guides/core-concept",
-              "Platform_Guides/datablocks",
-              "Platform_Guides/lifecycle"
+              "platform-guides/core-concepts",
+              "platform-guides/datablocks",
+              "platform-guides/lifecycle"
             ]
           },
           {
             "group": "Document-based IDV",
             "pages": [
-              "Platform_Guides/document-based-idv-capture",
-              "Platform_Guides/document-based-idv-headless"
+              "platform-guides/document-based-idv-capture",
+              "platform-guides/document-based-idv-headless"
             ]
           },
           {
             "group": "Biometric authentication",
             "pages": [
-              "Platform_Guides/biometric-enrollment",
-              "Platform_Guides/biometric-authentication"
+              "platform-guides/biometric-enrollment",
+              "platform-guides/biometric-authentication"
             ]
           },
           {
             "group": "eID",
             "pages": [
-             "Platform_Guides/france-identite",
-             "Platform_Guides/eudi-wallet"
+             "platform-guides/france-identite",
+             "platform-guides/eudi-wallet"
            ]
           },
           {
-            "group": "Trust Services",
-            "pages": ["Platform_Guides/instant-signature-issuance"]
+            "group": "Trust services",
+            "pages": ["platform-guides/instant-signature-issuance"]
           },
           {
             "group": "Fraud signals",
             "pages": [
-              "Platform_Guides/device-intelligence",
-              "Platform_Guides/email-phone-verification"
+              "platform-guides/device-intelligence",
+              "platform-guides/email-phone-verification"
             ]
           },
           {
             "group": "Screening",
-            "pages": ["Platform_Guides/aml-screening"]
+            "pages": ["platform-guides/aml-screening"]
           },
           {
             "group": "Actions",
             "pages": [
-              "Platform_Guides/choice",
-              "Platform_Guides/verification-method-selector",
-              "Platform_Guides/identity-comparison"
+              "platform-guides/choice",
+              "platform-guides/verification-method-selector",
+              "platform-guides/identity-comparison"
             ]
           }
         ]
@@ -108,30 +108,29 @@
         "tab": "Integration",
         "icon": "server",
         "groups": [
-          { "group": "Overview", "pages": ["Integration/integration"] },
-          { "group": "Authentication", "pages": ["Integration/authenticate"] },
+          { "group": "Overview", "pages": ["integration/index", "integration/authenticate"] },
           {
             "group": "Initialize session",
             "pages": [
-              "Integration/get-flows",
-              "Integration/create-session"
+              "integration/get-flows",
+              "integration/create-session"
             ]
           },
           {
             "group": "Receive results",
             "pages": [
-              "Integration/get-session-results",
-              "Integration/get-datablocks",
-              "Integration/get-files"
+              "integration/get-session-results",
+              "integration/get-datablocks",
+              "integration/get-files"
             ]
           },
           {
             "group": "Webhooks",
-            "pages": ["Development_Resources/webhooks-events"]
+            "pages": ["integration/webhooks-events"]
           },
           {
             "group": "Navigate player",
-            "pages": ["Integration/player-embed-or-redirect"]
+            "pages": ["integration/player-embed-or-redirect"]
           }
         ]
       },
@@ -141,36 +140,36 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": ["Development_Resources/index"]
+            "pages": ["development-resources/index"]
           },
           {
             "group": "Getting started",
             "pages": [
-              "Development_Resources/api-credentials",
-              "Development_Resources/user-roles"
+              "development-resources/api-clients",
+              "development-resources/team-management"
             ]
           },
           {
             "group": "Integration tools",
             "pages": [
-              "Development_Resources/libraries-sdk",
-              "Development_Resources/postman-collection"
+              "development-resources/libraries-sdk",
+              "development-resources/postman-collection"
             ]
           },
           {
             "group": "UI and branding",
-            "pages": ["Development_Resources/branding"]
+            "pages": ["development-resources/branding"]
           },
           {
             "group": "Webhooks",
             "pages": [
-              "Development_Resources/manage-webhooks",
-              "Development_Resources/secure-webhooks"
+              "development-resources/manage-webhooks",
+              "development-resources/secure-webhooks"
             ]
           },
           {
             "group": "Error handling",
-            "pages": ["Development_Resources/error-codes"]
+            "pages": ["development-resources/error-codes"]
           }
         ]
       }

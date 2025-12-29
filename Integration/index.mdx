@@ -11,16 +11,11 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 #### Integration steps
 
-1. **Authenticate once**: Obtain an OAuth 2.0 access token using the `Get /Token` endpoint and reuse it across all flows.
-
+1. **Authenticate once**: Obtain an OAuth 2.0 access token using the `GET /token` endpoint and reuse it across all flows.
 2. **Receive available flows**: Use `GET /flows` to list all flows configured in your environment.
-
 3. **Create a verification session**: Start a new session with `POST /flows/{flowId}/sessions` and receive a sessionId and sessionToken.
-
 4. **Track status and decisions**: Poll `GET /session/{sessionId}` to retrieve status, decision outcome, timestamps, and the last executed step.
-
-5. **Fetch data and files on demand**: Retrieve identity data via `GET /session/{sessionId}/datablocks` and files via `GET /files/{file
-Id}` only when needed.
+5. **Fetch data and files on demand**: Retrieve identity data via `GET /session/{sessionId}/datablocks` and files via `GET /files/{fileId}` only when needed.
 
 ---
 
@@ -36,7 +31,7 @@ Sessions track individual user flows. First, start a session, then query for its
 
 #### Audit-ready by design
 
-Session provides a clear audit trail across individual workflow steps, including detailed results for document-based IDV, enabling full traceability and audit support.
+Get a clear audit trail for each session, including detailed results for document-based IDV.
 
 #### Flexible frontends
 

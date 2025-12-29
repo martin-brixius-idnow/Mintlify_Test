@@ -1,7 +1,11 @@
 ---
-title: "Create a session"
-description: "Initiate a new verification session for a specific flow"
+title: Create a session
+description: Initiate a new verification session for a specific flow
 ---
+
+#### Initiate a new verification session for a specific flow
+
+## Overview
 
 Create a new session to start a verification flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
 
@@ -11,11 +15,11 @@ Create a new session to start a verification flow. The session begins in a `crea
 POST /flows/{flowId}/sessions
 ```
 
-***Path parameters***
+**_Path parameters_**
 
-| Parameter | Type   | Required | Description |
-|-----------|--------|----------|-------------|
-| `flowId`  | String | Yes      | The unique identifier of the flow to execute |
+| Parameter | Type   | Required | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| `flowId`  | string | Yes      | The unique identifier of the flow to execute |
 
 ## Request
 
@@ -41,13 +45,13 @@ POST /flows/{flowId}/sessions
 }
 ```
 
-***Request parameters***
+**_Request parameters_**
 
-| Parameter     | Type   | Required | Description |
-|---------------|--------|----------|-------------|
-| `flowId`      | String | Yes      | Flow identifier to execute |
-| `environment` | String | Yes      | Target environment (e.g. `production`, `sandbox`) |
-| `input`       | Array  | Yes      | Array of input data blocks |
+| Parameter     | Type   | Required | Description                                        |
+| ------------- | ------ | -------- | -------------------------------------------------- |
+| `flowId`      | string | Yes      | Flow identifier to execute                         |
+| `environment` | string | Yes      | Target environment (e.g., `production`, `sandbox`) |
+| `input`       | array  | Yes      | Array of input data blocks                         |
 
 ## Response
 
@@ -65,18 +69,18 @@ POST /flows/{flowId}/sessions
 }
 ```
 
-***Response parameters***
+**_Response parameters_**
 
-| Parameter                      | Type   | Description |
-|--------------------------------|--------|-------------|
-| `flowId`                       | String | Flow identifier |
-| `flowVersion`                  | String | Version of the flow being executed |
-| `environment`                  | String | Environment where the session was created |
-| `sessionContext`               | Object | Session metadata |
-| `sessionContext.sessionId`     | String | Unique session identifier |
-| `sessionContext.sessionStatus` | String | Initial status: `created` |
-| `sessionContext.createdAt`     | String | ISO 8601 timestamp of session creation |
-| `sessionToken`                 | String | JWT token used to initialize the Player |
+| Parameter                      | Type   | Description                               |
+| ------------------------------ | ------ | ----------------------------------------- |
+| `flowId`                       | string | Flow identifier                           |
+| `flowVersion`                  | string | Version of the flow being executed        |
+| `environment`                  | string | Environment where the session was created |
+| `sessionContext`               | object | Session metadata                          |
+| `sessionContext.sessionId`     | string | Unique session identifier                 |
+| `sessionContext.sessionStatus` | string | Initial status: `created`                 |
+| `sessionContext.createdAt`     | string | ISO 8601 timestamp of session creation    |
+| `sessionToken`                 | string | JWT token used to initialize the Player   |
 
 ## Example
 

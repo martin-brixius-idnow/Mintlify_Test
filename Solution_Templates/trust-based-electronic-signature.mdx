@@ -7,13 +7,15 @@ Enables document signing for users who already have ***verified AML identity dat
 
 In this recommended flow, the customer’s system uses ***existing AML-compliant identity data*** from a previous verification to issue a signature without requiring users to repeat full identity proofing. Before the signature is created, the platform performs a ***device trust assessment***, evaluating behavioral and technical signals to determine whether the device and network environment appear safe.
 
-![Trust-Based Electronic Signiture.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/Templates_Trust_Based_Electronic_Signiture.png)
+![Instant signature issuance.](/img/templates_trust_based_electronic_signature.png)
 
 If the environment ***is trusted***, the process continues seamlessly using the stored identity data. If the environment is ***suspicious or untrusted***, the flow introduces a ***light dynamic verification step***, prompting the user to provide a fresh set of identity evidence. This adaptive approach applies “healthy friction” only when risk is detected, ensuring compliance and fraud prevention while maintaining a smooth experience for low-risk users.
 
 This trust-based signature flow helps organizations ***optimize security, compliance, and user experience***, protecting against identity misuse and device-based fraud while keeping high completion rates.
 
-Key benefits
+---
+
+## Key benefits
 
 - ***Adaptive trust decisioning*** – Dynamically routes sessions based on device and network risk signals.
 - ***Frictionless experience for trusted users*** – Enables immediate signing using existing AML identity data.
@@ -23,42 +25,42 @@ Key benefits
 
 ---
 
-## Flow logic
+## Flow Logic
 
-***Step overview***
+**_Step overview_**
 
-| Step | Purpose |
-| --- | --- |
-| 1. `Start` | Entry point; collects input data blocks |
-| 2. `Device Intelligence` | Analyzes device trustworthiness |
-| 3a. `Electronic Signature` | Enables document signing (trusted path) |
+| Step                                | Purpose                                                    |
+| ----------------------------------- | ---------------------------------------------------------- |
+| 1. `Start`                          | Entry point; collects input DataBlocks                     |
+| 2. `Device intelligence`            | Analyzes device trustworthiness                            |
+| 3a. `Instant signature issuance`          | Enables document signing (trusted path)                    |
 | 3b. ` Document-based IDV (Capture)` | Verifies identity via. Document-based IDV (untrusted path) |
-| 4. `End` | Final decision: accepted or rejected |
+| 4. `End`                            | Final decision: accepted or rejected                       |
 
-***Verdict routing***
+**_Verdict Routing_**
 
 This flow uses a risk-based routing mechanism where verdicts at each step determine the next action. Trusted devices proceed directly to signing, while untrusted or suspicious devices require additional identity verification.
 
-| Step | Verdict | Meaning | Action |
-| --- | --- | --- | --- |
-| Device Intelligence | `trusted` | Device recognized, normal behavior | Proceed to Electronic Signature |
-| Device Intelligence | `suspicious`, `not_trusted`, `inconclusive`, `else` | Unknown device or anomalies detected | Route to Document-based IDV (Capture) |
-| Electronic Signature | `success` | Signing completed successfully | Session outcome `accepted` |
-| Electronic Signature | `identity_expired` | Pre-verified identity exceeded validity period | Session outcome `rejected` |
-| Document-based IDV (Capture) | `verified` | Identity confirmed via Document-based IDV | Route to Electronic Signature  |
-| Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, `else` | Fraud, user abandonment, or errors | Session outcome `rejected` |
+| Step                         | Verdict                                             | Meaning                                        | Action                                |
+| ---------------------------- | --------------------------------------------------- | ---------------------------------------------- | ------------------------------------- |
+| Device intelligence          | `trusted`                                           | Device recognized, normal behavior             | Proceed to Instant signature issuance       |
+| Device intelligence          | `suspicious`, `not_trusted`, `inconclusive`, `else` | Unknown device or anomalies detected           | Route to Document-based IDV (Capture) |
+| Instant signature issuance         | `success`                                           | Signing completed successfully                 | Session outcome `accepted`            |
+| Instant signature issuance         | `identity_expired`                                  | Pre-verified identity exceeded validity period | Session outcome `rejected`            |
+| Document-based IDV (Capture) | `verified`                                          | Identity confirmed via Document-based IDV      | Session outcome `accepted`            |
+| Document-based IDV (Capture) | `fraud_detected`, `aborted`, `cancelled`, `else`    | Fraud, user abandonment, or errors             | Session outcome `rejected`            |
 
 ---
 
 ## Configuration
 
-***Device signals***
+**_Device signals_**
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `suspiciousUserThreshold` | Integer (≥0) | Threshold for "suspicious" classification based on suspectScore |
-| `notTrustedUserThreshold` | Integer (≥0) | Threshold for "not_trusted" classification based on suspectScore |
-| `confidenceScoreThreshold` | Float (0-100) | Minimum fingerprint confidence; below this value result is "inconclusive" |
+| Parameter                  | Type          | Description                                                               |
+| -------------------------- | ------------- | ------------------------------------------------------------------------- |
+| `suspiciousUserThreshold`  | integer (≥0)  | Threshold for "suspicious" classification based on suspectScore           |
+| `notTrustedUserThreshold`  | integer (≥0)  | Threshold for "not_trusted" classification based on suspectScore          |
+| `confidenceScoreThreshold` | float (0-100) | Minimum fingerprint confidence; below this value result is "inconclusive" |
 
 **Example:**
 
@@ -70,24 +72,20 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 }
 ```
 
+**_Instant signature issuance_**
 
-
-***Electronic signature***
-
-| Parameter | Type | Description |
-| --- | --- | --- |
+| Parameter                             | Type | Description           |
+| ------------------------------------- | ---- | --------------------- |
 | `signingConfiguration.signatureLevel` | enum | QES or AES (required) |
 
-***Signature levels:***
+**_Signature levels:_**
 
-| Level | Legal Effect | Required Input Data Blocks |
-| --- | --- | --- |
+| Level   | Legal effect                                                                        | Required input data blocks                             |
+| ------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | **QES** | Equivalent to handwritten signature (eIDAS). Requires strict identity verification. | `ExtendedIdentity`, `DocumentData`, `DocumentsToSign` |
-| **AES** | Uniquely linked to signer. No regulated identity-proofing required. | `ExtendedIdentity`, `DocumentsToSign` |
+| **AES** | Uniquely linked to signer. No regulated identity-proofing required.                 | `ExtendedIdentity`, `DocumentsToSign`                 |
 
-**Note**: The value associated with the signature level must be aligned with the configuration defined on InstantSign.
-
-***Example:***
+**_Example:_**
 
 ```json
 {
@@ -103,11 +101,11 @@ This flow uses a risk-based routing mechanism where verdicts at each step determ
 
 Provide these data blocks when creating a session:
 
-| Data block type | Description | Required For |
-| --- | --- | --- |
-| `BasicIdentity` | Pre-verified identity data | All flows |
-| `DocumentData` | Identity document information | QES signature level |
-| `DocumentsToSign` | Documents requiring signature | All flows |
+| Data block Type    | Description                   | Required For        |
+| ----------------- | ----------------------------- | ------------------- |
+| `BasicIdentity`   | Pre-verified identity data    | All flows           |
+| `DocumentData`    | Identity document information | QES signature level |
+| `DocumentsToSign` | Documents requiring signature | All flows           |
 
 **Note:** `DeviceSignals` are auto-collected by Trust Platform.
 
@@ -115,38 +113,36 @@ Provide these data blocks when creating a session:
 
 ## Output data blocks
 
-***Trusted device path***
+**_Trusted device path_**
 
 When device signals indicate high trust and signature succeeds:
 
-| Data block type | Created By | Description |
-| --- | --- | --- |
-| `DeviceSignals` | device_signals | Device trust assessment results |
-| `SignedDocumentsPackage` | electronic_signature | Signed documents and metadata |
+| DataBlock Type           | Created By           | Description                     |
+| ------------------------ | -------------------- | ------------------------------- |
+| `DeviceSignals`          | device_signals       | Device trust assessment results |
+| `SignedDocumentsPackage` | Instant signature issuance | Signed documents and metadata   |
 
-***Untrusted device path***
+**_Untrusted Device Path_**
 
 When device signals trigger identity re-verification:
 
-| Data block type | Created By Step | Description |
-| --- | --- | --- |
-| `DeviceSignals` | Device Signals | Device trust assessment results |
-| `DocumentImages` |  Document-based IDV (Capture) | Uploaded document images |
-| `DocumentData` |  Document-based IDV (Capture) | Extracted document data |
-| `ExtendedIdentity` | Document-based IDV (Capture) | Verified identity data |
-| `BiometricSamples` |  Document-based IDV (Capture) | Liveness/selfie capture |
-| `DocumentVerification` | Document verification step | Verification results |
-| `SignedDocumentsPackage` | Electronic Signature | Signed documents and metadata |
-
-*The listed output datablocks represent the data returned after the identity has been successfully verified and the documents have been signed. Other verdicts will produce a different combination of output data blocks. 
+| Data block type           | Created By Step              | Description                     |
+| ------------------------ | ---------------------------- | ------------------------------- |
+| `DeviceSignals`          | Device Signals               | Device trust assessment results |
+| `DocumentImages`         | Document-based IDV (Capture) | Uploaded document images        |
+| `DocumentData`           | Document-based IDV (Capture) | Extracted document data         |
+| `ExtendedIdentity`       | Document-based IDV (Capture) | Verified identity data          |
+| `BiometricSamples`       | Document-based IDV (Capture) | Liveness/selfie capture         |
+| `DocumentVerification`   | Document verification step   | Verification results            |
+| `SignedDocumentsPackage` | Instant signature issuance         | Signed documents and metadata   |
 
 ---
 
-## API Integration Example
+## API integration example
 
 **Scenario:** Trusted device completes signature successfully
 
-### 1. Create Session
+### 1. Create session
 
 **Request:** `POST /flows/{flowId}/sessions`
 
@@ -182,7 +178,7 @@ When device signals trigger identity re-verification:
 }
 ```
 
-### 2. Check Session Status
+### 2. Check session status
 
 **Request:** `GET /session/sess_abc123`
 
@@ -221,7 +217,7 @@ When device signals trigger identity re-verification:
       "completedAt": "2025-12-18T10:30:18Z"
     },
     {
-      "stepName": "electronic_signature",
+      "stepName": "Instant_signature_issuance",
       "stepType": "STEP",
       "verdict": "success",
       "completedAt": "2025-12-18T10:32:45Z"
@@ -230,7 +226,7 @@ When device signals trigger identity re-verification:
 }
 ```
 
-### 3. Retrieve Data Blocks
+### 3. Retrieve Data blocks
 
 **Request:** `GET /session/sess_abc123/datablocks`
 
@@ -267,7 +263,7 @@ When device signals trigger identity re-verification:
     },
     {
       "type": "SignedDocumentsPackage",
-      "createdByStep": "electronic_signature",
+      "createdByStep": "Instant_signature_issuance",
       "signatureProcessId": "tx_987654321",
       "signedDocuments": {
         "mode": "both",

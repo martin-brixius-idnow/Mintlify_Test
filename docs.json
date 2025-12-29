@@ -68,8 +68,8 @@
           {
             "group": "Biometric authentication",
             "pages": [
-              "Platform_Guides/Biometric_Enrollment",
-              "Platform_Guides/Biometric_Verification"
+              "Platform_Guides/biometric-enrollment",
+              "Platform_Guides/biometric_verification"
             ]
           },
           {

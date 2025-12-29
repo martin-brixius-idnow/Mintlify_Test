@@ -1,395 +1,66 @@
-Review why the pages / links are not working - https://idnow.mintlify.app/
-
-
 ---
-title: "Welcome to IDnow Trust Platform"
-mode: "custom"
+title: Embed or Redirect
+description: Integrating Player into your frontend application
 ---
-
-<div className="mx-auto max-w-6xl px-6 py-16 text-left">
-  <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900">
-    Welcome to IDnow <span className="text-[#fa6a40]">Trust Platform</span>
-  </h1>
-
-  <p className="mt-4 max-w-2xl text-lg text-slate-700">
-    Your single, unified Platform for identity verification, risk, and trust.
-  </p>
-</div>
-
-<div className="bg-slate-50 py-12">
-  <div className="mx-auto max-w-6xl px-6 text-center">
-
-    <h2 className="text-2xl font-semibold text-slate-900">
-      Launch faster with ready-made solution templates or your own custom flows.
-    </h2>
-
-    <p className="mt-2 max-w-3xl mx-auto text-base text-slate-600">
-      Integrate the Flow API once to power unlimited workflows with real-time event updates.
-    </p>
-
-    <div className="mt-8">
-      <CardGroup cols={3} className="orange-cards text-center">
-        <Card
-          title="Get started"
-          icon="list-check"
-          href="/guides/setup"
-          className="idnow-card"
-        >
-          Create API credentials and securely authenticate every API request.
-        </Card>
-
-        <Card
-          title="Configure Flows"
-          icon="diagram-project"
-          href="/guides/workflows"
-          className="idnow-card"
-        >
-          Design and orchestrate identity and risk flows in minutes in the IDnow dashboard.
-        </Card>
-
-        <Card
-          title="Run Sessions and Get Results"
-          icon="plug"
-          href="/guides/execute-flow"
-          className="idnow-card"
-        >
-          Trigger any flow through a single API to access every capability.
-        </Card>
-      </CardGroup>
-    </div>
-
-    <div className="mt-4">
-      <CardGroup cols={1} className="orange-cards text-center">
-        <Card
-          title="Receive Updates"
-          icon="bolt"
-          href="/guides/webhooks"
-          className="idnow-card"
-        >
-          Subscribe to webhooks and receive events for important updates.
-        </Card>
-      </CardGroup>
-    </div>
-
-  </div>
-</div>
-
-<div className="bg-white pb-16">
-  <div className="mx-auto max-w-6xl px-6 mt-4">
-    <div className="rounded-3xl bg-slate-900 text-slate-50">
-      <div className="px-6 py-10">
-
-        <h2 className="text-2xl font-semibold text-slate-50 text-center">
-          Discover Trust Platform developer resources
-        </h2>
-        <p className="mt-2 max-w-3xl mx-auto text-base text-slate-300 text-center">
-          Everything you need to explore the Flow API, design flows, and plug Trust Platform into your stack.
-        </p>
-
-        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)]">
-
-          <div className="space-y-3">
-            <a
-              href="/api-reference"
-              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-            >
-              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                API Explorer
-              </div>
-              <div className="mt-1 text-sm text-slate-100">
-                Explore Flow API endpoints and inspect request and response examples.
-              </div>
-            </a>
-
-            <a
-              href="/Libraries_SDK"
-              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-            >
-              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Server-side libraries
-              </div>
-              <div className="mt-1 text-sm text-slate-100">
-                Get started fast with SDKs for seamless Trust Platform integration.
-              </div>
-            </a>
-
-            <a
-              href="/guides/Postman_Collection"
-              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-            >
-              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Postman collections
-              </div>
-              <div className="mt-1 text-sm text-slate-100">
-                Import ready-made Postman collections to replay and test common Trust Platform flows.
-              </div>
-            </a>
-
-            <a
-              href="/guides/Webhooks_Manage"
-              className="flex flex-col items-start rounded-2xl border border-slate-800 bg-slate-800/70 px-4 py-4 text-left
-                         transition hover:border-[#fa6a40] hover:bg-slate-800 hover:-translate-y-0.5"
-            >
-              <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Webhooks
-              </div>
-              <div className="mt-1 text-sm text-slate-100">
-                Receive real-time session status updates and decision events in your backend.
-              </div>
-            </a>
-          </div>
-
-          <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-800/80 p-6">
-            <div className="flex flex-col gap-3 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 md:flex-row md:items-center md:justify-between">
-              <div>
-                <div className="text-sm font-semibold text-slate-50">
-                  Get session results
-                </div>
-                <div className="mt-1 text-xs text-slate-400">
-                  Retrieve the status and decision outcome of a Trust Platform session.
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-mono">
-                <span className="rounded-full bg-emerald-500/10 px-2 py-1 text-emerald-300">
-                  GET
-                </span>
-                <span className="text-slate-200">/session/{'{'}sessionId{'}'}</span>
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
-                <div className="text-xs font-semibold text-slate-200">Request</div>
-                <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
-{`curl https://api.idnow.io/v1/session/e7c2b6f1-4a9d-4e3c-8f61 \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "flowId": "capture",
-    "environment": "live",
-    "sessionId": "e7c2b6f1-4a9d-4e3c-8f61"
-  }'`}
-                </pre>
-              </div>
-
-              <div className="rounded-2xl border border-slate-700 bg-slate-950/60 p-4">
-                <div className="text-xs font-semibold text-slate-200">Response</div>
-                <pre className="mt-2 overflow-x-auto text-xs leading-relaxed text-slate-200">
-{`{
-  "flowId": "capture",
-  "environment": "live",
-  "sessionId": "e7c2b6f1-4a9d-4e3c-8f61",
-  "sessionStatus": "COMPLETED",
-  "decisionOutcome": "accepted",
-  "createdAt": "2024-11-04T10:30:00Z",
-  "updatedAt": "2024-11-04T10:35:00Z",
-  "lastStep": {
-    "stepName": "end_approved",
-    "stepType": "END",
-    "verdict": "completed"
-  }
-}`}
-                </pre>
-              </div>
-            </div>
-
-            <div className="mt-1">
-              <a
-                href="/Integration/get-session-results"
-                className="inline-flex items-center justify-center rounded-full bg-[#fa6a40] px-4 py-2 text-xs font-semibold text-white
-                           shadow-sm transition hover:bg-[#fa6a40]"
-              >
-                See full reference in API Explorer
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-Here’s a review and debugging checklist for why your pages/links might not be working on 
-https://idnow.mintlify.app/
-:
-
-1. Mintlify Routing Expectations
-Mintlify expects:
-
-All documentation pages to exist as .mdx or .md files in your /docs directory (or the configured docs folder).
-Internal links (e.g. /guides/setup, /api-reference) must match the file structure and file names.
-If a file doesn’t exist, you’ll get a 404 or a “Coming soon” page.
-
-2. Check Your Link Hrefs
-Your links use paths like /guides/setup, /guides/workflows, /api-reference, etc.
-
-These will only work if:
-
-You have files at docs/guides/setup.mdx, docs/guides/workflows.mdx, docs/api-reference.mdx, etc.
-The file names and folder structure are an exact match (case-sensitive!).
-3. Common Issues
-Missing files: If you haven’t created the target .mdx files, the links won’t work.
-Wrong casing: Mintlify is case-sensitive (/Guides/Setup is different from /guides/setup).
-Wrong folder: If you put files in the wrong directory, Mintlify won’t find them.
-Custom routing: If you use a custom config (like docs.json or mint.json), make sure the routes are mapped correctly.
-4. How to Fix
-Check your repo: Ensure you have all the needed .mdx files in the correct folders according to your link structure.
-Example:
-If you have <Card href="/guides/setup" ...>, you must have docs/guides/setup.mdx.
-Check for typos: Double-check all file and folder names.
-Check your Mintlify config: If you use a custom docs folder or routing, make sure it matches your file structure.
-5. Quick Test
-Go to your repo and look for the /docs folder.
-For every link you have, make sure the corresponding .mdx file exists.
-If you want a page to show “Coming soon”, create an .mdx file with that content. Otherwise, Mintlify will 404.
-
-6. Special Cases
-Links like /Libraries_SDK should point to docs/Libraries_SDK.mdx (or similar).
-Links like /guides/Postman_Collection should point to docs/guides/Postman_Collection.mdx.
-Summary Table
-Table
-
-
-Link in your code	Required file in /docs folder
-/guides/setup	docs/guides/setup.mdx
-/guides/workflows	docs/guides/workflows.mdx
-/api-reference	docs/api-reference.mdx
-/Libraries_SDK	docs/Libraries_SDK.mdx
-/guides/Postman_Collection	docs/guides/Postman_Collection.mdx
-/guides/Webhooks_Manage	docs/guides/Webhooks_Manage.mdx
-/Integration/get-session-results	docs/Integration/get-session-results.mdx
-Conclusion
-Your links are not working because the corresponding .mdx files do not exist, are misnamed, or are misplaced.
-Solution: Add the missing files in the correct structure, and your links will work!
-
-If you want, share your repo structure and I’ll point out any mismatches!
-
-
-
-
-
-
-so Check Your Link Hrefs references to the files?
-
-Exactly!
-“Check Your Link Hrefs” means:
-→ For every href="/some/path" in your code, there must be a corresponding file at that path (relative to your /docs folder), with a .mdx or .md extension.
-
-Example
-If you have this link in your code:
-
-jsx
-
-Copy
-<Card href="/guides/setup" ...>
-You must have this file:
-
-/docs/guides/setup.mdx
-or
-
-/docs/guides/setup.md
-More Examples
-Table
-
-
-Link in Code	File Needed in /docs Folder
-/guides/setup	docs/guides/setup.mdx or .md
-/api-reference	docs/api-reference.mdx or .md
-/Libraries_SDK	docs/Libraries_SDK.mdx or .md
-/guides/Postman_Collection	docs/guides/Postman_Collection.mdx or .md
-If the file doesn’t exist, Mintlify will show a 404 or a placeholder.
-
-How to Check
-Look at your code:
-Find all the href values in your links.
-
-Look in your /docs folder:
-Make sure there’s a .mdx or .md file that matches every path.
-
-Check for typos/casing:
-/guides/Setup ≠ /guides/setup (case-sensitive!).
-
-Summary:
-
-Each link’s path must match a file in your docs folder.
-No file = link doesn’t work.
-If you’re still having trouble, paste your /docs folder structure and I’ll help you match them up!
-
-
-
-
-
-
-Can you put the code examples into a expand so you only see if needed? 
-
----
-title: 'Embed or Redirect'
-description: 'Integrating Player into your frontend application'
----
-
-## Overview
-## Prerequisites
 
 Before integrating with the Player, you need to set up your flow:
 
 - [x] **A Flow was created** in the IDnow dashboard.
 - [x] **The Flow was deployed** and published.
-- [x] **The flowId was obtained** from the IDnow dashboard or via the API.
+- [x] **The flowId was obtained** from the IDnow dashboard or via the API
 
-### Integration Method
 
-| Integration Method | Description |
-|--------------------|-------------|
+### Integration method
+
+| Integration method                     | Description                                                                                                                                                        |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Redirect Integration** | Redirect users to the IDnow-hosted Player URL for a full-screen verification experience with guaranteed camera/microphone access (if permission is given by user). |
-| **Embedded Integration** | Embed the Player within your web application using an iframe or webview to keep users on your domain while maintaining your UI context. |
+| **Embedded Integration** | Embed the Player within your web application using an iframe or webview to keep users on your domain while maintaining your UI context.                                     |
 
-### Integration Steps
+### Integration steps
 
 1. Create a session via the Flow API, providing input data blocks and a redirect URL (if redirect)
 2. Obtain the Session Token (JWT) containing session context
 3. Construct Player URL 
 4. Choose your integration method (redirect or embedded)
 
+
 ---
 
-## Create Flow Session
+## Create flow session
 
 Call the Session API to initiate a session.
 
 :::info
-For complete API documentation, request examples, and implementation details, see **[Create Session](https://idnow.mintlify.app/Integration/Create_Session)**.
+For complete API documentation, request examples, and implementation details, see **[Create Session](/docs/integration/create-session)**.
 :::
 
 ---
 
-## Obtain the Session Token
+## Obtain an session token
 
 The API returns a session token that you'll use to direct users to the Player.
 
 ```json
 {
-  "flowId": "wf_1a2b3c4d5e6f",
-  "flowVersion": "1.0",
-  "environment": "production",
-  "sessionContext": {
-    "sessionId": "abc123def456ghi789",
-    "sessionStatus": "created",
-    "createdAt": "2024-11-04T10:30:00Z"
-  },
-  "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "flowId": "wf_1a2b3c4d5e6f",
+  "flowVersion": "1.0",
+  "environment": "production",
+  "sessionContext": {
+    "sessionId": "abc123def456ghi789",
+    "sessionStatus": "created",
+    "createdAt": "2024-11-04T10:30:00Z"
+  },
+  "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
 **Session Token (JWT) Contains:**
 
-| Field | Description |
-|-------|-------------|
+| Field       | Description                     |
+| ----------- | ------------------------------- |
 | `sessionId` | The specific session identifier |
-| `flowId` | The flow identifier |
+| `flowId`    | The flow identifier             |
 
 ---
 
@@ -397,7 +68,7 @@ The API returns a session token that you'll use to direct users to the Player.
 
 Once you receive the session token from the API response, construct the Player URL by appending it as a query parameter. Direct your user to this URL to begin the verification process.
 
-***Examples***
+**_Examples_**
 
 **Node.js Implementation**:
 
@@ -405,24 +76,24 @@ Once you receive the session token from the API response, construct the Player U
 const axios = require('axios');
 
 const requestBody = {
-  flowId: flowId,
-  environment: 'production',
-  input: [
-    {
-      type: 'BasicIdentity',
-      name: 'John Doe',
-      familyName: 'Doe',
-      givenName: 'John',
-      birthDate: '1990-01-15'
-    }
-  ]
+  flowId: flowId,
+  environment: 'production',
+  input: [
+    {
+      type: 'BasicIdentity',
+      name: 'John Doe',
+      familyName: 'Doe',
+      givenName: 'John',
+      birthDate: '1990-01-15'
+    }
+  ]
 };
 
 const response = await axios.post(`/flows/${flowId}/sessions`, requestBody, {
-  headers: {
-    'Authorization': `Bearer ${accessToken}`,
-    'Content-Type': 'application/json'
-  }
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json'
+  }
 });
 
 const sessionToken = response.data.sessionToken;
@@ -437,21 +108,21 @@ import json
 
 url = f"/flows/{flow_id}/sessions"
 headers = {
-    "Authorization": f"Bearer {access_token}",
-    "Content-Type": "application/json"
+    "Authorization": f"Bearer {access_token}",
+    "Content-Type": "application/json"
 }
 data = {
-    "flowId": flow_id,
-    "environment": "production",
-    "input": [
-        {
-            "type": "BasicIdentity",
-            "name": "John Doe",
-            "familyName": "Doe",
-            "givenName": "John",
-            "birthDate": "1990-01-15"
-        }
-    ]
+    "flowId": flow_id,
+    "environment": "production",
+    "input": [
+        {
+            "type": "BasicIdentity",
+            "name": "John Doe",
+            "familyName": "Doe",
+            "givenName": "John",
+            "birthDate": "1990-01-15"
+        }
+    ]
 }
 
 response = requests.post(url, headers=headers, json=data)
@@ -470,27 +141,27 @@ HttpClient client = HttpClient.newHttpClient();
 ObjectMapper objectMapper = new ObjectMapper();
 
 Map<String, Object> requestBody = Map.of(
-    "flowId", flowId,
-    "environment", "production",
-    "input", List.of(
-        Map.of(
-            "type", "BasicIdentity",
-            "name", "John Doe",
-            "familyName", "Doe",
-            "givenName", "John",
-            "birthDate", "1990-01-15"
-        )
-    )
+    "flowId", flowId,
+    "environment", "production",
+    "input", List.of(
+        Map.of(
+            "type", "BasicIdentity",
+            "name", "John Doe",
+            "familyName", "Doe",
+            "givenName", "John",
+            "birthDate", "1990-01-15"
+        )
+    )
 );
 
 String jsonBody = objectMapper.writeValueAsString(requestBody);
 
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("/flows/" + flowId + "/sessions"))
-    .header("Authorization", "Bearer " + accessToken)
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+    .uri(URI.create("/flows/" + flowId + "/sessions"))
+    .header("Authorization", "Bearer " + accessToken)
+    .header("Content-Type", "application/json")
+    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+    .build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 JsonNode jsonResponse = objectMapper.readTree(response.body());
@@ -499,7 +170,7 @@ String sessionToken = jsonResponse.get("sessionToken").asText();
 String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
-***URL Structure***
+**_URL Structure_**
 
 The Player is hosted by IDnow at:
 
@@ -507,16 +178,16 @@ The Player is hosted by IDnow at:
 https://player-trustplatform.idnow.io/player/?session_token=[token]
 ```
 
-**Required Parameters**
+**Required parameters**
 
-| Field | Description |
-|-------|-------------|
+| Field           | Description                                         |
+| --------------- | --------------------------------------------------- |
 | `session_token` | JWT token returned from the Create Session endpoint |
-
 
 **Example URLs**
 
 Starting verification:
+
 ```
 https://player-trustplatform.idnow.io/player/?session_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
@@ -529,9 +200,9 @@ https://player-trustplatform-staging.idnow.io/player/?session_token=eyJhbGciOiJI
 
 ---
 
-## Choose Integration Method
+## Choose integration method
 
-### Redirect Integration
+### Redirect integration
 
 This is the simplest and most reliable integration method where the user is directed to the IDnow-hosted Player.
 
@@ -542,8 +213,8 @@ This is the simplest and most reliable integration method where the user is dire
 3. User completes verification
 4. Monitor completion via webhooks or polling
 
-
 **Web Browser**:
+
 ```code-tabs
 // Web Browser
 window.location.href = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
@@ -555,7 +226,7 @@ window.location.href = "https://player-trustplatform.idnow.io/player/?session_to
 // swift
 let playerURL = "https://player-trustplatform.idnow.io/player/?session_token=\(sessionToken)"
 if let url = URL(string: playerURL) {
-    UIApplication.shared.open(url)
+    UIApplication.shared.open(url)
 }
 ```
 
@@ -585,16 +256,15 @@ startActivity(intent);
 
 ---
 
-### Embedded Integration
+### Embedded integration
 
 Embed the IDnow-hosted Player within your web application for a seamless in-app experience.
 
-**Implementation Steps**:
+**Implementation steps**:
 
 1. Create flow session via API call
 2. Embed Player in iframe using returned session token
 3. Handle completion via callback URL or postMessage events
-
 
 **Basic iframe Implementation**:
 
@@ -602,48 +272,46 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 ///html
 <!-- After creating flow session via API -->
 <iframe
-  id="idnow-player"
-  src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
-  style="width: 100%; height: 600px; border: none;"
-  allow="camera; microphone; geolocation; fullscreen"
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+  id="idnow-player"
+  src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
+  style="width: 100%; height: 600px; border: none;"
+  allow="camera; microphone; geolocation; fullscreen"
+  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
 />
 ```
 
-
-**Advanced iframe with Event Handling** (display as code, not rendered):
+**Advanced iframe with event handling** (display as code, not rendered):
 
 ```code-tabs
 ///html
 <div id="verification-container" style="width: 100%; height: 600px;">
-  <iframe
-    id="idnow-player"
-    src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
-    style="width: 100%; height: 100%; border: none;"
-    allow="camera; microphone; geolocation; fullscreen"
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-  />
+  <iframe
+    id="idnow-player"
+    src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
+    style="width: 100%; height: 100%; border: none;"
+    allow="camera; microphone; geolocation; fullscreen"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+  />
 </div>
 ```
-
 
 **Responsive iframe Setup**:
 
 ```css
 .verification-iframe-container {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
 }
 
 .verification-iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 ```
 

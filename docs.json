@@ -106,7 +106,7 @@
         "icon": "server",
         "groups": [
           { "group": "Overview", "pages": ["Integration/index"] },
-          { "group": "Authentication", "pages": ["Integration/Authenticate"] },
+          { "group": "Authentication", "pages": ["Integration/authenticate"] },
           {
             "group": "Initialize Session",
             "pages": [

@@ -94,7 +94,7 @@
           {
             "group": "Actions",
             "pages": [
-              "Platform_Guides/Choice",
+              "Platform_Guides/choice",
               "Platform_Guides/Verification_Method_Selector",
               "Platform_Guides/Identity_Comparison"
             ]

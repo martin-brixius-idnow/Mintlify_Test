@@ -42,7 +42,7 @@
           },
           {
             "group": "Templates",
-            "pages": ["Solution_Templates/Trust_Based_Electronic_Signiture"]
+            "pages": ["Solution_Templates/trust-based-electronic-signature"]
           }
         ]
       },

@@ -1,6 +1,6 @@
 ---
-title: "Get files"
-description: "Retrieve files associated with a session"
+title: Get files
+description: Retrieve files associated with a session
 ---
 
 Retrieve specific files (such as document images, PDFs, or other attachments) generated or uploaded during a session. Files are referenced by their unique file identifier.
@@ -11,33 +11,33 @@ Retrieve specific files (such as document images, PDFs, or other attachments) ge
 GET /files/{fileId}
 ```
 
-***Path parameters***
+**_Path parameters_**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `fileId`  | String | Yes | The unique identifier of the file to retrieve |
+| Parameter | Type   | Required | Description                                   |
+| --------- | ------ | -------- | --------------------------------------------- |
+| `fileId`  | string | Yes      | The unique identifier of the file to retrieve |
 
 ## Request
 
 No request body is required for this endpoint.
 
-***Headers***
+**_Headers_**
 
-| Header          | Type   | Required | Description |
-|-----------------|--------|----------|-------------|
-| `Authorization` | String | Yes      | Bearer token for authentication |
+| Header          | Type   | Required | Description                     |
+| --------------- | ------ | -------- | ------------------------------- |
+| `Authorization` | string | Yes      | Bearer token for authentication |
 
 ## Response
 
 The response returns the requested file as a binary stream with appropriate content type headers.
 
-***Response headers***
+**_Response headers_**
 
-| Header                | Description |
-|-----------------------|-------------|
-| `Content-Type`        | MIME type of the file (e.g. `image/jpeg`, `application/pdf`) |
-| `Content-Length`      | Size of the file in bytes |
-| `Content-Disposition` | Suggested filename for download |
+| Header                | Description                                                   |
+| --------------------- | ------------------------------------------------------------- |
+| `Content-Type`        | MIME type of the file (e.g., `image/jpeg`, `application/pdf`) |
+| `Content-Length`      | Size of the file in bytes                                     |
+| `Content-Disposition` | Suggested filename for download                               |
 
 ## Example
 

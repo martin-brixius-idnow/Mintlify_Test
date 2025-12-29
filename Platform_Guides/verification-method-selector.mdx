@@ -17,9 +17,9 @@ Display a list of identity verification methods to the user. The user will be di
 
 ## Configuration
 
-| Attribute | Type  | Required | Description |
-|-----------|-------|----------|-------------|
-| `methods` | Array | Yes | A list of unique string identifiers for the verification methods to be offered (e.g. doc_id, france_identite, eudi_wallet). Each string is used to name a corresponding dynamic output port. Minimum 1 method required. |
+| Attribute | Type  | Required | Description                                                                                                                                                                                                              |
+| --------- | ----- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| methods   | array | Yes      | A list of unique string identifiers for the verification methods to be offered (e.g., doc_id, france_identite, eudi_wallet). Each string is used to name a corresponding dynamic output port. Minimum 1 method required. |
 
 **Frontend implications:**
 
@@ -29,15 +29,12 @@ Each method that can be defined as an option is associated with a set of assets 
 - An image displayed within the block
 - The country to which this method is associated (e.g. "France" for France Identité or "Germany" for AusweisID)
 
+
 ## Example
 
 ```json
 {
-  "methods": [
-    "doc_id",
-    "france_identite",
-    "eudi_wallet_verifier"
-  ]
+  "methods": ["doc_id", "france_identite", "eudi_wallet_verifier"]
 }
 ```
 

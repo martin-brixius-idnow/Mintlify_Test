@@ -1,0 +1,68 @@
+---
+title: Device intelligence
+description: Evaluates the trustworthiness of the customer’s device.
+---
+
+Helps determine whether the device appears safe, familiar, and genuine or if there are signs of unusual activity, automation, or manipulation.
+
+---
+
+## Key features
+
+- Integrates **_device signals services_** (e.g., Fingerprint) to assess device risk and detect fraud attempts.
+- **_Analyses automation_**, environment manipulation, VMs/emulators, and behavioral anomalies.
+- **_Configurable risk thresholds_** via `suspiciousUserThreshold`, `notTrustedUserThreshold`, and `confidenceScoreThreshold`.
+- **_Output mapping_** based on `suspectScore` and `confidence.score` thresholds.
+
+---
+
+## Configuration
+
+| Parameter                  | Type    | Required | Default | Description                                                                                                    |
+| -------------------------- | ------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------- |
+| `suspiciousUserThreshold`  | Integer | -        | -       | Defines the threshold at which a user is considered â€œsuspiciousâ€ based on suspectScore.                     |
+| `notTrustedUserThreshold`  | Integer | -        | -       | Defines the threshold at which a user is considered â€œnot_trustedâ€ based on suspectScore.                    |
+| `confidenceScoreThreshold` | Float   | -        | -       | Sets the minimum fingerprint confidence.score below which the result is deemed â€œinconclusiveâ€ and routed to |
+
+---
+
+## Input data blocks
+
+This step does not require any input data blocks.
+
+---
+
+## Verdicts
+
+Verdicts for this data block.
+
+| Verdict        | Description                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------- |
+| `trusted`      | The device is considered trustworthy as the suspect score is below the defined suspicious threshold.       |
+| `suspicious`   | The device is flagged as suspicious because the suspect score has exceeded the suspicious threshold.       |
+| `not_trusted`  | The device is deemed not trusted as the suspect score has surpassed the high-risk (not trusted) threshold. |
+| `inconclusive` | A verdict could not be reached because the confidence score was below the required threshold.              |
+
+---
+
+## Output data blocks
+
+Data blocks produced per verdict.
+
+| Verdict          | DataBlocks Produced | Notes |
+| ---------------- | ------------------- | ----- |
+| **trusted**      | `DeviceSignals`     |       |
+| **suspicious**   | `DeviceSignals`     |       |
+| **not_trusted**  | `DeviceSignals`     |       |
+| **inconclusive** | `DeviceSignals`     |       |
+
+---
+
+## Output mapping
+
+| Result                                        | Mapped Output  |
+| --------------------------------------------- | -------------- |
+| `confidence.score < confidenceScoreThreshold` | `inconclusive` |
+| `suspectScore < suspiciousUserThreshold`      | `trusted`      |
+| `suspectScore > suspiciousUserThreshold`      | `suspicious`   |
+| `suspectScore > notTrustedUserThreshold`      | `not_trusted`  |

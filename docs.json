@@ -61,7 +61,7 @@
           {
             "group": "Document-based IDV",
             "pages": [
-              "Platform_Guides/Document_Verification_Sphinx",
+              "Platform_Guides/document-based-idv-capture",
               "Platform_Guides/Document_Verification_Headless"
             ]
           },
@@ -83,7 +83,7 @@
           {
             "group": "Fraud signals",
             "pages": [
-              "Platform_Guides/Device_Intelligence",
+              "Platform_Guides/device-intelligence",
               "Platform_Guides/Email_Phone_Verification"
             ]
           },

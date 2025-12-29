@@ -21,7 +21,6 @@ POST /flows/{flowId}/sessions
 
 ```json
 {
-  "flowId": "string",
   "environment": "string",
   "input": [
     {
@@ -45,7 +44,6 @@ POST /flows/{flowId}/sessions
 
 | Parameter     | Type   | Required | Description                                        |
 | ------------- | ------ | -------- | -------------------------------------------------- |
-| `flowId`      | string | Yes      | Flow identifier to execute                         |
 | `environment` | string | Yes      | Target environment (e.g., `production`, `sandbox`) |
 | `input`       | array  | Yes      | Array of input data blocks                         |
 

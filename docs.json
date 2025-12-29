@@ -54,7 +54,7 @@
             "group": "Overview",
             "pages": [
               "Platform_Guides/core-concept",
-              "Platform_Guides/Core_Concept_Data_Blocks",
+              "Platform_Guides/datablocks",
               "Platform_Guides/Platform_Lifecycle"
             ]
           },

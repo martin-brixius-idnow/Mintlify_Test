@@ -10,7 +10,6 @@ In Capture mode, the end user completes verification through the IDnow front end
 This contrasts with the Headless approach, where customers collect document and biometric data within their own front end and submit it to IDnow via API for verification. In Capture mode, IDnow takes full responsibility for the evidence collection process, optimizing data quality and regulatory compliance.
 
 Users can complete verification through automated visual verification (AI-driven document and security feature checks), automated NFC verification (secure chip reading for eID-supported documents), or agent-assisted verification (review by trained identity specialists). Each mode ensures compliance with regulations such as eIDAS, AML, GwG, and BaFin. Configurations are modular, enabling flexible integration across fully automated or hybrid identity verification flows.
-
 ---
 
 ## Key features
@@ -27,10 +26,10 @@ Users can complete verification through automated visual verification (AI-driven
 
 ## Configuration
 
-| Parameter      | Type   | Required | Default | Description |
-|----------------|--------|----------|---------|-------------|
-| `inputSources` | Object | No       | - | Maps identity data sources to flow step IDs for pre-filling the session |
-| `shortname`    | String | No       | - | Managed at the credential configuration level on the platform |
+| Parameter      | Type   | Required | Default | Description                                                             |
+| -------------- | ------ | -------- | ------- | ----------------------------------------------------------------------- |
+| `inputSources` | Object | No       | -       | Maps identity data sources to flow step IDs for pre-filling the session |
+| `shortname`    | String | No       | -       | Managed at the credential configuration level on the platform           |
 
 ---
 
@@ -38,12 +37,13 @@ Users can complete verification through automated visual verification (AI-driven
 
 Input requirements for this step.
 
-| Data block         | Mandatory | Description                                        |
-|--------------------|----------|-----------------------------------------------------|
-| `BasicIdentity`    | No      | BasicIdentity data to compare against attestation    |
-| `ExtendedIdentity` | No      | ExtendedIdentity data to compare against attestation |
 
-If the data block is not available, the step will execute normally without this information, and the flow will proceed without error.
+| DataBlock          | Mandatory | Description                                          |
+| ------------------ | --------- | ---------------------------------------------------- |
+| `BasicIdentity`    | No        | BasicIdentity data to compare against attestation    |
+| `ExtendedIdentity` | No        | ExtendedIdentity data to compare against attestation |
+
+\*If the DataBlock is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
@@ -51,11 +51,12 @@ If the data block is not available, the step will execute normally without this 
 
 Verdicts for this data block.
 
-| Verdict          | Description |
-|------------------|-------------|
+
+| Verdict          | Description                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `verified`       | Successful document processing with identity extraction. User's documents were successfully verified, either automatically or by an agent. |
-| `fraud_detected` | Document identified as fraudulent. This occurs when fraud is confirmed after manual review. No identity data is extracted. |
-| `cancelled`      | The verification process was cancelled by the agent, for instance due to blurry images or unusable documents. |
+| `fraud_detected` | Document identified as fraudulent. This occurs when fraud is confirmed after manual review. No identity data is extracted.                 |
+| `cancelled`      | The verification process was cancelled by the agent, for instance due to blurry images or unusable documents.                              |
 
 ---
 
@@ -63,10 +64,11 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-| Verdict          | Data blocks produced   | Notes |
-|------------------|------------------------|-------|
-| `verified`       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
-| `fraud_detected` | `DocumentVerification` | Contains fraud detection details |
-| `aborted`        | -                      | No data blocks produced |
-| `cancelled`      | `DocumentVerification` | Contains cancellation reason |
-| `default`        | -                      | No data blocks produced |
+
+| Verdict            | Data blocks produced                                                                                               | Notes                                    |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **verified**       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
+| **fraud_detected** | `DocumentVerification`                                                                                            | Contains fraud detection details         |
+| **aborted**        | -                                                                                                                 | No DataBlocks produced                   |
+| **cancelled**      | `DocumentVerification`                                                                                            | Contains cancellation reason             |
+| **default**        | -                                                                                                                 | No DataBlocks produced                   |

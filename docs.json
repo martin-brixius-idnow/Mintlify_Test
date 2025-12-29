@@ -78,7 +78,7 @@
           },
           {
             "group": "Trust Services",
-            "pages": ["Platform_Guides/Electronic_Signature"]
+            "pages": ["Platform_Guides/instant-signature-issuance"]
           },
           {
             "group": "Fraud signals",

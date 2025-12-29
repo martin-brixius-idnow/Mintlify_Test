@@ -105,7 +105,7 @@
         "tab": "Integration",
         "icon": "server",
         "groups": [
-          { "group": "Overview", "pages": ["Integration/index"] },
+          { "group": "Overview", "pages": ["Integration/integration"] },
           { "group": "Authentication", "pages": ["Integration/authenticate"] },
           {
             "group": "Initialize Session",

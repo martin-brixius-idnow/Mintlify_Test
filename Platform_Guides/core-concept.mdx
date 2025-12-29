@@ -1,16 +1,16 @@
 ---
-title: Core concept
+title: Core Concept
 description: Flows, steps, verdicts and data blocks.
 ---
 
 This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
 
 - **Flow**: A flow that runs from start to end and defines the operational steps leading to a final outcome.
-- **Start and end step**: The flow ends in an End step that determines whether the outcome is accepted or rejected.
+- **Start & End Step**: The flow ends in an End Step that determines whether the outcome is accepted or rejected.
 - **Steps**: A Step performs an operational step that reads inputs, writes data blocks, and produces a verdict.
 - **Verdicts**: A verdict defines the Step’s result and determines the output data blocks and the next routing step (e.g. `"verified"`, `"fraud"`).
 - **Data blocks**: Typed payloads that act as inputs or outputs of a step depending on its verdict.
-- **Routes**: Named exits that route the flow to the next Step or an End step.
+- **Routes**: Named exits that route the flow to the next Step or an End step
 
 ---
 
@@ -18,7 +18,7 @@ This page explains the core building blocks of the IDnow Trust Platform and how 
 
 A **flow** defines how input data moves through a series of steps until a final outcome is produced.
 
-![Minimal flow with a single processing step.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-introduction.png)
+![Minimal flow with Start, a single processing Step, and an End Step.](/img/trustplatform-flow-introduction.png)
 
 ## Start and end step
 
@@ -26,8 +26,8 @@ Every flow must contain exactly one **Start step** as its entry point and at lea
 
 Between the Start step and the End step, you can add any combination of **operative steps** (processing steps) to perform operations, transform data and control the routing of the flow.
 
-![Minimal flow with a single processing step.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/1-trustplatform-basic-flow.png)
-*End steps represent the final outcome of a flow*
+![Minimal flow with Start, a single processing Step, and an End Step.](/img/1-trustplatform-basic-flow.png)
+_End Steps represent the final outcome of a flow_
 
 ---
 
@@ -56,8 +56,8 @@ In the flow, the verdict is used to select the next route: it either routes to a
 
 In the API response, each verdict includes structured data that explains the result.
 
-![Identity verification step with three outcomes: verified, fraud, and failure, leading to differend End steps.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/2-trustplatform-idv-verdicts.png)
-*Identity verification step with three outcomes: verified, fraud, and failure, leading to differend End steps.*
+![IDV Step with three outcomes: verified, fraud, and failure, each leading to a dedicated End Step.](/img/2-trustplatform-idv-verdicts.png)
+_Example of an IDV Step with multiple verdicts, each mapped to a dedicated End Step._
 
 ---
 
@@ -79,9 +79,9 @@ As an example, in an identity verification flow, a capture failure produces no `
 
 Many data blocks also carry the step’s verdict to indicate the outcome of the check that generated them.
 
-![An Identity verification step producing different data blocks for different verdicts (verified, fraud, failure).](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/3-trustplatform-idv-datablocks.png)
+![IDV Step producing different DataBlocks for different verdicts (verified, fraud, failure).](/img/3-trustplatform-idv-datablocks.png)
 
-*An Identity verification step generates different data blocks depending on whether the verdict is verified, fraud, or failure.*
+_An Identity verification step generates different data blocks depending on whether the verdict is verified, fraud, or failure._
 
 ### As step input
 
@@ -94,7 +94,7 @@ Each step defines which data blocks it requires and which it produces for each v
 
 Data blocks flow from each step’s outputs to the inputs of the next steps. These definitions allow the system to validate the flow, ensuring all required inputs are available before a step executes. The data block can be included in the initial API request when a flow is executed as shown in the example below.
 
-![Flow where an Identity verification step creates a `BasicIdentity` data block that is used as input for AML screening, which in turn produces a `PepAndSanctionsResults` data block.](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-aml-screening-match-no-match-alt.png)
+![Flow where an IDV Step creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](/img/trustplatform-aml-screening-match-no-match-alt.png)
 
 ### Missing data blocks
 
@@ -105,7 +105,7 @@ If a required data block is missing, the step cannot execute. As an example, an 
 
 All outputs from a step are added to the flow context, making them accessible to all of its descendant steps. As a result, any Step that generates a `BasicIdentity`, such as an Identity verification step, can satisfy the AML screening step’s input requirement.
 
-![Identity verification step produces `BasicIdentity` as an outcome which is used as input for AML screening](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-flow-overview.png)
+![IDV Step produces BasicIdentity as an outcome which is used as an inpot for AML Screening](/img/trustplatform-flow-overview.png)
 
 ### Duplications
 
@@ -126,14 +126,14 @@ A simplified transition object looks like this:
 
 ```json
 {
-  "id": "next_step_id",   // Identifier of the target Step
-  "route": "verified"      // Named route for conditional transitions (e.g. "verified", "failure")
+  "id": "next_Step_id", // Identifier of the target Step
+  "route": "verified" // Named route for conditional transitions (e.g., "verified", "failure")
 }
 ```
 
 When a step is configured with multiple output scenarios, the scenario keys act as route names (for example, `verified`, `fraud_detected`, `capture_failed`, `default`).
 
-![Flow where verdicts define flow path and output data blocks created](https://raw.githubusercontent.com/martin-brixius-idnow/Mintlify_Test/main/images/trustplatform-idv-aml-basicidentity.png)
+![More complex flow where verdicts define flow path and output Datablocks created](/img/trustplatform-idv-aml-basicidentity.png)
 
 ---
 
@@ -142,14 +142,14 @@ When a step is configured with multiple output scenarios, the scenario keys act 
 A flow is composed of steps, verdicts, data blocks, and routes. When designing a flow:
 
 1. **Define the initial process steps**  
-   For example, start with an ID verification step that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding routes, each connected to the appropriate next step or end step.
+  For example, start with an ID verification step that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding routes, each connected to the appropriate next step or end step.
 
-2. **Reuse outputs between steps**  
+2. **Reuse outputs between Steps**  
    Data blocks produced by one step can be used as inputs to downstream steps. For instance, a `BasicIdentity` data block created during ID verification can be passed to an _AML screening_ step, which then produces its own verdict and `PepAndSanctionsResults` data blocks.
 
 3. **Extend the flow as needed**  
    Add additional steps for risk checks, digital signals, signatures, or evidence collection. Each step follows the same pattern of verdicts, data blocks, and routes.
 
-*By combining steps, verdicts, data blocks, and routes, you can build complex trust flows.*
+_By combining steps, verdicts, data blocks, and routes, you can build complex trust flows._
 
 By understanding these building blocks, you can compose complex trust flows simply by wiring steps together. The platform handles session, data propagation, and audit trails automatically.

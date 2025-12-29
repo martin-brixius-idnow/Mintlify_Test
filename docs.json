@@ -74,8 +74,10 @@
           },
           {
             "group": "eID",
-            "pages": ["Platform_Guides/france-identite"],
-             "pages": ["Platform_Guides/eudi-wallet"]
+            "pages": [
+             "Platform_Guides/france-identite",
+             "Platform_Guides/eudi-wallet"
+           ]
           },
           {
             "group": "Trust Services",

@@ -19,9 +19,9 @@ This guide shows you how to:
 
 To authenticate against Trust Platform APIs, you need to obtain your API client credentials (`client_id` and `client_secret`).
 
-<Info>
-  For detailed instructions, refer to <a href="https://idnow.mintlify.app/Development_Resources/Manage" target="_blank" rel="noopener noreferrer">Manage API Credentials</a>.
-</Info>
+:::info
+For detailed instructions, refer to [Manage API Credentials](/docs/development-resources/api-credentials).
+:::
 
 ---
 
@@ -29,16 +29,16 @@ To authenticate against Trust Platform APIs, you need to obtain your API client 
 
 Use your client credentials to request an access token. Trust Platform supports two client authentication methods:
 
-***Request parameters***
+**_Request parameters_**
 
 | Parameter       | Description                                                               | Required |
-|-----------------|---------------------------------------------------------------------------|----------|
+| --------------- | ------------------------------------------------------------------------- | -------- |
 | `grant_type`    | OAuth 2.0 grant type. Use `client_credentials` for server-to-server auth. | Yes      |
 | `client_id`     | Your API client ID from the IDnow dashboard.                              | Yes      |
 | `client_secret` | Your API client secret from the IDnow dashboard.                          | Yes      |
 | `scope`         | The scopes required for your API requests (if applicable).                | Optional |
 
-***Option A***: Explicit credentials (`client_secret_post`)
+**_Option A_**: Explicit credentials (`client_secret_post`)
 
 Include your credentials directly in the request body:
 
@@ -51,7 +51,7 @@ curl --request POST https://<your-idnow-auth-server>/token \
   --data 'scope=<required-scopes>'
 ```
 
-***Option B***: HTTP Basic Authentication (`client_secret_basic`)
+**_Option B_**: HTTP Basic Authentication (`client_secret_basic`)
 
 Base64 encode your credentials in the format `client_id:client_secret` and include in the Authorization header:
 
@@ -63,7 +63,7 @@ curl --request POST https://<your-idnow-auth-server>/token \
   --data 'scope=<required-scopes>'
 ```
 
-***Response***
+**_Response_**
 
 If successful, you will receive an access token:
 
@@ -91,7 +91,7 @@ Accept: application/json
 Authorization: Bearer eyJh...QifQ.eyJ...hIOw
 ```
 
-***Example request***
+**_Example request_**
 
 ```bash
 curl --request GET https://<your-idnow-api-host>/api/v1/identifications/<id> \
@@ -100,4 +100,3 @@ curl --request GET https://<your-idnow-api-host>/api/v1/identifications/<id> \
 ```
 
 ---
-

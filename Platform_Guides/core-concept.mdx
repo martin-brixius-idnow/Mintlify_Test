@@ -79,7 +79,7 @@ As an example, in an identity verification flow, a capture failure produces no `
 
 Many data blocks also carry the step’s verdict to indicate the outcome of the check that generated them.
 
-![IDV Step producing different DataBlocks for different verdicts (verified, fraud, failure).](/img/3-trustplatform-idv-datablocks.png)
+![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](/img/3-trustplatform-idv-datablocks.png)
 
 _An Identity verification step generates different data blocks depending on whether the verdict is verified, fraud, or failure._
 
@@ -94,7 +94,7 @@ Each step defines which data blocks it requires and which it produces for each v
 
 Data blocks flow from each step’s outputs to the inputs of the next steps. These definitions allow the system to validate the flow, ensuring all required inputs are available before a step executes. The data block can be included in the initial API request when a flow is executed as shown in the example below.
 
-![Flow where an IDV Step creates a BasicIdentity DataBlock that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults DataBlock.](/img/trustplatform-aml-screening-match-no-match-alt.png)
+![Flow where an IDV Step creates a BasicIdentity data block that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults Data block.](/img/trustplatform-aml-screening-match-no-match-alt.png)
 
 ### Missing data blocks
 
@@ -133,7 +133,7 @@ A simplified transition object looks like this:
 
 When a step is configured with multiple output scenarios, the scenario keys act as route names (for example, `verified`, `fraud_detected`, `capture_failed`, `default`).
 
-![More complex flow where verdicts define flow path and output Datablocks created](/img/trustplatform-idv-aml-basicidentity.png)
+![More complex flow where verdicts define flow path and output data blocks created](/img/trustplatform-idv-aml-basicidentity.png)
 
 ---
 

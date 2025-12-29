@@ -124,7 +124,7 @@
           },
           {
             "group": "Webhooks",
-            "pages": ["Development_Resources/Webhooks_Events"]
+            "pages": ["Development_Resources/webhooks-events"]
           },
           {
             "group": "Navigate player",

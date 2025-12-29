@@ -1,6 +1,6 @@
 ---
 title: Lifecycle
-description: Transition states of a flow sessions
+description: Transition states of a Trust Platform sessions
 ---
 
 This guide explains the **lifecycle** of a flow session in the Trust Platform, including the available `sessionStatus` values, what each represents, and how a session transitions between states.
@@ -15,7 +15,12 @@ This guide explains the **lifecycle** of a flow session in the Trust Platform, i
 
 - From `In Progress`, a flow session can transition into any of the **terminal states** described below:
 
-- Once a flow session reaches any terminal state, it stops normal step processing and the flow has ended.
+- Once a flow session reaches any terminal state, it stops normal step processing and the flow session has ended.
+
+
+:::info
+The `sessionStatus` is included in every `GET /sessions/{sessionId}` response and in all webhook events triggered during an active session.
+:::
 
 
 ## `sessionStatus`

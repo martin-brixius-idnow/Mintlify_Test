@@ -1,0 +1,64 @@
+---
+title: Headless
+description: Automated verification using pre‑captured document and face images.
+---
+
+Verifies identity using static evidence collected by the your own front end and submitted to IDnow via API.
+
+In Headless mode, your application is responsible for collecting and providing identity evidence, such as images of the ID document and a selfie image of the user. IDnow then performs verification on these static inputs using AI-based analysis and data extraction modules. Unlike Capture mode, the Headless flow does not involve any user interaction within the IDnow front end; all evidence is provided directly by the customer’s system.
+
+Because verification relies solely on static images, certain checks that require dynamic interaction or live capture cannot be performed. These include NFC chip reading and dynamic document validation (for example, visual inspection of holograms under movement or live liveness actions). As a result, Headless verification provides a more limited level of accuracy compared to Capture mode and is not suitable for regulated use cases such as KYC or AML processes.
+
+Instead, Headless mode is best suited for unregulated scenarios, such as document data extraction, image quality assessment, or pre-validation steps where full dynamic verification is not required.
+
+---
+
+## Key features
+
+- ***Customer-managed evidence collection*** – The customer application captures and submits document and selfie images via API.
+- ***Static evidence processing*** – Verification is performed using only static images, without live interaction or dynamic capture.
+- ***AI-based analysis*** – Automated checks assess document authenticity, extract data, and compare facial features between the document and the selfie.
+- ***Lightweight integration*** – Ideal for API-based use cases that require automated data extraction or streamlined verification flows.
+
+---
+
+## Configuration
+
+| Parameter                      | Type   | Description                                                                                                                                                                                                             |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| biometricProcessing            | object | A container for parameters related to biometric verification. If this object is not provided, no biometric analysis is performed. The IDCheck.io realm configuration must be aligned with the options set in this step. |
+| biometricProcessing.sampleType | enum   | Defines the type of biometric sample provided. Currently, only the value `SELFIE` is supported.                                                                                                                         |
+
+---
+
+## Input data blocks
+
+Input requirements for this step.
+
+
+| DataBlock Type     | Required | Description                                           |
+| ------------------ | -------- | ----------------------------------------------------- |
+| `DocumentImages`   | Yes      | Pre-captured document images (front and/or back side) |
+| `BiometricSamples` | Yes      | Pre-captured biometric data with `consent = true`     |
+
+If the consent field in the BiometricSamples DataBlock is set to true, Idnow will not ask the user for consent. This indicates that the client has already obtained valid user consent prior to submitting the data for processing. If the field is set to false, the iframe will prompt the user to provide consent.
+
+---
+
+## Verdicts
+
+This step does not produce any verdicts.
+
+---
+
+## Output data blocks
+
+Data blocks produced per verdict.
+
+
+| Scenario       | DataBlocks Produced                                                                                               | Description                                             |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| verified       | `BasicIdentity`, `ExtendedIdentity`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `BiometricSamples` | Successful document processing with identity extraction |
+| fraud_detected | `DocumentVerification`                                                                                            | Document identified as fraudulent                       |
+| capture_failed | `DocumentVerification`                                                                                            | Document capture failed                                 |
+| default        | `DocumentVerification`                                                                                            | Unexpected or technical error during processing         |

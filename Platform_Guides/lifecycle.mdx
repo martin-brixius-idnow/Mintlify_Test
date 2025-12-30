@@ -1,21 +1,21 @@
 ---
-title: Lifecycle
-description: Transition states of a Trust Platform sessions
+title: Flow lifecycle
+description: Transition states of flow sessions
 ---
 
-This guide explains the **lifecycle** of a flow session in the Trust Platform, including the available `sessionStatus` values, what each represents, and how a session transitions between states.
+This page explains the lifecycle of a flow session in the Trust Platform, including the available sessionStatus values, what each represents, and how a session transitions between states.
 
-## Introduction
+## Sessions
 
-- A flow **session** is created when the endpoint `POST /flows/{flowId}/sessions` is called.
+A flow **session** is created when the endpoint `POST /flows/{flowId}/sessions` is called.
 
-- Immediately after creation, the initial `sessionStatus` of the session is `In Progress`.
+Immediately after creation, the initial sessionStatus of the session is `In Progress`.
 
-- While the session is `In Progress`, the flow steps are executed and the user proceeds through the journey.
+While the session is `In Progress`, the flow steps are executed and the user proceeds through the journey.
 
-- From `In Progress`, a flow session can transition into any of the **terminal states** described below:
+From `In Progress`, a flow session can transition into any of the terminal states described below.
 
-- Once a flow session reaches any terminal state, it stops normal step processing and the flow session has ended.
+Once a flow session reaches any terminal state, it stops normal step processing and the flow session has ended.
 
 
 :::info

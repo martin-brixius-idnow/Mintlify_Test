@@ -3,15 +3,15 @@ title: Data blocks
 description: Unit of information produced and consumed by flow steps
 ---
 
-## Overview
+As described in Core concept, a data block is a unit of information that is produced and consumed by flow steps. Each data block has a specific type, and each type defines a unique set of attributes.
 
-A **data block** is a piece of information that flow steps create or use. Each data block has a type, and that type defines what information it contains.
+The system ensures consistent data flow by:
 
-The system ensures data flow consistency by:
+- Identifying which data blocks are available at each step
+- Verifying that all required input data blocks are present
+- Confirming that all data dependencies are satisfied before executing a step
 
-- Tracking which data blocks exist at each step.
-- Checking that each step has the data blocks it needs.
-- Making sure all required data is ready before a step runs.
+The following section provides a comprehensive summary of all available data blocks including the attributes associated with each type.
 
 ---
 

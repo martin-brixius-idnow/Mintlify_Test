@@ -5,12 +5,12 @@ description: Flows, steps, verdicts and data blocks
 
 This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
 
-- **Flow**: A sequence of steps that produces a final decisionOutcome of a flow
-- **Start & End Steps**: Every flow has a Start step and one or more End steps. End steps define the final decisionOutcome
-- **Operational Steps**: Execute logic such as reading inputs, writing data blocks, and producing verdict
-- **Verdicts**: Step results that determine output data blocks and the next route
-- **Data Blocks**: Typed inputs or outputs of a step, based on the verdict
-- **Routes**: Named paths that lead to another step or an End step
+- **Flow:** A sequence of steps that produces a final decisionOutcome of a flow
+- **Start & End Steps:** Every flow has a Start step and one or more End steps. End steps define the final decisionOutcome
+- **Operational Steps:** Execute logic such as reading inputs, writing data blocks, and producing verdicts
+- **Verdicts:** Step results that determine output data blocks and the next route
+- **Data Blocks:** Typed inputs or outputs of a step, based on the verdict
+- **Routes:** Named paths that lead to another step or an End step
 
 ---
 
@@ -65,7 +65,7 @@ Examples of such data blocks could be `ExtendedIdentity`, `DocumentVerification`
 
 Data blocks keep data consistent as it moves through the flow. The platform determines which data blocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a step.
 
-The data block structure is preserved in the API response after a flow session, making it easy to trace data from the initial input to the final decisionOutcome.
+The data block structure is preserved in the API response after a flow session, making it easy to trace data from the initial input to the final outcome.
 
 ### As step output
 
@@ -73,7 +73,7 @@ The verdict of a step determines which data blocks it produces.
 
 As an example, in an identity verification flow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. 
 
-Many data blocks also carry the step’s verdict to indicate the decisionOutcome of the check that generated them.
+Many data blocks also carry the step’s verdict to indicate the outcome of the check that generated them.
 
 ![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](/img/3-trustplatform-idv-datablocks.png)
 
@@ -101,7 +101,7 @@ If a required data block is missing, the step cannot execute. As an example, an 
 
 All outputs from a step are added to the flow context, making them accessible to all of its descendant steps. As a result, any Step that generates a `BasicIdentity`, such as an Identity verification step, can satisfy the AML screening step’s input requirement.
 
-![IDV Step produces BasicIdentity as an decisionOutcome which is used as an inpot for AML Screening](/img/trustplatform-flow-overview.png)
+![IDV Step produces BasicIdentity as an outcome which is used as an inpot for AML Screening](/img/trustplatform-flow-overview.png)
 
 ### Duplications
 

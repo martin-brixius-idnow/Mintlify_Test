@@ -17,13 +17,11 @@ From `In Progress`, a flow session can transition into any of the terminal state
 
 Once a flow session reaches any terminal state, it stops normal step processing and the flow session has ended.
 
-
 :::info
 The `sessionStatus` is included in every `GET /sessions/{sessionId}` response and in all webhook events triggered during an active session.
 :::
 
-
-## `sessionStatus`
+## Session status
 
 | `sessionStatus` | Entry Condition | Meaning | Transitions / Notes |
 |-----------------|----------------|---------|-------------------|

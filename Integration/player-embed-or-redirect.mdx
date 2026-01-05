@@ -1,27 +1,27 @@
 ---
 title: Embed or redirect
-description: Integrating Player into your frontend application
+description: Integrate Player into your frontend application
 ---
 
 Before integrating with the Player, you need to set up your flow:
 
-- [x] **A Flow was created** in the IDnow dashboard.
-- [x] **The Flow was deployed** and published.
-- [x] **The flowId was obtained** from the IDnow dashboard or via the API
+- [x] **A flow was created** in the IDnow dashboard.
+- [x] **The flow was deployed** and published.
+- [x] **The `flowId` was obtained** from the IDnow dashboard or via the API
 
 
 ### Integration method
 
-| Integration method                     | Description                                                                                                                                                        |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Redirect Integration** | Redirect users to the IDnow-hosted Player URL for a full-screen verification experience with guaranteed camera/microphone access (if permission is given by user). |
-| **Embedded Integration** | Embed the Player within your web application using an iframe or webview to keep users on your domain while maintaining your UI context.                                     |
+| Integration method       | Description |
+| ------------------------ | ----------- |
+| **Redirect integration** | Redirect users to the IDnow-hosted Player URL for a full-screen verification experience with guaranteed camera/microphone access (if permission is given by user). |
+| **Embedded integration** | Embed the Player within your web application using an iframe or webview to keep users on your domain while maintaining your UI context. |                                  |
 
 ### Integration steps
 
-1. Create a session via the Flow API, providing input data blocks and a redirect URL (if redirect)
+1. Create a session via the API, providing input data blocks and a redirect URL (if redirect)
 2. Obtain the Session Token (JWT) containing session context
-3. Construct Player URL 
+3. Construct Player URL
 4. Choose your integration method (redirect or embedded)
 
 
@@ -29,10 +29,10 @@ Before integrating with the Player, you need to set up your flow:
 
 ## Create flow session
 
-Call the Session API to initiate a session.
+Call the API to initiate a session.
 
 :::info
-For complete API documentation, request examples, and implementation details, see **[Create Session](/docs/integration/create-session)**.
+For complete API documentation, request examples, and implementation details, see **[Create session](/docs/integration/create-session)**.
 :::
 
 ---
@@ -55,7 +55,7 @@ The API returns a session token that you'll use to direct users to the Player.
 }
 ```
 
-**Session Token (JWT) Contains:**
+**Session token (JWT) Contains:**
 
 | Field       | Description                     |
 | ----------- | ------------------------------- |
@@ -70,7 +70,7 @@ Once you receive the session token from the API response, construct the Player U
 
 **_Examples_**
 
-**Node.js Implementation**:
+**Node.js implementation**:
 
 ```code-tabs
 const axios = require('axios');
@@ -100,7 +100,7 @@ const sessionToken = response.data.sessionToken;
 const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=${sessionToken}`;
 ```
 
-**Python Implementation**:
+**Python implementation**:
 
 ```code-tabs
 import requests
@@ -132,7 +132,7 @@ session_token = result['sessionToken']
 player_url = f"https://player-trustplatform.idnow.io/player/?session_token={session_token}"
 ```
 
-**Java Implementation**:
+**Java implementation**:
 
 ```code-tabs
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -170,7 +170,7 @@ String sessionToken = jsonResponse.get("sessionToken").asText();
 String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
-**_URL Structure_**
+**_URL structure_**
 
 The Player is hosted by IDnow at:
 
@@ -213,14 +213,14 @@ This is the simplest and most reliable integration method where the user is dire
 3. User completes verification
 4. Monitor completion via webhooks or polling
 
-**Web Browser**:
+**Web browser**:
 
 ```code-tabs
-// Web Browser
+// Web browser
 window.location.href = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
 ```
 
-**Mobile App (iOS)**
+**Mobile app (iOS)**
 
 ```code-tabs
 // swift
@@ -230,7 +230,7 @@ if let url = URL(string: playerURL) {
 }
 ```
 
-**Mobile App (Android)**:
+**Mobile app (Android)**:
 
 ```code-tabs
 // java
@@ -266,7 +266,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 2. Embed Player in iframe using returned session token
 3. Handle completion via callback URL or postMessage events
 
-**Basic iframe Implementation**:
+**Basic iframe implementation**:
 
 ```code-tabs
 ///html
@@ -295,7 +295,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 </div>
 ```
 
-**Responsive iframe Setup**:
+**Responsive iframe setup**:
 
 ```css
 .verification-iframe-container {
@@ -315,7 +315,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 }
 ```
 
-**Current Limitations**:
+**Current limitations**:
 
 - Some mobile browsers may restrict camera access in iframes
 - Requires explicit permissions in iframe `allow` attribute

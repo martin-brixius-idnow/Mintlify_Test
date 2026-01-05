@@ -142,7 +142,7 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": ["Development_Resources/index"]
+            "pages": ["Development_Resources/resources"]
           },
           {
             "group": "Getting started",

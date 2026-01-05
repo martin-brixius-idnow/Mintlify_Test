@@ -147,7 +147,7 @@
           {
             "group": "Getting started",
             "pages": [
-              "Development_Resources/api-credentials",
+              "Development_Resources/api-clients",
               "Development_Resources/user-roles"
             ]
           },

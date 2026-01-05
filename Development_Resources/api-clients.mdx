@@ -3,7 +3,7 @@ title: "API clients"
 description: "Manage API clients to authenticate API request"
 ---
 
-An API client securely authenticates your application with IDnow. You can manage multiple keys and their permissions in the IDnow dashboard.
+An API client securely authenticates your application with IDnow. You can manage multiple keys in the IDnow dashboard.
 
 Each API client has a **Client ID** and a **Client secret**. Never share client secrets or store them in version control.**
 
@@ -23,17 +23,8 @@ _API key details page_
 
 1. Select **New API key**.
 2. Enter a descriptive name.
-3. Select permissions.
-4. Select **Create API key**.
+3. Select **Create API key**.
 
-
-**Permission overview**
-
-| Permission                    | Description |
-|-------------------------------|-------------|
-| Read API resources            | Retrieve data from the API |
-| Execute flow                  | Initiate and execute identity verification flows |
-| Edit and create API resources | Modify and create resources via the API |
 
 ---
 
@@ -51,7 +42,7 @@ _API key details page_
 ## Edit key
 
 1. Find your API key, select **View details**.
-2. Edit name, permissions, or regenerate client secret.
+2. Edit name or regenerate client secret.
 
 > 'Client ID' cannot be changed.
 
@@ -80,7 +71,6 @@ _API key details page_
 - Never share secrets.
 - Don't store keys in version control.
 - Use environment variables or secure storage.
-- Grant minimum permissions.
 - Remove unused keys.
 - Regenerate secrets periodically.
 - Use separate keys for each environment.

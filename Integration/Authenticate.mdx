@@ -1,23 +1,20 @@
 ---
-title: Get token
-description: Learn how to obtain an API token to authenticate with Trust Platform APIs.
+title: Authenticate
+description: Learn how to obtain an API token to authenticate with IDnow.
 ---
 
-Learn how to set up authentication and obtain an API token to connect to Trust Platform APIs.
-
-IDnow uses OAuth 2.0 with the client credentials grant type for API authentication.
-
+IDnow uses OAuth 2.0 with the client credentials grant type for API authentication. The steps to set up authentication are:
 This guide shows you how to:
 
-1. Get your API client credentials from the IDnow dashboard
-2. Obtain an access token using your credentials
-3. Make an authenticated API request
+1. Get API client details (client ID and client secret) from the IDnow dashboard
+2. Use the client ID and client secret to get an access token
+3. Use the access token to make an authenticated API request
 
 ---
 
-## Get credentials
+## Get API client details
 
-To authenticate against Trust Platform APIs, you need to obtain your API client credentials (`client_id` and `client_secret`).
+To authenticate with IDnow, you need to obtain API client details (`client_id` and `client_secret`)..
 
 <Info>
   For detailed instructions, refer to <a href="https://idnow.mintlify.app/Development_Resources/Manage" target="_blank" rel="noopener noreferrer">Manage API Credentials</a>.
@@ -27,7 +24,7 @@ To authenticate against Trust Platform APIs, you need to obtain your API client 
 
 ## Obtain access token
 
-Use your client credentials to request an access token. Trust Platform supports two client authentication methods:
+Use your client ID and client secret to request an access token. IDnow supports two client authentication methods:
 
 ***Request parameters***
 

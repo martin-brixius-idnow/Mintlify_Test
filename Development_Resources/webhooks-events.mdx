@@ -114,3 +114,23 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
   }
 }
 ```
+
+### `session.aborted`
+
+```json
+{
+  "eventId": "evt_e5f6g7h8i9j0k1l2",
+  "eventName": "session.aborted",
+  "eventVersion": "123",
+  "eventDeliveryId": "1",
+  "createdAt": "2025-11-24T11:15:30.654Z",
+  "payload": {
+    "flowId": "identity_verification_v2",
+    "sessionId": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
+    "sessionStatus": "ABORTED",
+    "lastStepId": "My step",
+    "lastStepType": "DOC_ID:v2",
+    "lastStepStatus": "ABORTED"
+  }
+}
+```

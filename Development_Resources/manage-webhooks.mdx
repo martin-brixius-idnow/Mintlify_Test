@@ -58,7 +58,7 @@ Track `event_id` to detect and skip duplicate deliveries caused by retries.
 
 ---
 
-## Setting up webhooks
+## Configure webhooks
 
 Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it's no longer required.
 
@@ -87,7 +87,7 @@ Configure your webhooks on a flow-by-flow basis IDnow:
 2. **Create endpoint**: Click "Add webhook" to open the configuration form.
 3. **Add endpoint details**: Enter your HTTPS endpoint URL and other details.
 4. **Subscribe to events**: Select specific events or receive all events by default.
-5. **Set secret key**: Provide a secret key for authentication in the headers section.
+5. **Set secret key**: Provide a secret key for authentication in the headers section (optional).
 
 :::info
 Configure separate endpoints for **staging**, and **live** environments. You can update an existing endpoint, including its URL, after creation.

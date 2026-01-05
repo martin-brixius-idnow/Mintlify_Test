@@ -3,12 +3,12 @@ title: Manage webhooks
 description: Set up webhook endpoints, manage subscriptions, and monitor delivery
 ---
 
-In Trust Platform, each flow runs as a session made up of one or more steps, like identity checks or digital signatures. Instead of polling the API, your server gets an HTTP POST as soon as something changes.
+IDnow sends HTTP webhooks for each session. Webhooks allow you to keep your system in sync and let you know when new results or data blocks are ready.
 
-Because steps run asynchronously, depending on the user, the device, or third-party services, webhooks keep your system in sync and let you know when new results or data blocks are ready to retrieve.
+Note that session steps are ***asynchronous***.
 
 :::info
-See the full list of available webhook events here: [Webhook Events →](/docs/integration/webhooks-events)
+See the full list of available webhook events here: [Webhook events →](/integration/webhooks-events)
 :::
 
 :::info
@@ -29,7 +29,7 @@ Your endpoint must support **TLS 1.2 or higher** for receiving POST requests.
 </details>
 
 <details>
-<summary>2. Allowlist official IDnow IP ranges</summary>
+<summary>2. Only allow incoming requests from IDnow’s IPs</summary>
 
 Block unauthorized sources by accepting requests only from documented IDnow IPs.
 
@@ -50,7 +50,7 @@ Return a success status quickly and process events asynchronously in the backgro
 </details>
 
 <details>
-<summary>5. Use event_id for idempotency</summary>
+<summary>5. Use `event_id` to prevent duplicate operations</summary>
 
 Track `event_id` to detect and skip duplicate deliveries caused by retries.
 
@@ -58,7 +58,7 @@ Track `event_id` to detect and skip duplicate deliveries caused by retries.
 
 ---
 
-## Setup
+## Setting up webhooks
 
 Webhook endpoints are fully manageable after creation. You can update an existing endpoint at any time like adjusting its URL, description, or security settings or delete it completely if it's no longer required.
 
@@ -79,17 +79,18 @@ Return 2xx **immediately**, then process events asynchronously to avoid timeouts
 
 ---
 
-### 2. Set up webhooks on IDnow
+### 2. Configure webhooks on IDnow
 
-Set up your webhook endpoint on IDnow:
+Configure your webhooks on a flow-by-flow basis IDnow:
 
-1. **Navigate to Settings**: Go to **Settings** then **Webhooks** in the IDnow dashboard.
-2. **Add endpoint URL**: Enter your HTTPS endpoint URL and description.
-3. **Set secret key**: Provide a secret key for authentication.
+1. **Go to flow Settings**: In the IDnow dashboard, go to your flow, and navigate to the **Settings** tab. Then scroll down to **Webhooks**.
+2. **Create endpoint**: Click "Add webhook" to open the configuration form.
+3. **Add endpoint details**: Enter your HTTPS endpoint URL and other details.
 4. **Subscribe to events**: Select specific events or receive all events by default.
+5. **Set secret key**: Provide a secret key for authentication in the headers section.
 
 :::info
-Configure separate endpoints for **staging**, and **live** environments.
+Configure separate endpoints for **staging**, and **live** environments. You can update an existing endpoint, including its URL, after creation.
 :::
 
 ---
@@ -137,11 +138,13 @@ IDnow automatically retries failed deliveries:
 | 3rd retry | 8 seconds | 14s                |
 
 **Retry conditions:**
+
 - Transient errors (5xx status codes)
 - Network errors (timeout, connection refused)
 - Endpoint unavailable
 
 **No retry for:**
+
 - Client errors (4xx status codes)
 - Authentication failures
 - Invalid endpoint URL

@@ -1,20 +1,20 @@
 ---
-title: Handle events
+title: Webhook events
 description: Understand webhook event types and payload structure
 ---
 
-IDnow sends webhook events for different stages of a session. Each event provides information about the current state of the configured flow journey.
+Webhook payloads are minimal, machine-readable JSON messages that deliver metadata about an event. They will never include personally identifiable information (PII). You can fetch full details from the API when needed by using the respective `session_id`.
 
 :::info
 All events use thin payloads. No personally identifiable information (PII) is included by default.  
-To learn more, see the [Configure Webhooks →](/docs/development-resources/webhooks-manage)
+To learn more, see the [Configure webhooks →](/docs/development-resources/webhooks-manage)
 :::
 
 ---
 
 ## Payload structure
 
-All webhook events share a common structure:
+All webhook events include these fields:
 
 | Field            | Type     | Description                                                                          |
 | ---------------- | -------- | ------------------------------------------------------------------------------------ |
@@ -50,7 +50,7 @@ IDnow sends the following event types when a session changes state:
 
 ---
 
-## Payloads examples
+## Payload examples
 
 All webhook payloads are a minimal, machine-readable JSON message that delivers metadata about an event and will never include any PII. You can fetch full details from the API when needed by using the respective `session_id`.
 

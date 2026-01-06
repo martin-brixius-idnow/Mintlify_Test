@@ -8,7 +8,7 @@ Retrieve detailed information about a specific session, including its current st
 ## Endpoint
 
 ```http
-GET /session/{sessionId}
+GET v1/session/{environment}/{sessionId}
 ```
 
 **_Path parameters_**
@@ -16,6 +16,16 @@ GET /session/{sessionId}
 | Parameter   | Type   | Required | Description                          |
 | ----------- | ------ | -------- | ------------------------------------ |
 | `sessionId` | string | Yes      | The unique identifier of the session |
+
+## Request
+
+No request body is required for this endpoint.
+
+**_Headers_**
+
+| Header          | Type   | Required | Description                     |
+| --------------- | ------ | -------- | ------------------------------- |
+| `Authorization` | string | Yes      | Bearer token for authentication |
 
 ## Request
 
@@ -83,14 +93,9 @@ GET /session/{sessionId}
 ## Example
 
 ```bash
-curl https://api.idnow.io/v1/session/123 \
+curl https://api.eu.platform.idnow.io/api/v1/session/123/live \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{
-    "flowId": "wf_1a2b3c4d5e6f",
-    "environment": "production",
-    "sessionId": "123"
-  }'
 ```
 
 ## Notes

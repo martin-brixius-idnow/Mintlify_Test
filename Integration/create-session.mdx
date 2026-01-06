@@ -1,6 +1,6 @@
 ---
-title: Create a session
-description: Initiate a new verification session for a specific flow
+title: "Create a session"
+description: "Initiate a new verification session for a specific flow"
 ---
 
 Create a new session to start a verification flow. The session begins in a `created` status to differentiate the pre-user interaction phase from the active processing phase.
@@ -8,20 +8,19 @@ Create a new session to start a verification flow. The session begins in a `crea
 ## Endpoint
 
 ```http
-POST /flows/{flowId}/sessions
+POST v1/flows/{flowId}/{environment}/sessions
 ```
 
-**_Path parameters_**
+***Path parameters***
 
-| Parameter | Type   | Required | Description                                  |
-| --------- | ------ | -------- | -------------------------------------------- |
-| `flowId`  | string | Yes      | The unique identifier of the flow to execute |
+| Parameter | Type   | Required | Description |
+|-----------|--------|----------|-------------|
+| `flowId`  | String | Yes      | The unique identifier of the flow to execute |
 
 ## Request
 
 ```json
 {
-  "environment": "string",
   "input": [
     {
       "type": "BasicIdentity",
@@ -40,12 +39,11 @@ POST /flows/{flowId}/sessions
 }
 ```
 
-**_Request parameters_**
+***Request parameters***
 
-| Parameter     | Type   | Required | Description                                        |
-| ------------- | ------ | -------- | -------------------------------------------------- |
-| `environment` | string | Yes      | Target environment (e.g., `production`, `sandbox`) |
-| `input`       | array  | Yes      | Array of input data blocks                         |
+| Parameter     | Type   | Required | Description |
+|---------------|--------|----------|-------------|
+| `input`       | Array  | Yes      | Array of input data blocks |
 
 ## Response
 
@@ -63,29 +61,27 @@ POST /flows/{flowId}/sessions
 }
 ```
 
-**_Response parameters_**
+***Response parameters***
 
-| Parameter                      | Type   | Description                               |
-| ------------------------------ | ------ | ----------------------------------------- |
-| `flowId`                       | string | Flow identifier                           |
-| `flowVersion`                  | string | Version of the flow being executed        |
-| `environment`                  | string | Environment where the session was created |
-| `sessionContext`               | object | Session metadata                          |
-| `sessionContext.sessionId`     | string | Unique session identifier                 |
-| `sessionContext.sessionStatus` | string | Initial status: `created`                 |
-| `sessionContext.createdAt`     | string | ISO 8601 timestamp of session creation    |
-| `sessionToken`                 | string | JWT token used to initialize the Player   |
+| Parameter                      | Type   | Description |
+|--------------------------------|--------|-------------|
+| `flowId`                       | String | Flow identifier |
+| `flowVersion`                  | String | Version of the flow being executed |
+| `environment`                  | String | Environment where the session was created |
+| `sessionContext`               | Object | Session metadata |
+| `sessionContext.sessionId`     | String | Unique session identifier |
+| `sessionContext.sessionStatus` | String | Initial status: `created` |
+| `sessionContext.createdAt`     | String | ISO 8601 timestamp of session creation |
+| `sessionToken`                 | String | JWT token used to initialize the Player |
 
 ## Example
 
 ```bash
-curl https://api.idnow.io/v1/flows/wf_1a2b3c4d5e6f/sessions \
+curl https://api.eu.platform.idnow.io/api/v1/flows/12345/live/sessions
   -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "flowId": "wf_1a2b3c4d5e6f",
-    "environment": "production",
     "input": [
       {
         "type": "BasicIdentity",
@@ -100,6 +96,6 @@ curl https://api.idnow.io/v1/flows/wf_1a2b3c4d5e6f/sessions \
 ## Notes
 
 - Session status is set to `created` immediately upon successful creation
-- Input object format is analogous to the Datablock endpoint structure
+- Input object format is analogous to the data block endpoint structure
 - Supports both interactive (customer-involved) and non-interactive (headless) flows
 - The `sessionToken` is a JWT that contains the session context and is used to initialize the Player

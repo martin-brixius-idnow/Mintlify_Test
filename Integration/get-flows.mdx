@@ -8,7 +8,7 @@ Use this endpoint to retrieve all flows available in your environment. The respo
 ## Endpoint
 
 ```http
-GET /flows
+GET v1/flows/{environment}
 ```
 
 ## Request
@@ -50,7 +50,7 @@ Returns an array of flow objects with minimal metadata.
 ## Example
 
 ```bash
-curl https://api.idnow.io/v1/flows \
+curl https://api.eu.platform.idnow.io/api/v1/flows/live \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json"
 ```

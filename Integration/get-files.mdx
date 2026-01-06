@@ -8,7 +8,7 @@ Retrieve specific files (such as document images, PDFs, or other attachments) ge
 ## Endpoint
 
 ```http
-GET /files/{fileId}
+GET v1/files/{environment}/{fileId}
 ```
 
 **_Path parameters_**
@@ -42,7 +42,7 @@ The response returns the requested file as a binary stream with appropriate cont
 ## Example
 
 ```bash
-curl https://api.idnow.io/v1/files/file_abc123xyz \
+curl https://api.eu.platform.idnow.io/api/v1/files/live/file_abc123xyz \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -o downloaded_file.jpg
 ```

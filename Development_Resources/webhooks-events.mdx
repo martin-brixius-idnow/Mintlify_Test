@@ -21,20 +21,55 @@ All webhook events include these fields:
 | `eventId`        | String   | Same ID across retries for the same event                                            |
 | `eventVersion`   | String   | Current event version                                                                |
 | `eventName`      | String   | Format: `resource.action`                                                            |
-| `eventDeliverId` | String   | Unique per retry attempt (sequence: 1, 2, 3)                                         |
+| `eventDeliverId` | String   | Unique per retry attempt (max. 3 times)                                              |
+| `eventSequence`  | String   | Index of the specific event within a session (sequence: 1, 2, 3)                     |
 | `createdAt`      | ISO 8601 | When the webhook was sent                                                            |
+| `environment`    | String   | Environment on which endpoint URL was configured                                     |
 | `flowId`         | String   | The identifier of the flow that was triggered                                        |
 | `sessionId`      | UUID     | The identifier of the specific session                                               |
 | `sessionStatus`  | Enum     | Current status of the flow                                                           |
-| `lastStepId`     | String   | Identifier of the last executed step, ID is defined by you in the step configuration |
-| `lastStepType`   | String   | Name of the last executed step                                                       |
-| `lastStepStatus` | String   | Status of the last executed step (e.g., Aborted)                                     |
 
 :::info
 The `eventId` remains the same across all retry attempts, while `eventDeliverId` increments.
 :::
 
 ---
+
+### JWT-encoded payload
+
+Webhook messages are delivered as a **JSON Web Token (JWT)** rather than as a plain JSON object.  
+The HTTP request body therefore contains a JWT string, which must be decoded to access the underlying payload.
+
+The JWT **must be verified before use**, including validation of the signature and standard claims such as `iss`, `aud`, `exp`, and `iat`. Once successfully decoded and verified, the JWT payload exposes the event metadata and business data under the `data` field.
+
+The decoded JWT payload has the following structure:
+
+```json
+{
+  "data": {
+    "eventId": "b821e85b-7eff-44c2-8f56-af86630fd6ca",
+    "eventName": "session.created",
+    "eventVersion": "1.0",
+    "eventSequence": 1,
+    "eventDeliverId": 1,
+    "createdAt": "2026-01-06T09:45:54.315Z",
+    "environment": "staging",
+    "payload": {
+      "flowId": "d1e22c48-097f-4a7f-860b-ed9ffc1e1f20",
+      "sessionId": "d4611be0-0634-4aff-b883-31de8963fcf3",
+      "sessionStatus": "CREATED"
+    }
+  },
+  "iss": "https://localhost:3002/oidc",
+  "iat": 1767692757,
+  "exp": 1767696357,
+  "sub": "b821e85b-7eff-44c2-8f56-af86630fd6ca",
+  "aud": "https://webhook.site/f3aaa67d-952b-4b7f-b5a9-ed6a3ef5a539"
+}
+
+
+---
+
 
 ## Session events
 
@@ -86,9 +121,6 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
     "flowId": "identity_verification_v2",
     "sessionId": "d08d589a-4f3b-4e9a-8c21-7a9b3f2e1d6c",
     "sessionStatus": "COMPLETED",
-    "lastStepId": "My step",
-    "lastStepType": "END",
-    "lastStepStatus": "COMPLETED"
   }
 }
 ```
@@ -108,29 +140,6 @@ All webhook payloads are a minimal, machine-readable JSON message that delivers 
     "flowId": "identity_verification_v2",
     "sessionId": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
     "sessionStatus": "EXPIRED",
-    "lastStepId": "My step",
-    "lastStepType": "DOC_ID:v2",
-    "lastStepStatus": "EXPIRED"
-  }
-}
-```
-
-### `session.aborted`
-
-```json
-{
-  "eventId": "evt_e5f6g7h8i9j0k1l2",
-  "eventName": "session.aborted",
-  "eventVersion": "123",
-  "eventDeliveryId": "1",
-  "createdAt": "2025-11-24T11:15:30.654Z",
-  "payload": {
-    "flowId": "identity_verification_v2",
-    "sessionId": "f20f701c-6h5d-6g1c-0e43-9c1d5h4g3f8e",
-    "sessionStatus": "ABORTED",
-    "lastStepId": "My step",
-    "lastStepType": "DOC_ID:v2",
-    "lastStepStatus": "ABORTED"
   }
 }
 ```

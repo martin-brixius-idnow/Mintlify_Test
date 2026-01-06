@@ -63,7 +63,8 @@
             "group": "Document-based IDV",
             "pages": [
               "Platform_Guides/document-based-idv-capture",
-              "Platform_Guides/document-based-idv-headless"
+              "Platform_Guides/document-based-idv-headless",
+              "Platform_Guides/document-based-idv-capture-with-instant-signature-issuance"
             ]
           },
           {

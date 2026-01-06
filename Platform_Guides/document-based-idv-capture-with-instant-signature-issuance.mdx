@@ -1,0 +1,68 @@
+---
+title: Capture with Instant signature issuance
+description: Unified document-based IDV with Instant signature issuance
+---
+
+Combines document-based IDV in Capture mode with instant signature issuance capabilities.This unified approach streamlines customer onboarding and contract execution while maintaining compliance with document-based IDV and electronic signature regulations.
+
+Users can complete document-based IDV through agent-assisted review (VideoIdent), automated visual verification (AutoIdent), combined with either contract signing (eSign) or qualified electronic signature (QES). Each mode ensures compliance with regulations such as eIDAS, AML, GwG, and BaFin. 
+---
+
+## Key features
+
+This step can operate in one of three modes, driven entirely by the configured shortname:
+
+- ***VideoIdent + Contract Signing*** - Agent-assisted document verification combined with electronic contract signing (VideoIdent + eSign).
+- ***AutoIdent + Contract Signing*** - Automated document verification combined with electronic contract signing (AutoIdent + eSign).
+- ***AutoIdent + QES*** - Automated document verification with Qualified Electronic Signature (trust-based identity verification; no contract PDF input required). 
+
+---
+
+## Configuration
+
+| Parameter                      | Type   | Required    | Default | Description                                                                                                                    |
+| ------------------------------ | ------ | ----------- | ------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `inputSources`                 | Object | Yes         | -       | Maps identity data sources to flow step IDs for pre-filling the session                                                        |
+| `inputSources.basicIdentity`   | String | Yes         | -       | The ID of the step providing the BasicIdentity data block.                                         |
+| `inputSources.documentsToSign` | String | Conditional | -       | The ID of the step providing the DocumentsToSign data block. Required when `signingMode` is `CONTRACT_SIGNING`                  |
+| `config`                       | Object | Yes         | -       | Contains credentials and mode configuration for identity verification and signing services                                     |
+| `config.shortname`             | String | Yes         | -       | Shortname identifier determining verification method and linked to pre-configured journey on the platform                      |
+| `config.apiKey`                | String | Yes         | -       | API key for authenticating with the services                                                                                   |
+| `config.signingMode`           | String | Yes         | -       | Signing behavior. Values: `CONTRACT_SIGNING` (requires DocumentsToSign) or `QES` (document configured at account level)        |
+
+---
+
+## Input data blocks
+
+Input requirements for this step.
+
+| Data block        | Mandatory   | Description                                                                                                       |
+| ----------------- | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| `BasicIdentity`   | Yes         | BasicIdentity data containing first name and last name to initiate the verification session                       |
+| `DocumentsToSign` | Conditional | Contract PDF documents to be signed. Required when `signingMode` is `CONTRACT_SIGNING`; optional when `QES`       |
+
+\*If the Data block is not available when required, the workflow will fail validation.
+
+---
+
+## Verdicts
+
+Verdicts for this data block.
+
+| Verdict          | Description                                                                                                                            |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `verified`       | Successful document processing with identity extraction and signing. User's documents were successfully verified and signed.           |
+| `fraud_detected` | Document or liveness identified as fraudulent. This occurs when fraud is confirmed after manual review. No signed documents produced.  |
+| `cancelled`      | The verification process was cancelled by the agent, for instance due to blurry images or unusable documents.                          |
+
+---
+
+## Output data blocks
+
+Data blocks produced per verdict.
+
+| Verdict            | Data blocks produced                                                                                                             | Notes                                          |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| **verified**       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification`, `SignedDocumentsPackage` | All identity data and signed documents extracted |
+| **fraud_detected** | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification`               | Contains fraud detection details               |
+| **cancelled**      | `DocumentVerification`                                                                                                           | Contains cancellation reason                   |

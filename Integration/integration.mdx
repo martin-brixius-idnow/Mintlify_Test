@@ -23,6 +23,25 @@ The API returns only what you need. No bloat. No unnecessary PII exposure. Reque
 
 ---
 
+#### Environment and API versions
+
+Environments and versions are reflected directly in the endpoint base path. 
+
+The domain indicates the ***environment***, using `api.eu.platform.idnow.io` for ***live*** and `api.eu.platform.idnow.sx` for ***sandbox***. 
+
+The API version is included as a versioned path segment such as `/api/v1`. 
+
+Each of these contains two logical environments — `live` and `staging` — which must be explicitly defined in the endpoint path, for example:
+
+- POST /flows/{flowId}/{environment}/sessions 
+
+Example endpoint calls:
+
+- POST `https://api.eu.platform.idnow.io/api/v1/flows/12345/live/sessions`
+- POST `https://api.eu.platform.idnow.sx/api/v1/flows/12345/staging/sessions`
+
+---
+
 ## Feature set
 
 #### Privacy by default

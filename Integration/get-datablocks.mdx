@@ -13,21 +13,19 @@ GET v1/session/{sessionId}/{environment}/datablocks
 
 **_Path parameters_**
 
-None
+| Parameter   | Type   | Required | Description                          |
+| ----------- | ------ | -------- | ------------------------------------ |
+| `sessionId` | string | Yes      | The unique identifier of the session |
 
 ## Request
 
-Query parameters control pagination and sorting:
+No request body is required for this endpoint.
 
-| Parameter     | Type    | Required | Description                      |
-| ------------- | ------- | -------- | -------------------------------- |
-| `flowId`      | string  | Yes      | Flow identifier                  |
-| `environment` | string  | Yes      | Environment identifier           |
-| `sessionId`   | string  | Yes      | Session identifier               |
-| `page`        | number  | No       | Page number for pagination       |
-| `size`        | number  | No       | Number of items per page         |
-| `sortBy`      | string  | Yes      | Field to sort by                 |
-| `sortDesc`    | boolean | Yes      | Sort in descending order if true |
+**_Headers_**
+
+| Header          | Type   | Required | Description                     |
+| --------------- | ------ | -------- | ------------------------------- |
+| `Authorization` | string | Yes      | Bearer token for authentication |
 
 ## Response
 

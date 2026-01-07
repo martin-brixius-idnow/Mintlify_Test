@@ -8,7 +8,7 @@ Retrieve all data blocks associated with a specific session. Data blocks contain
 ## Endpoint
 
 ```http
-GET v1/session/{sessionId}/{environment}/datablocks
+GET v1/sessions/{sessionId}/{environment}/datablocks
 ```
 
 **_Path parameters_**
@@ -75,7 +75,7 @@ For a complete list of available data block types and their schemas, see [Core c
 ## Example
 
 ```bash
-curl https://api.eu.platform.idnow.io/api/v1/session/123/live/datablocks?flowId=wf_1a2b3c4d5e6f
+curl https://api.eu.platform.idnow.io/api/v1/sessions/123/live/datablocks?flowId=wf_1a2b3c4d5e6f
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json"
 ```

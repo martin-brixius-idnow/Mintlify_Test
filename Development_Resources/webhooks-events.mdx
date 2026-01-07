@@ -25,9 +25,9 @@ All webhook events include these fields:
 | `eventSequence`  | String   | Index of the specific event within a session (sequence: 1, 2, 3)                     |
 | `createdAt`      | ISO 8601 | When the webhook was sent                                                            |
 | `environment`    | String   | Environment on which endpoint URL was configured                                     |
-| `flowId`         | String   | The identifier of the flow that was triggered                                        |
-| `sessionId`      | UUID     | The identifier of the specific session                                               |
-| `sessionStatus`  | Enum     | Current status of the flow                                                           |
+| `payload.flowId`         | String   | The identifier of the flow that was triggered                                        |
+| `payload.sessionId`      | UUID     | The identifier of the specific session                                               |
+| `payload.sessionStatus`  | Enum     | Current status of the flow                                                           |
 
 :::info
 The `eventId` remains the same across all retry attempts, while `eventDeliverId` increments.

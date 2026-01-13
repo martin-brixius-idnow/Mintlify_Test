@@ -1,7 +1,9 @@
 ---
-title: Rejection and failure reasons
+title: Rejection reasons
 description: Understanding detailed decision information in data blocks
 ---
+
+#### Understanding detailed decision information in data blocks
 
 As explained in the Core Concept section, each flow session provides a decisionOutcome parameter representing the final flow result. While this high-level outcome is always available, certain steps provide additional detailed information about how that outcome was reached.
 
@@ -19,12 +21,13 @@ Each data block follows a consistent structure:
 
 ```json
 {
-  "verdict": "enum",        // The final, qualitative outcome of a step
-  "score": "number",        // A optional, numerical score as a percentage (e.g., 71.6)
-  "reasons": [              // Factors that significantly influenced the score or verdict
+  "verdict": "enum", // The final, qualitative outcome of a step
+  "score": "number", // A optional, numerical score as a percentage (e.g., 71.6)
+  "reasons": [
+    // Factors that significantly influenced the score or verdict
     {
-      "code": "string",     // Machine-readable code (e.g., "RE029")
-      "details": "string"   // Human-readable explanation
+      "code": "string", // Machine-readable code (e.g., "RE029")
+      "details": "string" // Human-readable explanation
     }
   ]
 }
@@ -32,6 +35,7 @@ Each data block follows a consistent structure:
 
 :::info
 Data blocks may provide varying levels of detail. Some steps return complete decision information, while others provide only partial results or no detailed breakdown. The available data depends on the step type, IDnow's internal logic, and any availability of third-party results .:::
+:::
 
 ---
 
@@ -43,12 +47,12 @@ A flow uses the Biometric `Authentication` step to authenticate a user, but the 
 
 ```json
 {
-  "verdict": "failure",      
-  "score": "",   
-  "reasons": [      
+  "verdict": "failure",
+  "score": "",
+  "reasons": [
     {
-      "code": "",   
-      "details": "SERVER_FACE_DOES_NOT_MATCH"   
+      "code": "",
+      "details": "SERVER_FACE_DOES_NOT_MATCH"
     }
   ]
 }
@@ -60,16 +64,16 @@ The `Device intelligence` step detects that a user is connecting through a proxy
 
 ```json
 {
-  "verdict": "not_trusted",      
-  "score": 28.3,   
-  "reasons": [      
+  "verdict": "not_trusted",
+  "score": 28.3,
+  "reasons": [
     {
-      "code": "RC004",   
-      "details": "The country associated to the ip address does not match with the country of the phone number"   
+      "code": "RC004",
+      "details": "The country associated to the ip address does not match with the country of the phone number"
     },
     {
-      "code": "RE011",   
-      "details": "This email address is present in much more data breach than usual, indicating a shared email"   
+      "code": "RE011",
+      "details": "This email address is present in much more data breach than usual, indicating a shared email"
     }
   ]
 }
@@ -79,4 +83,5 @@ The `Device intelligence` step detects that a user is connecting through a proxy
 
 ## Detailed rejection and failure reasons
 
-For detailed reasons such as available parameters, possible values, third-party providers, and links to external documentation—please refer to the Data block overview. 
+For detailed reasons such as available parameters, possible values, third-party providers, and links to external documentation, please refer to the Data block overview.
+

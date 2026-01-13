@@ -3,11 +3,12 @@ title: Webhook events
 description: Understand webhook event types and payload structure
 ---
 
+#### Understand webhook event types and payload structure
+
 Webhook payloads are minimal, machine-readable JSON messages that deliver metadata about an event. They will never include personally identifiable information (PII). You can fetch full details from the API when needed by using the respective `session_id`.
 
 :::info
-All events use thin payloads. No personally identifiable information (PII) is included by default.  
-To learn more, see the [Configure webhooks →](/docs/development-resources/webhooks-manage)
+All events use thin payloads. No personally identifiable information (PII) is included by default. To learn more, see the [Configure webhooks →](/docs/development-resources/manage-webhooks)
 :::
 
 ---
@@ -16,18 +17,22 @@ To learn more, see the [Configure webhooks →](/docs/development-resources/webh
 
 All webhook events include these fields:
 
-| Field            | Type     | Description                                                                          |
-| ---------------- | -------- | ------------------------------------------------------------------------------------ |
-| `eventId`        | String   | Same ID across retries for the same event                                            |
-| `eventVersion`   | String   | Current event version                                                                |
-| `eventName`      | String   | Format: `resource.action`                                                            |
-| `eventDeliverId` | String   | Unique per retry attempt (max. 3 times)                                              |
-| `eventSequence`  | String   | Index of the specific event within a session (sequence: 1, 2, 3)                     |
-| `createdAt`      | ISO 8601 | When the webhook was sent                                                            |
-| `environment`    | String   | Environment on which endpoint URL was configured                                     |
-| `payload.flowId`         | String   | The identifier of the flow that was triggered                                        |
-| `payload.sessionId`      | UUID     | The identifier of the specific session                                               |
-| `payload.sessionStatus`  | Enum     | Current status of the flow                                                           |
+| Field                   | Type     | Description                                                      |
+| ----------------------- | -------- | ---------------------------------------------------------------- |
+| `eventId`               | String   | Same ID across retries for the same event                        |
+| `eventVersion`          | String   | Current event version                                            |
+| `eventName`             | String   | Format: `resource.action`                                        |
+| `eventDeliverId`        | String   | Unique per retry attempt (max. 3 times)                          |
+| `eventSequence`         | String   | Index of the specific event within a session (sequence: 1, 2, 3) |
+| `createdAt`             | ISO 8601 | When the webhook was sent                                        |
+| `environment`           | String   | Environment on which endpoint URL was configured                 |
+| `payload.flowId`        | String   | The identifier of the flow that was triggered                    |
+| `payload.sessionId`     | UUID     | The identifier of the specific session                           |
+| `payload.sessionStatus` | Enum     | Current status of the flow                                       |
+| `lastStepId`            | String   | The identifier of the name. Is configurable in IDnow dashboard   |
+| `lastStepType`          | String   | Last run step                                                    |
+| `lastStepStatus`        | String   | Status of the last step run                                      |
+
 
 :::info
 The `eventId` remains the same across all retry attempts, while `eventDeliverId` increments.
@@ -49,24 +54,27 @@ The decoded JWT payload has the following structure:
 ```json
 {
   "data": {
-    "eventId": "b821e85b-7eff-44c2-8f56-af86630fd6ca",
-    "eventName": "session.created",
+    "eventId": "61a51c5b-480d-4f47-8334-34b0ba7ae0be",
+    "eventName": "session.completed",
     "eventVersion": "1.0",
-    "eventSequence": 1,
-    "eventDeliverId": 1,
-    "createdAt": "2026-01-06T09:45:54.315Z",
+    "eventSequence": "2",
+    "eventDeliverId": "1",
+    "createdAt": "2026-01-08T08:35:37.581Z",
     "environment": "staging",
     "payload": {
-      "flowId": "d1e22c48-097f-4a7f-860b-ed9ffc1e1f20",
-      "sessionId": "d4611be0-0634-4aff-b883-31de8963fcf3",
-      "sessionStatus": "CREATED"
+      "flowId": "bf8e2e27-2340-426f-a0bb-f1081e4a07ac",
+      "sessionId": "fe1941c2-bc45-4142-b516-fa0fc9fd7754",
+      "sessionStatus": "COMPLETED",
+      "lastStepId": "END-ACCEPT",
+      "lastStepType": "END",
+      "lastStepStatus": "COMPLETED"
     }
   },
-  "iss": "https://localhost:3002/oidc",
-  "iat": 1767692757,
-  "exp": 1767696357,
-  "sub": "b821e85b-7eff-44c2-8f56-af86630fd6ca",
-  "aud": "https://webhook.site/f3aaa67d-952b-4b7f-b5a9-ed6a3ef5a539"
+  "iss": "https://auth.dev1.platform.idnow.dev/oidc",
+  "iat": 1767861339,
+  "exp": 1767864939,
+  "sub": "61a51c5b-480d-4f47-8334-34b0ba7ae0be",
+  "aud": "https://webhook.site/d076d490-8424-4c85-8904-5d1801c7909e"
 }
 ```
 
@@ -85,3 +93,6 @@ IDnow sends the following event types when a session changes state:
 | session.error     | Flow enters ERROR state and stops processing        |
 
 ---
+
+
+

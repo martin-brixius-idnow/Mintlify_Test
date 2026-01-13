@@ -1,7 +1,9 @@
 ---
 title: Device intelligence
-description: Evaluates the trustworthiness of the customer’s device.
+description: Evaluates the trustworthiness of the customer’s device
 ---
+
+#### Evaluates the trustworthiness of the customer’s device
 
 Helps determine whether the device appears safe, familiar, and genuine or if there are signs of unusual activity, automation, or manipulation.
 
@@ -20,9 +22,9 @@ Helps determine whether the device appears safe, familiar, and genuine or if the
 
 | Parameter                  | Type    | Required | Default | Description                                                                                                    |
 | -------------------------- | ------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------- |
-| `suspiciousUserThreshold`  | Integer | -        | -       | Defines the threshold at which a user is considered â€œsuspiciousâ€ based on suspectScore.                     |
-| `notTrustedUserThreshold`  | Integer | -        | -       | Defines the threshold at which a user is considered â€œnot_trustedâ€ based on suspectScore.                    |
-| `confidenceScoreThreshold` | Float   | -        | -       | Sets the minimum fingerprint confidence.score below which the result is deemed â€œinconclusiveâ€ and routed to |
+| `suspiciousUserThreshold`  | Integer | -        | -       | Defines the threshold at which a user is considered suspicious based on suspectScore.                     |
+| `notTrustedUserThreshold`  | Integer | -        | -       | Defines the threshold at which a user is considered not_trusted based on suspectScore.                    |
+| `confidenceScoreThreshold` | Float   | -        | -       | Sets the minimum fingerprint confidence.score below which the result is deemed inconclusive and routed to |
 
 ---
 
@@ -50,11 +52,11 @@ Verdicts for this data block.
 Data blocks produced per verdict.
 
 | Verdict          | Data blocks Produced | Notes |
-| ---------------- | ------------------- | ----- |
-| **trusted**      | `DeviceSignals`     |       |
-| **suspicious**   | `DeviceSignals`     |       |
-| **not_trusted**  | `DeviceSignals`     |       |
-| **inconclusive** | `DeviceSignals`     |       |
+| ---------------- | -------------------- | ----- |
+| **trusted**      | `DeviceSignals`      |       |
+| **suspicious**   | `DeviceSignals`      |       |
+| **not_trusted**  | `DeviceSignals`      |       |
+| **inconclusive** | `DeviceSignals`      |       |
 
 ---
 
@@ -66,3 +68,4 @@ Data blocks produced per verdict.
 | `suspectScore < suspiciousUserThreshold`      | `trusted`      |
 | `suspectScore > suspiciousUserThreshold`      | `suspicious`   |
 | `suspectScore > notTrustedUserThreshold`      | `not_trusted`  |
+

@@ -1,24 +1,15 @@
 ---
 title: Authenticate
-description: Learn how to obtain an API token to authenticate with IDnow.
+description: Learn how to obtain an `access token` to authenticate with IDnow
 ---
+
+#### Learn how to obtain an `access token` to authenticate with IDnow
 
 IDnow uses OAuth 2.0 with the client credentials grant type for API authentication. The steps to set up authentication are:
-This guide shows you how to:
 
-1. Get API client details (client ID and client secret) from the IDnow dashboard
-2. Use the client ID and client secret to get an access token
-3. Use the access token to make an authenticated API request
-
----
-
-## Get API client details
-
-To authenticate with IDnow, you need to obtain API client details (`client_id` and `client_secret`)..
-
-<Info>
-  For detailed instructions, refer to <a href="https://idnow.mintlify.app/Development_Resources/Manage" target="_blank" rel="noopener noreferrer">Manage API Credentials</a>.
-</Info>
+1. Create [API clients](/docs/development-resources/api-clients)
+2. Use the obtained `client ID` and `client secret` to get an `access token`
+3. Use the `access token` to make an authenticated API request
 
 ---
 
@@ -26,41 +17,38 @@ To authenticate with IDnow, you need to obtain API client details (`client_id` a
 
 Use your client ID and client secret to request an access token. IDnow supports two client authentication methods:
 
-***Request parameters***
+**_Request parameters_**
 
 | Parameter       | Description                                                               | Required |
-|-----------------|---------------------------------------------------------------------------|----------|
+| --------------- | ------------------------------------------------------------------------- | -------- |
 | `grant_type`    | OAuth 2.0 grant type. Use `client_credentials` for server-to-server auth. | Yes      |
 | `client_id`     | Your API client ID from the IDnow dashboard.                              | Yes      |
 | `client_secret` | Your API client secret from the IDnow dashboard.                          | Yes      |
-| `scope`         | The scopes required for your API requests (if applicable).                | Optional |
 
-***Option A***: Explicit credentials (`client_secret_post`)
+**_Option A_**: Explicit credentials (`client_secret_post`)
 
 Include your credentials directly in the request body:
 
 ```bash
-curl --request POST https://<your-idnow-auth-server>/token \
+curl --request POST https://<your-idnow-auth-server>/oidc/token \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data 'grant_type=client_credentials' \
   --data 'client_id=<your-client-id>' \
   --data 'client_secret=<your-client-secret>' \
-  --data 'scope=<required-scopes>'
 ```
 
-***Option B***: HTTP Basic Authentication (`client_secret_basic`)
+**_Option B_**: HTTP Basic Authentication (`client_secret_basic`)
 
 Base64 encode your credentials in the format `client_id:client_secret` and include in the Authorization header:
 
 ```bash
-curl --request POST https://<your-idnow-auth-server>/token \
+curl --request POST https://<your-idnow-auth-server>/oidc/token \
   --header 'Authorization: Basic <BASE64_ENCODED_CREDENTIALS>' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data 'grant_type=client_credentials' \
-  --data 'scope=<required-scopes>'
 ```
 
-***Response***
+**_Response_**
 
 If successful, you will receive an access token:
 
@@ -68,12 +56,11 @@ If successful, you will receive an access token:
 {
   "access_token": "eyJh...QifQ.eyJ...hIOw",
   "expires_in": 3600,
-  "token_type": "Bearer",
-  "scope": "<granted-scopes>"
+  "token_type": "Bearer"
 }
 ```
 
-> **Note:** The default access token lifetime is typically 3600 seconds (1 hour). Cache tokens appropriately to avoid unnecessary requests.
+> **Note:** The default `access token` lifetime is typically 3600 seconds (1 hour). Cache tokens appropriately to avoid unnecessary requests.
 
 ---
 
@@ -88,10 +75,10 @@ Accept: application/json
 Authorization: Bearer eyJh...QifQ.eyJ...hIOw
 ```
 
-***Example request***
+**_Example request_**
 
 ```bash
-curl --request GET https://<your-idnow-api-host>/api/v1/identifications/<id> \
+curl --request GET https://<your-idnow-api-host>/v1/flows/{flowId}/{environment}/sessions\
   --header 'Accept: application/json' \
   --header 'Authorization: Bearer eyJh...QifQ.eyJ...hIOw'
 ```

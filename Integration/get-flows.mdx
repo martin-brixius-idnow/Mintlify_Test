@@ -3,6 +3,8 @@ title: Get flows
 description: Retrieve a list of available flows configured for your environment
 ---
 
+#### Retrieve a list of available flows configured for your environment
+
 Use this endpoint to retrieve all flows available in your environment. The response provides essential metadata for each flow.
 
 ## Endpoint
@@ -19,7 +21,7 @@ No request body is required for this endpoint.
 
 | Header          | Type   | Required | Description                     |
 | --------------- | ------ | -------- | ------------------------------- |
-| `Authorization` | string | Yes      | Bearer token for authentication | |
+| `Authorization` | string | Yes      | Bearer token for authentication |
 
 ## Response
 
@@ -29,7 +31,7 @@ Returns an array of flow objects with minimal metadata.
 {
   "content": [
     {
-      "flowID": "string",
+      "flowId": "string",
       "flowName": "string",
       "flowDescription": "string"
     }

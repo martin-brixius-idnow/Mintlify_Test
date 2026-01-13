@@ -1,30 +1,29 @@
 ---
-title: "API clients"
-description: "Manage API clients to authenticate API request"
+title: API clients
+description: Manage API clients to authenticate API request
 ---
 
-An API client securely authenticates your application with IDnow. You can manage multiple keys in the IDnow dashboard.
+#### Manage API clients to authenticate API request
 
-Each API client has a **Client ID** and a **Client secret**. Never share client secrets or store them in version control.**
+API credentials securely authenticates your application with IDnow. You can manage multiple clients and their credentials in the IDnow dashboard.
+
+Each API client has a **Client ID** and a **Client secret**. Never share client secrets or store them in version control.\*\*
 
 ---
 
-## Manage keys
+## Manage clients
 
-1. Log in to the IDnow dashboard at [hub.hub.dev.eu.idnow.io](https://hub.hub.dev.eu.idnow.io/auth/login).
+1. Log in to the IDnow dashboard at [studio.dev1.platform.idnow.dev](https://studio.dev1.platform.idnow.dev/auth/login).
 2. Go to **Settings** > **Developer** > **API clients**.
 
-![API keys management interface](/img/resources/api-keys-overview.png)
-_API key details page_
-
 ---
 
-## Create key
+## Create client
 
-1. Select **New API key**.
+1. Select **New API client**.
 2. Enter a descriptive name.
-3. Select **Create API key**.
-
+3. Select permissions.
+4. Select **Create API client**.
 
 ---
 
@@ -33,16 +32,15 @@ _API key details page_
 1. Copy **Client ID** and **Client secret** securely.
 2. Confirm you have saved them.
 
-
 > **Copy the client secret now. You won't see it again.**  
 > Lost secrets must be regenerated and updated in all apps.
 
 ---
 
-## Edit key
+## Edit client
 
-1. Find your API key, select **View details**.
-2. Edit name or regenerate client secret.
+1. Find your API client, select **View details**.
+2. Edit name, permissions, or regenerate client secret.
 
 > 'Client ID' cannot be changed.
 
@@ -57,21 +55,23 @@ _API key details page_
 
 ---
 
-## Delete key
+## Delete client
 
 1. Find and select **Delete icon**.
 2. Confirm deletion.
 
-> **This action cannot be undone.** Update or disable all apps using this key before deletion.
+> **This action cannot be undone.** Update or disable all apps using this client before deletion.
 
 ---
 
 ## Security best practices
 
 - Never share secrets.
-- Don't store keys in version control.
+- Don't store secret in version control.
 - Use environment variables or secure storage.
-- Remove unused keys.
+- Grant minimum permissions.
+- Remove unused clients.
 - Regenerate secrets periodically.
-- Use separate keys for each environment.
+- Use separate clients for each environment.
 - Test rotation before applying to Live.
+

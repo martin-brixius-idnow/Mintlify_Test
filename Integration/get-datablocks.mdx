@@ -1,23 +1,23 @@
 ---
-title: Get data blocks
-description: Retrieve input and output data blocks for a session
+title: Get files
+description: Retrieve files associated with a session
 ---
 
-#### Retrieve input and output data blocks for a session
+#### Retrieve files associated with a session
 
-Retrieve all data blocks associated with a specific session. Data blocks contain the input data provided when creating the session and output data generated during flow execution. This endpoint supports both input and output data block retrieval with pagination.
+Retrieve specific files (such as document images, PDFs, or other attachments) generated or uploaded during a session. Files are referenced by their unique file identifier.
 
 ## Endpoint
 
 ```http
-GET v1/sessions/{sessionId}/{environment}/datablocks
+GET v1/files/{environment}/{fileId}
 ```
 
 **_Path parameters_**
 
-| Parameter   | Type   | Required | Description                          |
-| ----------- | ------ | -------- | ------------------------------------ |
-| `sessionId` | string | Yes      | The unique identifier of the session |
+| Parameter | Type   | Required | Description                                   |
+| --------- | ------ | -------- | --------------------------------------------- |
+| `fileId`  | string | Yes      | The unique identifier of the file to retrieve |
 
 ## Request
 
@@ -31,60 +31,32 @@ No request body is required for this endpoint.
 
 ## Response
 
-```json
-{
-  "datablocks": [
-    {
-      "type": "BasicIdentity",
-      "createdByStep": "doc_idv",
-      "createdAt": "2025-10-24T12:30:00Z",
-      "name": "Schmidt",
-      "familyName": "Schmidt",
-      "givenName": "Max",
-      "birthDate": "1985-08-22"
-    },
-    {
-      "type": "Credentials",
-      "createdByStep": "doc_idv",
-      "createdAt": "2025-10-24T12:30:00Z",
-      "credentialType": "io.idnow.idcheckio.<document code>",
-      "issuanceDate": "2025-12-07",
-      "expiryDate": "2035-12-07",
-      "issuer": {}
-    }
-  ]
-}
-```
+The response returns the requested file as a binary stream with appropriate content type headers.
 
-**_Response parameters_**
+**_Response headers_**
 
-| Parameter    | Type  | Description                 |
-| ------------ | ----- | --------------------------- |
-| `datablocks` | array | Array of data block objects |
-
-All data blocks include these fields:
-
-| Field           | Type   | Description                                               |
-| --------------- | ------ | --------------------------------------------------------- |
-| `type`          | string | Type of data block (e.g., `BasicIdentity`, `Credentials`) |
-| `createdByStep` | string | Step that created this data block                         |
-| `createdAt`     | string | ISO 8601 timestamp when data block was created            |
-
-:::info
-For a complete list of available data block types and their schemas, see [Core concepts: Data blocks](/docs/platform-guides/datablocks).
-:::
+| Header                | Description                                                   |
+| --------------------- | ------------------------------------------------------------- |
+| `Content-Type`        | MIME type of the file (e.g., `image/jpeg`, `application/pdf`) |
+| `Content-Length`      | Size of the file in bytes                                     |
+| `Content-Disposition` | Suggested filename for download                               |
 
 ## Example
 
 ```bash
-curl https://api.eu.platform.idnow.io/api/v1/sessions/123/live/datablocks?flowId=wf_1a2b3c4d5e6f
+curl https://api.eu.platform.idnow.io/api/v1/files/live/file_abc123xyz \
   -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
+  -o downloaded_file.jpg
 ```
+
+## Use cases
+
+- Retrieve document images (passport, ID card photos)
+- Access uploaded supporting documents
+- Retrieve facial biometric images
 
 ## Notes
 
-- Data blocks are sorted by `createdAt` timestamp by default
-- Both input data blocks (provided at session creation) and output data blocks (generated during execution) are returned
-- Data blocks are linked to the steps that created them via the `createdByStep` field
-- All access attempts are logged for auditability and compliance
+- All file access attempts are logged for compliance and auditability
+- Files are stored securely and access requires proper authentication
+

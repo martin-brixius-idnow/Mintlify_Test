@@ -3,34 +3,58 @@ title: Secure webooks
 description: Implement security best practices to protect your webhook endpoints.
 ---
 
+#### Implement security best practices to protect your webhook endpoints
+
 Secure your webhook endpoints to ensure that incoming requests genuinely originate from IDnow and have not been tampered with.
 
-## Authentication
+---
 
-IDnow signs all webhook events with a JWT signature. You can verify this signature to ensure the webhook came from IDnow.
+## Security headers
+
+When configuring your webhook endpoint in the IDnow dashboard, you can define custom HTTP headers that are sent with every webhook request. IDnow automatically includes these headers in each call. No schema validation is performed.
+
+**_Steps:_**
+
+1. **Configure headers**: Define the desired headers (e.g. API key or shared secret) in the webhook configuration.
+2. **Verify headers**: Check that the header values received in the webhook request match the expected ones.
+
+**_Example patterns:_**
+
+- Static token (API Key / Shared Secret): X-Auth-Token: 5eaf37d12c9b4c0987a6f9e1a4f823bf
+- Basic Authentication: Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 
 ---
 
-### API token
+## JWT signature
 
-You must provide an API token when configuring your webhook endpoint in the IDnow dashboard. IDnow includes this token in the request header.
+All webhook payloads are additionally signed using a JSON Web Token (JWT). You can optionally verify this signature to ensure the authenticity and integrity of the webhook. The JWT is included in the `X-Idnow-Signature` header of every webhook request.
 
-**Steps:**
+**_JWKS endpoint_**
 
-1. **Add your API token**: Configure your API token in the IDnow dashboard when setting up the webhook endpoint.
-2. **Verify the token**: Check the token in the request header matches your expected value.
+IDnow exposes its public keys at:
 
----
+```
+https://auth.dev1.platform.idnow.dev/oidc/.well-known/jwks.json
+```
 
-### JWT signature
+The JWKS URL is also advertised via the OpenID configuration:
 
-All webhook payloads are signed using JSON Web Tokens (JWT). You can optionally verify the signature to confirm authenticity.
+```
+https://auth.dev1.platform.idnow.dev/oidc/.well-known/openid-configuration
+```
 
-The JWT signature is included in the `X-Idnow-Signature` header with every webhook request.
+**_Validation Steps_**
 
-:::info
-JWT signature verification is optional but recommended for production environments.
-:::
+1. **Extract `kid`** from the JWT header.
+2. **Fetch JWKS** from the endpoint above.
+3. **Select the matching public key** using the `kid`.
+4. **Verify the signature** using RS256.
+5. **Validate claims**:
+   - `exp` – token not expired
+   - `iss` – issuer matches IDnow
+   - `aud` – token intended for your application
+
+Once the signature and claims are valid, you can safely trust the webhook payload.
 
 ---
 
@@ -42,15 +66,9 @@ Restrict your webhook endpoint to only accept requests from IDnow IP addresses.
 IDnow maintains a limited and stable list of IP addresses for webhook delivery.
 :::
 
-### IP ranges
+**_IP ranges:_**
 
-Add these IP ranges to your firewall or application allow list:
-
-```text
-203.0.113.0/24
-198.51.100.0/24
-192.0.2.0/24
-```
+Add the IP ranges provided by account managers to your firewall or application allow list.
 
 :::note
 Contact your account manager for the current production IP ranges.
@@ -67,15 +85,3 @@ Your webhook endpoint must support TLS 1.2 or higher. IDnow validates your endpo
 - **TLS 1.2**: Supported and recommended
 - **TLS 1.3**: Supported and recommended
 
----
-
-## Security headers
-
-IDnow includes these headers with every webhook request:
-
-| Header              | Description                          |
-| ------------------- | ------------------------------------ |
-| `Authorization`     | Your API token                       |
-| `X-Idnow-Signature` | JWT signature of the payload         |
-| `Content-Type`      | Always `application/json`            |
-| `User-Agent`        | IDnow webhook service identifier     |

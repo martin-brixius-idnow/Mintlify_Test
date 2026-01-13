@@ -1,32 +1,33 @@
 ---
-title: Email and phone verification 
-description: Assesses trust signals from a user’s contact details.
+title: Email and phone verification
+description: Assesses trust signals from a user’s contact details
 ---
 
-Helps businesses identify suspicious or trustworthy behaviour based on email, phone, name, and IP data before the user continues with e.g. identity verification or electronic signiture processes. 
+#### Assesses trust signals from a user’s contact details
+
+Helps businesses identify suspicious or trustworthy behaviour based on email, phone, name, and IP data before the user continues with e.g. identity verification or electronic signiture processes.
 
 ---
 
 ## Key features
 
-- Computes a ***trust score*** from email, phone, IP and name signals.
-- Routes flow using ***configurable thresholds***: suspiciousUserThreshold and trustedUserThreshold.
-- ***Optional `inputSources`*** to specify step IDs (basicIdentity, extendedIdentity, deviceSignals); otherwise uses latest data blocks.
-- ***Produces `DigitalSignals`*** for trusted, suspicious, and not_trusted; inconclusive when no definitive assessment.
+- Computes a **_trust score_** from email, phone, IP and name signals.
+- Routes flow using **_configurable thresholds_**: suspiciousUserThreshold and trustedUserThreshold.
+- **_Optional `inputSources`_** to specify step IDs (basicIdentity, extendedIdentity, deviceSignals); otherwise uses latest data blocks.
+- **_Produces `DigitalSignals`_** for trusted, suspicious, and not_trusted; inconclusive when no definitive assessment.
 
 ---
 
-
 ## Configuration
 
-| Parameter                       | Type    | Required | Default | Description                                                                                                                        |
-| ------------------------------- | ------- | -------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `suspiciousUserThreshold`       | Integer | Yes      |         | The score threshold (in percent) below which a user is considered "suspicious".                                                    |
-| `trustedUserThreshold`          | Integer | Yes      |         | The score threshold (in percent) above which a user is considered "trusted".                                                       |
+| Parameter                       | Type    | Required | Default | Description                                                                                                                         |
+| ------------------------------- | ------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `suspiciousUserThreshold`       | Integer | Yes      |         | The score threshold (in percent) below which a user is considered "suspicious".                                                     |
+| `trustedUserThreshold`          | Integer | Yes      |         | The score threshold (in percent) above which a user is considered "trusted".                                                        |
 | `inputSources`                  | Object  | No       |         | Specifies the flow step IDs to use for sourcing data. If omitted, the step will use the latest available data blocks from the flow. |
-| `inputSources.basicIdentity`    | String  | No       |         | The step ID providing basic identity data (e.g., first name, last name).                                                           |
-| `inputSources.extendedIdentity` | String  | No       |         | The step ID providing extended identity data (e.g., phone, email).                                                                 |
-| `inputSources.deviceSignals`    | String  | No       |         | The step ID providing device signal data (e.g., IP address).                                                                       |
+| `inputSources.basicIdentity`    | String  | No       |         | The step ID providing basic identity data (e.g., first name, last name).                                                            |
+| `inputSources.extendedIdentity` | String  | No       |         | The step ID providing extended identity data (e.g., phone, email).                                                                  |
+| `inputSources.deviceSignals`    | String  | No       |         | The step ID providing device signal data (e.g., IP address).                                                                        |
 
 ---
 
@@ -39,7 +40,6 @@ If the input sources are not specified, this step attempts to retrieve the infor
 ## Verdicts
 
 Verdicts for this data block.
-
 
 | Verdict        | Description                                                                     |
 | -------------- | ------------------------------------------------------------------------------- |
@@ -54,10 +54,9 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-
 | Verdict          | Data blocks produced | Notes |
-| ---------------- | ------------------- | ----- |
-| **trusted**      | `DigitalSignals`    |       |
-| **suspicious**   | `DigitalSignals`    |       |
-| **not_trusted**  | `DigitalSignals`    |       |
-| **inconclusive** |                     |       |
+| ---------------- | -------------------- | ----- |
+| **trusted**      | `DigitalSignals`     |       |
+| **suspicious**   | `DigitalSignals`     |       |
+| **not_trusted**  | `DigitalSignals`     |       |
+| **inconclusive** | None                 |       |

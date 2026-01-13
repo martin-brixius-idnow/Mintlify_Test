@@ -3,6 +3,8 @@ title: Capture
 description: End-to-end, compliant document-based identity verification
 ---
 
+#### End-to-end, compliant document-based identity verification
+
 Verifies identity using secure identity documents through multiple verification modes, adapted to business and regulatory needs.
 
 In Capture mode, the end user completes verification through the IDnow frontend, which guides them step by step in providing the required identity evidence. This includes capturing document images, performing biometric checks (such as face matching and liveness detection), and optionally reading electronic document chips via NFC. The IDnow frontend ensures high-quality image capture, proper lighting checks, and guided user interaction, while maintaining a compliant and user-friendly verification experience.
@@ -11,17 +13,15 @@ This contrasts with the Headless approach, where customers collect document and 
 
 Users can complete verification through automated visual verification (AI-driven document and security feature checks), automated NFC verification (secure chip reading for eID-supported documents), or agent-assisted verification (review by trained identity specialists). Each mode ensures compliance with regulations such as eIDAS, AML, GwG, and BaFin. Configurations are modular, enabling flexible integration across fully automated or hybrid identity verification flows.
 
----
-
 ## Key features
 
-- ***Automated visual verification*** - AI-based analysis of ID document authenticity, integrity, and visual security features.
-- ***Automated NFC verification*** - Secure reading and validation of embedded NFC chips in electronic identity documents.
-- ***Agent-assisted verification*** - Expert review for complex, regulated, or escalated cases both in Autoident and VideoIndent products.
-- ***Capture frontend*** – Guided user interface collect document images, biometric samples, and NFC data directly from the end user through SDKs.
-- ***Optimized data quality*** - Built-in guidance ensures correct document positioning, image sharpness, and proper lighting for improved verification outcomes.
-- ***Configurable workflows*** - Automated and manual verification modes can be combined or sequenced based on business or regulatory requirements.
-- ***Regulatory alignment*** - Fully compliant with eIDAS, AML, GwG, EAA and BaFin standards for secure remote identity verification.
+- **_Automated visual verification_** - AI-based analysis of ID document authenticity, integrity, and visual security features.
+- **_Automated NFC verification_** - Secure reading and validation of embedded NFC chips in electronic identity documents.
+- **_Agent-assisted verification_** - Expert review for complex, regulated, or escalated cases both in Autoident and VideoIndent products.
+- **_Capture frontend_** – Guided user interface collect document images, biometric samples, and NFC data directly from the end user through SDKs.
+- **_Optimized data quality_** - Built-in guidance ensures correct document positioning, image sharpness, and proper lighting for improved verification outcomes.
+- **_Configurable workflows_** - Automated and manual verification modes can be combined or sequenced based on business or regulatory requirements.
+- **_Regulatory alignment_** - Fully compliant with eIDAS, AML, GwG, EAA and BaFin standards for secure remote identity verification.
 
 ---
 
@@ -38,20 +38,18 @@ Users can complete verification through automated visual verification (AI-driven
 
 Input requirements for this step.
 
-
-| Data block          | Mandatory | Description                                          |
+| Data block         | Mandatory | Description                                          |
 | ------------------ | --------- | ---------------------------------------------------- |
 | `BasicIdentity`    | No        | BasicIdentity data to compare against attestation    |
 | `ExtendedIdentity` | No        | ExtendedIdentity data to compare against attestation |
 
-\*If the data block is not available, the step will execute normally without this information, and the flow will proceed without error.
+\*If the Data block is not available, the step will execute normally without this information, and the flow will proceed without error.
 
 ---
 
 ## Verdicts
 
 Verdicts for this data block.
-
 
 | Verdict          | Description                                                                                                                                |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -65,11 +63,9 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-
-| Verdict            | Data blocks produced                                                                                               | Notes                                    |
+| Verdict            | Data blocks produced                                                                                              | Notes                                    |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | **verified**       | `BasicIdentity`, `ExtendedIdentity`, `BiometricSamples`, `DocumentData`, `DocumentImages`, `DocumentVerification` | All identity data successfully extracted |
 | **fraud_detected** | `DocumentVerification`                                                                                            | Contains fraud detection details         |
-| **aborted**        | -                                                                                                                 | No Data blocks produced                   |
-| **cancelled**      | `DocumentVerification`                                                                                            | Contains cancellation reason             |
-| **default**        | -                                                                                                                 | No Data blocks produced                   |
+| **aborted**        | -                                                                                                                 | No Data blocks produced                  |
+| **cancelled**      | `DocumentVerification`

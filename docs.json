@@ -55,7 +55,7 @@
             "pages": [
               "Platform_Guides/core-concept",
               "Platform_Guides/datablocks",
-              "Platform_Guides/lifecycle",
+              "Platform_Guides/sessions",
               "Platform_Guides/rejection-and-failure-reasons"
             ]
           },

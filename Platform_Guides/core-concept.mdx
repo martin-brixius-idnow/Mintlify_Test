@@ -3,6 +3,8 @@ title: Core concept
 description: Flows, steps, verdicts and data blocks
 ---
 
+#### Flows, steps, verdicts and data blocks
+
 This page explains the core building blocks of the IDnow Trust Platform and how they work together to form end-to-end flows:
 
 - **Flow:** A sequence of steps that produces a final decisionOutcome of a flow
@@ -18,7 +20,7 @@ This page explains the core building blocks of the IDnow Trust Platform and how 
 
 A **flow** defines how input data moves through a series of steps until a final decisionOutcome is produced.
 
-![Minimal flow with Start, a single processing Step, and an End Step.](/img/trustplatform-flow-introduction.png)
+![Minimal flow with Start, a single processing Step, and an End Step.](/img/flows.svg)
 
 ## Start and end step
 
@@ -26,42 +28,39 @@ Every flow must contain exactly one **Start step** as its entry point and at lea
 
 Between the Start step and the End step, you can add any combination of **operational steps** to perform actions, transform data and control the routing of the flow.
 
-![Minimal flow with Start, a single processing Step, and an End Step.](/img/1-trustplatform-basic-flow.png)
-_End Steps represent the final decisionOutcome of a flow_
-
 ---
 
 ## Operational steps
 
-Operational **Steps** are modular building blocks within a flow, each representing a single operational step. Typical examples include Document-based IDV, Biometric authentication or Trust Services. 
+Operational **Steps** are modular building blocks within a flow, each representing a single operational step. Typical examples include Document-based IDV, Biometric authentication or Trust Services.
 
 Each step session results in exactly one **verdict**, which in turn determines:
 
-- which **data blocks** are produced or updated, and  
+- which **data blocks** are produced or updated, and
 - how the flow continues via **Routes** to either another Step or an End step.
 
 ---
 
 ## Verdicts
 
-Each step can produce **verdicts**, which describe the result of a step operation. For example, the verdicts of an  Document-based IDV step are:
+Each step can produce **verdicts**, which describe the result of a step operation. For example, the verdicts of an Document-based IDV step are:
 
 - `verified`
 - `fraud`
 - `failure`
 
-In the flow, the verdict is used to select the next route: it either routes to a follow-up step or to an End step, which sets the final decisionOutcome shown in the API response (for example, accepted or rejected). 
+In the flow, the verdict is used to select the next route: it either routes to a follow-up step or to an End step, which sets the final decisionOutcome shown in the API response (for example, accepted or rejected).
 
-![IDV Step with three outcomes: verified, fraud, and failure, each leading to a dedicated End Step.](/img/2-trustplatform-idv-verdicts.png)
+![IDV Step with three outcomes: verified, fraud, and failure, each leading to a dedicated End Step.](/img/verdicts.svg)
 _Example of an IDV Step with multiple verdicts, each mapped to a dedicated End Step._
 
 ---
 
 ## Data blocks
 
-Each step consumes and produces typed **data blocks**. 
+Each step consumes and produces typed **data blocks**.
 
-Examples of such data blocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`. 
+Examples of such data blocks could be `ExtendedIdentity`, `DocumentVerification` and `DocumentData`.
 
 Data blocks keep data consistent as it moves through the flow. The platform determines which data blocks are available at each step, verifies that all required inputs are present, and ensures data dependencies are satisfied before executing a step.
 
@@ -71,11 +70,11 @@ The data block structure is preserved in the API response after a flow session, 
 
 The verdict of a step determines which data blocks it produces.
 
-As an example, in an identity verification flow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results. 
+As an example, in an identity verification flow, a capture failure produces no `DocumentData` or `ExtendedIdentity`, while a capture failure or a fraud verdict always includes `DocumentVerification` results.
 
 Many data blocks also carry the step’s verdict to indicate the outcome of the check that generated them.
 
-![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](/img/3-trustplatform-idv-datablocks.png)
+![IDV Step producing different data blocks for different verdicts (verified, fraud, failure).](/img/datablocks.svg)
 
 _An Identity verification step generates different data blocks depending on whether the verdict is verified, fraud, or failure._
 
@@ -90,18 +89,14 @@ Each step defines which data blocks it requires and which it produces for each v
 
 Data blocks flow from each step’s outputs to the inputs of the next steps. These definitions allow the system to validate the flow, ensuring all required inputs are available before a step executes. The data block can be included in the initial API request when a flow is executed as shown in the example below.
 
-![Flow where an IDV Step creates a BasicIdentity data block that is used as input for AML Screening, which in turn produces a PepAndSanctionsResults Data block.](/img/trustplatform-aml-screening-match-no-match-alt.png)
-
 ### Missing data blocks
 
-If a required data block is missing, the step cannot execute. As an example, an AML screening step requires a `BasicIdentity` data block, which can be provided either 
+If a required data block is missing, the step cannot execute. As an example, an AML screening step requires a `BasicIdentity` data block, which can be provided either
 
-- in the initial API request or 
+- in the initial API request or
 - produced by an upstream step
 
 All outputs from a step are added to the flow context, making them accessible to all of its descendant steps. As a result, any Step that generates a `BasicIdentity`, such as an Identity verification step, can satisfy the AML screening step’s input requirement.
-
-![IDV Step produces BasicIdentity as an outcome which is used as an inpot for AML Screening](/img/trustplatform-flow-overview.png)
 
 ### Duplications
 
@@ -122,14 +117,12 @@ A simplified transition object looks like this:
 
 ```json
 {
-  "id": "next_Step_id", // Identifier of the target Step
+  "id": "next_Step_id", // Identifier of the target step
   "route": "verified" // Named route for conditional transitions (e.g., "verified", "failure")
 }
 ```
 
 When a step is configured with multiple output scenarios, the scenario keys act as route names (for example, `verified`, `fraud_detected`, `capture_failed`, `default`).
-
-![More complex flow where verdicts define flow path and output data blocks created](/img/trustplatform-idv-aml-basicidentity.png)
 
 ---
 
@@ -138,7 +131,7 @@ When a step is configured with multiple output scenarios, the scenario keys act 
 A flow is composed of steps, verdicts, data blocks, and routes. When designing a flow:
 
 1. **Define the initial process steps**  
-  For example, start with an ID verification step that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding routes, each connected to the appropriate next step or end step.
+   For example, start with an ID verification step that outputs multiple verdicts (`success`, `fraud`, `capture_failed`) through corresponding routes, each connected to the appropriate next step or end step.
 
 2. **Reuse outputs between Steps**  
    Data blocks produced by one step can be used as inputs to downstream steps. For instance, a `BasicIdentity` data block created during ID verification can be passed to an _AML screening_ step, which then produces its own verdict and `PepAndSanctionsResults` data blocks.
@@ -149,3 +142,4 @@ A flow is composed of steps, verdicts, data blocks, and routes. When designing a
 _By combining steps, verdicts, data blocks, and routes, you can build complex trust flows._
 
 By understanding these building blocks, you can compose complex trust flows simply by wiring steps together. The platform handles session, data propagation, and audit trails automatically.
+

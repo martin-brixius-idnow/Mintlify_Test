@@ -110,7 +110,7 @@
         "tab": "Integration",
         "icon": "server",
         "groups": [
-          { "group": "Overview", "pages": ["Integration/integration"] },
+          { "group": "Overview", "pages": ["Integration/quickstart"] },
           { "group": "Authentication", "pages": ["Integration/authenticate"] },
           {
             "group": "Initialize session",

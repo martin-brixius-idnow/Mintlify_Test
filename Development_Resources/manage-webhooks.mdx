@@ -3,12 +3,14 @@ title: Manage webhooks
 description: Set up webhook endpoints, manage subscriptions, and monitor delivery
 ---
 
+#### Set up webhook endpoints, manage subscriptions, and monitor delivery
+
 IDnow sends HTTP webhooks for each session. Webhooks allow you to keep your system in sync and let you know when new results or data blocks are ready.
 
-Note that session steps are ***asynchronous***.
+Note that session steps are **_asynchronous_**.
 
 :::info
-See the full list of available webhook events here: [Webhook events →](/integration/webhooks-events)
+See the full list of available webhook events here: [Webhook events →](/docs/integration/webhooks-events)
 :::
 
 :::info
@@ -21,40 +23,25 @@ See the full list of available webhook events here: [Webhook events →](/integr
 
 Before receiving webhooks, complete these steps:
 
-<details>
-<summary>1. Expose a secure HTTPS endpoint</summary>
+**1. Expose a secure HTTPS endpoint**
 
 Your endpoint must support **TLS 1.2 or higher** for receiving POST requests.
 
-</details>
-
-<details>
-<summary>2. Only allow incoming requests from IDnow’s IPs</summary>
+**2. Only allow incoming requests from IDnow's IPs**
 
 Block unauthorized sources by accepting requests only from documented IDnow IPs.
 
-</details>
+**3. Enable JWT signature verification (recommended)**
 
-<details>
-<summary>3. Enable JWT signature verification (recommended)</summary>
+Use our signed JWT to verify webhook authenticity and prevent spoofing.
 
-Use our signed JTW to verify webhook authenticity and prevent spoofing.
-
-</details>
-
-<details>
-<summary>4. Respond with HTTP 2xx within 10 seconds</summary>
+**4. Respond with HTTP 2xx within 10 seconds**
 
 Return a success status quickly and process events asynchronously in the background.
 
-</details>
-
-<details>
-<summary>5. Use `event_id` to prevent duplicate operations</summary>
+**5. Use `event_id` to prevent duplicate operations**
 
 Track `event_id` to detect and skip duplicate deliveries caused by retries.
-
-</details>
 
 ---
 
@@ -99,19 +86,13 @@ Configure separate endpoints for **staging**, and **live** environments. You can
 
 #### Verify the source
 
-<details>
-<summary>Validate IP address</summary>
+**Validate IP address**
 
 Accept requests only from IDnow's documented IP ranges.
 
-</details>
-
-<details>
-<summary>Verify JWT signature</summary>
+**Verify JWT signature**
 
 Optionally, use your secret key to validate the JWT in the request header. See the Security page for details.
-
-</details>
 
 #### Process the event
 
@@ -129,7 +110,7 @@ Process webhook events asynchronously. Acknowledge receipt immediately (return H
 
 #### Retry logic
 
-IDnow automatically retries failed deliveries ***3 times***:
+IDnow automatically retries failed deliveries **_3 times_**:
 
 | Attempt   | Delay     | Total elapsed time |
 | --------- | --------- | ------------------ |
@@ -149,4 +130,5 @@ IDnow automatically retries failed deliveries ***3 times***:
 - Authentication failures
 - Invalid endpoint URL
 
-After maximum retries, the event is moved to the **dead letter queue**. For manual retrigger please reach out to IDnow. 
+After maximum retries, the event is moved to the **dead letter queue**. For manual retrigger please reach out to IDnow.
+

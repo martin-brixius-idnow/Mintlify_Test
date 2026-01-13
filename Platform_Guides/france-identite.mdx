@@ -1,7 +1,9 @@
 ---
 title: France Identité
-description: Verifies a user’s identity using the France Identité mobile app.
+description: Verifies a user’s identity using the France Identité mobile app
 ---
+
+#### Verifies a user’s identity using the France Identité mobile app
 
 Provides a secure verification option where users prove their identity through France’s national digital identity app. Ideal for fast, trusted onboarding or identity verification processes.
 
@@ -9,9 +11,9 @@ Provides a secure verification option where users prove their identity through F
 
 ## Key features
 
-- ***OIDC-based authentication***: Secure authentication using France Identité via OpenID Connect.
-- ***Seamless redirection***: Redirects users to France Identité for login and returns them post-authentication.
-- ***Ready-to-use***: No additional configuration needed for integration.
+- **_OIDC-based authentication_**: Secure authentication using France Identité via OpenID Connect.
+- **_Seamless redirection_**: Redirects users to France Identité for login and returns them post-authentication.
+- **_Ready-to-use_**: No additional configuration needed for integration.
 
 ---
 
@@ -31,7 +33,6 @@ This step does not require any input data blocks.
 
 Verdicts for this data block.
 
-
 | Verdict        | Description                                                                                                                                                                                                                                |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `verified`     | The user's identity has been successfully authenticated by the France Identité wallet. The user has consented to sharing their data, and the OIDC flow has completed with the reception of an ID Token containing the verified attributes. |
@@ -44,8 +45,7 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-
-| Verdict          | Data blocks produced                                         | Notes |
+| Verdict          | Data blocks produced                                        | Notes |
 | ---------------- | ----------------------------------------------------------- | ----- |
 | **verified**     | `BasicIdentity`, `ExtendedIdentity`, `AuthenticationResult` |       |
 | **canceled**     | `AuthenticationResult`                                      |       |

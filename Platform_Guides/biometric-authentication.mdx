@@ -3,6 +3,8 @@ title: Authentication
 description: Authenticates identity using facial recognition
 ---
 
+#### Authenticates identity using facial recognition
+
 Used when strong, real‑time identity confirmation is required. The user completes a quick face scan, and the system ensures they are a real person and match the enrolled face, helping prevent impersonation, spoofing, and deepfakes.
 
 ---
@@ -26,7 +28,7 @@ This step requires no configuration options. It uses the Third Party configurati
 
 Input requirements for this step.
 
-| Data block       | Mandatory | Description                                                                                              |
+| Data block      | Mandatory | Description                                                                                              |
 | --------------- | --------- | -------------------------------------------------------------------------------------------------------- |
 | `UserReference` | Yes       | Contains the unique subject identifier (subjectId) necessary to identify the user in the Keyless system. |
 
@@ -47,8 +49,7 @@ Verdicts for this data block.
 
 Data blocks produced per verdict.
 
-| Scenario          |  Data blocks produced    | Description                                                                                                |
+| Scenario          | Data blocks produced   | Description                                                                                                |
 | ----------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **authenticated** | `AuthenticationResult` | Biometric authentication succeeded. The user has been successfully authenticated.                          |
 | **failed**        | `AuthenticationResult` | Biometric authentication failed. This can be due to biometric mismatch, capture error, or technical issue. |
-| **default**       | `âˆ…`                  | A technical or unexpected error occurred during processing.                                                |

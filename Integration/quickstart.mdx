@@ -1,0 +1,73 @@
+---
+title: Quickstart
+description: 6 endpoints. Zero friction. Ship identity flows in minutes.
+---
+
+#### 6 endpoints. Zero friction. Ship identity flows in minutes
+
+Ship identity flows in minutes, not weeks. One authentication. A small, stable set of endpoints. Unlimited identity journeys.
+
+## Prerequisite
+
+Before beginning your integration, ensure the following:
+
+- [x] An `organization` was created in the IDnow dashboard
+- [x] Your user in the IDnow dashboard has an [Editor](/docs/development-resources/team-management) role
+- [x] A flow was created in the IDnow dashboard and its **version** is published to `staging` or `live`
+- [x] A [webhook](/docs/development-resources/manage-webhooks) for the flow is configured on `Staging` or `Live`
+- [x] You obtained a `client ID` and `client secret` by creating [API credentials](/docs/development-resources/api-clients)
+
+Each published flow receives a `flowId`, used to create individual user sessions. Webhooks and API clients are environment‑specific and depend on the flow being published to the configured environment `Staging` or `Live`.
+
+## Integration steps
+
+1. **Authenticate**: Request an access token using `GET v1/token` with your environment‑specific `client ID` and `client secret`.
+2. **Get flows**: Use `GET v1/flows/{environment}` to list all published flows and their `flowId`.
+3. **Create a session**: Use `v1/flows/\{flowId\}/\{environment\}/sessions` to create a user session and receive a `sessionID` and `sessionToken` .
+4. **Listen to webhook events**: Receive updates through webhook events and process the data.
+5. **Track status and decisions**: Poll `GET /sessions/{sessionId}` to retrieve `sessionStatus` and potential `flow outcome`.
+6. **Get data blocks**: Retrieve data blocks via `GET v1/sessions/{sessionId}/{environment}/datablocks`.
+7. **Get files**: Retrieve files via `GET v1/files/{environment}/{fileId}` only when needed.
+
+Optionally
+
+8. **Embed or redirect**: Integrate IDnow’s Player into your frontend and construct individual Player URLs using the obtained `sessionToken`.
+
+For complete endpoint documentation with parameters, schemas, and examples, see also [API reference](/docs/api/trust-platform-api)
+
+## Obtain data blocks
+
+[Data blocks](/docs/platform-guides/datablocks) are the structured outputs produced by each step of a flow. They are not returned automatically when creating a session or requesting session details and must be retrieved explicitly using `GET v1/sessions/{sessionId}/{environment}/datablocks`.
+
+:::note
+APIs return only what you need. No bloat and no unnecessary PII exposure. Request full data when you need it, and ignore it when you don’t.
+:::
+
+## Create sessions with dynamic payloads
+
+When creating a session, the payload you send is entirely defined by the flow that was configured. Each [flow](/docs/platform-guides/core-concepts) contains one or more steps. Each individual step specifies which input [data block](/docs/platform-guides/datablocks) it requires.
+
+Lets assume our flow consists only of a Trust service step called [Instant signature issuance](/docs/platform-guides/instant-signature-issuance). The input data blocks required for this step are `BasicIdentity` and `DocumentsToSign`. Also, `DocumentData` might be required if the signatureLevel in the flow configuration was set to `QES`.
+
+Some flows require several inputs, others only one, and some require none at all. Before creating a session for a specific flow, review the inputs required per step configured in the IDnow dashboard and construct the payload accordingly.
+
+A full list of available steps and data blocks can be found under [Platform-guides](/docs/platform-guides/core-concepts)
+
+---
+
+## Environment and API versions
+
+Environments and versions are reflected directly in the endpoint base path.
+
+The domain indicates the **_environment_**, using `api.eu.platform.idnow.io` for `production` and `api.eu.platform.idnow.sx` for `sandbox`. The **_API version_** is included as a versioned path segment such as `/api/v1`.
+
+Each environment contains two logical environments — `live` and `staging` — which must be explicitly defined in the endpoint path, for example:
+
+- POST `v1/flows/\{flowId\}/\{environment\}/sessions`
+
+Example endpoint calls:
+
+- POST `https://api.eu.platform.idnow.io/api/v1/flows/12345/live/sessions`
+- POST `https://api.eu.platform.idnow.sx/api/v1/flows/12345/staging/sessions`
+
+---

@@ -1,5 +1,5 @@
 ---
-title: Updated
+title: Data blocks
 description: Unit of information produced and consumed by flow steps
 ---
 
@@ -24,18 +24,30 @@ The `AuthenticationResult` data block contains the result of a biometric authent
 **_Attributes_**
 
 | Attribute         | Description                                                                 | Mandatory          |
+
 | ----------------- | --------------------------------------------------------------------------- | ------------------ |
+
 | `result`          | Discriminator that determines the result type (`"success"` or `"failure"`). | Yes                |
+
 | `provider`        | Authentication service provider.                                            | Yes                |
+
 | `credentialId`    | Unique identifier of the credential used (or attempted).                    | Yes                |
+
 | `credentialType`  | Type of credential (e.g., `"FACE"`, `"FINGERPRINT"`, `"FIDO_KEY"`).         | Yes                |
+
 | `subjectId`       | Identifier of the authenticated (or attempted) subject.                     | Yes                |
+
 | `requestId`       | Unique identifier of the authentication request.                            | Yes                |
+
 | `authenticatedAt` | ISO 8601 timestamp of successful authentication (success variant).          | Yes (success)      |
+
 | `attemptedAt`     | ISO 8601 timestamp of the authentication attempt (failure variant).         | Yes (failure)      |
+
 | result              | Discriminator that determines the result type: success or failure. | Yes |
+
 | reasons[].code      | Defined by the third‑party Web SDK for the "error" event. Full list: [Error Explanations](https://docs.keyless.io/web-sdk/web-sdk-reference/error-handling#errors-explanation). | Yes |
-| reasons[].details   | IDnow concatenates the error code with the reason before returning it. The result contains the code and a reason prefixed with the same code (e.g., SERVER_USER_NOT_FOUND - <detailed message>). | Yes |
+
+| reasons[].details   | IDnow concatenates the error code with the reason before returning it. The result contains the code and a reason prefixed with the same code (e.g., SERVER_USER_NOT_FOUND - &lt;detailed message&gt;). | Yes |
 
 ---
 
@@ -46,13 +58,21 @@ The `AuthenticatorCredential` data block represents a concrete authentication cr
 **_Attributes_**
 
 | Attribute        | Description                                                                               | Mandatory |
+
 | ---------------- | ----------------------------------------------------------------------------------------- | --------- |
+
 | `credentialId`   | Unique identifier returned by the provider.                                               | Yes       |
+
 | `credentialType` | Technology / modality (e.g. `FACE`, `FINGERPRINT`, `FIDO_KEY`, `PASSWORD`).               | Yes       |
+
 | `subjectId`      | Internal immutable identifier of the entity (links the credential to a subject).          | Yes       |
+
 | `provider`       | System that manages the credential (e.g. `KEYLESS`, `PLATFORM`, `CUSTOM`, `INTERNAL_CA`). | Yes       |
+
 | `status`         | Lifecycle status of the credential (e.g. `ACTIVE`, `REVOKED`, `SUSPENDED`, `EXPIRED`).    | Yes       |
+
 | `createdAt`      | ISO 8601 timestamp of initial creation.                                                   | Yes       |
+
 | `updatedAt`      | ISO 8601 timestamp of last modification (equals `createdAt` if never updated).            | Yes       |
 
 ---
@@ -64,11 +84,17 @@ The `BasicIdentity` data block contains fundamental identity information extract
 **_Attributes_**
 
 | Attribute    | Description  | Mandatory |
+
 | ------------ | ------------ | --------- |
+
 | `familyName` | Family name. | Yes       |
+
 | `name`       | Name.        | No        |
+
 | `givenName`  | Given name.  | Yes       |
+
 | `birthDate`  | Birth date.  | No        |
+
 | `birthPlace` | Birth place. | No        |
 
 ---
@@ -80,8 +106,11 @@ The `BiometricSamples` data block contains references to biometric data captured
 **_Attributes_**
 
 | Attribute | Description                                                                                               | Mandatory |
+
 | --------- | --------------------------------------------------------------------------------------------------------- | --------- |
+
 | `faceUrl` | S3 bucket URL pointing to the captured face image (selfie).                                               | Yes       |
+
 | `consent` | Indicates user consent for biometric processing; usage depends on context (headless vs SDK-driven steps). | Optional  |
 
 ---
@@ -93,8 +122,11 @@ The `Check` JSON object represents an individual verification check performed on
 **_Attributes_**
 
 | Attribute | Description                                | Mandatory |
+
 | --------- | ------------------------------------------ | --------- |
+
 | `id`      | Identifier of the check.                   | Yes       |
+
 | `status`  | Status of the check (`valid` / `invalid`). | Yes       |
 
 ---
@@ -106,12 +138,19 @@ The `ComparisonResults` data block contains the output of a comparison between t
 **_Attributes_**
 
 | Attribute              | Description                                                                              | Mandatory |
+
 | ---------------------- | ---------------------------------------------------------------------------------------- | --------- |
+
 | `verdict`              | Overall result of the comparison (`match` / `noMatch` / `inconclusive`).                 | Yes       |
+
 | `leftOperand`          | Id of the step whose data was used as left operand.                                      | Yes       |
+
 | `rightOperand`         | Id of the step whose data was used as right operand.                                     | Yes       |
+
 | `attributesCompared`   | List of attributes that were checked.                                                    | Yes       |
+
 | `mismatchedAttributes` | List of attributes that failed to match (empty if verdict is `match` or `inconclusive`). | Yes       |
+
 | `missingAttributes`    | List of attributes that could not be compared because data was missing.                  | Yes       |
 
 ---
@@ -123,16 +162,27 @@ The `DeviceSignals` data block encapsulates information about the end-user's dev
 **_Attributes_**
 
 | Attribute                       | Description                                                                           | Mandatory              |
+
 | ------------------------------- | ------------------------------------------------------------------------------------- | ---------------------- |
+
 | `userReference`                 | Identifier to link the assessment to a specific user or session.                      | Optional               |
+
 | `provider`                      | Service that performed the assessment.                                                | Yes                    |
+
 | `timestamp`                     | ISO 8601 timestamp of when the assessment was completed.                              | Yes                    |
+
 | `services`                      | Array listing specific services/signals analyzed (e.g., `["ip", "emails", "phone"]`). | Yes                    |
+
 | `inputSources.basicIdentity`    | Step ID that provided basic identity data.                                            | Optional               |
+
 | `inputSources.extendedIdentity` | Step ID that provided extended identity data.                                         | Optional               |
+
 | `inputSources.deviceSignals`    | Step ID that provided device signal data.                                             | Optional               |
+
 | result  | Final qualitative outcome computed by IDnow. Possible values: trusted, suspicious, not_trusted, inconclusive. Results correlate to step level configuration | Yes |
+
 | score   | Numerical trust score (0–100) computed by IDnow. Based on the confidence score of the third‑party provider multiplied by 100. See also See also: [Confidence Score](https://dev.fingerprint.com/docs/identification-accuracy-and-confidence#confidence-score) | Yes |
+
 | signals | Mandatory JSON object containing the complete, raw, unaltered response from the external provider. More info: [API reference](https://dev.fingerprint.com/reference/server-api-get-event) | Yes |
 
 ---
@@ -144,12 +194,19 @@ The `DocumentData` data block contains information about processed documents.
 **_Attributes_**
 
 | Attribute          | Description                    | Mandatory |
+
 | ------------------ | ------------------------------ | --------- |
+
 | `documentType`     | Document type.                 | Yes       |
+
 | `documentNumber`   | Document number.               | Optional  |
+
 | `expiryDate`       | Expiry date of the document.   | Optional  |
+
 | `issuanceDate`     | Issuance date of the document. | Optional  |
+
 | `issuingAuthority` | Issuing authority.             | Optional  |
+
 | `issuingCountry`   | Issuing country.               | Optional  |
 
 ---
@@ -161,8 +218,11 @@ The `DocumentImages` data block contains references to image files stored in S3 
 **_Attributes_**
 
 | Attribute      | Description                                          | Mandatory |
+
 | -------------- | ---------------------------------------------------- | --------- |
+
 | `frontSideUrl` | S3 bucket URL pointing to the front side image file. | Optional  |
+
 | `backSideUrl`  | S3 bucket URL pointing to the back side image file.  | Optional  |
 
 ---
@@ -174,9 +234,13 @@ The `DocumentsToSign` data block references the documents uploaded by the custom
 **_Attributes_**
 
 | Attribute                | Description                                                                                  | Mandatory |
+
 | ------------------------ | -------------------------------------------------------------------------------------------- | --------- |
+
 | `documents`              | Array of document objects to be included in the signing process (must contain at least one). | Yes       |
+
 | `documents[].templateId` | Identifier linking the runtime document to a document template / definition.                 | Yes       |
+
 | `documents[].sourceUrl`  | URL (e.g. S3) pointing to the actual source file to be signed.                               | Yes       |
 
 ---
@@ -188,8 +252,11 @@ The `DocumentVerification` data block contains the results of document verificat
 **_Attributes_**
 
 | Attribute      | Description                                | Mandatory |
+
 | -------------- | ------------------------------------------ | --------- |
+
 | `verdict`      | Overall verdict (`success` or `failure`).  | Yes       |
+
 | `failedChecks` | Array of Check JSON Object (can be empty). | Yes       |
 
 ---
@@ -201,22 +268,39 @@ The `ExtendedIdentity` data block contains additional identity information beyon
 **_Attributes_**
 
 | Attribute                      | Description                                                             | Mandatory |
+
 | ------------------------------ | ----------------------------------------------------------------------- | --------- |
+
 | `portrait`                     | Portrait image for EUDI requirement (can be the same as `portraitUrl`). | Optional  |
+
 | `nationality`                  | Nationality information.                                                | Optional  |
+
 | `personalAdministrativeNumber` | Personal administrative number (same as SSN number?).                   | Optional  |
+
 | `address`                      | Address (general, free text).                                           | Optional  |
+
 | `residentAddress`              | The full address of the place (string).                                 | Optional  |
+
 | `residentStreet`               | Street of residence.                                                    | Optional  |
+
 | `residentHouseNumber`          | House number of residence.                                              | Optional  |
+
 | `residentCountry`              | Alpha-2 country code as specified in ISO 3166-1.                        | Optional  |
+
 | `residentState`                | State or province of residence.                                         | Optional  |
+
 | `residentCity`                 | City of residence.                                                      | Optional  |
+
 | `residentPostalCode`           | Postal code of residence.                                               | Optional  |
+
 | `familyNameBirth`              | Family name at birth.                                                   | Optional  |
+
 | `givenNameBirth`               | Given name at birth.                                                    | Optional  |
+
 | `sex`                          | Sex (ISO 5218 sex codes: 0/1/2/9; renamed from gender).                 | Optional  |
+
 | `email`                        | Email address.                                                          | Optional  |
+
 | `phoneNumber`                  | Phone number.                                                           | Optional  |
 
 ---
@@ -228,17 +312,29 @@ The `DigitalSignals` data block is the structured output generated by the `DIGIT
 **_Attributes_**
 
 | Attribute                       | Description                                                                           | Mandatory              |
+
 | ------------------------------- | ------------------------------------------------------------------------------------- | ---------------------- |
+
 | `provider`                      | Service that performed the assessment.                                                | Yes                    |
+
 | `timestamp`                     | ISO 8601 timestamp of when the assessment was completed.                              | Yes                    |
+
 | `services`                      | List of services/signals analyzed (e.g. `["ip", "emails", "phone", "name"]`).         | Yes                    |
+
 | `inputSources.basicIdentity`    | Step ID that provided core identity data (e.g. name).                                 | Optional               |
+
 | `inputSources.extendedIdentity` | Step ID that provided additional identity data (e.g. phone, email).                   | Optional               |
+
 | `inputSources.deviceSignals`    | Step ID that provided device signal data (e.g. IP address).                           | Optional               |
+
 | result                          | Final qualitative outcome computed by IDnow. Possible values: trusted, suspicious, not_trusted, inconclusive. | Yes |
+
 | score                           | Numerical trust score (0–100) computed by IDnow. Based on third‑party provider score divided by 10.See also: [Trustfull Digital Score(https://docs.trustfull.com/docs/what-is-digital-score) | Yes |
+
 | reasons[].code                  | Machine‑readable reason code defined by the third‑party provider. Full list: [Reason Codes](https://docs.trustfull.com/docs/reason-codes#risk-signals). | Yes |
+
 | reasons[].details               | Human‑readable explanation for the reason code, defined by the third‑party provider. Full list: [Reason Codes](https://docs.trustfull.com/docs/reason-codes#risk-signals) | Yes |
+
 | signals                         | Mandatory JSON object containing the complete, raw, unaltered response from the Trustfull [Onboarding API](https://docs.trustfull.com/reference/digital-score-api). | Yes |
 
 ---
@@ -250,31 +346,49 @@ The `PresentationResult` data block encapsulates the complete outcome of an EUDI
 **_Attributes (common)_**
 
 | Attribute   | Description                                              | Mandatory |
+
 | ----------- | -------------------------------------------------------- | --------- |
+
 | `sessionId` | Unique identifier for the presentation session.          | Yes       |
+
 | `result`    | Discriminator (`"success"` or `"failure"`).              | Yes       |
+
 | `createdAt` | ISO 8601 timestamp of the presentation request creation. | Yes       |
 
 **_Attributes (success variant)_**
 
 | Attribute                                             | Description                                              | Mandatory |
+
 | ----------------------------------------------------- | -------------------------------------------------------- | --------- |
+
 | `presentedAt`                                         | ISO 8601 timestamp of the presentation by the user.      | Yes       |
+
 | `presentedCredentials`                                | List of credentials presented by the user.               | Optional  |
+
 | `presentedCredentials[].type`                         | Type of the presented credential.                        | Yes       |
+
 | `presentedCredentials[].issuer`                       | Identifier of the credential issuer.                     | Yes       |
+
 | `presentedCredentials[].presentedClaims[].claimName`  | Name of the claim shared by the user.                    | Yes       |
+
 | `presentedCredentials[].presentedClaims[].claimValue` | Value of the claim shared by the user.                   | Yes       |
+
 | `presentedCredentials[].issuerNames`                  | Names associated with the issuer.                        | Optional  |
+
 | `presentedCredentials[].queryId`                      | Identifier of the query associated with this credential. | Optional  |
 
 **_Attributes (failure variant)_**
 
 | Attribute        | Description                                     | Mandatory |
+
 | ---------------- | ----------------------------------------------- | --------- |
+
 | `attemptedAt`    | ISO 8601 timestamp of the presentation attempt. | Yes       |
+
 | result            | Possible values: success or failure. | Yes |
+
 | reasons[].code    | Defined by the third‑party Web SDK. Contact your Account Manager for more information. | Yes |
+
 | reasons[].details | IDnow concatenates the error code with the reason before returning it as part of the data block. Contact your Account Manager for more information. | Yes |
 
 ---
@@ -286,35 +400,61 @@ The `SessionContext` data block consolidates information about the end-user's te
 **_Attributes (client)_**
 
 | Attribute                           | Description                                                             | Mandatory                                       |
+
 | ----------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------- |
+
 | `client.browser.userAgent`          | Full user-agent string reported by the browser.                         | Always Present                                  |
+
 | `client.browser.language`           | Preferred language of the user (e.g. `"en-US"`).                        | Always Present                                  |
+
 | `client.browser.cookiesEnabled`     | Indicates whether cookies are enabled.                                  | Always Present                                  |
+
 | `client.browser.vendor`             | Vendor of the browser (e.g. `"Google Inc."`).                           | Always Present                                  |
+
 | `client.device.type`                | Device type (`mobile`, `tablet`, `desktop`).                            | Always Present                                  |
+
 | `client.device.screen.width`        | Screen width in pixels.                                                 | Always Present                                  |
+
 | `client.device.screen.height`       | Screen height in pixels.                                                | Always Present                                  |
+
 | `client.device.screen.colorDepth`   | Screen color depth.                                                     | Always Present                                  |
+
 | `client.device.hardwareConcurrency` | Number of logical processor cores (depends on browser API support).     | Optional                                        |
+
 | `client.os.platform`                | OS/platform identifier (e.g. `"Win32"`, `"MacIntel"`).                  | Always Present (attribute exists, may be empty) |
+
 | `client.timezone.name`              | IANA timezone name (e.g. `"Europe/Paris"`).                             | Always Present                                  |
+
 | `client.timezone.offset`            | Timezone offset from UTC in minutes.                                    | Always Present                                  |
+
 | `client.network.online`             | Online status of the browser.                                           | Always Present                                  |
+
 | `client.network.effectiveType`      | Effective connection quality (e.g. `slow-2g`, `2g`, `3g`, `4g`).        | Optional                                        |
+
 | `client.network.type`               | Underlying connection technology (e.g. `wifi`, `cellular`, `ethernet`). | Optional                                        |
+
 | `client.network.downlink`           | Estimated download bandwidth in Mbps.                                   | Optional                                        |
+
 | `client.network.rtt`                | Estimated round-trip time in ms.                                        | Optional                                        |
 
 **_Attributes (server)_**
 
 | Attribute                                | Description                                               | Mandatory                  |
+
 | ---------------------------------------- | --------------------------------------------------------- | -------------------------- |
+
 | `server.network.ipAddress`               | Client's public IP address.                               | Always Present             |
+
 | `server.network.geolocation.countryCode` | ISO country code (e.g. `"FR"`, `"US"`).                   | Optional (object optional) |
+
 | `server.network.geolocation.region`      | Region / state / province.                                | Optional                   |
+
 | `server.network.geolocation.city`        | City.                                                     | Optional                   |
+
 | `server.network.asn.number`              | Autonomous System Number.                                 | Optional                   |
+
 | `server.network.asn.organization`        | Name of the organization owning the ASN.                  | Optional                   |
+
 | `server.network.tlsFingerprint`          | TLS fingerprint (e.g. JA3) of the client's TLS handshake. | Optional                   |
 
 ---
@@ -326,13 +466,21 @@ The `SignedDocumentsPackage` data block is the successful output of the `ELECTRO
 **_Attributes_**
 
 | Attribute                                | Description                                                                                | Mandatory                        |
+
 | ---------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------- |
+
 | `signatureProcessId`                     | Identifier of the signature process (transaction number).                                  | Yes                              |
+
 | `signedDocuments.mode`                   | Delivery mode: `"archive"`, `"items"`, or `"both"`.                                        | Yes                              |
+
 | `signedDocuments.archiveUrl`             | Direct download URL for the ZIP archive containing signed documents (depending on `mode`). | Optional                         |
+
 | `signedDocuments.documents`              | Array of signed document objects (depending on `mode`).                                    | Optional                         |
+
 | `signedDocuments.documents[].templateId` | Identifier for the template used for the electronic signature.                             | Yes (per document, when present) |
+
 | `signedDocuments.documents[].signedUrl`  | S3 URL to the final signed PDF file.                                                       | Yes (per document, when present) |
+
 | `createdAt`                              | ISO 8601 timestamp of initial creation.                                                    | Yes                              |
 
 ---
@@ -344,5 +492,7 @@ The `UserReference` data block carries a reference to a user and contains the su
 **_Attributes_**
 
 | Attribute   | Description                                                                                                                                     | Mandatory |
+
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+
 | `subjectId` | Identifier of the subject provided by the customer (identifier generated by the Trust Platform is provided with the `AuthenticatorCredential`). | Optional  |

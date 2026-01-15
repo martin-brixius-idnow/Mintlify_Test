@@ -63,8 +63,7 @@
             "group": "Document-based IDV",
             "pages": [
               "Platform_Guides/document-based-idv-capture",
-              "Platform_Guides/document-based-idv-headless",
-              "Platform_Guides/document-based-idv-capture-with-instant-signature-issuance"
+              "Platform_Guides/document-based-idv-headless"
             ]
           },
           {
@@ -83,7 +82,10 @@
           },
           {
             "group": "Trust services",
-            "pages": ["Platform_Guides/instant-signature-issuance"]
+            "pages": [
+              "Platform_Guides/instant-signature-issuance",
+              "Platform_Guides/document-based-idv-capture-with-instant-signature-issuance"
+            ]
           },
           {
             "group": "Fraud signals",

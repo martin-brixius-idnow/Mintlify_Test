@@ -33,9 +33,8 @@ The `AuthenticationResult` data block contains the result of a biometric authent
 | `requestId`       | Unique identifier of the authentication request.                            | Yes                |
 | `authenticatedAt` | ISO 8601 timestamp of successful authentication (success variant).          | Yes (success)      |
 | `attemptedAt`     | ISO 8601 timestamp of the authentication attempt (failure variant).         | Yes (failure)      |
-| result              | Discriminator that determines the result type: success or failure. | Yes |
-| reasons[].code      | Defined by the third‑party Web SDK for the "error" event. Full list: [Error Explanations](https://docs.keyless.io/web-sdk/web-sdk-reference/error-handling#errors-explanation). | Yes |
-| reasons[].details   | IDnow concatenates the error code with the reason before returning it. The result contains the code and a reason prefixed with the same code (e.g., SERVER_USER_NOT_FOUND - &lt;detailed message&gt;). | Yes |
+| `reasons[].code`      | Defined by the third‑party Web SDK for the "error" event. Full list: [Error Explanations](https://docs.keyless.io/web-sdk/web-sdk-reference/error-handling#errors-explanation). | Yes |
+| `reasons[].details`   | IDnow concatenates the error code with the reason before returning it. The result contains the code and a reason prefixed with the same code (e.g., SERVER_USER_NOT_FOUND - &lt;detailed message&gt;). | Yes |
 
 ---
 

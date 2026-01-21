@@ -5,11 +5,8 @@ description: Integrate Player into your frontend application
 
 #### Integrate Player into your frontend application
 
-Before integrating with the Player, you need to set up your flow:
+Before integrating with Player, ensure that all prerequisites are fulfilled as described in the [Quickstart guide](https://docs.eu.platform.idnow.sx/docs/integration/quickstart).
 
-- [x] **A flow was created** in the IDnow dashboard.
-- [x] **The flow was deployed** and published.
-- [x] **The `flowId` was obtained** from the IDnow dashboard or via the API
 
 ### Integration method
 
@@ -20,16 +17,15 @@ Before integrating with the Player, you need to set up your flow:
 
 ### Integration steps
 
-1. Create a session via the API, providing input data blocks and a redirect URL (if redirect)
-2. Obtain the Session Token (JWT) containing session context
-3. Construct Player URL
-4. Choose your integration method (redirect or embedded)
+1. [Create a session](https://docs.eu.platform.idnow.sx/docs/integration/create-session) via API
+2. Obtain `playerUrl` or `sdkToken` from the API response
+3. Either **redirect** the user to the `playerUrl` or **embed** it as the `src` of your iframe or webview
 
 ---
 
-## Create flow session
+## Create a session
 
-Call the API to initiate a session.
+Call the API to create a session.
 
 :::info
 For complete API documentation, request examples, and implementation details, see **[Create session](/docs/integration/create-session)**.
@@ -37,177 +33,56 @@ For complete API documentation, request examples, and implementation details, se
 
 ---
 
-## Obtain an session token
+## Obtain `playerUrl` or `sdkToken`
 
-The API returns a session token that you'll use to direct users to the Player.
+When you create a flow session via the API, the response includes an `sdkToken` along with its expiration information. The SDK token is a JWE (JSON Web Encryption) generated using the **jose** library and encrypted with a 256-bit symmetric key. It is used by the Player for authentication. The response also provides a `playerUrl` that includes the token as a query parameter.
+
 
 ```json
 {
-  "flowId": "wf_1a2b3c4d5e6f",
-  "flowVersion": "1.0",
-  "environment": "production",
-  "sessionContext": {
-    "sessionId": "abc123def456ghi789",
-    "sessionStatus": "created",
-    "createdAt": "2024-11-04T10:30:00Z"
-  },
-  "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "sdkToken": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0...",
+  "playerUrl": "https://localhost:3000/player?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0...",
+  "expiresAt": "2024-11-04T11:30:00Z",
+  "expiresIn": 86400
 }
 ```
 
-**Session token (JWT) Contains:**
+### URL structure
 
-| Field       | Description                     |
-| ----------- | ------------------------------- |
-| `sessionId` | The specific session identifier |
-| `flowId`    | The flow identifier             |
+The `playerUrl` already includes the SDK token as a `token` query parameter and can be used directly by the frontend.
+
+The general structure is:
+```text
+https://player-trustplatform.idnow.io/player/?token=[token]
+
+
+### Token payload
+
+| Field | Description |
+|------|-------------|
+| `iss` | Token issuer. Default value is `hub-core-api` |
+| `sub` | Subject carrying the flow identifier (`flowId`) |
+| `aud` | Token audience. Default value is `hub-player` |
+| `exp` | Expiration timestamp in seconds. Used to compute `expiresAt` and `expiresIn` |
+| `iat` | Issued-at timestamp in seconds. Used together with `exp` to compute `expiresIn` |
+| `jti` | Flow session identifier (`sessionId`) |
+
+
+### Token lifetime
+
+
+The token lifetime is always synchronized with the flow expiration. By ***default***, it is set to 24 hours. If the flow timeout is shorter or longer, the token will expire accordingly.
+
+
+### Token validation
+
+When the Player interacts with the IDnow backend, the SDK token is validated before processing. The system checks the issuer (`iss`) and audience (`aud`).
+
+- Missing or invalid token → `UNAUTHORIZED` (`Missing or invalid authentication token`)
+- Required `workflowId` missing → `BAD_REQUEST` (`workflowId is required`)
 
 ---
 
-## Construct Player URL
-
-Once you receive the session token from the API response, construct the Player URL by appending it as a query parameter. Direct your user to this URL to begin the verification process.
-
-**_Examples_**
-
-**Node.js implementation**:
-
-```javascript
-const axios = require('axios');
-
-const flowId = 'YOUR_FLOW_ID'; // Your flow ID
-const accessToken = 'YOUR_ACCESS_TOKEN'; // Your access token
-
-const requestBody = {
-  flowId: flowId,
-  environment: 'production',
-  input: [
-    {
-      type: 'BasicIdentity',
-      name: 'John Doe',
-      familyName: 'Doe',
-      givenName: 'John',
-      birthDate: '1990-01-15',
-    },
-  ],
-};
-
-const response = await axios.post(`/flows/${flowId}/sessions`, requestBody, {
-  headers: {
-    Authorization: `Bearer ${accessToken}`,
-    Content-Type: 'application/json',
-  },
-});
-
-const sessionToken = response.data.sessionToken;
-const playerUrl = `https://player-trustplatform.idnow.io/player/?session_token=${sessionToken}`;
-```
-
-**Python implementation**:
-
-```python
-import requests
-import json
-
-flow_id = 'YOUR_FLOW_ID'  # Your flow ID
-access_token = 'YOUR_ACCESS_TOKEN'  # Your access token
-
-url = f"/flows/{flow_id}/sessions"
-headers = {
-    "Authorization": f"Bearer {access_token}",
-    "Content-Type": "application/json"
-}
-data = {
-    "flowId": flow_id,
-    "environment": "production",
-    "input": [
-        {
-            "type": "BasicIdentity",
-            "name": "John Doe",
-            "familyName": "Doe",
-            "givenName": "John",
-            "birthDate": "1990-01-15"
-        }
-    ]
-}
-
-response = requests.post(url, headers=headers, json=data)
-result = response.json()
-
-session_token = result['sessionToken']
-player_url = f"https://player-trustplatform.idnow.io/player/?session_token={session_token}"
-```
-
-**Java implementation**:
-
-```java
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-String flowId = "YOUR_FLOW_ID"; // Your flow ID
-String accessToken = "YOUR_ACCESS_TOKEN"; // Your access token
-
-HttpClient client = HttpClient.newHttpClient();
-ObjectMapper objectMapper = new ObjectMapper();
-
-Map<String, Object> requestBody = Map.of(
-    "flowId", flowId,
-    "environment", "production",
-    "input", List.of(
-        Map.of(
-            "type", "BasicIdentity",
-            "name", "John Doe",
-            "familyName", "Doe",
-            "givenName", "John",
-            "birthDate", "1990-01-15"
-        )
-    )
-);
-
-String jsonBody = objectMapper.writeValueAsString(requestBody);
-
-HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("/flows/" + flowId + "/sessions"))
-    .header("Authorization", "Bearer " + accessToken)
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
-
-HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-JsonNode jsonResponse = objectMapper.readTree(response.body());
-String sessionToken = jsonResponse.get("sessionToken").asText();
-
-String playerUrl = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
-```
-
-**_URL structure_**
-
-The Player is hosted by IDnow at:
-
-```
-https://player-trustplatform.idnow.io/player/?session_token=[token]
-```
-
-**Required parameters**
-
-| Field           | Description                                         |
-| --------------- | --------------------------------------------------- |
-| `session_token` | JWT token returned from the Create Session endpoint |
-
-**Example URLs**
-
-Starting verification:
-
-```
-https://player-trustplatform.idnow.io/player/?session_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
-Different environments may use different subdomains:
-
-```
-https://player-trustplatform-staging.idnow.io/player/?session_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
----
 
 ## Choose integration method
 
@@ -217,24 +92,25 @@ This is the simplest and most reliable integration method where the user is dire
 
 **Process**:
 
-1. Create flow session via API call
-2. Redirect user to Player URL
-3. User completes verification
-4. Monitor completion via webhooks or polling
+1. Create a flow session via API call
+2. Read the `playerUrl` (and `sdkToken`) from the API response
+3. Redirect the user to `playerUrl`
+4. User completes verification
+5. Monitor completion via webhooks or polling
 
 **Web browser**:
 
 ```javascript
 // Web browser
-window.location.href =
-  'https://player-trustplatform.idnow.io/player/?session_token=' + sessionToken;
+// playerUrl is returned by the API and already contains ?token=<sdkToken>
+window.location.href = playerUrl;
 ```
 
 **Mobile app (iOS)**
 
 ```swift
-// swift
-let playerURL = "https://player-trustplatform.idnow.io/player/?session_token=\(sessionToken)"
+// playerURL is returned by the API and already contains ?token=<sdkToken>
+let playerURL = "<PLAYER_URL_FROM_API>"
 if let url = URL(string: playerURL) {
     UIApplication.shared.open(url)
 }
@@ -243,11 +119,10 @@ if let url = URL(string: playerURL) {
 **Mobile app (Android)**:
 
 ```java
-// java
-String playerURL = "https://player-trustplatform.idnow.io/player/?session_token=" + sessionToken;
+// playerURL is returned by the API and already contains ?token=<sdkToken>
+String playerURL = "<PLAYER_URL_FROM_API>";
 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(playerURL));
 startActivity(intent);
-```
 
 ---
 
@@ -272,17 +147,19 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 
 **Implementation steps**:
 
-1. Create flow session via API call
-2. Embed Player in iframe using returned session token
+1. Create a flow session via API call
+2. Read the `playerUrl` (and `sdkToken`) from the API response
+3. Embed the Player in an iframe using the returned `playerUrl`
 3. Handle completion via callback URL or postMessage events
 
 **Basic iframe implementation**:
 
 ```html
 <!-- After creating flow session via API -->
+<!-- playerUrl already contains ?token=<sdkToken> -->
 <iframe
   id="idnow-player"
-  src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
+  src="<PLAYER_URL_FROM_API>"
   style="width: 100%; height: 600px; border: none;"
   allow="camera; microphone; geolocation; fullscreen"
   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -295,7 +172,7 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 <div id="verification-container" style="width: 100%; height: 600px;">
   <iframe
     id="idnow-player"
-    src="https://player-trustplatform.idnow.io/player/?session_token=YOUR_SESSION_TOKEN"
+    src="<PLAYER_URL_FROM_API>"
     style="width: 100%; height: 100%; border: none;"
     allow="camera; microphone; geolocation; fullscreen"
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -334,4 +211,3 @@ Embed the IDnow-hosted Player within your web application for a seamless in-app 
 - You need to maintain your application UI
 - Verification is part of a larger form/process
 - Users should not leave your domain
-

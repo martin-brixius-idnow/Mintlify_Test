@@ -32,3 +32,48 @@ The `sessionStatus` is included in every `GET /sessions/{sessionId}` response an
 | **Aborted**     | User explicitly stops the session via an Abort action              | User intentionally dropped out. No further automated processing occurs.                                        | Cannot be restarted. Represents user-driven termination.                         |
 | **Expired**     | TTL reached while session still `In Progress`                      | Session out due to inactivity or incomplete progression.                                                       | Cannot be restarted.                                                             |
 | **Error**       | Any step encounters a technical failure                            | Technical failure during execution (system exception, integration failure, etc.). Normal flow cannot continue. | Reflects technical failure, not a business decision.                             |
+
+---
+title: Sessions
+description: Transition states of flow sessions
+---
+
+#### Transition states of flow sessions
+
+This page explains the lifecycle of a flow session in the Trust Platform, including the available sessionStatus values, what each represents, and how a session transitions between states.
+
+## Sessions
+
+A flow **session** is created when the endpoint `POST /v1/flows/{flowId}/{environment}/sessions` is called.
+
+Immediately after creation, the initial sessionStatus of the session is `In Progress`.
+
+While the session is `In Progress`, the flow steps are executed and the user proceeds through the journey.
+
+From `In Progress`, a flow session can transition into any of the terminal states described below.
+
+Once a flow session reaches any terminal state, it stops normal step processing and the flow session has ended.
+
+:::info
+The `sessionStatus` is included in every `GET /v1/{environment}/sessions/{sessionId}` response and in all webhook events triggered during an active session.
+:::
+
+## Session status
+
+| `sessionStatus` | Entry Condition                                                                  | Meaning                                                                                                        | Transitions / Notes                                                              |
+| --------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **In Progress** | Created immediately when `POST /flows/{flowId}/{environment}/sessions` is called | Flow steps are being executed. User is progressing through the journey. TTL has not expired.                   | Can transition to: `Completed`, `Aborted`, `Expired`, `Error`                    |
+| **Completed**   | Session finishes all steps without expiry, abort, or error                       | Session ended successfully. Business decision reached.                                                         | Metadata outcome: `Accepted` or `Rejected`. Technical state remains `Completed`. |
+| **Aborted**     | User explicitly stops the session via an Abort action                            | User intentionally dropped out. No further automated processing occurs.                                        | Cannot be restarted. Represents user-driven termination.                         |
+| **Expired**     | TTL reached while session still `In Progress`                                    | Session out due to inactivity or incomplete progression.                                                       | Cannot be restarted.                                                             |
+| **Error**       | Any step encounters a technical failure                                          | Technical failure during execution (system exception, integration failure, etc.). Normal flow cannot continue. | Reflects technical failure, not a business decision.                             |
+
+## Session lifetime
+
+Session Execution Timeout defines how long a session remains valid before it expires. 
+
+:::info
+Session lifetime is configurable per flow under: *Flows → Your Flow → Versions → Edit or Publish → Execution Timeout*
+:::
+
+The default value is 24 hours. Once this time elapses, the user can no longer continue and must start a new session. The Execution Timeout is also aligned with the [SDK token lifetime](/integration/player-embed-or-redirect#token-lifetime) for IDnow’s Player, meaning adjusting the session timeout automatically updates the token lifetime as well.
